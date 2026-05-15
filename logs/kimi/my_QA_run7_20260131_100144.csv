@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source google-chrome-cve-2024-0519?,True,Google
+2,simple,What date is recorded for incident inc-cve-2022-34713-in-the-wild?,True,2022-08-01
+3,simple,What CVSS score is stated in the CVE-2022-22047 summary?,True,7.8
+4,simple,What is the incident type for INC-CVE-2022-22047-EXPLOITED-IN-THE-WILD?,True,vulnerability exploitation
+5,simple,What is the incident category code for INC-CVE-2022-22047-EXPLOITED-IN-THE-WILD?,True,C5
+6,simple,What date is stored on source unit42-p2pinfect-2023-07-11?,True,2023-07-11
+7,simple,What malware family is assigned to P2PInfect?,True,Worm
+8,simple,What programming language is stated for P2PInfect?,True,Rust
+9,simple,What technique tactic is set for technique T1190?,True,Initial Access
+10,simple,What technique tactic is set for technique T1486?,True,Impact
+11,simple,What framework is listed for mitigation Improved bounds checking?,True,Vendor Patch
+12,simple,What framework is listed for mitigation Install security updates?,True,Vendor Guidance
+13,simple,What date is stored for incident apple-zero-days-active-attack-weekly-update-2022?,True,2022-01-01
+14,simple,What is the incident type for unit42-2023-07-11-p2pinfect?,True,worm
+15,simple,What published date is stored for CVE-2022-0543?,True,2022-01-01
+16,single_hop,Which CVE is exploited_in by incident inc-cve-2022-34713-in-the-wild?,True,CVE-2022-34713
+17,single_hop,Which CVE is exploited_in by incident INC-CVE-2022-22047-EXPLOITED-IN-THE-WILD?,True,CVE-2022-22047
+18,single_hop,Which technique is used_technique by incident INC-CVE-2022-22047-EXPLOITED-IN-THE-WILD?,True,T1068
+19,single_hop,Which mitigation mitigates CVE-2022-22047?,True,Patching
+20,single_hop,Which mitigation mitigates incident inc-cve-2022-34713-in-the-wild?,True,Patch Management
+21,single_hop,Which CVE is exploited_in by incident apple-zero-days-active-attack-weekly-update-2022?,True,CVE-2022-32894
+22,single_hop,Which technique is used_technique by incident apple-zero-days-active-attack-weekly-update-2022?,True,T1068
+23,single_hop,Which mitigation mitigates CVE-2022-32894?,True,Improved bounds checking
+24,single_hop,Which malware exploits CVE-2022-0543?,True,P2PInfect
+25,single_hop,Which technique is used_technique by incident unit42-2023-07-11-p2pinfect?,True,T1190
+26,single_hop,Which capability is leveraged by malware P2PInfect?,True,Automation
+27,single_hop,Which threat actor uses TargetCompany ransomware?,True,TargetCompany
+28,single_hop,Which C2 infrastructure is abused by threat actor TargetCompany?,True,Tor .onion negotiation site
+29,single_hop,Which incident is attributed_to threat actor TargetCompany?,True,inc-targetcompany-variants-2023-01
+30,single_hop,Which technique is used_technique by incident inc-targetcompany-variants-2023-01?,True,T1486
+31,multi_hop,Which CVE is exploited by malware used by TargetCompany?,True,None
+32,multi_hop,Which malware is involved in incidents attributed_to TargetCompany?,True,TargetCompany ransomware
+33,multi_hop,Which tactics appear across techniques used by incidents that exploit CVEs?,True,"Privilege Escalation, Initial Access"
+34,multi_hop,How many incidents exploit a CVE and use technique T1068?,True,2
+35,multi_hop,How many incidents are mitigated by Install security updates?,True,1
+36,multi_hop,Which publisher supports the incident inc-cve-2022-34713-in-the-wild?,True,Microsoft
+37,multi_hop,Which publisher supports CVE-2022-0543 via supported_by sources?,True,Unit 42
+38,multi_hop,How many unique CVEs are exploited_in across all incidents?,True,4
+39,multi_hop,How many distinct techniques are used across all incidents?,True,3
+40,multi_hop,Which incident date is earliest among incidents that exploit a CVE?,True,2022-01-01
+41,multi_hop,Which CVE has the latest incident date among exploited_in relationships?,True,CVE-2022-0543
+42,multi_hop,How many mitigations have status recommended on mitigates relationships?,True,4
+43,multi_hop,Which mitigation is linked to both a CVE and an incident?,True,Patching
+44,multi_hop,How many threat actor aliases are linked from TargetCompany?,True,2
+45,multi_hop,"Which alias was recorded earlier for TargetCompany, by has_alias date?",True,Fargo
+46,unanswerable,What file hash is associated with P2PInfect samples?,False,
+47,unanswerable,Which industry sectors were targeted in inc-targetcompany-variants-2023-01?,False,
+48,unanswerable,What operating system version is affected by CVE-2022-34713?,False,
+49,unanswerable,What CVSS score is recorded for CVE-2022-32894?,False,
+50,unanswerable,Which country hosted the Tor .onion negotiation site infrastructure?,False,

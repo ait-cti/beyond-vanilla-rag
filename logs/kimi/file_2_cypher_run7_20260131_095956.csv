@@ -1,0 +1,465 @@
+filename,cypher
+google-fixes-first-actively-exploited-chrome-zero-day-of-2024.json,"MERGE (src_1:Source {id:'google-chrome-cve-2024-0519'})
+ON CREATE SET
+  src_1.title = 'Google releases security updates for Chrome zero-day CVE-2024-0519 exploited in the wild',
+  src_1.publisher = 'Google'
+ON MATCH SET
+  src_1.title = CASE WHEN src_1.title IS NULL OR src_1.title = '' THEN 'Google releases security updates for Chrome zero-day CVE-2024-0519 exploited in the wild' ELSE src_1.title END,
+  src_1.publisher = CASE WHEN src_1.publisher IS NULL OR src_1.publisher = '' THEN 'Google' ELSE src_1.publisher END
+MERGE (cve_1:CVE {id:'CVE-2024-0519'})
+ON CREATE SET
+  cve_1.summary = 'High-severity Chrome zero-day in the V8 JavaScript engine caused by out-of-bounds memory access; exploitable via crafted HTML page to read beyond buffer via heap corruption, potentially exposing sensitive information or causing a crash; may also be used to bypass protections such as ASLR to ease achieving code execution via another weakness.'
+ON MATCH SET
+  cve_1.summary = CASE WHEN cve_1.summary IS NULL OR cve_1.summary = '' THEN 'High-severity Chrome zero-day in the V8 JavaScript engine caused by out-of-bounds memory access; exploitable via crafted HTML page to read beyond buffer via heap corruption, potentially exposing sensitive information or causing a crash; may also be used to bypass protections such as ASLR to ease achieving code execution via another weakness.' ELSE cve_1.summary END
+MERGE (cve_1)-[sup_1:supported_by]->(src_1)
+ON CREATE SET
+  sup_1.quote = 'Google released security updates to fix a high-severity Chrome zero-day (CVE-2024-0519) exploited in the wild; out-of-bounds memory access in V8 exploitable via crafted HTML page; may bypass ASLR.'
+ON MATCH SET
+  sup_1.quote = CASE WHEN sup_1.quote IS NULL OR sup_1.quote = '' THEN 'Google released security updates to fix a high-severity Chrome zero-day (CVE-2024-0519) exploited in the wild; out-of-bounds memory access in V8 exploitable via crafted HTML page; may bypass ASLR.' ELSE sup_1.quote END;"
+cisa-urges-patch-11-bug.json,"MERGE (cve_1:CVE {id:'CVE-2022-22047'})
+ON CREATE SET cve_1.summary = 'Elevation of privileges vulnerability in Windows Client Server Runtime Subsystem (CSRSS) affecting Windows 11 (and earlier) and Windows Server 2022 (and earlier) and reported as exploited in the wild; CVSS 7.8; initially classified as a zero-day.'
+ON MATCH SET cve_1.summary = CASE WHEN cve_1.summary IS NULL OR trim(cve_1.summary) = '' THEN 'Elevation of privileges vulnerability in Windows Client Server Runtime Subsystem (CSRSS) affecting Windows 11 (and earlier) and Windows Server 2022 (and earlier) and reported as exploited in the wild; CVSS 7.8; initially classified as a zero-day.' ELSE cve_1.summary END
+
+MERGE (tech_1:Technique {technique_id:'T1068'})
+ON CREATE SET tech_1.name = 'Exploitation for Privilege Escalation',
+              tech_1.tactic = 'Privilege Escalation',
+              tech_1.summary = 'Adversaries exploit a vulnerability to escalate privileges on a system.'
+ON MATCH SET tech_1.name = CASE WHEN tech_1.name IS NULL OR trim(tech_1.name) = '' THEN 'Exploitation for Privilege Escalation' ELSE tech_1.name END,
+              tech_1.tactic = CASE WHEN tech_1.tactic IS NULL OR trim(tech_1.tactic) = '' THEN 'Privilege Escalation' ELSE tech_1.tactic END,
+              tech_1.summary = CASE WHEN tech_1.summary IS NULL OR trim(tech_1.summary) = '' THEN 'Adversaries exploit a vulnerability to escalate privileges on a system.' ELSE tech_1.summary END
+
+MERGE (mit_1:Mitigation {name:'Patching'})
+ON CREATE SET mit_1.framework = 'General',
+              mit_1.control_id = 'PATCH',
+              mit_1.summary = 'Apply vendor security updates to remediate known vulnerabilities.'
+ON MATCH SET mit_1.framework = CASE WHEN mit_1.framework IS NULL OR trim(mit_1.framework) = '' THEN 'General' ELSE mit_1.framework END,
+              mit_1.control_id = CASE WHEN mit_1.control_id IS NULL OR trim(mit_1.control_id) = '' THEN 'PATCH' ELSE mit_1.control_id END,
+              mit_1.summary = CASE WHEN mit_1.summary IS NULL OR trim(mit_1.summary) = '' THEN 'Apply vendor security updates to remediate known vulnerabilities.' ELSE mit_1.summary END
+
+MERGE (inc_1:Incident {id:'INC-CVE-2022-22047-EXPLOITED-IN-THE-WILD'})
+ON CREATE SET inc_1.type = 'vulnerability exploitation',
+              inc_1.category = 'C5',
+              inc_1.summary = 'CVE-2022-22047 (Windows CSRSS elevation of privilege) reported as exploited in the wild; CISA advised patching by August 2 for federal agencies.'
+ON MATCH SET inc_1.type = CASE WHEN inc_1.type IS NULL OR trim(inc_1.type) = '' THEN 'vulnerability exploitation' ELSE inc_1.type END,
+              inc_1.category = CASE WHEN inc_1.category IS NULL OR trim(inc_1.category) = '' THEN 'C5' ELSE inc_1.category END,
+              inc_1.summary = CASE WHEN inc_1.summary IS NULL OR trim(inc_1.summary) = '' THEN 'CVE-2022-22047 (Windows CSRSS elevation of privilege) reported as exploited in the wild; CISA advised patching by August 2 for federal agencies.' ELSE inc_1.summary END
+
+MERGE (inc_1)-[r_exploit_1:exploited_in]->(cve_1)
+ON CREATE SET r_exploit_1.evidence = 'CVE-2022-22047 is being exploited in the wild; CSRSS elevation of privileges flaw.'
+ON MATCH SET r_exploit_1.evidence = CASE WHEN r_exploit_1.evidence IS NULL OR trim(r_exploit_1.evidence) = '' THEN 'CVE-2022-22047 is being exploited in the wild; CSRSS elevation of privileges flaw.' ELSE r_exploit_1.evidence END
+
+MERGE (inc_1)-[r_tech_1:used_technique]->(tech_1)
+ON CREATE SET r_tech_1.phase = 'Privilege Escalation',
+              r_tech_1.details = 'Elevation of privileges via CSRSS vulnerability CVE-2022-22047',
+              r_tech_1.evidence = 'CSRSS bug is an elevation of privileges vulnerability allowing adversaries with a pre-established foothold to execute code as an unprivileged user.'
+ON MATCH SET r_tech_1.phase = CASE WHEN r_tech_1.phase IS NULL OR trim(r_tech_1.phase) = '' THEN 'Privilege Escalation' ELSE r_tech_1.phase END,
+              r_tech_1.details = CASE WHEN r_tech_1.details IS NULL OR trim(r_tech_1.details) = '' THEN 'Elevation of privileges via CSRSS vulnerability CVE-2022-22047' ELSE r_tech_1.details END,
+              r_tech_1.evidence = CASE WHEN r_tech_1.evidence IS NULL OR trim(r_tech_1.evidence) = '' THEN 'CSRSS bug is an elevation of privileges vulnerability allowing adversaries with a pre-established foothold to execute code as an unprivileged user.' ELSE r_tech_1.evidence END
+
+MERGE (mit_1)-[r_mit_1:mitigates]->(cve_1)
+ON CREATE SET r_mit_1.status = 'recommended',
+              r_mit_1.observed_effectiveness = 'CISA advised patching by August 2 to address exploitation in the wild.',
+              r_mit_1.evidence = 'CISA advised patching of CVE-2022-22047 by August 2.'
+ON MATCH SET r_mit_1.status = CASE WHEN r_mit_1.status IS NULL OR trim(r_mit_1.status) = '' THEN 'recommended' ELSE r_mit_1.status END,
+              r_mit_1.observed_effectiveness = CASE WHEN r_mit_1.observed_effectiveness IS NULL OR trim(r_mit_1.observed_effectiveness) = '' THEN 'CISA advised patching by August 2 to address exploitation in the wild.' ELSE r_mit_1.observed_effectiveness END,
+              r_mit_1.evidence = CASE WHEN r_mit_1.evidence IS NULL OR trim(r_mit_1.evidence) = '' THEN 'CISA advised patching of CVE-2022-22047 by August 2.' ELSE r_mit_1.evidence END
+
+MERGE (mit_1)-[r_mit_2:mitigates]->(inc_1)
+ON CREATE SET r_mit_2.status = 'recommended',
+              r_mit_2.observed_effectiveness = 'Recommended action in response to active exploitation in the wild.',
+              r_mit_2.evidence = 'CISA advised patching of the elevation of privileges flaw by August 2.'
+ON MATCH SET r_mit_2.status = CASE WHEN r_mit_2.status IS NULL OR trim(r_mit_2.status) = '' THEN 'recommended' ELSE r_mit_2.status END,
+              r_mit_2.observed_effectiveness = CASE WHEN r_mit_2.observed_effectiveness IS NULL OR trim(r_mit_2.observed_effectiveness) = '' THEN 'Recommended action in response to active exploitation in the wild.' ELSE r_mit_2.observed_effectiveness END,
+              r_mit_2.evidence = CASE WHEN r_mit_2.evidence IS NULL OR trim(r_mit_2.evidence) = '' THEN 'CISA advised patching of the elevation of privileges flaw by August 2.' ELSE r_mit_2.evidence END"
+ransomware-spotlight-targetcompany.json,"MERGE (src_1:Source {id:'interview-2023-01-targetcompany'})
+ON CREATE SET src_1.title = 'Interview with TargetCompany ransomware operators (Jan 2023)', src_1.publisher = 'Unknown', src_1.published_on = date('2023-01-01')
+ON MATCH SET src_1.title = coalesce(src_1.title,'Interview with TargetCompany ransomware operators (Jan 2023)'), src_1.publisher = coalesce(src_1.publisher,'Unknown'), src_1.published_on = coalesce(src_1.published_on,date('2023-01-01'))
+WITH src_1
+MERGE (ta_1:ThreatActor {name:'TargetCompany'})
+ON CREATE SET ta_1.summary = 'Ransomware operators who stated that major updates change encryption algorithm/decryptor characteristics and associated file extension/naming. Earlier variants provided a .onion negotiation site and ransom note ""How to decrypt files.txt""; later variants used different extensions and dropped ""HOW TO RECOVER!!.txt"".'
+ON MATCH SET ta_1.summary = coalesce(ta_1.summary,'Ransomware operators who stated that major updates change encryption algorithm/decryptor characteristics and associated file extension/naming. Earlier variants provided a .onion negotiation site and ransom note ""How to decrypt files.txt""; later variants used different extensions and dropped ""HOW TO RECOVER!!.txt"".')
+WITH src_1, ta_1
+MERGE (ta_2:ThreatActor {name:'Fargo'})
+ON CREATE SET ta_2.summary = 'Name used for the TargetCompany ransomware group in mid- to late 2022, associated with the .fargo file extension.'
+ON MATCH SET ta_2.summary = coalesce(ta_2.summary,'Name used for the TargetCompany ransomware group in mid- to late 2022, associated with the .fargo file extension.')
+WITH src_1, ta_1, ta_2
+MERGE (ta_3:ThreatActor {name:'Mallox'})
+ON CREATE SET ta_3.summary = 'Name used by the group for a data leak site; also an extension observed among later variants.'
+ON MATCH SET ta_3.summary = coalesce(ta_3.summary,'Name used by the group for a data leak site; also an extension observed among later variants.')
+WITH src_1, ta_1, ta_2, ta_3
+MERGE (d_1:Date {value:date('2022-01-01')})
+WITH src_1, ta_1, ta_2, ta_3, d_1
+MERGE (d_2:Date {value:date('2023-01-01')})
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2
+MERGE (ta_1)-[rha_1:has_alias]->(ta_2)
+ON CREATE SET rha_1.date = date('2022-01-01')
+ON MATCH SET rha_1.date = coalesce(rha_1.date, date('2022-01-01'))
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2
+MERGE (ta_1)-[rha_2:has_alias]->(ta_3)
+ON CREATE SET rha_2.date = date('2023-01-01')
+ON MATCH SET rha_2.date = coalesce(rha_2.date, date('2023-01-01'))
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2
+MERGE (ta_1)-[rsb_1:supported_by]->(src_1)
+ON CREATE SET rsb_1.page = 'N/A', rsb_1.quote = 'In an interview in January 2023, threat actors behind TargetCompany clarified that each major update of the ransomware entailed a change in the encryption algorithm and different decryptor characteristics. These are accompanied by a change in file name extensions.'
+ON MATCH SET rsb_1.page = coalesce(rsb_1.page,'N/A'), rsb_1.quote = coalesce(rsb_1.quote,'In an interview in January 2023, threat actors behind TargetCompany clarified that each major update of the ransomware entailed a change in the encryption algorithm and different decryptor characteristics. These are accompanied by a change in file name extensions.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2
+MERGE (ta_2)-[rsb_2:supported_by]->(src_1)
+ON CREATE SET rsb_2.page = 'N/A', rsb_2.quote = 'In mid- to late 2022, the group was given the name Fargo due to the extension that it added to its encrypted files in that period.'
+ON MATCH SET rsb_2.page = coalesce(rsb_2.page,'N/A'), rsb_2.quote = coalesce(rsb_2.quote,'In mid- to late 2022, the group was given the name Fargo due to the extension that it added to its encrypted files in that period.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2
+MERGE (ta_3)-[rsb_3:supported_by]->(src_1)
+ON CREATE SET rsb_3.page = 'N/A', rsb_3.quote = 'The ransomware group eventually established a data leak site under the name Mallox.'
+ON MATCH SET rsb_3.page = coalesce(rsb_3.page,'N/A'), rsb_3.quote = coalesce(rsb_3.quote,'The ransomware group eventually established a data leak site under the name Mallox.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2
+MERGE (mal_1:Malware {name:'TargetCompany ransomware'})
+ON CREATE SET mal_1.family = 'TargetCompany', mal_1.summary = 'Ransomware with evolving variants; major updates change encryption algorithm and decryptor characteristics; file extension and ransom note naming changed over time (e.g., How to decrypt files.txt; HOW TO RECOVER!!.txt). Later variants observed using Chacha20, Curve25519, and AES-128.'
+ON MATCH SET mal_1.family = coalesce(mal_1.family,'TargetCompany'), mal_1.summary = coalesce(mal_1.summary,'Ransomware with evolving variants; major updates change encryption algorithm and decryptor characteristics; file extension and ransom note naming changed over time (e.g., How to decrypt files.txt; HOW TO RECOVER!!.txt). Later variants observed using Chacha20, Curve25519, and AES-128.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1
+MERGE (ta_1)-[ru_1:uses]->(mal_1)
+ON CREATE SET ru_1.date = date('2023-01-01'),
+              ru_1.evidence = 'Operators stated major updates change encryption algorithm/decryptor characteristics and file extension naming; later variants used Chacha20, Curve25519, and AES-128; ransom note names changed.',
+              ru_1.source_id = 'interview-2023-01-targetcompany',
+              ru_1.page = 'N/A'
+ON MATCH SET ru_1.date = coalesce(ru_1.date,date('2023-01-01')),
+             ru_1.evidence = coalesce(ru_1.evidence,'Operators stated major updates change encryption algorithm/decryptor characteristics and file extension naming; later variants used Chacha20, Curve25519, and AES-128; ransom note names changed.'),
+             ru_1.source_id = coalesce(ru_1.source_id,'interview-2023-01-targetcompany'),
+             ru_1.page = coalesce(ru_1.page,'N/A')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1
+MERGE (mal_1)-[rsb_4:supported_by]->(src_1)
+ON CREATE SET rsb_4.page = 'N/A', rsb_4.quote = 'Other extensions used by the ransomware group include “.mallox,” and “.xollam.” These later variants were observed using a combination of Chacha20, Curve 25519, and AES-128 algorithms to encrypt the victim\'s files.'
+ON MATCH SET rsb_4.page = coalesce(rsb_4.page,'N/A'), rsb_4.quote = coalesce(rsb_4.quote,'Other extensions used by the ransomware group include “.mallox,” and “.xollam.” These later variants were observed using a combination of Chacha20, Curve 25519, and AES-128 algorithms to encrypt the victim\'s files.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1
+MERGE (c2_1:C2_Infrastructure {service:'Tor .onion negotiation site'})
+ON CREATE SET c2_1.summary = 'Onion-based contact/negotiation site provided by earlier variants.'
+ON MATCH SET c2_1.summary = coalesce(c2_1.summary,'Onion-based contact/negotiation site provided by earlier variants.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1
+MERGE (ta_1)-[rab_1:abuses]->(c2_1)
+ON CREATE SET rab_1.date = date('2022-01-01'),
+              rab_1.evidence = 'Earlier variants provided a “.onion” contact site for negotiations.',
+              rab_1.source_id = 'interview-2023-01-targetcompany',
+              rab_1.page = 'N/A'
+ON MATCH SET rab_1.date = coalesce(rab_1.date,date('2022-01-01')),
+             rab_1.evidence = coalesce(rab_1.evidence,'Earlier variants provided a “.onion” contact site for negotiations.'),
+             rab_1.source_id = coalesce(rab_1.source_id,'interview-2023-01-targetcompany'),
+             rab_1.page = coalesce(rab_1.page,'N/A')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1
+MERGE (inc_1:Incident {id:'inc-targetcompany-variants-2023-01'})
+ON CREATE SET inc_1.date = date('2023-01-01'),
+              inc_1.type = 'ransomware',
+              inc_1.summary = 'Jan 2023 interview describes TargetCompany ransomware evolution: major updates changed encryption algorithm and decryptor characteristics with associated file extension/name changes; earlier variants used .onion negotiation site and dropped ransom note ""How to decrypt files.txt""; later variants used extensions including .fargo (mid-late 2022), .mallox, .xollam and dropped ransom note ""HOW TO RECOVER!!.txt""; a data leak site was established under the name Mallox.'
+ON MATCH SET inc_1.date = coalesce(inc_1.date,date('2023-01-01')),
+             inc_1.type = coalesce(inc_1.type,'ransomware'),
+             inc_1.summary = coalesce(inc_1.summary,'Jan 2023 interview describes TargetCompany ransomware evolution: major updates changed encryption algorithm and decryptor characteristics with associated file extension/name changes; earlier variants used .onion negotiation site and dropped ransom note ""How to decrypt files.txt""; later variants used extensions including .fargo (mid-late 2022), .mallox, .xollam and dropped ransom note ""HOW TO RECOVER!!.txt""; a data leak site was established under the name Mallox.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1, inc_1
+MERGE (inc_1)-[rat_1:attributed_to]->(ta_1)
+ON CREATE SET rat_1.confidence = 'high',
+              rat_1.evidence = 'Interview statements by the threat actors behind TargetCompany.',
+              rat_1.source_id = 'interview-2023-01-targetcompany',
+              rat_1.page = 'N/A'
+ON MATCH SET rat_1.confidence = coalesce(rat_1.confidence,'high'),
+             rat_1.evidence = coalesce(rat_1.evidence,'Interview statements by the threat actors behind TargetCompany.'),
+             rat_1.source_id = coalesce(rat_1.source_id,'interview-2023-01-targetcompany'),
+             rat_1.page = coalesce(rat_1.page,'N/A')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1, inc_1
+MERGE (inc_1)-[rim_1:involved_malware]->(mal_1)
+ON CREATE SET rim_1.evidence = 'Ransomware evolution and observed encryption algorithms described; variants and naming (.fargo/.mallox/.xollam) discussed.',
+              rim_1.source_id = 'interview-2023-01-targetcompany',
+              rim_1.page = 'N/A'
+ON MATCH SET rim_1.evidence = coalesce(rim_1.evidence,'Ransomware evolution and observed encryption algorithms described; variants and naming (.fargo/.mallox/.xollam) discussed.'),
+             rim_1.source_id = coalesce(rim_1.source_id,'interview-2023-01-targetcompany'),
+             rim_1.page = coalesce(rim_1.page,'N/A')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1, inc_1
+MERGE (inc_1)-[rsb_5:supported_by]->(src_1)
+ON CREATE SET rsb_5.page = 'N/A', rsb_5.quote = 'In an interview in January 2023... earlier variants provided a “.onion” contact site... later variants dropped ransom notes as HOW TO RECOVER!!.txt.'
+ON MATCH SET rsb_5.page = coalesce(rsb_5.page,'N/A'), rsb_5.quote = coalesce(rsb_5.quote,'In an interview in January 2023... earlier variants provided a “.onion” contact site... later variants dropped ransom notes as HOW TO RECOVER!!.txt.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1, inc_1
+MERGE (inc_1)-[roc_1:occurred_on]->(d_2)
+ON CREATE SET roc_1.date = date('2023-01-01')
+ON MATCH SET roc_1.date = coalesce(roc_1.date,date('2023-01-01'))
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1, inc_1
+MERGE (tech_1:Technique {technique_id:'T1486'})
+ON CREATE SET tech_1.name = 'Data Encrypted for Impact', tech_1.tactic = 'Impact', tech_1.summary = 'Ransomware encrypts data to deny availability.'
+ON MATCH SET tech_1.name = coalesce(tech_1.name,'Data Encrypted for Impact'),
+             tech_1.tactic = coalesce(tech_1.tactic,'Impact'),
+             tech_1.summary = coalesce(tech_1.summary,'Ransomware encrypts data to deny availability.')
+WITH src_1, ta_1, ta_2, ta_3, d_1, d_2, mal_1, c2_1, inc_1, tech_1
+MERGE (inc_1)-[rut_1:used_technique]->(tech_1)
+ON CREATE SET rut_1.phase = 'Impact',
+              rut_1.details = 'Encryption using Chacha20, Curve25519, and AES-128 (later variants).',
+              rut_1.evidence = 'Later variants observed using a combination of Chacha20, Curve 25519, and AES-128 algorithms to encrypt the victim\'s files.',
+              rut_1.source_id = 'interview-2023-01-targetcompany',
+              rut_1.page = 'N/A'
+ON MATCH SET rut_1.phase = coalesce(rut_1.phase,'Impact'),
+             rut_1.details = coalesce(rut_1.details,'Encryption using Chacha20, Curve25519, and AES-128 (later variants).'),
+             rut_1.evidence = coalesce(rut_1.evidence,'Later variants observed using a combination of Chacha20, Curve 25519, and AES-128 algorithms to encrypt the victim\'s files.'),
+             rut_1.source_id = coalesce(rut_1.source_id,'interview-2023-01-targetcompany'),
+             rut_1.page = coalesce(rut_1.page,'N/A');"
+iphone-users-urged-to-update-to-patch-2-zero-days-under-attack.json,"MERGE (cve_2022_32894:CVE {id:'CVE-2022-32894'})
+ON CREATE SET cve_2022_32894.summary = 'Kernel out-of-bounds write issue affecting iOS and macOS; addressed with improved bounds checking; may have been actively exploited.'
+ON MATCH SET cve_2022_32894.summary = CASE WHEN (cve_2022_32894.summary IS NULL OR cve_2022_32894.summary = '') THEN 'Kernel out-of-bounds write issue affecting iOS and macOS; addressed with improved bounds checking; may have been actively exploited.' ELSE cve_2022_32894.summary END
+MERGE (mit_bounds:Mitigation {name:'Improved bounds checking'})
+ON CREATE SET mit_bounds.framework = 'Vendor Patch', mit_bounds.summary = 'Fix implemented by Apple to address an out-of-bounds write issue via improved bounds checking.'
+ON MATCH SET mit_bounds.framework = CASE WHEN (mit_bounds.framework IS NULL OR mit_bounds.framework = '') THEN 'Vendor Patch' ELSE mit_bounds.framework END,
+              mit_bounds.summary = CASE WHEN (mit_bounds.summary IS NULL OR mit_bounds.summary = '') THEN 'Fix implemented by Apple to address an out-of-bounds write issue via improved bounds checking.' ELSE mit_bounds.summary END
+MERGE (mit_update:Mitigation {name:'Install security updates'})
+ON CREATE SET mit_update.framework = 'Vendor Guidance', mit_update.summary = 'Apply the latest Apple security updates to remediate actively exploited vulnerabilities.'
+ON MATCH SET mit_update.framework = CASE WHEN (mit_update.framework IS NULL OR mit_update.framework = '') THEN 'Vendor Guidance' ELSE mit_update.framework END,
+              mit_update.summary = CASE WHEN (mit_update.summary IS NULL OR mit_update.summary = '') THEN 'Apply the latest Apple security updates to remediate actively exploited vulnerabilities.' ELSE mit_update.summary END
+MERGE (tech_kernel_exec:Technique {technique_id:'T1068'})
+ON CREATE SET tech_kernel_exec.name = 'Exploitation for Privilege Escalation', tech_kernel_exec.tactic = 'Privilege Escalation', tech_kernel_exec.summary = 'Exploiting a vulnerability to escalate privileges, including achieving kernel-level execution.'
+ON MATCH SET tech_kernel_exec.name = CASE WHEN (tech_kernel_exec.name IS NULL OR tech_kernel_exec.name = '') THEN 'Exploitation for Privilege Escalation' ELSE tech_kernel_exec.name END,
+              tech_kernel_exec.tactic = CASE WHEN (tech_kernel_exec.tactic IS NULL OR tech_kernel_exec.tactic = '') THEN 'Privilege Escalation' ELSE tech_kernel_exec.tactic END,
+              tech_kernel_exec.summary = CASE WHEN (tech_kernel_exec.summary IS NULL OR tech_kernel_exec.summary = '') THEN 'Exploiting a vulnerability to escalate privileges, including achieving kernel-level execution.' ELSE tech_kernel_exec.summary END
+MERGE (incident_apple_zerodays_2022:Incident {id:'apple-zero-days-active-attack-weekly-update-2022'})
+ON CREATE SET incident_apple_zerodays_2022.date = date('2022-01-01'),
+              incident_apple_zerodays_2022.type = 'zero-day exploitation',
+              incident_apple_zerodays_2022.summary = 'Apple urged macOS, iPhone and iPad users to install updates that fix two zero-days under active attack; one disclosed flaw CVE-2022-32894 is a kernel out-of-bounds write enabling arbitrary code execution with kernel privileges and potential device takeover.'
+ON MATCH SET incident_apple_zerodays_2022.date = CASE WHEN incident_apple_zerodays_2022.date IS NULL THEN date('2022-01-01') ELSE incident_apple_zerodays_2022.date END,
+              incident_apple_zerodays_2022.type = CASE WHEN (incident_apple_zerodays_2022.type IS NULL OR incident_apple_zerodays_2022.type = '') THEN 'zero-day exploitation' ELSE incident_apple_zerodays_2022.type END,
+              incident_apple_zerodays_2022.summary = CASE WHEN (incident_apple_zerodays_2022.summary IS NULL OR incident_apple_zerodays_2022.summary = '') THEN 'Apple urged macOS, iPhone and iPad users to install updates that fix two zero-days under active attack; one disclosed flaw CVE-2022-32894 is a kernel out-of-bounds write enabling arbitrary code execution with kernel privileges and potential device takeover.' ELSE incident_apple_zerodays_2022.summary END
+MERGE (incident_apple_zerodays_2022)-[rel_exploit_cve:exploited_in]->(cve_2022_32894)
+ON CREATE SET rel_exploit_cve.evidence = 'Apple reported CVE-2022-32894 may have been actively exploited and allows an application to execute arbitrary code with kernel privileges.',
+              rel_exploit_cve.page = '',
+              rel_exploit_cve.source_id = ''
+ON MATCH SET rel_exploit_cve.evidence = CASE WHEN (rel_exploit_cve.evidence IS NULL OR rel_exploit_cve.evidence = '') THEN 'Apple reported CVE-2022-32894 may have been actively exploited and allows an application to execute arbitrary code with kernel privileges.' ELSE rel_exploit_cve.evidence END
+MERGE (incident_apple_zerodays_2022)-[rel_used_tech:used_technique]->(tech_kernel_exec)
+ON CREATE SET rel_used_tech.phase = 'Privilege Escalation',
+              rel_used_tech.details = 'Kernel-level arbitrary code execution via out-of-bounds write (CVE-2022-32894), enabling device takeover.',
+              rel_used_tech.evidence = 'Vulnerability allows an application to execute arbitrary code with kernel privileges; reported as possibly actively exploited.',
+              rel_used_tech.page = '',
+              rel_used_tech.source_id = ''
+ON MATCH SET rel_used_tech.phase = CASE WHEN (rel_used_tech.phase IS NULL OR rel_used_tech.phase = '') THEN 'Privilege Escalation' ELSE rel_used_tech.phase END,
+              rel_used_tech.details = CASE WHEN (rel_used_tech.details IS NULL OR rel_used_tech.details = '') THEN 'Kernel-level arbitrary code execution via out-of-bounds write (CVE-2022-32894), enabling device takeover.' ELSE rel_used_tech.details END,
+              rel_used_tech.evidence = CASE WHEN (rel_used_tech.evidence IS NULL OR rel_used_tech.evidence = '') THEN 'Vulnerability allows an application to execute arbitrary code with kernel privileges; reported as possibly actively exploited.' ELSE rel_used_tech.evidence END
+MERGE (mit_bounds)-[rel_mitig_bounds:mitigates]->(cve_2022_32894)
+ON CREATE SET rel_mitig_bounds.status = 'applied',
+              rel_mitig_bounds.observed_effectiveness = 'Addresses the out-of-bounds write with improved bounds checking.',
+              rel_mitig_bounds.evidence = 'Apple stated the out-of-bounds write issue was addressed with improved bounds checking.',
+              rel_mitig_bounds.page = '',
+              rel_mitig_bounds.source_id = ''
+ON MATCH SET rel_mitig_bounds.status = CASE WHEN (rel_mitig_bounds.status IS NULL OR rel_mitig_bounds.status = '') THEN 'applied' ELSE rel_mitig_bounds.status END,
+              rel_mitig_bounds.observed_effectiveness = CASE WHEN (rel_mitig_bounds.observed_effectiveness IS NULL OR rel_mitig_bounds.observed_effectiveness = '') THEN 'Addresses the out-of-bounds write with improved bounds checking.' ELSE rel_mitig_bounds.observed_effectiveness END,
+              rel_mitig_bounds.evidence = CASE WHEN (rel_mitig_bounds.evidence IS NULL OR rel_mitig_bounds.evidence = '') THEN 'Apple stated the out-of-bounds write issue was addressed with improved bounds checking.' ELSE rel_mitig_bounds.evidence END
+MERGE (mit_update)-[rel_mitig_update:mitigates]->(incident_apple_zerodays_2022)
+ON CREATE SET rel_mitig_update.status = 'recommended',
+              rel_mitig_update.observed_effectiveness = 'Applying updates remediates actively exploited zero-days affecting iOS 15 and macOS Monterey.',
+              rel_mitig_update.evidence = 'Apple urged users to immediately install updates that include fixes for two zero-days under active attack.',
+              rel_mitig_update.page = '',
+              rel_mitig_update.source_id = ''
+ON MATCH SET rel_mitig_update.status = CASE WHEN (rel_mitig_update.status IS NULL OR rel_mitig_update.status = '') THEN 'recommended' ELSE rel_mitig_update.status END,
+              rel_mitig_update.observed_effectiveness = CASE WHEN (rel_mitig_update.observed_effectiveness IS NULL OR rel_mitig_update.observed_effectiveness = '') THEN 'Applying updates remediates actively exploited zero-days affecting iOS 15 and macOS Monterey.' ELSE rel_mitig_update.observed_effectiveness END,
+              rel_mitig_update.evidence = CASE WHEN (rel_mitig_update.evidence IS NULL OR rel_mitig_update.evidence = '') THEN 'Apple urged users to immediately install updates that include fixes for two zero-days under active attack.' ELSE rel_mitig_update.evidence END;"
+microsoft-patches-dogwalk-zero-day-and-17-critical-flaws.json,"MERGE (src1:Source {id:'microsoft-aug-2022-patch-tuesday-dogwalk-cve-2022-34713'})
+ON CREATE SET
+  src1.title = 'Microsoft urges users to patch zero-day ""Dogwalk"" (CVE-2022-34713) actively exploited in the wild',
+  src1.publisher = 'Microsoft'
+ON MATCH SET
+  src1.title = CASE WHEN src1.title IS NULL OR trim(src1.title) = '' THEN 'Microsoft urges users to patch zero-day ""Dogwalk"" (CVE-2022-34713) actively exploited in the wild' ELSE src1.title END,
+  src1.publisher = CASE WHEN src1.publisher IS NULL OR trim(src1.publisher) = '' THEN 'Microsoft' ELSE src1.publisher END
+
+WITH src1
+MERGE (cve1:CVE {id:'CVE-2022-34713'})
+ON CREATE SET
+  cve1.summary = 'Zero-day dubbed Dogwalk; tied to Microsoft Windows Support Diagnostic Tool; allows code execution; actively exploited in the wild; exploitation can only be performed by an adversary with physical access to a vulnerable computer.'
+ON MATCH SET
+  cve1.summary = CASE WHEN cve1.summary IS NULL OR trim(cve1.summary) = '' THEN 'Zero-day dubbed Dogwalk; tied to Microsoft Windows Support Diagnostic Tool; allows code execution; actively exploited in the wild; exploitation can only be performed by an adversary with physical access to a vulnerable computer.' ELSE cve1.summary END
+
+WITH src1, cve1
+MERGE (inc1:Incident {id:'inc-cve-2022-34713-in-the-wild'})
+ON CREATE SET
+  inc1.date = date('2022-08-01'),
+  inc1.type = 'intrusion',
+  inc1.summary = 'Microsoft warned that zero-day CVE-2022-34713 (""Dogwalk"" variant) is actively being exploited in the wild; tied to Microsoft Windows Support Diagnostic Tool; exploitation requires adversary physical access.'
+ON MATCH SET
+  inc1.date = CASE WHEN inc1.date IS NULL THEN date('2022-08-01') ELSE inc1.date END,
+  inc1.type = CASE WHEN inc1.type IS NULL OR trim(inc1.type) = '' THEN 'intrusion' ELSE inc1.type END,
+  inc1.summary = CASE WHEN inc1.summary IS NULL OR trim(inc1.summary) = '' THEN 'Microsoft warned that zero-day CVE-2022-34713 (""Dogwalk"" variant) is actively being exploited in the wild; tied to Microsoft Windows Support Diagnostic Tool; exploitation requires adversary physical access.' ELSE inc1.summary END
+
+WITH src1, cve1, inc1
+MERGE (dt1:Date {value:date('2022-08-01')})
+
+WITH src1, cve1, inc1, dt1
+MERGE (inc1)-[r_occ1:occurred_on {date:date('2022-08-01')}]->(dt1)
+
+WITH src1, cve1, inc1, dt1, r_occ1
+MERGE (inc1)-[r_exp1:exploited_in]->(cve1)
+ON CREATE SET
+  r_exp1.evidence = 'Microsoft urged users to patch zero-day CVE-2022-34713 (""Dogwalk"") actively exploited in the wild; exploitation can only be performed by an adversary with physical access.',
+  r_exp1.source_id = 'microsoft-aug-2022-patch-tuesday-dogwalk-cve-2022-34713'
+ON MATCH SET
+  r_exp1.evidence = CASE WHEN r_exp1.evidence IS NULL OR trim(r_exp1.evidence) = '' THEN 'Microsoft urged users to patch zero-day CVE-2022-34713 (""Dogwalk"") actively exploited in the wild; exploitation can only be performed by an adversary with physical access.' ELSE r_exp1.evidence END,
+  r_exp1.source_id = CASE WHEN r_exp1.source_id IS NULL OR trim(r_exp1.source_id) = '' THEN 'microsoft-aug-2022-patch-tuesday-dogwalk-cve-2022-34713' ELSE r_exp1.source_id END
+
+WITH src1, cve1, inc1, dt1, r_occ1, r_exp1
+MERGE (inc1)-[r_sup_inc1:supported_by]->(src1)
+ON CREATE SET
+  r_sup_inc1.quote = 'Microsoft is urging users to patch a zero-day vulnerability dubbed Dogwalk that is actively being exploited in the wild... The bug (CVE-2022-34713)...'
+ON MATCH SET
+  r_sup_inc1.quote = CASE WHEN r_sup_inc1.quote IS NULL OR trim(r_sup_inc1.quote) = '' THEN 'Microsoft is urging users to patch a zero-day vulnerability dubbed Dogwalk that is actively being exploited in the wild... The bug (CVE-2022-34713)...' ELSE r_sup_inc1.quote END
+
+WITH src1, cve1, inc1, dt1, r_occ1, r_exp1, r_sup_inc1
+MERGE (cve1)-[r_sup_cve1:supported_by]->(src1)
+ON CREATE SET
+  r_sup_cve1.quote = 'The bug (CVE-2022-34713) is tied to a Microsoft Windows Support Diagnostic Tool and allows a remote attacker to execute code on a vulnerable system... Microsoft... warns that the exploitation... can only be performed by an adversary with physical access...'
+ON MATCH SET
+  r_sup_cve1.quote = CASE WHEN r_sup_cve1.quote IS NULL OR trim(r_sup_cve1.quote) = '' THEN 'The bug (CVE-2022-34713) is tied to a Microsoft Windows Support Diagnostic Tool and allows a remote attacker to execute code on a vulnerable system... Microsoft... warns that the exploitation... can only be performed by an adversary with physical access...' ELSE r_sup_cve1.quote END
+
+WITH src1, cve1, inc1, dt1, r_occ1, r_exp1, r_sup_inc1, r_sup_cve1
+MERGE (mit1:Mitigation {name:'Patch Management'})
+ON CREATE SET
+  mit1.framework = 'General',
+  mit1.summary = 'Apply vendor patches and updates to remediate known and zero-day vulnerabilities.'
+ON MATCH SET
+  mit1.framework = CASE WHEN mit1.framework IS NULL OR trim(mit1.framework) = '' THEN 'General' ELSE mit1.framework END,
+  mit1.summary = CASE WHEN mit1.summary IS NULL OR trim(mit1.summary) = '' THEN 'Apply vendor patches and updates to remediate known and zero-day vulnerabilities.' ELSE mit1.summary END
+
+WITH src1, cve1, inc1, dt1, r_occ1, r_exp1, r_sup_inc1, r_sup_cve1, mit1
+MERGE (mit1)-[r_mit1:mitigates]->(inc1)
+ON CREATE SET
+  r_mit1.status = 'recommended',
+  r_mit1.evidence = 'Microsoft urged users to patch the zero-day vulnerability CVE-2022-34713 (""Dogwalk"") that is actively being exploited in the wild.',
+  r_mit1.source_id = 'microsoft-aug-2022-patch-tuesday-dogwalk-cve-2022-34713'
+ON MATCH SET
+  r_mit1.status = CASE WHEN r_mit1.status IS NULL OR trim(r_mit1.status) = '' THEN 'recommended' ELSE r_mit1.status END,
+  r_mit1.evidence = CASE WHEN r_mit1.evidence IS NULL OR trim(r_mit1.evidence) = '' THEN 'Microsoft urged users to patch the zero-day vulnerability CVE-2022-34713 (""Dogwalk"") that is actively being exploited in the wild.' ELSE r_mit1.evidence END,
+  r_mit1.source_id = CASE WHEN r_mit1.source_id IS NULL OR trim(r_mit1.source_id) = '' THEN 'microsoft-aug-2022-patch-tuesday-dogwalk-cve-2022-34713' ELSE r_mit1.source_id END
+
+WITH src1, cve1, inc1, dt1, r_occ1, r_exp1, r_sup_inc1, r_sup_cve1, mit1, r_mit1
+MERGE (mit1)-[r_sup_mit1:supported_by]->(src1)
+ON CREATE SET
+  r_sup_mit1.quote = 'Microsoft is urging users to patch a zero-day vulnerability dubbed Dogwalk that is actively being exploited in the wild.'
+ON MATCH SET
+  r_sup_mit1.quote = CASE WHEN r_sup_mit1.quote IS NULL OR trim(r_sup_mit1.quote) = '' THEN 'Microsoft is urging users to patch a zero-day vulnerability dubbed Dogwalk that is actively being exploited in the wild.' ELSE r_sup_mit1.quote END;"
+peer-to-peer-worm-p2pinfect.json,"MERGE (src1:Source {id:'unit42-p2pinfect-2023-07-11'})
+ON CREATE SET
+  src1.title = 'Unit 42 cloud researchers discovered P2PInfect (P2P worm targeting Redis)',
+  src1.publisher = 'Unit 42',
+  src1.published_on = date('2023-07-11')
+ON MATCH SET
+  src1.title = coalesce(src1.title,'Unit 42 cloud researchers discovered P2PInfect (P2P worm targeting Redis)'),
+  src1.publisher = coalesce(src1.publisher,'Unit 42'),
+  src1.published_on = coalesce(src1.published_on,date('2023-07-11'))
+
+MERGE (mal1:Malware {name:'P2PInfect'})
+ON CREATE SET
+  mal1.family = 'Worm',
+  mal1.summary = 'Peer-to-peer (P2P) worm written in Rust; targets Redis in cloud environments; cross-platform infections; exploits CVE-2022-0543 (Lua sandbox escape).'
+ON MATCH SET
+  mal1.family = coalesce(mal1.family,'Worm'),
+  mal1.summary = coalesce(mal1.summary,'Peer-to-peer (P2P) worm written in Rust; targets Redis in cloud environments; cross-platform infections; exploits CVE-2022-0543 (Lua sandbox escape).')
+
+MERGE (cve1:CVE {id:'CVE-2022-0543'})
+ON CREATE SET
+  cve1.published_date = date('2022-01-01'),
+  cve1.summary = 'Lua sandbox escape vulnerability affecting Redis; NIST NVD rated Critical (CVSS 10.0) per Unit 42.'
+ON MATCH SET
+  cve1.published_date = coalesce(cve1.published_date,date('2022-01-01')),
+  cve1.summary = coalesce(cve1.summary,'Lua sandbox escape vulnerability affecting Redis; NIST NVD rated Critical (CVSS 10.0) per Unit 42.')
+
+MERGE (tech1:Technique {technique_id:'T1190'})
+ON CREATE SET
+  tech1.name = 'Exploit Public-Facing Application',
+  tech1.tactic = 'Initial Access',
+  tech1.summary = 'Adversaries exploit a vulnerability in an internet-facing application to gain access.'
+ON MATCH SET
+  tech1.name = coalesce(tech1.name,'Exploit Public-Facing Application'),
+  tech1.tactic = coalesce(tech1.tactic,'Initial Access'),
+  tech1.summary = coalesce(tech1.summary,'Adversaries exploit a vulnerability in an internet-facing application to gain access.')
+
+MERGE (cap1:Capability {name:'Automation'})
+ON CREATE SET
+  cap1.summary = 'Automated/scalable capability enabling large-scale targeting or propagation.'
+ON MATCH SET
+  cap1.summary = coalesce(cap1.summary,'Automated/scalable capability enabling large-scale targeting or propagation.')
+
+MERGE (inc1:Incident {id:'unit42-2023-07-11-p2pinfect'})
+ON CREATE SET
+  inc1.date = date('2023-07-11'),
+  inc1.type = 'worm',
+  inc1.summary = 'Unit 42 discovered P2PInfect, a new P2P worm written in Rust that targets Redis instances in cloud environments and infects by exploiting CVE-2022-0543.'
+ON MATCH SET
+  inc1.date = coalesce(inc1.date,date('2023-07-11')),
+  inc1.type = coalesce(inc1.type,'worm'),
+  inc1.summary = coalesce(inc1.summary,'Unit 42 discovered P2PInfect, a new P2P worm written in Rust that targets Redis instances in cloud environments and infects by exploiting CVE-2022-0543.')
+
+MERGE (dt1:Date {value:date('2023-07-11')})
+
+MERGE (inc1)-[r_occ1:occurred_on {date:date('2023-07-11')}]->(dt1)
+
+MERGE (inc1)-[r_mal1:involved_malware]->(mal1)
+ON CREATE SET
+  r_mal1.evidence = 'Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect.',
+  r_mal1.source_id = src1.id
+ON MATCH SET
+  r_mal1.evidence = coalesce(r_mal1.evidence,'Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect.'),
+  r_mal1.source_id = coalesce(r_mal1.source_id,src1.id)
+
+MERGE (mal1)-[r_exp1:exploits]->(cve1)
+ON CREATE SET
+  r_exp1.date = date('2023-07-11'),
+  r_exp1.evidence = 'The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543.',
+  r_exp1.source_id = src1.id
+ON MATCH SET
+  r_exp1.date = coalesce(r_exp1.date,date('2023-07-11')),
+  r_exp1.evidence = coalesce(r_exp1.evidence,'The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543.'),
+  r_exp1.source_id = coalesce(r_exp1.source_id,src1.id)
+
+MERGE (inc1)-[r_cve1:exploited_in]->(cve1)
+ON CREATE SET
+  r_cve1.first_seen = date('2023-07-11'),
+  r_cve1.evidence = 'P2PInfect infects vulnerable Redis instances by exploiting CVE-2022-0543 (Lua sandbox escape).',
+  r_cve1.source_id = src1.id
+ON MATCH SET
+  r_cve1.first_seen = coalesce(r_cve1.first_seen,date('2023-07-11')),
+  r_cve1.evidence = coalesce(r_cve1.evidence,'P2PInfect infects vulnerable Redis instances by exploiting CVE-2022-0543 (Lua sandbox escape).'),
+  r_cve1.source_id = coalesce(r_cve1.source_id,src1.id)
+
+MERGE (inc1)-[r_t1:used_technique]->(tech1)
+ON CREATE SET
+  r_t1.phase = 'Initial Access',
+  r_t1.details = 'Exploit Redis (Lua sandbox escape) via CVE-2022-0543',
+  r_t1.evidence = 'The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543.',
+  r_t1.source_id = src1.id
+ON MATCH SET
+  r_t1.phase = coalesce(r_t1.phase,'Initial Access'),
+  r_t1.details = coalesce(r_t1.details,'Exploit Redis (Lua sandbox escape) via CVE-2022-0543'),
+  r_t1.evidence = coalesce(r_t1.evidence,'The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543.'),
+  r_t1.source_id = coalesce(r_t1.source_id,src1.id)
+
+MERGE (inc1)-[r_cap1:leverages]->(cap1)
+ON CREATE SET
+  r_cap1.details = 'Highly scalable, cloud-friendly worm capable of cross-platform infections; targets large numbers of publicly communicating Redis systems.',
+  r_cap1.evidence = 'Written in Rust, a highly scalable and cloud-friendly programming language; capable of cross-platform infections and targets Redis heavily used within cloud environments; identified over 307,000 unique Redis systems communicating publicly over the last two weeks.',
+  r_cap1.source_id = src1.id
+ON MATCH SET
+  r_cap1.details = coalesce(r_cap1.details,'Highly scalable, cloud-friendly worm capable of cross-platform infections; targets large numbers of publicly communicating Redis systems.'),
+  r_cap1.evidence = coalesce(r_cap1.evidence,'Written in Rust, a highly scalable and cloud-friendly programming language; capable of cross-platform infections and targets Redis heavily used within cloud environments; identified over 307,000 unique Redis systems communicating publicly over the last two weeks.'),
+  r_cap1.source_id = coalesce(r_cap1.source_id,src1.id)
+
+MERGE (mal1)-[r_cap2:leverages]->(cap1)
+ON CREATE SET
+  r_cap2.details = 'Scalable, cross-platform worm behavior (Linux/Windows Redis servers).',
+  r_cap2.evidence = 'P2PInfect exploits Redis servers running on both Linux and Windows operating systems, making it more scalable and potent than other worms.',
+  r_cap2.source_id = src1.id
+ON MATCH SET
+  r_cap2.details = coalesce(r_cap2.details,'Scalable, cross-platform worm behavior (Linux/Windows Redis servers).'),
+  r_cap2.evidence = coalesce(r_cap2.evidence,'P2PInfect exploits Redis servers running on both Linux and Windows operating systems, making it more scalable and potent than other worms.'),
+  r_cap2.source_id = coalesce(r_cap2.source_id,src1.id)
+
+MERGE (mal1)-[r_sup1:supported_by]->(src1)
+ON CREATE SET
+  r_sup1.quote = 'On July 11, 2023, Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect.'
+ON MATCH SET
+  r_sup1.quote = coalesce(r_sup1.quote,'On July 11, 2023, Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect.')
+
+MERGE (cve1)-[r_sup2:supported_by]->(src1)
+ON CREATE SET
+  r_sup2.quote = 'The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543.'
+ON MATCH SET
+  r_sup2.quote = coalesce(r_sup2.quote,'The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543.')
+
+MERGE (inc1)-[r_sup3:supported_by]->(src1)
+ON CREATE SET
+  r_sup3.quote = 'On July 11, 2023, Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect.'
+ON MATCH SET
+  r_sup3.quote = coalesce(r_sup3.quote,'On July 11, 2023, Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect.')"

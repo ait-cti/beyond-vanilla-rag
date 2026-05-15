@@ -1,0 +1,535 @@
+filename,cypher
+ryuk-2020-distributing-ransomware-via-trickbot-and-bazarloader.json,"MERGE (src_1:Source {id:'text-ryuk-bazarloader-trickbot-connection'})
+ON CREATE SET src_1.title = 'Text excerpt: Ryuk uses BazarLoader; phishing distribution; C2 deployment; TrickBot actor connected to BazarLoader',
+              src_1.publisher = 'Provided Text',
+              src_1.url = 'N/A'
+
+MERGE (ta_ryuk:ThreatActor {name:'Ryuk'})
+MERGE (mal_bazar:Malware {name:'BazarLoader'})
+ON CREATE SET mal_bazar.family = 'BazarLoader'
+MERGE (mal_bazar_alias:Malware {name:'BazarBackdoor'})
+ON CREATE SET mal_bazar_alias.family = 'BazarLoader'
+
+MERGE (mal_trickbot:Malware {name:'TrickBot'})
+ON CREATE SET mal_trickbot.family = 'TrickBot'
+
+MERGE (tech_phishing:Technique {technique_id:'T1566'})
+ON CREATE SET tech_phishing.name = 'Phishing',
+              tech_phishing.tactic = 'Initial Access',
+              tech_phishing.summary = 'Phishing emails delivering malicious attachments or links used for initial access.'
+
+MERGE (c2_server:Technique {technique_id:'T1071'})
+ON CREATE SET c2_server.name = 'Application Layer Protocol',
+              c2_server.tactic = 'Command and Control',
+              c2_server.summary = 'Use of command-and-control communication to deploy and install malware/backdoors.'
+
+MERGE (c2_infra_1:C2_Infrastructure {service:'C&C Server'})
+ON CREATE SET c2_infra_1.summary = 'Command-and-control server used to deploy and install the backdoor.'
+
+MERGE (ryuk_uses_bazar:ThreatActor {name:'Ryuk'})
+MERGE (ryuk_uses_bazar)-[r_uses_1:uses]->(mal_bazar)
+ON CREATE SET r_uses_1.evidence = 'Ryuk began using another dropper called BazarLoader (also known as BazarBackdoor).',
+              r_uses_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_uses_1.evidence = CASE WHEN r_uses_1.evidence IS NULL OR r_uses_1.evidence = '' THEN 'Ryuk began using another dropper called BazarLoader (also known as BazarBackdoor).' ELSE r_uses_1.evidence END,
+             r_uses_1.source_id = CASE WHEN r_uses_1.source_id IS NULL OR r_uses_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_uses_1.source_id END
+
+MERGE (mal_bazar_alias)-[r_alias_1:uses]->(mal_bazar)
+ON CREATE SET r_alias_1.evidence = 'BazarLoader (also known as BazarBackdoor).',
+              r_alias_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_alias_1.evidence = CASE WHEN r_alias_1.evidence IS NULL OR r_alias_1.evidence = '' THEN 'BazarLoader (also known as BazarBackdoor).' ELSE r_alias_1.evidence END,
+             r_alias_1.source_id = CASE WHEN r_alias_1.source_id IS NULL OR r_alias_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_alias_1.source_id END
+
+MERGE (inc_1:Incident {id:'inc-ryuk-bazarloader-starting-this-year'})
+ON CREATE SET inc_1.type = 'intrusion',
+              inc_1.summary = 'Ryuk began using BazarLoader/BazarBackdoor; BazarLoader distributed via phishing emails with attachments/links; C2 used to deploy/install backdoor; advisory connects TrickBot actor to BazarLoader.'
+ON MATCH SET inc_1.type = CASE WHEN inc_1.type IS NULL OR inc_1.type = '' THEN 'intrusion' ELSE inc_1.type END,
+             inc_1.summary = CASE WHEN inc_1.summary IS NULL OR inc_1.summary = '' THEN 'Ryuk began using BazarLoader/BazarBackdoor; BazarLoader distributed via phishing emails with attachments/links; C2 used to deploy/install backdoor; advisory connects TrickBot actor to BazarLoader.' ELSE inc_1.summary END
+
+MERGE (inc_1)-[r_inc_mal_1:involved_malware]->(mal_bazar)
+ON CREATE SET r_inc_mal_1.evidence = 'Ryuk began using another dropper called BazarLoader (also known as BazarBackdoor).',
+              r_inc_mal_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_inc_mal_1.evidence = CASE WHEN r_inc_mal_1.evidence IS NULL OR r_inc_mal_1.evidence = '' THEN 'Ryuk began using another dropper called BazarLoader (also known as BazarBackdoor).' ELSE r_inc_mal_1.evidence END,
+             r_inc_mal_1.source_id = CASE WHEN r_inc_mal_1.source_id IS NULL OR r_inc_mal_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_inc_mal_1.source_id END
+
+MERGE (inc_1)-[r_inc_tech_1:used_technique]->(tech_phishing)
+ON CREATE SET r_inc_tech_1.phase = 'Initial Access',
+              r_inc_tech_1.details = 'Distributed via phishing emails with malicious attachments or links to file-hosting websites.',
+              r_inc_tech_1.evidence = 'BazarLoader is primarily distributed via phishing emails that contain either malicious attachments or links to websites (typically free, online file-hosting solutions) that host malware.',
+              r_inc_tech_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_inc_tech_1.phase = CASE WHEN r_inc_tech_1.phase IS NULL OR r_inc_tech_1.phase = '' THEN 'Initial Access' ELSE r_inc_tech_1.phase END,
+             r_inc_tech_1.details = CASE WHEN r_inc_tech_1.details IS NULL OR r_inc_tech_1.details = '' THEN 'Distributed via phishing emails with malicious attachments or links to file-hosting websites.' ELSE r_inc_tech_1.details END,
+             r_inc_tech_1.evidence = CASE WHEN r_inc_tech_1.evidence IS NULL OR r_inc_tech_1.evidence = '' THEN 'BazarLoader is primarily distributed via phishing emails that contain either malicious attachments or links to websites (typically free, online file-hosting solutions) that host malware.' ELSE r_inc_tech_1.evidence END,
+             r_inc_tech_1.source_id = CASE WHEN r_inc_tech_1.source_id IS NULL OR r_inc_tech_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_inc_tech_1.source_id END
+
+MERGE (mal_bazar)-[r_mal_tech_1:uses]->(tech_phishing)
+ON CREATE SET r_mal_tech_1.evidence = 'BazarLoader is primarily distributed via phishing emails that contain either malicious attachments or links to websites that host malware.',
+              r_mal_tech_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_mal_tech_1.evidence = CASE WHEN r_mal_tech_1.evidence IS NULL OR r_mal_tech_1.evidence = '' THEN 'BazarLoader is primarily distributed via phishing emails that contain either malicious attachments or links to websites that host malware.' ELSE r_mal_tech_1.evidence END,
+             r_mal_tech_1.source_id = CASE WHEN r_mal_tech_1.source_id IS NULL OR r_mal_tech_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_mal_tech_1.source_id END
+
+MERGE (mal_bazar)-[r_abuse_c2_1:abuses]->(c2_infra_1)
+ON CREATE SET r_abuse_c2_1.evidence = 'Once the payload is distributed, a command-and-control (C&C) server is used to deploy and install the backdoor.',
+              r_abuse_c2_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_abuse_c2_1.evidence = CASE WHEN r_abuse_c2_1.evidence IS NULL OR r_abuse_c2_1.evidence = '' THEN 'Once the payload is distributed, a command-and-control (C&C) server is used to deploy and install the backdoor.' ELSE r_abuse_c2_1.evidence END,
+             r_abuse_c2_1.source_id = CASE WHEN r_abuse_c2_1.source_id IS NULL OR r_abuse_c2_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_abuse_c2_1.source_id END
+
+MERGE (inc_1)-[r_inc_tech_2:used_technique]->(c2_server)
+ON CREATE SET r_inc_tech_2.phase = 'Command and Control',
+              r_inc_tech_2.details = 'C&C server used to deploy and install the backdoor after payload distribution.',
+              r_inc_tech_2.evidence = 'A command-and-control (C&C) server is used to deploy and install the backdoor.',
+              r_inc_tech_2.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_inc_tech_2.phase = CASE WHEN r_inc_tech_2.phase IS NULL OR r_inc_tech_2.phase = '' THEN 'Command and Control' ELSE r_inc_tech_2.phase END,
+             r_inc_tech_2.details = CASE WHEN r_inc_tech_2.details IS NULL OR r_inc_tech_2.details = '' THEN 'C&C server used to deploy and install the backdoor after payload distribution.' ELSE r_inc_tech_2.details END,
+             r_inc_tech_2.evidence = CASE WHEN r_inc_tech_2.evidence IS NULL OR r_inc_tech_2.evidence = '' THEN 'A command-and-control (C&C) server is used to deploy and install the backdoor.' ELSE r_inc_tech_2.evidence END,
+             r_inc_tech_2.source_id = CASE WHEN r_inc_tech_2.source_id IS NULL OR r_inc_tech_2.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_inc_tech_2.source_id END
+
+MERGE (ta_trickbot:ThreatActor {name:'TrickBot threat actor'})
+ON CREATE SET ta_trickbot.summary = 'Threat actor behind TrickBot (as referenced in the advisory).'
+
+MERGE (ta_trickbot)-[r_conn_1:uses]->(mal_bazar)
+ON CREATE SET r_conn_1.evidence = 'According to the advisory, the threat actor behind TrickBot is also connected to BazarLoader.',
+              r_conn_1.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_conn_1.evidence = CASE WHEN r_conn_1.evidence IS NULL OR r_conn_1.evidence = '' THEN 'According to the advisory, the threat actor behind TrickBot is also connected to BazarLoader.' ELSE r_conn_1.evidence END,
+             r_conn_1.source_id = CASE WHEN r_conn_1.source_id IS NULL OR r_conn_1.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_conn_1.source_id END
+
+MERGE (ta_trickbot)-[r_conn_2:uses]->(mal_trickbot)
+ON CREATE SET r_conn_2.evidence = 'the threat actor behind TrickBot',
+              r_conn_2.source_id = 'text-ryuk-bazarloader-trickbot-connection'
+ON MATCH SET r_conn_2.evidence = CASE WHEN r_conn_2.evidence IS NULL OR r_conn_2.evidence = '' THEN 'the threat actor behind TrickBot' ELSE r_conn_2.evidence END,
+             r_conn_2.source_id = CASE WHEN r_conn_2.source_id IS NULL OR r_conn_2.source_id = '' THEN 'text-ryuk-bazarloader-trickbot-connection' ELSE r_conn_2.source_id END
+
+MERGE (ta_ryuk)-[r_sup_1:supported_by]->(src_1)
+ON CREATE SET r_sup_1.quote = 'Starting this year, Ryuk began using another dropper called BazarLoader (also known as BazarBackdoor)...'
+
+MERGE (mal_bazar)-[r_sup_2:supported_by]->(src_1)
+ON CREATE SET r_sup_2.quote = 'BazarLoader is also primarily distributed via phishing emails...'
+
+MERGE (inc_1)-[r_sup_3:supported_by]->(src_1)
+ON CREATE SET r_sup_3.quote = 'Once the payload is distributed, a command-and-control (C&C) server is used to deploy and install the backdoor. According to the advisory, the threat actor behind TrickBot is also connected to BazarLoader.'"
+chromeloader-hijacker-threats.json,"MERGE (malware_chromeloader:Malware {name:'ChromeLoader'})
+ON CREATE SET
+  malware_chromeloader.summary = 'Browser hijacker that redirects victims to advertisement websites; persists and manifests as a browser extension, modifies Chrome settings; on Windows infections occur via ISO files posing as cracked games or pirated films/TV. Uses PowerShell and may enable follow-on activity such as ransomware/spyware propagation or theft of browser-session data.',
+  malware_chromeloader.family = 'ChromeLoader'
+ON MATCH SET
+  malware_chromeloader.summary = CASE WHEN malware_chromeloader.summary IS NULL OR malware_chromeloader.summary = '' THEN 'Browser hijacker that redirects victims to advertisement websites; persists and manifests as a browser extension, modifies Chrome settings; on Windows infections occur via ISO files posing as cracked games or pirated films/TV. Uses PowerShell and may enable follow-on activity such as ransomware/spyware propagation or theft of browser-session data.' ELSE malware_chromeloader.summary END,
+  malware_chromeloader.family  = CASE WHEN malware_chromeloader.family  IS NULL OR malware_chromeloader.family  = '' THEN 'ChromeLoader' ELSE malware_chromeloader.family END
+MERGE (tool_powershell:Tool {name:'PowerShell'})
+ON CREATE SET
+  tool_powershell.summary = 'Windows scripting and automation shell; used by ChromeLoader to increase risk of advanced malicious activity.'
+ON MATCH SET
+  tool_powershell.summary = CASE WHEN tool_powershell.summary IS NULL OR tool_powershell.summary = '' THEN 'Windows scripting and automation shell; used by ChromeLoader to increase risk of advanced malicious activity.' ELSE tool_powershell.summary END
+MERGE (tech_t1204:Technique {technique_id:'T1204'})
+ON CREATE SET
+  tech_t1204.name = 'User Execution',
+  tech_t1204.tactic = 'Execution',
+  tech_t1204.summary = 'Infection occurs when users execute malicious content (e.g., ISO files posing as cracked games or pirated media).'
+ON MATCH SET
+  tech_t1204.name = CASE WHEN tech_t1204.name IS NULL OR tech_t1204.name = '' THEN 'User Execution' ELSE tech_t1204.name END,
+  tech_t1204.tactic = CASE WHEN tech_t1204.tactic IS NULL OR tech_t1204.tactic = '' THEN 'Execution' ELSE tech_t1204.tactic END,
+  tech_t1204.summary = CASE WHEN tech_t1204.summary IS NULL OR tech_t1204.summary = '' THEN 'Infection occurs when users execute malicious content (e.g., ISO files posing as cracked games or pirated media).' ELSE tech_t1204.summary END
+MERGE (tech_t1059_001:Technique {technique_id:'T1059.001'})
+ON CREATE SET
+  tech_t1059_001.name = 'PowerShell',
+  tech_t1059_001.tactic = 'Execution',
+  tech_t1059_001.summary = 'Adversaries may abuse PowerShell for execution and follow-on malicious activity.'
+ON MATCH SET
+  tech_t1059_001.name = CASE WHEN tech_t1059_001.name IS NULL OR tech_t1059_001.name = '' THEN 'PowerShell' ELSE tech_t1059_001.name END,
+  tech_t1059_001.tactic = CASE WHEN tech_t1059_001.tactic IS NULL OR tech_t1059_001.tactic = '' THEN 'Execution' ELSE tech_t1059_001.tactic END,
+  tech_t1059_001.summary = CASE WHEN tech_t1059_001.summary IS NULL OR tech_t1059_001.summary = '' THEN 'Adversaries may abuse PowerShell for execution and follow-on malicious activity.' ELSE tech_t1059_001.summary END
+MERGE (malware_chromeloader)-[rel_uses_tool:uses]->(tool_powershell)
+ON CREATE SET
+  rel_uses_tool.evidence = 'ChromeLoader use of PowerShell could pose a greater risk by leading to further and advanced malicious activity.',
+  rel_uses_tool.source_id = 'text'
+ON MATCH SET
+  rel_uses_tool.evidence = CASE WHEN rel_uses_tool.evidence IS NULL OR rel_uses_tool.evidence = '' THEN 'ChromeLoader use of PowerShell could pose a greater risk by leading to further and advanced malicious activity.' ELSE rel_uses_tool.evidence END,
+  rel_uses_tool.source_id = CASE WHEN rel_uses_tool.source_id IS NULL OR rel_uses_tool.source_id = '' THEN 'text' ELSE rel_uses_tool.source_id END
+MERGE (malware_chromeloader)-[rel_usedtech_ps:used_technique]->(tech_t1059_001)
+ON CREATE SET
+  rel_usedtech_ps.phase = 'Execution',
+  rel_usedtech_ps.details = 'Uses PowerShell',
+  rel_usedtech_ps.evidence = 'ChromeLoader use of PowerShell could pose a greater risk by leading to further and advanced malicious activity.',
+  rel_usedtech_ps.source_id = 'text'
+ON MATCH SET
+  rel_usedtech_ps.phase = CASE WHEN rel_usedtech_ps.phase IS NULL OR rel_usedtech_ps.phase = '' THEN 'Execution' ELSE rel_usedtech_ps.phase END,
+  rel_usedtech_ps.details = CASE WHEN rel_usedtech_ps.details IS NULL OR rel_usedtech_ps.details = '' THEN 'Uses PowerShell' ELSE rel_usedtech_ps.details END,
+  rel_usedtech_ps.evidence = CASE WHEN rel_usedtech_ps.evidence IS NULL OR rel_usedtech_ps.evidence = '' THEN 'ChromeLoader use of PowerShell could pose a greater risk by leading to further and advanced malicious activity.' ELSE rel_usedtech_ps.evidence END,
+  rel_usedtech_ps.source_id = CASE WHEN rel_usedtech_ps.source_id IS NULL OR rel_usedtech_ps.source_id = '' THEN 'text' ELSE rel_usedtech_ps.source_id END
+MERGE (malware_chromeloader)-[rel_usedtech_iso:used_technique]->(tech_t1204)
+ON CREATE SET
+  rel_usedtech_iso.phase = 'Initial Access',
+  rel_usedtech_iso.details = 'Infection via ISO files posing as cracked video games or pirated films/TV programs (user execution).',
+  rel_usedtech_iso.evidence = 'On Windows machines, victims become infected with the malware through ISO files that poses as a cracked video game or pirated films or TV programs.',
+  rel_usedtech_iso.source_id = 'text'
+ON MATCH SET
+  rel_usedtech_iso.phase = CASE WHEN rel_usedtech_iso.phase IS NULL OR rel_usedtech_iso.phase = '' THEN 'Initial Access' ELSE rel_usedtech_iso.phase END,
+  rel_usedtech_iso.details = CASE WHEN rel_usedtech_iso.details IS NULL OR rel_usedtech_iso.details = '' THEN 'Infection via ISO files posing as cracked video games or pirated films/TV programs (user execution).' ELSE rel_usedtech_iso.details END,
+  rel_usedtech_iso.evidence = CASE WHEN rel_usedtech_iso.evidence IS NULL OR rel_usedtech_iso.evidence = '' THEN 'On Windows machines, victims become infected with the malware through ISO files that poses as a cracked video game or pirated films or TV programs.' ELSE rel_usedtech_iso.evidence END,
+  rel_usedtech_iso.source_id = CASE WHEN rel_usedtech_iso.source_id IS NULL OR rel_usedtech_iso.source_id = '' THEN 'text' ELSE rel_usedtech_iso.source_id END
+MERGE (src_malwarebytes:Source {id:'Malwarebytes Labs blog'})
+ON CREATE SET
+  src_malwarebytes.publisher = 'Malwarebytes Labs',
+  src_malwarebytes.title = 'Blog post warning about ChromeLoader resurgence'
+ON MATCH SET
+  src_malwarebytes.publisher = CASE WHEN src_malwarebytes.publisher IS NULL OR src_malwarebytes.publisher = '' THEN 'Malwarebytes Labs' ELSE src_malwarebytes.publisher END,
+  src_malwarebytes.title = CASE WHEN src_malwarebytes.title IS NULL OR src_malwarebytes.title = '' THEN 'Blog post warning about ChromeLoader resurgence' ELSE src_malwarebytes.title END
+MERGE (src_redcanary:Source {id:'Red Canary blog'})
+ON CREATE SET
+  src_redcanary.publisher = 'Red Canary',
+  src_redcanary.title = 'Blog post warning about ChromeLoader resurgence'
+ON MATCH SET
+  src_redcanary.publisher = CASE WHEN src_redcanary.publisher IS NULL OR src_redcanary.publisher = '' THEN 'Red Canary' ELSE src_redcanary.publisher END,
+  src_redcanary.title = CASE WHEN src_redcanary.title IS NULL OR src_redcanary.title = '' THEN 'Blog post warning about ChromeLoader resurgence' ELSE src_redcanary.title END
+MERGE (malware_chromeloader)-[rel_sup_mb:supported_by]->(src_malwarebytes)
+ON CREATE SET
+  rel_sup_mb.quote = 'Researchers are warning of the potential for ChromeLoader... according to ... blog posts by Malwarebytes Labs ...'
+ON MATCH SET
+  rel_sup_mb.quote = CASE WHEN rel_sup_mb.quote IS NULL OR rel_sup_mb.quote = '' THEN 'Researchers are warning of the potential for ChromeLoader... according to ... blog posts by Malwarebytes Labs ...' ELSE rel_sup_mb.quote END
+MERGE (malware_chromeloader)-[rel_sup_rc:supported_by]->(src_redcanary)
+ON CREATE SET
+  rel_sup_rc.quote = 'Researchers are warning of the potential for ChromeLoader... according to ... blog posts by ... Red Canary.'
+ON MATCH SET
+  rel_sup_rc.quote = CASE WHEN rel_sup_rc.quote IS NULL OR rel_sup_rc.quote = '' THEN 'Researchers are warning of the potential for ChromeLoader... according to ... blog posts by ... Red Canary.' ELSE rel_sup_rc.quote END"
+kasseika-ransomware-uses-antivirus-driver-to-kill-other-antiviruses.json,"MERGE (ta_threatactor_1:ThreatActor {name:'Kasseika'})
+ON CREATE SET ta_threatactor_1.summary = 'Ransomware operation employing BYOVD tactics to disable antivirus software before encrypting files.'
+ON MATCH SET ta_threatactor_1.summary = CASE WHEN (ta_threatactor_1.summary IS NULL OR ta_threatactor_1.summary = '') THEN 'Ransomware operation employing BYOVD tactics to disable antivirus software before encrypting files.' ELSE ta_threatactor_1.summary END
+MERGE (mot_motivation_1:Motivation {type:'financial'})
+MERGE (ta_threatactor_1)-[:motivated_by]->(mot_motivation_1)
+MERGE (mal_malware_1:Malware {name:'Kasseika'})
+ON CREATE SET mal_malware_1.family = 'ransomware',
+              mal_malware_1.summary = 'Ransomware associated with the Kasseika operation; uses BYOVD to disable antivirus before encryption.'
+ON MATCH SET mal_malware_1.family = CASE WHEN (mal_malware_1.family IS NULL OR mal_malware_1.family = '') THEN 'ransomware' ELSE mal_malware_1.family END,
+             mal_malware_1.summary = CASE WHEN (mal_malware_1.summary IS NULL OR mal_malware_1.summary = '') THEN 'Ransomware associated with the Kasseika operation; uses BYOVD to disable antivirus before encryption.' ELSE mal_malware_1.summary END
+MERGE (ta_threatactor_1)-[:uses {evidence:""A recently uncovered ransomware operation named 'Kasseika' ... employs Bring Your Own Vulnerable Driver (BYOVD) tactics to disable antivirus software before encrypting files.""}]->(mal_malware_1)
+MERGE (tool_tool_1:Tool {name:'Windows PsExec'})
+ON CREATE SET tool_tool_1.summary = 'Windows PsExec tool abused to execute malicious batch files and support lateral movement.'
+ON MATCH SET tool_tool_1.summary = CASE WHEN (tool_tool_1.summary IS NULL OR tool_tool_1.summary = '') THEN 'Windows PsExec tool abused to execute malicious batch files and support lateral movement.' ELSE tool_tool_1.summary END
+MERGE (ta_threatactor_1)-[:uses {evidence:'Kasseika operators abuse the Windows PsExec tool to execute malicious .bat files on the infected system and others they have accessed through lateral movement.'}]->(tool_tool_1)
+MERGE (tech_technique_1:Technique {technique_id:'T1566', name:'Phishing', tactic:'Initial Access'})
+ON CREATE SET tech_technique_1.summary = 'Initial access via phishing emails to steal credentials.'
+ON MATCH SET tech_technique_1.summary = CASE WHEN (tech_technique_1.summary IS NULL OR tech_technique_1.summary = '') THEN 'Initial access via phishing emails to steal credentials.' ELSE tech_technique_1.summary END
+MERGE (tech_technique_2:Technique {technique_id:'T1555', name:'Credentials from Password Stores', tactic:'Credential Access'})
+ON CREATE SET tech_technique_2.summary = 'Credential theft to obtain account credentials for access.'
+ON MATCH SET tech_technique_2.summary = CASE WHEN (tech_technique_2.summary IS NULL OR tech_technique_2.summary = '') THEN 'Credential theft to obtain account credentials for access.' ELSE tech_technique_2.summary END
+MERGE (tech_technique_3:Technique {technique_id:'T1021', name:'Remote Services', tactic:'Lateral Movement'})
+ON CREATE SET tech_technique_3.summary = 'Lateral movement via remote execution to additional systems.'
+ON MATCH SET tech_technique_3.summary = CASE WHEN (tech_technique_3.summary IS NULL OR tech_technique_3.summary = '') THEN 'Lateral movement via remote execution to additional systems.' ELSE tech_technique_3.summary END
+MERGE (tech_technique_4:Technique {technique_id:'T1569', name:'System Services', tactic:'Execution'})
+ON CREATE SET tech_technique_4.summary = 'Execution of malicious batch scripts and remote execution mechanisms.'
+ON MATCH SET tech_technique_4.summary = CASE WHEN (tech_technique_4.summary IS NULL OR tech_technique_4.summary = '') THEN 'Execution of malicious batch scripts and remote execution mechanisms.' ELSE tech_technique_4.summary END
+MERGE (tech_technique_5:Technique {technique_id:'T1068', name:'Exploitation for Privilege Escalation', tactic:'Privilege Escalation'})
+ON CREATE SET tech_technique_5.summary = 'BYOVD-style exploitation of a vulnerable driver to obtain privileges.'
+ON MATCH SET tech_technique_5.summary = CASE WHEN (tech_technique_5.summary IS NULL OR tech_technique_5.summary = '') THEN 'BYOVD-style exploitation of a vulnerable driver to obtain privileges.' ELSE tech_technique_5.summary END
+MERGE (tech_technique_6:Technique {technique_id:'T1562', name:'Impair Defenses', tactic:'Defense Evasion'})
+ON CREATE SET tech_technique_6.summary = 'Disables/impairs security tools (e.g., antivirus) by terminating processes.'
+ON MATCH SET tech_technique_6.summary = CASE WHEN (tech_technique_6.summary IS NULL OR tech_technique_6.summary = '') THEN 'Disables/impairs security tools (e.g., antivirus) by terminating processes.' ELSE tech_technique_6.summary END
+MERGE (inc_incident_1:Incident {id:'kasseika-byovd-operation'})
+ON CREATE SET inc_incident_1.type = 'ransomware',
+              inc_incident_1.summary = 'Kasseika ransomware operation uses phishing for initial access, PsExec for execution/lateral movement, and BYOVD abusing the Martini driver to disable antivirus prior to encryption.'
+ON MATCH SET inc_incident_1.type = CASE WHEN (inc_incident_1.type IS NULL OR inc_incident_1.type = '') THEN 'ransomware' ELSE inc_incident_1.type END,
+             inc_incident_1.summary = CASE WHEN (inc_incident_1.summary IS NULL OR inc_incident_1.summary = '') THEN 'Kasseika ransomware operation uses phishing for initial access, PsExec for execution/lateral movement, and BYOVD abusing the Martini driver to disable antivirus prior to encryption.' ELSE inc_incident_1.summary END
+MERGE (inc_incident_1)-[:attributed_to {confidence:'medium', evidence:""A recently uncovered ransomware operation named 'Kasseika' ... employs BYOVD tactics...""}]->(ta_threatactor_1)
+MERGE (inc_incident_1)-[:involved_malware {evidence:""A recently uncovered ransomware operation named 'Kasseika' ... before encrypting files.""}]->(mal_malware_1)
+MERGE (inc_incident_1)-[:involved_tool {evidence:'Kasseika operators abuse the Windows PsExec tool to execute malicious .bat files...'}]->(tool_tool_1)
+MERGE (inc_incident_1)-[:used_technique {phase:'Initial Access', details:'phishing email to employees to steal account credentials', evidence:'Kasseika attacks start with a phishing email ... attempting to steal their account credentials, which will then be used for initial access to the corporate network.'}]->(tech_technique_1)
+MERGE (inc_incident_1)-[:used_technique {phase:'Credential Access', details:'credential theft for account credentials', evidence:'...attempting to steal their account credentials...'}]->(tech_technique_2)
+MERGE (inc_incident_1)-[:used_technique {phase:'Lateral Movement', details:'PsExec used to execute .bat files across systems accessed through lateral movement', evidence:'...abuse the Windows PsExec tool to execute malicious .bat files ... and others they have accessed through lateral movement.'}]->(tech_technique_3)
+MERGE (inc_incident_1)-[:used_technique {phase:'Execution', details:'execution of malicious .bat files via PsExec', evidence:'...abuse the Windows PsExec tool to execute malicious .bat files...'}]->(tech_technique_4)
+MERGE (inc_incident_1)-[:used_technique {phase:'Privilege Escalation', details:'BYOVD exploiting flaws in the loaded driver', evidence:'By using BYOVD attacks, aka exploiting flaws in the loaded driver, the malware gains the privileges...'}]->(tech_technique_5)
+MERGE (inc_incident_1)-[:used_technique {phase:'Defense Evasion', details:'terminate antivirus/security processes (hardcoded list; 991 processes) using vulnerable driver', evidence:'...disable antivirus products... gains the privileges to terminate 991 processes ... many ... antivirus products, security tools, analysis tools, and system utilities.'}]->(tech_technique_6)
+MERGE (tool_tool_2:Tool {name:'Martini driver (Martini.sys/viragt64.sys)'})
+ON CREATE SET tool_tool_2.summary = 'Vulnerable driver (part of TG Soft VirtIT Agent System) abused in BYOVD to disable antivirus by terminating processes.'
+ON MATCH SET tool_tool_2.summary = CASE WHEN (tool_tool_2.summary IS NULL OR tool_tool_2.summary = '') THEN 'Vulnerable driver (part of TG Soft VirtIT Agent System) abused in BYOVD to disable antivirus by terminating processes.' ELSE tool_tool_2.summary END
+MERGE (ta_threatactor_1)-[:uses {evidence:'Kasseika abuses the Martini driver (Martini.sys/viragt64.sys)... to disable antivirus products...'}]->(tool_tool_2)
+MERGE (inc_incident_1)-[:involved_tool {evidence:'Kasseika abuses the Martini driver (Martini.sys/viragt64.sys)... to disable antivirus products...'}]->(tool_tool_2)"
+attackers-exploit-microsoft-office-bug-spyware.json,"MERGE (src1:Source {id:'zscaler-blog-2019-12-19-cve-2017-11882-agent-tesla-telegram'})
+ON CREATE SET
+  src1.title = 'Attackers exploit Microsoft Office RCE CVE-2017-11882 to deliver Agent Tesla via Excel attachments',
+  src1.publisher = 'Zscaler',
+  src1.published_on = date('2019-12-19')
+ON MATCH SET
+  src1.title = CASE WHEN src1.title IS NULL OR src1.title = '' THEN 'Attackers exploit Microsoft Office RCE CVE-2017-11882 to deliver Agent Tesla via Excel attachments' ELSE src1.title END,
+  src1.publisher = CASE WHEN src1.publisher IS NULL OR src1.publisher = '' THEN 'Zscaler' ELSE src1.publisher END,
+  src1.published_on = CASE WHEN src1.published_on IS NULL THEN date('2019-12-19') ELSE src1.published_on END
+WITH src1
+
+MERGE (cve1:CVE {id:'CVE-2017-11882'})
+ON CREATE SET
+  cve1.summary = 'Microsoft Office remote code execution flaw abused via weaponized Excel attachments.'
+ON MATCH SET
+  cve1.summary = CASE WHEN cve1.summary IS NULL OR cve1.summary = '' THEN 'Microsoft Office remote code execution flaw abused via weaponized Excel attachments.' ELSE cve1.summary END
+WITH src1, cve1
+
+MERGE (mal1:Malware {name:'Agent Tesla'})
+ON CREATE SET
+  mal1.family = 'Agent Tesla',
+  mal1.summary = 'Remote access Trojan (RAT) and keylogger used to exfiltrate credentials and other data.'
+ON MATCH SET
+  mal1.family = CASE WHEN mal1.family IS NULL OR mal1.family = '' THEN 'Agent Tesla' ELSE mal1.family END,
+  mal1.summary = CASE WHEN mal1.summary IS NULL OR mal1.summary = '' THEN 'Remote access Trojan (RAT) and keylogger used to exfiltrate credentials and other data.' ELSE mal1.summary END
+WITH src1, cve1, mal1
+
+MERGE (c2_1:C2_Infrastructure {service:'Telegram'})
+ON CREATE SET
+  c2_1.summary = 'Used as attacker-controlled bot for data exfiltration.'
+ON MATCH SET
+  c2_1.summary = CASE WHEN c2_1.summary IS NULL OR c2_1.summary = '' THEN 'Used as attacker-controlled bot for data exfiltration.' ELSE c2_1.summary END
+WITH src1, cve1, mal1, c2_1
+
+MERGE (tech1:Technique {technique_id:'T1566'})
+ON CREATE SET
+  tech1.name = 'Phishing',
+  tech1.tactic = 'Initial Access',
+  tech1.summary = 'Spam email lures used to deliver malicious attachments.'
+ON MATCH SET
+  tech1.name = CASE WHEN tech1.name IS NULL OR tech1.name = '' THEN 'Phishing' ELSE tech1.name END,
+  tech1.tactic = CASE WHEN tech1.tactic IS NULL OR tech1.tactic = '' THEN 'Initial Access' ELSE tech1.tactic END,
+  tech1.summary = CASE WHEN tech1.summary IS NULL OR tech1.summary = '' THEN 'Spam email lures used to deliver malicious attachments.' ELSE tech1.summary END
+WITH src1, cve1, mal1, c2_1, tech1
+
+MERGE (tech2:Technique {technique_id:'T1204'})
+ON CREATE SET
+  tech2.name = 'User Execution',
+  tech2.tactic = 'Execution',
+  tech2.summary = 'Execution triggered via opening weaponized Excel attachments.'
+ON MATCH SET
+  tech2.name = CASE WHEN tech2.name IS NULL OR tech2.name = '' THEN 'User Execution' ELSE tech2.name END,
+  tech2.tactic = CASE WHEN tech2.tactic IS NULL OR tech2.tactic = '' THEN 'Execution' ELSE tech2.tactic END,
+  tech2.summary = CASE WHEN tech2.summary IS NULL OR tech2.summary = '' THEN 'Execution triggered via opening weaponized Excel attachments.' ELSE tech2.summary END
+WITH src1, cve1, mal1, c2_1, tech1, tech2
+
+MERGE (inc1:Incident {id:'zscaler-2019-12-19-office-rce-agent-tesla-telegram'})
+ON CREATE SET
+  inc1.date = date('2019-12-19'),
+  inc1.type = 'spyware',
+  inc1.exfiltration = true,
+  inc1.summary = 'Email campaign weaponized with malicious Excel attachments exploiting CVE-2017-11882 to load Agent Tesla and exfiltrate credentials via a Telegram bot.'
+ON MATCH SET
+  inc1.date = CASE WHEN inc1.date IS NULL THEN date('2019-12-19') ELSE inc1.date END,
+  inc1.type = CASE WHEN inc1.type IS NULL OR inc1.type = '' THEN 'spyware' ELSE inc1.type END,
+  inc1.exfiltration = CASE WHEN inc1.exfiltration IS NULL THEN true ELSE inc1.exfiltration END,
+  inc1.summary = CASE WHEN inc1.summary IS NULL OR inc1.summary = '' THEN 'Email campaign weaponized with malicious Excel attachments exploiting CVE-2017-11882 to load Agent Tesla and exfiltrate credentials via a Telegram bot.' ELSE inc1.summary END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (date1:Date {value:date('2019-12-19')})
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1, date1
+
+MERGE (inc1)-[:occurred_on {date:date('2019-12-19')}]->(date1)
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (inc1)-[r_sup1:supported_by]->(src1)
+ON CREATE SET r_sup1.page = '', r_sup1.quote = 'Zscaler reported an email campaign using malicious Excel attachments exploiting CVE-2017-11882 to load Agent Tesla and exfiltrate data via Telegram.'
+ON MATCH SET
+  r_sup1.page = CASE WHEN r_sup1.page IS NULL OR r_sup1.page = '' THEN '' ELSE r_sup1.page END,
+  r_sup1.quote = CASE WHEN r_sup1.quote IS NULL OR r_sup1.quote = '' THEN 'Zscaler reported an email campaign using malicious Excel attachments exploiting CVE-2017-11882 to load Agent Tesla and exfiltrate data via Telegram.' ELSE r_sup1.quote END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (inc1)-[r_mal1:involved_malware]->(mal1)
+ON CREATE SET
+  r_mal1.evidence = 'End goal is to load Agent Tesla RAT/keylogger.',
+  r_mal1.source_id = src1.id,
+  r_mal1.page = ''
+ON MATCH SET
+  r_mal1.evidence = CASE WHEN r_mal1.evidence IS NULL OR r_mal1.evidence = '' THEN 'End goal is to load Agent Tesla RAT/keylogger.' ELSE r_mal1.evidence END,
+  r_mal1.source_id = CASE WHEN r_mal1.source_id IS NULL OR r_mal1.source_id = '' THEN src1.id ELSE r_mal1.source_id END,
+  r_mal1.page = CASE WHEN r_mal1.page IS NULL OR r_mal1.page = '' THEN '' ELSE r_mal1.page END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (inc1)-[r_cve1:exploited_in]->(cve1)
+ON CREATE SET
+  r_cve1.evidence = 'Malicious Excel attachments contain CVE-2017-11882 used for RCE/system takeover.',
+  r_cve1.source_id = src1.id,
+  r_cve1.page = ''
+ON MATCH SET
+  r_cve1.evidence = CASE WHEN r_cve1.evidence IS NULL OR r_cve1.evidence = '' THEN 'Malicious Excel attachments contain CVE-2017-11882 used for RCE/system takeover.' ELSE r_cve1.evidence END,
+  r_cve1.source_id = CASE WHEN r_cve1.source_id IS NULL OR r_cve1.source_id = '' THEN src1.id ELSE r_cve1.source_id END,
+  r_cve1.page = CASE WHEN r_cve1.page IS NULL OR r_cve1.page = '' THEN '' ELSE r_cve1.page END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (mal1)-[r_expl1:exploits]->(cve1)
+ON CREATE SET
+  r_expl1.date = date('2019-12-19'),
+  r_expl1.evidence = 'Campaign exploits CVE-2017-11882 to deliver Agent Tesla.',
+  r_expl1.source_id = src1.id,
+  r_expl1.page = ''
+ON MATCH SET
+  r_expl1.date = CASE WHEN r_expl1.date IS NULL THEN date('2019-12-19') ELSE r_expl1.date END,
+  r_expl1.evidence = CASE WHEN r_expl1.evidence IS NULL OR r_expl1.evidence = '' THEN 'Campaign exploits CVE-2017-11882 to deliver Agent Tesla.' ELSE r_expl1.evidence END,
+  r_expl1.source_id = CASE WHEN r_expl1.source_id IS NULL OR r_expl1.source_id = '' THEN src1.id ELSE r_expl1.source_id END,
+  r_expl1.page = CASE WHEN r_expl1.page IS NULL OR r_expl1.page = '' THEN '' ELSE r_expl1.page END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (mal1)-[r_ab1:abuses]->(c2_1)
+ON CREATE SET
+  r_ab1.date = date('2019-12-19'),
+  r_ab1.evidence = 'Exfiltrates credentials and other data via a Telegram bot run by the attackers.',
+  r_ab1.source_id = src1.id,
+  r_ab1.page = ''
+ON MATCH SET
+  r_ab1.date = CASE WHEN r_ab1.date IS NULL THEN date('2019-12-19') ELSE r_ab1.date END,
+  r_ab1.evidence = CASE WHEN r_ab1.evidence IS NULL OR r_ab1.evidence = '' THEN 'Exfiltrates credentials and other data via a Telegram bot run by the attackers.' ELSE r_ab1.evidence END,
+  r_ab1.source_id = CASE WHEN r_ab1.source_id IS NULL OR r_ab1.source_id = '' THEN src1.id ELSE r_ab1.source_id END,
+  r_ab1.page = CASE WHEN r_ab1.page IS NULL OR r_ab1.page = '' THEN '' ELSE r_ab1.page END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (inc1)-[r_t1:used_technique]->(tech1)
+ON CREATE SET
+  r_t1.phase = 'Initial Access',
+  r_t1.details = 'Spam email lures delivering weaponized Excel attachments',
+  r_t1.evidence = 'Threat actors use spam emails with business lures to deliver malicious Excel attachments.',
+  r_t1.source_id = src1.id,
+  r_t1.page = ''
+ON MATCH SET
+  r_t1.phase = CASE WHEN r_t1.phase IS NULL OR r_t1.phase = '' THEN 'Initial Access' ELSE r_t1.phase END,
+  r_t1.details = CASE WHEN r_t1.details IS NULL OR r_t1.details = '' THEN 'Spam email lures delivering weaponized Excel attachments' ELSE r_t1.details END,
+  r_t1.evidence = CASE WHEN r_t1.evidence IS NULL OR r_t1.evidence = '' THEN 'Threat actors use spam emails with business lures to deliver malicious Excel attachments.' ELSE r_t1.evidence END,
+  r_t1.source_id = CASE WHEN r_t1.source_id IS NULL OR r_t1.source_id = '' THEN src1.id ELSE r_t1.source_id END,
+  r_t1.page = CASE WHEN r_t1.page IS NULL OR r_t1.page = '' THEN '' ELSE r_t1.page END
+WITH src1, cve1, mal1, c2_1, tech1, tech2, inc1
+
+MERGE (inc1)-[r_t2:used_technique]->(tech2)
+ON CREATE SET
+  r_t2.phase = 'Execution',
+  r_t2.details = 'Opening weaponized Excel attachment triggers exploit chain',
+  r_t2.evidence = 'Weaponized Excel attachments are used to execute the exploit/payload.',
+  r_t2.source_id = src1.id,
+  r_t2.page = ''
+ON MATCH SET
+  r_t2.phase = CASE WHEN r_t2.phase IS NULL OR r_t2.phase = '' THEN 'Execution' ELSE r_t2.phase END,
+  r_t2.details = CASE WHEN r_t2.details IS NULL OR r_t2.details = '' THEN 'Opening weaponized Excel attachment triggers exploit chain' ELSE r_t2.details END,
+  r_t2.evidence = CASE WHEN r_t2.evidence IS NULL OR r_t2.evidence = '' THEN 'Weaponized Excel attachments are used to execute the exploit/payload.' ELSE r_t2.evidence END,
+  r_t2.source_id = CASE WHEN r_t2.source_id IS NULL OR r_t2.source_id = '' THEN src1.id ELSE r_t2.source_id END,
+  r_t2.page = CASE WHEN r_t2.page IS NULL OR r_t2.page = '' THEN '' ELSE r_t2.page END;"
+new-macos-vulnerability-migraine-could-bypass-system-integrity-protection.json,"MERGE (src1:Source {id:'MSVR_CVD_Migraine_CVE-2023-32369'})
+ON CREATE SET
+  src1.title = 'Migraine (macOS migration) SIP bypass vulnerability disclosure and fix',
+  src1.publisher = 'Microsoft Security Vulnerability Research (MSVR) / Apple',
+  src1.published_on = date('2023-05-18')
+ON MATCH SET
+  src1.title = CASE WHEN src1.title IS NULL OR src1.title = '' THEN 'Migraine (macOS migration) SIP bypass vulnerability disclosure and fix' ELSE src1.title END,
+  src1.publisher = CASE WHEN src1.publisher IS NULL OR src1.publisher = '' THEN 'Microsoft Security Vulnerability Research (MSVR) / Apple' ELSE src1.publisher END,
+  src1.published_on = CASE WHEN src1.published_on IS NULL THEN date('2023-05-18') ELSE src1.published_on END
+MERGE (cve1:CVE {id:'CVE-2023-32369'})
+ON CREATE SET
+  cve1.summary = '“Migraine” vulnerability related to macOS migration that could allow an attacker with root access to automatically bypass System Integrity Protection (SIP) and perform arbitrary operations on a device.'
+ON MATCH SET
+  cve1.summary = CASE WHEN cve1.summary IS NULL OR cve1.summary = '' THEN '“Migraine” vulnerability related to macOS migration that could allow an attacker with root access to automatically bypass System Integrity Protection (SIP) and perform arbitrary operations on a device.' ELSE cve1.summary END
+MERGE (cve1)-[sb1:supported_by]->(src1)
+ON CREATE SET
+  sb1.quote = 'A new vulnerability ... “Migraine” ... could allow an attacker with root access to automatically bypass System Integrity Protection (SIP) ... A fix ... identified as CVE-2023-32369 ... included in the security updates released by Apple on May 18, 2023.'
+ON MATCH SET
+  sb1.quote = CASE WHEN sb1.quote IS NULL OR sb1.quote = '' THEN 'A new vulnerability ... “Migraine” ... could allow an attacker with root access to automatically bypass System Integrity Protection (SIP) ... A fix ... identified as CVE-2023-32369 ... included in the security updates released by Apple on May 18, 2023.' ELSE sb1.quote END;"
+operation-earth-kitsune-tracking-slub-s-current-operations.json,"MERGE (camp_OperationEarthKitsune:Campaign {name:'Operation Earth Kitsune'})
+ON CREATE SET camp_OperationEarthKitsune.summary = 'Campaign observed redirecting visitors from the Korean American National Coordinating Council (KANCC) website to the Hanseattle website, leading to a weaponized PoC exploit for Google Chrome CVE-2019-5782 and infecting victim machines with three malware samples; reported to use five C&C servers, seven samples, and four new bugs.'
+ON MATCH SET camp_OperationEarthKitsune.summary = CASE WHEN camp_OperationEarthKitsune.summary IS NULL OR camp_OperationEarthKitsune.summary = '' THEN 'Campaign observed redirecting visitors from the Korean American National Coordinating Council (KANCC) website to the Hanseattle website, leading to a weaponized PoC exploit for Google Chrome CVE-2019-5782 and infecting victim machines with three malware samples; reported to use five C&C servers, seven samples, and four new bugs.' ELSE camp_OperationEarthKitsune.summary END
+MERGE (src_chromium:C2_Infrastructure {service:'Chromium tracking system'})
+ON CREATE SET src_chromium.summary = 'Mentioned as the publication venue for the proof-of-concept related to CVE-2019-5782.'
+ON MATCH SET src_chromium.summary = CASE WHEN src_chromium.summary IS NULL OR src_chromium.summary = '' THEN 'Mentioned as the publication venue for the proof-of-concept related to CVE-2019-5782.' ELSE src_chromium.summary END
+MERGE (victim_KANCC:Victim {name:'Korean American National Coordinating Council (KANCC)'})
+ON CREATE SET victim_KANCC.summary = 'Website observed redirecting visitors to another site during Operation Earth Kitsune.'
+ON MATCH SET victim_KANCC.summary = CASE WHEN victim_KANCC.summary IS NULL OR victim_KANCC.summary = '' THEN 'Website observed redirecting visitors to another site during Operation Earth Kitsune.' ELSE victim_KANCC.summary END
+MERGE (victim_Hanseattle:Victim {name:'Hanseattle'})
+ON CREATE SET victim_Hanseattle.summary = 'Website to which visitors were redirected; hosted a weaponized PoC exploit during Operation Earth Kitsune.'
+ON MATCH SET victim_Hanseattle.summary = CASE WHEN victim_Hanseattle.summary IS NULL OR victim_Hanseattle.summary = '' THEN 'Website to which visitors were redirected; hosted a weaponized PoC exploit during Operation Earth Kitsune.' ELSE victim_Hanseattle.summary END
+MERGE (cve_2019_5782:CVE {id:'CVE-2019-5782'})
+ON CREATE SET cve_2019_5782.summary = 'Google Chrome vulnerability referenced as exploited via a weaponized proof-of-concept during Operation Earth Kitsune.'
+ON MATCH SET cve_2019_5782.summary = CASE WHEN cve_2019_5782.summary IS NULL OR cve_2019_5782.summary = '' THEN 'Google Chrome vulnerability referenced as exploited via a weaponized proof-of-concept during Operation Earth Kitsune.' ELSE cve_2019_5782.summary END
+MERGE (tech_ExploitPublicFacingApp:Technique {technique_id:'T1190'})
+ON CREATE SET tech_ExploitPublicFacingApp.name = 'Exploit Public-Facing Application', tech_ExploitPublicFacingApp.tactic = 'Initial Access', tech_ExploitPublicFacingApp.summary = 'Use of a weaponized proof-of-concept exploit delivered via compromised/redirecting websites.'
+ON MATCH SET
+  tech_ExploitPublicFacingApp.name = CASE WHEN tech_ExploitPublicFacingApp.name IS NULL OR tech_ExploitPublicFacingApp.name = '' THEN 'Exploit Public-Facing Application' ELSE tech_ExploitPublicFacingApp.name END,
+  tech_ExploitPublicFacingApp.tactic = CASE WHEN tech_ExploitPublicFacingApp.tactic IS NULL OR tech_ExploitPublicFacingApp.tactic = '' THEN 'Initial Access' ELSE tech_ExploitPublicFacingApp.tactic END,
+  tech_ExploitPublicFacingApp.summary = CASE WHEN tech_ExploitPublicFacingApp.summary IS NULL OR tech_ExploitPublicFacingApp.summary = '' THEN 'Use of a weaponized proof-of-concept exploit delivered via compromised/redirecting websites.' ELSE tech_ExploitPublicFacingApp.summary END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782:Incident {id:'operation-earth-kitsune-web-redirect-cve-2019-5782'})
+ON CREATE SET
+  inc_EarthKitsune_WebRedirect_Exploit_2019_5782.type = 'intrusion',
+  inc_EarthKitsune_WebRedirect_Exploit_2019_5782.summary = 'Visitors to the KANCC website were redirected to Hanseattle, where a weaponized PoC for Google Chrome CVE-2019-5782 was delivered, infecting victim machines with three separate malware samples.'
+ON MATCH SET
+  inc_EarthKitsune_WebRedirect_Exploit_2019_5782.type = CASE WHEN inc_EarthKitsune_WebRedirect_Exploit_2019_5782.type IS NULL OR inc_EarthKitsune_WebRedirect_Exploit_2019_5782.type = '' THEN 'intrusion' ELSE inc_EarthKitsune_WebRedirect_Exploit_2019_5782.type END,
+  inc_EarthKitsune_WebRedirect_Exploit_2019_5782.summary = CASE WHEN inc_EarthKitsune_WebRedirect_Exploit_2019_5782.summary IS NULL OR inc_EarthKitsune_WebRedirect_Exploit_2019_5782.summary = '' THEN 'Visitors to the KANCC website were redirected to Hanseattle, where a weaponized PoC for Google Chrome CVE-2019-5782 was delivered, infecting victim machines with three separate malware samples.' ELSE inc_EarthKitsune_WebRedirect_Exploit_2019_5782.summary END
+MERGE (camp_OperationEarthKitsune)-[r_inc_includes:includes]->(inc_EarthKitsune_WebRedirect_Exploit_2019_5782)
+ON CREATE SET r_inc_includes.evidence = 'Operation Earth Kitsune investigation described a redirect chain delivering a weaponized PoC for CVE-2019-5782 and infecting victim machines with three malware samples.'
+ON MATCH SET r_inc_includes.evidence = CASE WHEN r_inc_includes.evidence IS NULL OR r_inc_includes.evidence = '' THEN 'Operation Earth Kitsune investigation described a redirect chain delivering a weaponized PoC for CVE-2019-5782 and infecting victim machines with three malware samples.' ELSE r_inc_includes.evidence END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_targets_kancc:targets]->(victim_KANCC)
+ON CREATE SET r_inc_targets_kancc.evidence = 'KANCC website was observed redirecting visitors during the campaign.'
+ON MATCH SET r_inc_targets_kancc.evidence = CASE WHEN r_inc_targets_kancc.evidence IS NULL OR r_inc_targets_kancc.evidence = '' THEN 'KANCC website was observed redirecting visitors during the campaign.' ELSE r_inc_targets_kancc.evidence END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_targets_hanseattle:targets]->(victim_Hanseattle)
+ON CREATE SET r_inc_targets_hanseattle.evidence = 'Visitors were redirected to the Hanseattle website which served a weaponized PoC exploit.'
+ON MATCH SET r_inc_targets_hanseattle.evidence = CASE WHEN r_inc_targets_hanseattle.evidence IS NULL OR r_inc_targets_hanseattle.evidence = '' THEN 'Visitors were redirected to the Hanseattle website which served a weaponized PoC exploit.' ELSE r_inc_targets_hanseattle.evidence END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_exploited_cve:exploited_in]->(cve_2019_5782)
+ON CREATE SET r_inc_exploited_cve.evidence = 'Users were redirected to a weaponized version of a PoC for CVE-2019-5782 (Google Chrome).'
+ON MATCH SET r_inc_exploited_cve.evidence = CASE WHEN r_inc_exploited_cve.evidence IS NULL OR r_inc_exploited_cve.evidence = '' THEN 'Users were redirected to a weaponized version of a PoC for CVE-2019-5782 (Google Chrome).' ELSE r_inc_exploited_cve.evidence END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_used_technique:used_technique]->(tech_ExploitPublicFacingApp)
+ON CREATE SET r_inc_used_technique.phase = 'Initial Access', r_inc_used_technique.details = 'Weaponized proof-of-concept exploit for Google Chrome CVE-2019-5782 delivered via website redirects.', r_inc_used_technique.evidence = 'Redirected users to a weaponized PoC exploit which then infected victim machines.'
+ON MATCH SET
+  r_inc_used_technique.phase = CASE WHEN r_inc_used_technique.phase IS NULL OR r_inc_used_technique.phase = '' THEN 'Initial Access' ELSE r_inc_used_technique.phase END,
+  r_inc_used_technique.details = CASE WHEN r_inc_used_technique.details IS NULL OR r_inc_used_technique.details = '' THEN 'Weaponized proof-of-concept exploit for Google Chrome CVE-2019-5782 delivered via website redirects.' ELSE r_inc_used_technique.details END,
+  r_inc_used_technique.evidence = CASE WHEN r_inc_used_technique.evidence IS NULL OR r_inc_used_technique.evidence = '' THEN 'Redirected users to a weaponized PoC exploit which then infected victim machines.' ELSE r_inc_used_technique.evidence END
+MERGE (mal_sample_1:Malware {name:'Operation Earth Kitsune malware sample 1'})
+ON CREATE SET mal_sample_1.summary = 'One of three separate malware samples reported to infect the victim machine after exploitation in Operation Earth Kitsune.'
+ON MATCH SET mal_sample_1.summary = CASE WHEN mal_sample_1.summary IS NULL OR mal_sample_1.summary = '' THEN 'One of three separate malware samples reported to infect the victim machine after exploitation in Operation Earth Kitsune.' ELSE mal_sample_1.summary END
+MERGE (mal_sample_2:Malware {name:'Operation Earth Kitsune malware sample 2'})
+ON CREATE SET mal_sample_2.summary = 'One of three separate malware samples reported to infect the victim machine after exploitation in Operation Earth Kitsune.'
+ON MATCH SET mal_sample_2.summary = CASE WHEN mal_sample_2.summary IS NULL OR mal_sample_2.summary = '' THEN 'One of three separate malware samples reported to infect the victim machine after exploitation in Operation Earth Kitsune.' ELSE mal_sample_2.summary END
+MERGE (mal_sample_3:Malware {name:'Operation Earth Kitsune malware sample 3'})
+ON CREATE SET mal_sample_3.summary = 'One of three separate malware samples reported to infect the victim machine after exploitation in Operation Earth Kitsune.'
+ON MATCH SET mal_sample_3.summary = CASE WHEN mal_sample_3.summary IS NULL OR mal_sample_3.summary = '' THEN 'One of three separate malware samples reported to infect the victim machine after exploitation in Operation Earth Kitsune.' ELSE mal_sample_3.summary END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_mal1:involved_malware]->(mal_sample_1)
+ON CREATE SET r_inc_mal1.evidence = 'Exploit was infecting the victim machine with three separate malware samples.'
+ON MATCH SET r_inc_mal1.evidence = CASE WHEN r_inc_mal1.evidence IS NULL OR r_inc_mal1.evidence = '' THEN 'Exploit was infecting the victim machine with three separate malware samples.' ELSE r_inc_mal1.evidence END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_mal2:involved_malware]->(mal_sample_2)
+ON CREATE SET r_inc_mal2.evidence = 'Exploit was infecting the victim machine with three separate malware samples.'
+ON MATCH SET r_inc_mal2.evidence = CASE WHEN r_inc_mal2.evidence IS NULL OR r_inc_mal2.evidence = '' THEN 'Exploit was infecting the victim machine with three separate malware samples.' ELSE r_inc_mal2.evidence END
+MERGE (inc_EarthKitsune_WebRedirect_Exploit_2019_5782)-[r_inc_mal3:involved_malware]->(mal_sample_3)
+ON CREATE SET r_inc_mal3.evidence = 'Exploit was infecting the victim machine with three separate malware samples.'
+ON MATCH SET r_inc_mal3.evidence = CASE WHEN r_inc_mal3.evidence IS NULL OR r_inc_mal3.evidence = '' THEN 'Exploit was infecting the victim machine with three separate malware samples.' ELSE r_inc_mal3.evidence END
+MERGE (camp_OperationEarthKitsune)-[r_camp_includes_mal1:includes]->(mal_sample_1)
+ON CREATE SET r_camp_includes_mal1.evidence = 'Campaign described as infecting machines with three separate malware samples.'
+ON MATCH SET r_camp_includes_mal1.evidence = CASE WHEN r_camp_includes_mal1.evidence IS NULL OR r_camp_includes_mal1.evidence = '' THEN 'Campaign described as infecting machines with three separate malware samples.' ELSE r_camp_includes_mal1.evidence END
+MERGE (camp_OperationEarthKitsune)-[r_camp_includes_mal2:includes]->(mal_sample_2)
+ON CREATE SET r_camp_includes_mal2.evidence = 'Campaign described as infecting machines with three separate malware samples.'
+ON MATCH SET r_camp_includes_mal2.evidence = CASE WHEN r_camp_includes_mal2.evidence IS NULL OR r_camp_includes_mal2.evidence = '' THEN 'Campaign described as infecting machines with three separate malware samples.' ELSE r_camp_includes_mal2.evidence END
+MERGE (camp_OperationEarthKitsune)-[r_camp_includes_mal3:includes]->(mal_sample_3)
+ON CREATE SET r_camp_includes_mal3.evidence = 'Campaign described as infecting machines with three separate malware samples.'
+ON MATCH SET r_camp_includes_mal3.evidence = CASE WHEN r_camp_includes_mal3.evidence IS NULL OR r_camp_includes_mal3.evidence = '' THEN 'Campaign described as infecting machines with three separate malware samples.' ELSE r_camp_includes_mal3.evidence END
+MERGE (c2_unknown_1:C2_Infrastructure {service:'Operation Earth Kitsune C2 server 1'})
+ON CREATE SET c2_unknown_1.summary = 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).'
+ON MATCH SET c2_unknown_1.summary = CASE WHEN c2_unknown_1.summary IS NULL OR c2_unknown_1.summary = '' THEN 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).' ELSE c2_unknown_1.summary END
+MERGE (c2_unknown_2:C2_Infrastructure {service:'Operation Earth Kitsune C2 server 2'})
+ON CREATE SET c2_unknown_2.summary = 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).'
+ON MATCH SET c2_unknown_2.summary = CASE WHEN c2_unknown_2.summary IS NULL OR c2_unknown_2.summary = '' THEN 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).' ELSE c2_unknown_2.summary END
+MERGE (c2_unknown_3:C2_Infrastructure {service:'Operation Earth Kitsune C2 server 3'})
+ON CREATE SET c2_unknown_3.summary = 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).'
+ON MATCH SET c2_unknown_3.summary = CASE WHEN c2_unknown_3.summary IS NULL OR c2_unknown_3.summary = '' THEN 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).' ELSE c2_unknown_3.summary END
+MERGE (c2_unknown_4:C2_Infrastructure {service:'Operation Earth Kitsune C2 server 4'})
+ON CREATE SET c2_unknown_4.summary = 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).'
+ON MATCH SET c2_unknown_4.summary = CASE WHEN c2_unknown_4.summary IS NULL OR c2_unknown_4.summary = '' THEN 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).' ELSE c2_unknown_4.summary END
+MERGE (c2_unknown_5:C2_Infrastructure {service:'Operation Earth Kitsune C2 server 5'})
+ON CREATE SET c2_unknown_5.summary = 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).'
+ON MATCH SET c2_unknown_5.summary = CASE WHEN c2_unknown_5.summary IS NULL OR c2_unknown_5.summary = '' THEN 'One of five C&C servers used in Operation Earth Kitsune (service details not specified).' ELSE c2_unknown_5.summary END
+MERGE (mal_sample_1)-[r_mal1_abuses_c2_1:abuses]->(c2_unknown_1)
+ON CREATE SET r_mal1_abuses_c2_1.evidence = 'Campaign reported using a total of five C&C servers.'
+ON MATCH SET r_mal1_abuses_c2_1.evidence = CASE WHEN r_mal1_abuses_c2_1.evidence IS NULL OR r_mal1_abuses_c2_1.evidence = '' THEN 'Campaign reported using a total of five C&C servers.' ELSE r_mal1_abuses_c2_1.evidence END
+MERGE (mal_sample_1)-[r_mal1_abuses_c2_2:abuses]->(c2_unknown_2)
+ON CREATE SET r_mal1_abuses_c2_2.evidence = 'Campaign reported using a total of five C&C servers.'
+ON MATCH SET r_mal1_abuses_c2_2.evidence = CASE WHEN r_mal1_abuses_c2_2.evidence IS NULL OR r_mal1_abuses_c2_2.evidence = '' THEN 'Campaign reported using a total of five C&C servers.' ELSE r_mal1_abuses_c2_2.evidence END
+MERGE (mal_sample_2)-[r_mal2_abuses_c2_3:abuses]->(c2_unknown_3)
+ON CREATE SET r_mal2_abuses_c2_3.evidence = 'Campaign reported using a total of five C&C servers.'
+ON MATCH SET r_mal2_abuses_c2_3.evidence = CASE WHEN r_mal2_abuses_c2_3.evidence IS NULL OR r_mal2_abuses_c2_3.evidence = '' THEN 'Campaign reported using a total of five C&C servers.' ELSE r_mal2_abuses_c2_3.evidence END
+MERGE (mal_sample_2)-[r_mal2_abuses_c2_4:abuses]->(c2_unknown_4)
+ON CREATE SET r_mal2_abuses_c2_4.evidence = 'Campaign reported using a total of five C&C servers.'
+ON MATCH SET r_mal2_abuses_c2_4.evidence = CASE WHEN r_mal2_abuses_c2_4.evidence IS NULL OR r_mal2_abuses_c2_4.evidence = '' THEN 'Campaign reported using a total of five C&C servers.' ELSE r_mal2_abuses_c2_4.evidence END
+MERGE (mal_sample_3)-[r_mal3_abuses_c2_5:abuses]->(c2_unknown_5)
+ON CREATE SET r_mal3_abuses_c2_5.evidence = 'Campaign reported using a total of five C&C servers.'
+ON MATCH SET r_mal3_abuses_c2_5.evidence = CASE WHEN r_mal3_abuses_c2_5.evidence IS NULL OR r_mal3_abuses_c2_5.evidence = '' THEN 'Campaign reported using a total of five C&C servers.' ELSE r_mal3_abuses_c2_5.evidence END
+MERGE (mal_sample_1)-[r_mal1_exploits_cve:exploits]->(cve_2019_5782)
+ON CREATE SET r_mal1_exploits_cve.evidence = 'Attack involved a weaponized version of the Chrome exploit for CVE-2019-5782 which led to malware infection.'
+ON MATCH SET r_mal1_exploits_cve.evidence = CASE WHEN r_mal1_exploits_cve.evidence IS NULL OR r_mal1_exploits_cve.evidence = '' THEN 'Attack involved a weaponized version of the Chrome exploit for CVE-2019-5782 which led to malware infection.' ELSE r_mal1_exploits_cve.evidence END
+MERGE (camp_OperationEarthKitsune)-[r_camp_targets_kancc:targets]->(victim_KANCC)
+ON CREATE SET r_camp_targets_kancc.evidence = 'Investigation began after noticing the KANCC website redirecting visitors.'
+ON MATCH SET r_camp_targets_kancc.evidence = CASE WHEN r_camp_targets_kancc.evidence IS NULL OR r_camp_targets_kancc.evidence = '' THEN 'Investigation began after noticing the KANCC website redirecting visitors.' ELSE r_camp_targets_kancc.evidence END
+MERGE (camp_OperationEarthKitsune)-[r_camp_targets_hanseattle:targets]->(victim_Hanseattle)
+ON CREATE SET r_camp_targets_hanseattle.evidence = 'Visitors were redirected to the Hanseattle website which hosted the weaponized exploit.'
+ON MATCH SET r_camp_targets_hanseattle.evidence = CASE WHEN r_camp_targets_hanseattle.evidence IS NULL OR r_camp_targets_hanseattle.evidence = '' THEN 'Visitors were redirected to the Hanseattle website which hosted the weaponized exploit.' ELSE r_camp_targets_hanseattle.evidence END
+MERGE (camp_OperationEarthKitsune)-[r_camp_abuses_chromium:abuses]->(src_chromium)
+ON CREATE SET r_camp_abuses_chromium.evidence = 'Weaponized PoC for CVE-2019-5782 was published in the Chromium tracking system and used in the attack chain.'
+ON MATCH SET r_camp_abuses_chromium.evidence = CASE WHEN r_camp_abuses_chromium.evidence IS NULL OR r_camp_abuses_chromium.evidence = '' THEN 'Weaponized PoC for CVE-2019-5782 was published in the Chromium tracking system and used in the attack chain.' ELSE r_camp_abuses_chromium.evidence END;"

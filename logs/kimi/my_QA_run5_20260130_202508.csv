@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source microsoft-ti-ms-appinstaller-2023-11?,True,Microsoft Threat Intelligence
+2,simple,What publication date is set for source microsoft-ti-ms-appinstaller-2023-11?,True,2023-11-01
+3,simple,What is the incident type for microsoft-ti-ms-appinstaller-mid-nov-2023?,True,intrusion
+4,simple,What date is stored on incident microsoft-ti-ms-appinstaller-mid-nov-2023?,True,2023-11-01
+5,simple,What tactic is assigned to technique T1566?,True,Initial Access
+6,simple,What tactic is assigned to technique T1204?,True,Execution
+7,simple,What framework is set on mitigation Disable ms-appinstaller protocol handler by default?,True,Product Security Configuration
+8,simple,What family is set for malware FalseFont?,True,Backdoor
+9,simple,What sponsor is set for threat actor Peach Sandstorm?,True,Iran
+10,simple,What motivation string is stored on threat actor Flax Typhoon?,True,espionage
+11,simple,What ISO2 code is stored for the country Taiwan node?,True,TW
+12,simple,What CVSS rating is stated in CVE-2021-36260 summary?,True,9.8/10
+13,simple,What incident type is set for arete-trigona-cve-2021-40539-observed?,True,ransomware
+14,simple,What is the double_extortion value on arete-trigona-cve-2021-40539-observed?,True,true
+15,simple,What is the incident type for inc-text-1-hikvision-cve-2021-36260?,True,vulnerability_exploitation_interest
+16,single_hop,Which motivation type is linked from Clop via motivated_by?,True,financial
+17,single_hop,Which motivation type is linked from Storm-0569 via motivated_by?,True,financial
+18,single_hop,Which tool does Sangria Tempest use that enables MSIX delivery?,True,MSIX file format
+19,single_hop,Which tool does Storm-1674 use as a distribution access vector?,True,ms-appinstaller URI scheme (App Installer)
+20,single_hop,Which technique is used by incident microsoft-ti-ms-appinstaller-mid-nov-2023 for Initial Access?,True,Phishing
+21,single_hop,Which technique is used by incident microsoft-ti-ms-appinstaller-mid-nov-2023 for Initial Access besides phishing?,True,User Execution
+22,single_hop,Which malware is involved in incident microsoft-ti-ms-appinstaller-mid-nov-2023?,True,Unspecified malware delivered via ms-appinstaller/MSIX
+23,single_hop,Which capability is leveraged by Flax Typhoon?,True,Living off the Land
+24,single_hop,Which country is the victim Dozens of organizations in Taiwan located in?,True,Taiwan
+25,single_hop,Which technique is linked to incident microsoft_blog_flax_typhoon_incident with phase Defense Evasion?,True,System Binary Proxy Execution
+26,single_hop,Which CVE is exploited by malware Trigona?,True,CVE-2021-40539
+27,single_hop,Which CVE is exploited in incident incident:CVE-2024-0507?,True,CVE-2024-0507
+28,single_hop,Which technique is used by incident incident:CVE-2024-0200 for Credential Access?,True,Unsecured Credentials
+29,single_hop,Which C2 service is abused by malware FalseFont?,True,Command-and-control servers
+30,single_hop,Which victim is targeted by campaign FalseFont delivery campaign?,True,Defense Industrial Base (DIB)
+31,multi_hop,How many threat actors are attributed_to incident microsoft-ti-ms-appinstaller-mid-nov-2023?,True,4
+32,multi_hop,List tools used by threat actors attributed_to microsoft-ti-ms-appinstaller-mid-nov-2023.,True,"ms-appinstaller URI scheme (App Installer), MSIX file format"
+33,multi_hop,How many techniques are linked to microsoft-ti-ms-appinstaller-mid-nov-2023 via used_technique?,True,2
+34,multi_hop,Which mitigation mitigates both microsoft-ti-ms-appinstaller-mid-nov-2023 and technique T1204?,True,Disable ms-appinstaller protocol handler by default
+35,multi_hop,How many unique tools are used by Peach Sandstorm via uses?,True,2
+36,multi_hop,How many techniques are used by microsoft_peach_sandstorm_password_spray_2023_02?,True,4
+37,multi_hop,List phases for techniques used by microsoft_peach_sandstorm_password_spray_2023_02.,True,"Initial Access, Discovery, Persistence, Lateral Movement"
+38,multi_hop,How many sectors are linked from microsoft_peach_sandstorm_password_spray_2023_02 via targets_sector?,True,3
+39,multi_hop,Count victims targeted by incident microsoft_peach_sandstorm_password_spray_2023_feb_jul.,True,4
+40,multi_hop,Which distinct sectors are associated with victims targeted by microsoft_peach_sandstorm_password_spray_2023_feb_jul?,True,"Government, Technology, Healthcare"
+41,multi_hop,How many aliases does BlackCat have across has_alias relationships?,True,3
+42,multi_hop,How many incidents are attributed_to Clop?,True,2
+43,multi_hop,What is the earliest occurred_on date among Clop incidents?,True,2021-01-01
+44,multi_hop,How many CVEs are connected to Clop incidents via exploited_in?,True,1
+45,multi_hop,How many techniques are linked to incident incident:CVE-2024-0200 via used_technique?,True,2
+46,unanswerable,What CVSS score is recorded for CVE-2024-0200?,False,
+47,unanswerable,What URL is provided for the Arete source about Trigona?,False,
+48,unanswerable,Which specific GoAnywhere MFT versions are affected by CVE-2023-0669?,False,
+49,unanswerable,What is the exact disclosure date for CVE-2021-40539 in the dataset?,False,
+50,unanswerable,Which ransomware payment cryptocurrency is used by BlackCat according to the graph?,False,

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source mcafee-mobile-research-xamalicious?,True,McAfee
+2,simple,What type is incident xamalicious-discovery?,True,malware
+3,simple,What date value is stored in Date node used for Xamalicious discovery?,True,2020-06-01
+4,simple,What sponsor is recorded for threat actor Midnight Blizzard?,True,Russian state-sponsored
+5,simple,What sector is recorded for victim Microsoft?,True,Technology
+6,simple,What is the incident type for microsoft-email-breach-2023-11_detected-2024-01-12?,True,intrusion
+7,simple,What tactic is assigned to technique T1110?,True,Credential Access
+8,simple,What malware family is FudModule labeled as?,True,rootkit
+9,simple,What date is set on incident lazarus-cve-2024-21338-2023-avast?,True,2023-01-01
+10,simple,What family is assigned to malware ChromeLoader?,True,Browser Hijacker
+11,simple,What tactic is assigned to technique T1176?,True,Persistence
+12,simple,What framework is recorded for mitigation MGMT-EXPOSURE?,True,General
+13,simple,What country name corresponds to Country iso2 GB?,True,United Kingdom
+14,simple,What incident type is inc-cve-2024-23222-zero-day-exploited?,True,exploitation
+15,simple,What sector is assigned to victim Online gambling sites?,True,Technology
+16,single_hop,Which tool does Xamalicious use for development?,True,Xamarin
+17,single_hop,What infrastructure service does Xamalicious abuse?,True,C2 server
+18,single_hop,Which victim is targeted by incident microsoft-email-breach-2023-11_detected-2024-01-12?,True,Microsoft
+19,single_hop,Which technique is used for initial access in the Microsoft email breach incident?,True,T1110
+20,single_hop,Which CVE does FudModule exploit?,True,CVE-2024-21338
+21,single_hop,Which technique is associated with privilege escalation in the Lazarus 2023 Avast incident?,True,T1068
+22,single_hop,Which tool is involved in chromeloader-resurgence-activity?,True,PowerShell
+23,single_hop,Which technique in chromeloader-resurgence-activity covers browser-extension persistence?,True,T1176
+24,single_hop,Which tool does Volt Typhoon use for initial access?,True,Fortinet FortiGuard device
+25,single_hop,Which technique is mitigated by Restrict management interfaces from public internet?,True,T1133
+26,single_hop,Which malware does threat actor Royal use starting 2022-01-01?,True,Royal ransomware
+27,single_hop,Which victim is targeted by incident inc-royal-2022-11-silverstone?,True,Silverstone Circuit
+28,single_hop,Which CVE is exploited in incident operation-earth-kitsune-kancc-hanseattle-redirect?,True,CVE-2019-5782
+29,single_hop,Which capability is leveraged by operation-earth-kitsune-kancc-hanseattle-redirect?,True,Automation
+30,single_hop,Which mitigation is linked to inc-cve-2024-23222-zero-day-exploited?,True,Apply Apple Security Updates
+31,multi_hop,Which CVE is exploited by malware used by Lazarus?,True,CVE-2024-21338
+32,multi_hop,Which country is Silverstone Circuit located in?,True,United Kingdom
+33,multi_hop,Which threat actor was incident microsoft-email-breach attributed to?,True,Midnight Blizzard
+34,multi_hop,Which two aliases are linked from Midnight Blizzard?,True,"Nobelium, APT29"
+35,multi_hop,Which CVEs are tied to incident incident:github:keys-rotation-cve-2024-0200-0507?,True,"CVE-2024-0200, CVE-2024-0507"
+36,multi_hop,How many techniques are used by the GitHub keys-rotation incident?,True,3
+37,multi_hop,How many techniques are used by incident chromeloader-resurgence-activity?,True,3
+38,multi_hop,How many techniques are directly used by Volt Typhoon?,True,4
+39,multi_hop,How many malware samples are included in Operation Earth Kitsune campaign?,True,3
+40,multi_hop,How many victims are targeted by Operation Earth Kitsune campaign?,True,2
+41,multi_hop,How many malware nodes exploit CVE-2019-5782?,True,3
+42,multi_hop,How many distinct sources support ChromeLoader?,True,2
+43,multi_hop,How many different malware does threat actor Earth Berberoka use?,True,3
+44,multi_hop,Which malware used by Earth Berberoka is described as brand-new multistage?,True,PuppetLoader
+45,multi_hop,Which tactics appear among techniques used in the Xamalicious discovery incident?,True,"Defense Evasion, Credential Access, Command and Control"
+46,unanswerable,What CVSS score is assigned to CVE-2024-0507?,False,
+47,unanswerable,What hash value identifies any ChromeLoader ISO payload?,False,
+48,unanswerable,Which specific Silverstone Circuit systems were encrypted in the Royal attack?,False,
+49,unanswerable,What exact number of C&C servers does Volt Typhoon use?,False,
+50,unanswerable,Which operating system version numbers were vulnerable to CVE-2024-23222?,False,

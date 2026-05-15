@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the incident type for inc-zimbra-cve-2023-37580-gov-global-2023-06?,True,intrusion
+2,simple,What date is stored for incident microsoft-corp-email-breach-2024-01?,True,2024-01-12
+3,simple,What sponsor is set for threat actor Midnight Blizzard?,True,Russia
+4,simple,What motivation property is set for Storm-1113?,True,financial
+5,simple,What framework is recorded for mitigation Patching?,True,General
+6,simple,What status is set on the mitigation Disable ms-appinstaller protocol handler by default?,True,applied
+7,simple,What sector value is stored for victim Maritime services giant (Singapore HQ)?,True,Transportation
+8,simple,What country ISO2 is stored for victim Maritime services giant (Singapore HQ)?,True,SG
+9,simple,What is the published_date for CVE-2023-7024?,True,2023-12-19
+10,simple,What CVSS value is stated in the summary of CVE-2022-22047?,True,7.8
+11,simple,What is the incident type for unit42-cryptoclippy-clipper-campaign?,True,malware
+12,simple,What tactic is set for technique T1110.003 Password Spraying?,True,Credential Access
+13,simple,What tactic is set for technique T1190 Exploit Public-Facing Application?,True,Initial Access
+14,simple,What family is set for malware CryptoClippy?,True,Cryptocurrency Clipper
+15,simple,What publisher is stored for source unit42-cryptoclippy-portuguese-speakers?,True,Unit 42
+16,single_hop,Which sector is targeted by incident inc-zimbra-cve-2023-37580-gov-global-2023-06?,True,Government
+17,single_hop,Which CVE is exploited in incident inc-clop-servu-2021-11?,True,CVE-2021-35211
+18,single_hop,Which technique is used by incident incQuantumBazar?,True,"T1566, T1559"
+19,single_hop,Which tool is involved in incident CVE-2023-45866-keystroke-injection?,True,Python script (emulated Bluetooth keyboard)
+20,single_hop,Which threat actor is attributed for incident microsoft-corp-email-breach-2024-01?,True,Midnight Blizzard
+21,single_hop,Which victim is targeted by incident microsoft-corp-email-breach-2024-01?,True,Microsoft
+22,single_hop,Which malware is involved in incident mti_appinstaller_msix_abuse_2023-11?,True,Malware distributed via ms-appinstaller/MSIX
+23,single_hop,Which technique IDs are used by incident mti_appinstaller_msix_abuse_2023-11?,True,"T1204, T1566, T1566.003"
+24,single_hop,Which incident is mitigated by Patching?,True,INC-CVE-2022-22047-EXPLOITED-IN-THE-WILD
+25,single_hop,Which threat actors are motivated_by motivation type financial?,True,"Storm-0569, Storm-1113, Sangria Tempest, Storm-1674"
+26,single_hop,Which aliases does threat actor Quantum Locker have?,True,"AstroLocker, MountLocker, XingLocker"
+27,single_hop,Which tool does threat actor Ryuk use for initial access?,True,BazarCall
+28,single_hop,Which victim did threat actor Clop attack?,True,Maritime services giant (Singapore HQ)
+29,single_hop,Which threat actor is included by Conti Team Two?,True,Quantum Locker
+30,single_hop,Which country is victim Maritime services giant (Singapore HQ) located in?,True,Singapore
+31,multi_hop,How many techniques are linked to incident incQuantumBazar via used_technique?,True,2
+32,multi_hop,How many tools are involved in incident mti_appinstaller_msix_abuse_2023-11?,True,2
+33,multi_hop,How many threat actors are attributed_to incident mti_appinstaller_msix_abuse_2023-11?,True,4
+34,multi_hop,How many victims are targeted by incident unit42-cryptoclippy-clipper-campaign?,True,4
+35,multi_hop,How many sectors are targeted by incident unit42-cryptoclippy-clipper-campaign?,True,3
+36,multi_hop,What sectors correspond to victims targeted by unit42-cryptoclippy-clipper-campaign?,True,"Other, Manufacturing, Technology, Retail"
+37,multi_hop,Which tools are included by campaign CryptoClippy Portuguese-speaker clipper campaign?,True,"Google Ads, Traffic Distribution System (TDS)"
+38,multi_hop,Which malware is included by campaign CryptoClippy Portuguese-speaker clipper campaign?,True,CryptoClippy
+39,multi_hop,What tactic is used in incident inc-zimbra-cve-2023-37580-gov-global-2023-06?,True,Initial Access
+40,multi_hop,Which CVE is linked to technique T1189 in the government Zimbra incident?,True,CVE-2023-37580
+41,multi_hop,What is the earliest occurred_on date for campaign Quantum ransomware / Quantum Locker operation?,True,2021-08-01
+42,multi_hop,How many distinct occurred_on dates are recorded for campaign Quantum ransomware / Quantum Locker operation?,True,3
+43,multi_hop,"Which tools does Quantum Locker use, as shown in incQuantumBazar?",True,Jormungandr
+44,multi_hop,Which techniques are shared by incidents incQuantumBazar and unit42-cryptoclippy-clipper-campaign?,True,T1566
+45,multi_hop,How many unique tools are used by actors attributed to mti_appinstaller_msix_abuse_2023-11?,True,2
+46,unanswerable,What Microsoft Teams tenant ID was used in the Storm-1674 phishing vector?,False,
+47,unanswerable,What ransomware note filename is used by Quantum ransomware?,False,
+48,unanswerable,What CVSS score is recorded for CVE-2023-7024?,False,
+49,unanswerable,Which specific WhatsApp Web impersonation domains were used by CryptoClippy campaign?,False,
+50,unanswerable,What patch version fixed CVE-2021-35211 in SolarWinds Serv-U?,False,

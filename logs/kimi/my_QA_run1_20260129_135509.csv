@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the published date of the Zscaler source about Agent Tesla?,True,2019-12-19
+2,simple,What exfiltration value is set on the 2019 Agent Tesla incident?,True,true
+3,simple,What type is the incident chromeloader-iso-windows-infection?,True,malware-infection
+4,simple,What family is assigned to the malware Kasseika?,True,ransomware
+5,simple,What is the motivation type linked to Kasseika threat actor?,True,financial
+6,simple,What confidence value is set for attributing the Kasseika incident?,True,medium
+7,simple,What tactic is stored for technique T1059.001?,True,Execution
+8,simple,What tactic is stored for technique T1190?,True,Initial Access
+9,simple,What type is the incident operation-earth-kitsune-web-redirect-cve-2019-5782?,True,intrusion
+10,simple,What publisher is listed for the source red-canary-blog?,True,Red Canary
+11,simple,What publisher is listed for the source malwarebytes-labs-blog?,True,Malwarebytes Labs
+12,simple,What is the published date of the MSVR/Apple Migraine source?,True,2023-05-18
+13,simple,What service value is set for the C2 infrastructure used by Agent Tesla?,True,Telegram
+14,simple,What family is assigned to the malware TrickBot?,True,TrickBot
+15,simple,What family is assigned to the malware BazarBackdoor node?,True,BazarLoader
+16,single_hop,Which malware does Ryuk use according to the graph?,True,BazarLoader
+17,single_hop,Which malware does the TrickBot threat actor use besides TrickBot?,True,BazarLoader
+18,single_hop,Which C2 infrastructure service is abused by BazarLoader?,True,C&C Server
+19,single_hop,Which technique does BazarLoader use for initial access?,True,Phishing
+20,single_hop,Which tool is used by ChromeLoader?,True,PowerShell
+21,single_hop,Which technique is linked to the ChromeLoader ISO infection incident?,True,User Execution
+22,single_hop,Which tool is involved in the Kasseika BYOVD incident besides PsExec?,True,Martini driver (Martini.sys/viragt64.sys)
+23,single_hop,Which CVE is exploited by Agent Tesla in the Zscaler incident?,True,CVE-2017-11882
+24,single_hop,Which technique is used for execution in the Agent Tesla incident?,True,User Execution
+25,single_hop,Which C2 service is abused by Agent Tesla for exfiltration?,True,Telegram
+26,single_hop,Which victims are targeted by the Operation Earth Kitsune incident?,True,"Korean American National Coordinating Council (KANCC), Hanseattle"
+27,single_hop,Which CVE is referenced as exploited in the Operation Earth Kitsune incident?,True,CVE-2019-5782
+28,single_hop,Which incident includes an occurred_on relationship to date 2019-12-19?,True,zscaler-2019-12-19-office-rce-agent-tesla-telegram
+29,single_hop,Which source supports the Migraine CVE node?,True,MSVR_CVD_Migraine_CVE-2023-32369
+30,single_hop,Which techniques are used by the Kasseika BYOVD incident?,True,"Phishing, Credentials from Password Stores, Remote Services, System Services, Exploitation for Privilege Escalation, Impair Defenses"
+31,multi_hop,"From Ryuk, which technique is used by its used malware?",True,Phishing
+32,multi_hop,"From TrickBot threat actor, list techniques used by its malware via the graph.",True,Phishing
+33,multi_hop,Which C2 service is reachable from Ryuk through uses then abuses?,True,C&C Server
+34,multi_hop,How many malware are involved in the Ryuk BazarLoader incident?,True,1
+35,multi_hop,How many techniques are recorded for the Ryuk BazarLoader incident?,True,2
+36,multi_hop,How many sources support the ChromeLoader malware node?,True,4
+37,multi_hop,How many distinct tools are involved across all incidents?,True,3
+38,multi_hop,Count distinct techniques used across the Agent Tesla and Kasseika incidents.,True,7
+39,multi_hop,Which incident linked to Operation Earth Kitsune targets both listed victims?,True,operation-earth-kitsune-web-redirect-cve-2019-5782
+40,multi_hop,How many malware samples in Operation Earth Kitsune abuse C2 infrastructure?,True,3
+41,multi_hop,How many C2 servers are linked from Operation Earth Kitsune malware samples?,True,5
+42,multi_hop,Which CVEs are tied to incidents that used User Execution?,True,CVE-2017-11882
+43,multi_hop,Which malware both exploits a CVE and abuses Telegram?,True,Agent Tesla
+44,multi_hop,Count malware that exploit any CVE in the dataset.,True,2
+45,multi_hop,Which incident has the earliest date among dated incidents?,True,zscaler-2019-12-19-office-rce-agent-tesla-telegram
+46,unanswerable,What CVSS severity score is recorded for CVE-2017-11882?,False,
+47,unanswerable,What operating system version is affected by CVE-2023-32369?,False,
+48,unanswerable,What country is attributed as the origin of Operation Earth Kitsune?,False,
+49,unanswerable,What file hashes are provided for the Operation Earth Kitsune malware samples?,False,
+50,unanswerable,Which industry sectors were targeted in the Kasseika operation?,False,

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source unit42-blackcat-munchkin?,True,Unit 42
+2,simple,What is the incident type for inc_zimbra_cve_2023_37580_exploitation_2023_06?,True,intrusion
+3,simple,What date is stored on incident inc_zimbra_cve_2023_37580_hotfix_2023_07_05?,True,2023-07-05
+4,simple,What tactic is recorded for technique T1059.007?,True,Execution
+5,simple,What is the framework for mitigation Patch Management?,True,General
+6,simple,What severity label is stated for CVE-2022-34713 in its source quote?,True,Important
+7,simple,What sponsor is set for threat actor Kimsuky?,True,North Korea
+8,simple,What motivation property is set for threat actor Storm-1674?,True,financial
+9,simple,What is the service name on the C2_Infrastructure node used in ms-appinstaller abuse?,True,ms-appinstaller URI scheme
+10,simple,What family is recorded for malware SnappyTCP?,True,SnappyTCP
+11,simple,What published_on date is stored for source cisco-talos-apr-2019-sea-turtle?,True,2019-04-01
+12,simple,What type is stored on incident sea-turtle-snappytcp-2021-2023?,True,intrusion
+13,simple,What tactic is recorded for technique T1564?,True,Defense Evasion
+14,simple,What summary describes tool MSIX file format?,True,MSIX package format used to deliver signed malicious packages
+15,simple,What sector name is targeted by the Zimbra exploitation incident?,True,Government
+16,single_hop,Which date did incident inc_zimbra_cve_2023_37580_patched_2023_07_25 occur on?,True,2023-07-25
+17,single_hop,Which CVE was exploited in inc_cve-2022-34713_active_exploitation_2022-08?,True,CVE-2022-34713
+18,single_hop,Which technique was used by the Zimbra exploitation incident inc_zimbra_cve_2023_37580_exploitation_2023_06?,True,T1059.007
+19,single_hop,Which tool was involved in incident inc_zimbra_cve_2023_37580_exploitation_2023_06?,True,Zimbra Collaboration Suite
+20,single_hop,Which mitigation mitigates incident msti-appinstaller-observed-2023-11?,True,Disable ms-appinstaller protocol handler by default
+21,single_hop,Which technique was used in incident msti-storm-1674-teams-phishing-2023-11?,True,T1566
+22,single_hop,Which tool does Storm-1674 use as an additional phishing vector?,True,Microsoft Teams
+23,single_hop,Which malware is involved in incident sea-turtle-snappytcp-2021-2023?,True,SnappyTCP
+24,single_hop,Which motivation node is Kimsuky connected to via motivated_by?,True,espionage
+25,single_hop,Which capability does the malware kit as a service leverage?,True,Malware-as-a-Service
+26,single_hop,Which infrastructure service does malware Signed malicious MSIX application packages abuse?,True,ms-appinstaller URI scheme
+27,single_hop,Which tool does Malware kit as a service (MSIX/ms-appinstaller) use?,True,MSIX file format
+28,single_hop,Which actors is incident msti-appinstaller-observed-2023-11 attributed to?,True,"Storm-0569, Storm-1113, Sangria Tempest, Storm-1674"
+29,single_hop,Which malware does threat actor Kimsuky use besides AppleSeed?,True,TinyNuke
+30,single_hop,Which tool is used by threat actor BlackCat to propagate payloads?,True,Munchkin
+31,multi_hop,How many incidents are supported by source microsoft_ti_appinstaller_2023-11?,True,2
+32,multi_hop,How many threat actors are attributed_to incident msti-appinstaller-observed-2023-11?,True,4
+33,multi_hop,How many unique techniques are linked to incident msti-appinstaller-observed-2023-11?,True,2
+34,multi_hop,How many malware nodes are involved in incident msti-appinstaller-observed-2023-11?,True,2
+35,multi_hop,How many distinct sources support threat actor Sea Turtle?,True,2
+36,multi_hop,How many aliases does Sea Turtle have via has_alias?,True,4
+37,multi_hop,Which aliases are connected to Sea Turtle through has_alias?,True,"Cosmic Wolf, Marbled Dust, Teal Kurma, UNC1326"
+38,multi_hop,Which technique is linked to Sea Turtle via incident sea-turtle-dns-hijacking-2017-01?,True,T1566
+39,multi_hop,Which threat actor is attributed to the SnappyTCP incident sea-turtle-snappytcp-2021-2023?,True,Sea Turtle
+40,multi_hop,Which malware is used by BlackCat and supported by source unit42-blackcat-munchkin?,True,BlackCat
+41,multi_hop,What capability does BlackCat leverage when using Munchkin?,True,Automation
+42,multi_hop,Which technique does BlackCat use when leveraging Virtualization?,True,T1564
+43,multi_hop,Which incidents involved ms-appinstaller URI scheme abuse through malware relationships?,True,msti-appinstaller-observed-2023-11
+44,multi_hop,Which tool is used by both MSIX-related malware nodes in Microsoft TI data?,True,MSIX file format
+45,multi_hop,What is the day difference between Zimbra hotfix and patch incidents?,True,20 days
+46,unanswerable,What CVSS base score is assigned to CVE-2023-37580?,False,
+47,unanswerable,Which country is the primary location for Sea Turtle operations?,False,
+48,unanswerable,What file hash identifies the Munchkin Alpine VM sample?,False,
+49,unanswerable,Which industries in the U.S. were targeted by Royal?,False,
+50,unanswerable,What specific domain was hijacked in the Sea Turtle DNS hijacking activity?,False,

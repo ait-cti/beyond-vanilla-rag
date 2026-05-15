@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is Magnet Goblin's stated motivation?,True,financial
+2,simple,What type is incident checkpoint_magnetgoblin_ivanti_flaws?,True,intrusion
+3,simple,What date is set for incident checkpoint_2022_attack_magento_servers?,True,2022-01-01
+4,simple,What technique_id corresponds to Exploit Public-Facing Application?,True,T1190
+5,simple,What is the published_on date for the TeamCity disclosure source?,True,2024-03-06
+6,simple,What date is assigned to incident inc-teamcity-cve-2024-27198-mass-exploitation-2024-03-06?,True,2024-03-06
+7,simple,What confidence is recorded for inc_mispadu_ursa_spam_001 attribution?,True,low
+8,simple,What sponsor is recorded for Lazarus?,True,North Korea
+9,simple,What motivation type is linked to Lazarus?,True,espionage
+10,simple,What sector is assigned to victim Engineers?,True,Technology
+11,simple,What is the incident type for operation-interception-incident-1?,True,cyberespionage
+12,simple,What is the incident type for mallox-activity-increase-2023?,True,ransomware
+13,simple,Does mallox-activity-increase-2023 mark exfiltration as true or false?,True,true
+14,simple,What is the tactic for technique T1059.001?,True,Execution
+15,simple,What is the published_date for CVE-2023-32369?,True,2023-05-18
+16,single_hop,Which malware are involved in operation-interception-incident-1?,True,"FinderFontsUpdater.app, safarifontagent"
+17,single_hop,Which tool is involved in incident-cve-2022-34713-active-exploitation?,True,Microsoft Windows Support Diagnostic Tool
+18,single_hop,Which CVEs are exploited in checkpoint_magnetgoblin_qlik_sense_targeting?,True,"CVE-2023-41265, CVE-2023-41266, CVE-2023-48365"
+19,single_hop,Which technique is used by inc_mispadu_ursa_spam_001?,True,T1566
+20,single_hop,Which victims are targeted by inc_mispadu_ursa_spam_001?,True,"Spanish-language Windows systems, Portuguese-language Windows systems"
+21,single_hop,Which countries does inc_mispadu_ursa_spam_001 occur in?,True,"Mexico, Spain, Portugal"
+22,single_hop,Which CVE is exploited in incident-cve-2022-34713-active-exploitation?,True,CVE-2022-34713
+23,single_hop,Which mitigation mitigates incident-cve-2022-34713-active-exploitation?,True,Patch Management
+24,single_hop,Which CVEs are exploited in inc-teamcity-cve-2024-27198-mass-exploitation-2024-03-06?,True,CVE-2024-27198
+25,single_hop,Which tool is involved in inc-teamcity-cve-2024-27198-mass-exploitation-2024-03-06?,True,JetBrains TeamCity
+26,single_hop,Which threat actor is attributed to inc-bianlian-teamcity-cve-2024-27198-ransomware-initial-access-2024-03-06?,True,BianLian
+27,single_hop,Which malware is involved in inc-bianlian-teamcity-cve-2024-27198-ransomware-initial-access-2024-03-06?,True,BianLian ransomware
+28,single_hop,Which CVEs are exploited by mallox-activity-increase-2023?,True,"CVE-2020-0618, CVE-2019-1068"
+29,single_hop,Which sectors are targeted by mallox-activity-increase-2023?,True,"Manufacturing, Legal, Retail"
+30,single_hop,Which C2 infrastructure service is abused by TargetCompany actors?,True,.onion negotiation site
+31,multi_hop,How many CVEs are linked to checkpoint_magnetgoblin_ivanti_flaws via exploited_in?,True,4
+32,multi_hop,How many tools are used by Magnet Goblin and also involved in checkpoint_magnetgoblin_ivanti_flaws?,True,2
+33,multi_hop,Which tools used by Magnet Goblin appear in any incident as involved_tool?,True,"Warpwire, Ligolo"
+34,multi_hop,How many incidents attributed_to Magnet Goblin are in the dataset?,True,2
+35,multi_hop,How many distinct CVEs are exploited across Magnet Goblin-attributed incidents?,True,7
+36,multi_hop,Which CVE is both exploited in inc-teamcity-cve-2024-27198-mass-exploitation-2024-03-06 and exploited by BianLian ransomware?,True,CVE-2024-27198
+37,multi_hop,What is the earliest first_seen date among exploited_in edges for TeamCity incidents?,True,2024-03-04
+38,multi_hop,How many incidents have involved_tool JetBrains TeamCity?,True,2
+39,multi_hop,Which date value is shared by both TeamCity incidents via occurred_on?,True,2024-03-06
+40,multi_hop,How many entities are included in campaign Operation Interception?,True,4
+41,multi_hop,What technique_id is used by Operation Interception incident for initial access?,True,T1566
+42,multi_hop,Which sector is targeted by operation-interception-incident-1 through targets_sector?,True,Technology
+43,multi_hop,How many techniques are recorded for mallox-activity-increase-2023 via used_technique?,True,7
+44,multi_hop,List technique_ids for mallox-activity-increase-2023 with tactic Execution.,True,"T1059.001, T1059.003"
+45,multi_hop,How many CVEs are exploited across all incidents with type intrusion?,True,9
+46,unanswerable,What CVSS score is recorded for CVE-2024-27198?,False,
+47,unanswerable,Which specific organization was targeted in the TeamCity mass exploitation incident?,False,
+48,unanswerable,What file hashes are provided for FinderFontsUpdater.app?,False,
+49,unanswerable,What ransomware payment amount is demanded by Mallox in 2023?,False,
+50,unanswerable,Which MITRE sub-technique is used for phishing in the Mispadu campaign?,False,

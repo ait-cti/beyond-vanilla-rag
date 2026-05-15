@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What published date is set for CVE-2023-36460?,True,2023-07-01
+2,simple,What published date is set for CVE-2023-32369?,True,2023-05-18
+3,simple,What motivation type is linked to Yanluowang?,True,financial
+4,simple,What motivation type is linked to LockBit?,True,financial
+5,simple,What motivation string is stored on the BlackCat threat actor node?,True,financial
+6,simple,What malware family is assigned to Trigona?,True,ransomware
+7,simple,What malware family is assigned to Wipers (various)?,True,Wiper
+8,simple,What incident type is stored for unit42-il-destructive-series-2023?,True,destructive
+9,simple,What incident type is stored for lockbit-ops-2021-10?,True,ransomware
+10,simple,What is the incident date for symantec-yanluowang-us-2021-10-attempted-deploy?,True,2021-10-01
+11,simple,What is the incident date for symantec-yanluowang-us-2021-08-observed?,True,2021-08-01
+12,simple,What sector value is stored on victim Technology sector organizations in Israel?,True,Technology
+13,simple,What country_iso2 value is stored on victim Likely targets in Spain?,True,ES
+14,simple,What technique tactic is stored for T1105?,True,Command and Control
+15,simple,What technique tactic is stored for T1486?,True,Impact
+16,single_hop,Which country did incident symantec-yanluowang-us-2021-08-observed occur in?,True,United States
+17,single_hop,Which country did incident unit42-il-destructive-series-2023 occur in?,True,Israel
+18,single_hop,Which malware is involved in incident symantec-yanluowang-us-2021-10-attempted-deploy?,True,Yanluowang
+19,single_hop,Which tool is involved in incident symantec-yanluowang-us-2021-10-attempted-deploy?,True,AdFind
+20,single_hop,Which technique is used by incident mispadu_spam_campaigns_undated_1?,True,T1566
+21,single_hop,Which victims are targeted by incident mispadu_spam_campaigns_undated_1?,True,"Spanish-language systems, Portuguese-language systems, Likely targets in Mexico, Likely targets in Spain, Likely targets in Portugal"
+22,single_hop,Which CVE is exploited_in by incident volexity-confluence-2022-26134-01?,True,CVE-2022-26134
+23,single_hop,Which tools are involved in incident volexity-confluence-2022-26134-01?,True,"Atlassian Confluence Server and Data Center, Public exploit"
+24,single_hop,Which technique is used by incident volexity-confluence-2022-26134-01?,True,T1190
+25,single_hop,Which CVE is exploited by Trigona?,True,CVE-2021-40539
+26,single_hop,Which malware is used by tool Munchkin?,True,BlackCat
+27,single_hop,Which techniques are used by tool Munchkin?,True,"T1105, T1021, T1072"
+28,single_hop,Which techniques are used by incident unit42-il-destructive-series-2023?,True,"T1485, T1565, T1070, T1041"
+29,single_hop,Which sectors are targeted by incident unit42-il-destructive-series-2023?,True,"Education, Technology"
+30,single_hop,Which aliases are linked from threat actor BlackCat via has_alias?,True,"ALPHV, AlphaVM, AlphaV"
+31,multi_hop,Which malware is used by BlackCat operators via tool Munchkin?,True,BlackCat
+32,multi_hop,Which tactics are associated with techniques used by Munchkin?,True,"Command and Control, Lateral Movement"
+33,multi_hop,Which country is targeted by unit42-il-destructive-series-2023 victims?,True,Israel
+34,multi_hop,Which sectors are represented by victims targeted in unit42-il-destructive-series-2023?,True,"Education, Technology"
+35,multi_hop,What is the earliest occurred_on date for unit42-il-destructive-series-2023?,True,2023-01-01
+36,multi_hop,What is the latest occurred_on date for unit42-il-destructive-series-2023?,True,2023-10-01
+37,multi_hop,How many techniques are used by incident symantec-yanluowang-us-2021-10-attempted-deploy?,True,3
+38,multi_hop,How many malware entries are involved in incident lockbit-ops-2021-10?,True,3
+39,multi_hop,How many victims are targeted by mispadu_spam_campaigns_undated_1?,True,5
+40,multi_hop,How many targeted victims in mispadu_spam_campaigns_undated_1 are located_in a country?,True,3
+41,multi_hop,Which countries are linked via victim located_in among Mispadu likely targets?,True,"Mexico, Spain, Portugal"
+42,multi_hop,How many tools are involved in volexity-confluence-2022-26134-01?,True,2
+43,multi_hop,How many capabilities does BlackCat leverage in Unit 42 dataset?,True,2
+44,multi_hop,Which techniques support lateral movement for Kasseika incident?,True,"T1569.002, T1021.002"
+45,multi_hop,How many distinct tactics are covered by Kasseika incident techniques?,True,5
+46,unanswerable,What CVSS score is recorded for CVE-2022-26134?,False,
+47,unanswerable,What file hash identifies the Munchkin utility sample?,False,
+48,unanswerable,Which organization name was the target of symantec-yanluowang-us-2021-10-attempted-deploy?,False,
+49,unanswerable,What ransomware note filename is used by BlackCat?,False,
+50,unanswerable,Which email subject line delivered Mispadu in the spam campaigns?,False,

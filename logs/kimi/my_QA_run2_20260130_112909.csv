@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the type of incident whatsapp-phishing-banking-trojan-telemetry?,True,intrusion
+2,simple,What country ISO2 is stored for victim Bank customers (India)?,True,IN
+3,simple,What sector is stored for victim Bank customers (India)?,True,Finance
+4,simple,What is the name property of Country node with iso2 IN?,True,India
+5,simple,What family is set for malware Fake bank KYC APK banking trojan?,True,Banking trojan
+6,simple,What service value identifies the SMS exfiltration C2 infrastructure?,True,SMS exfiltration (hard-coded phone number)
+7,simple,What technique tactic is stored for technique T1566?,True,Initial Access
+8,simple,What family is stored for malware Androxgh0st?,True,Androxgh0st
+9,simple,What is the CVE published_date for CVE-2022-0543?,True,2022-01-01
+10,simple,What type is incident unit42-p2pinfect-2023-07-11?,True,worm
+11,simple,What is the motivation value stored for threat actor BlackCat?,True,financial
+12,simple,What family is stored for malware Predator?,True,Spyware
+13,simple,What sponsor value is stored for threat actor Intellexa?,True,Commercial surveillance vendor
+14,simple,What is the date of incident INC-CVE-2023-36884-STORM-0978?,True,2023-01-01
+15,simple,What motivation is stored for threat actor UNC3886?,True,espionage
+16,single_hop,Which country is victim Bank customers (India) located in?,True,India
+17,single_hop,Which victim is targeted by campaign WhatsApp phishing campaign?,True,Bank customers (India)
+18,single_hop,Which sector node is targeted by incident whatsapp-phishing-banking-trojan-telemetry?,True,Finance
+19,single_hop,Which tool is involved in incident whatsapp-phishing-banking-trojan-telemetry?,True,WhatsApp
+20,single_hop,Which malware is involved in incident whatsapp-phishing-banking-trojan-telemetry?,True,Fake bank KYC APK banking trojan
+21,single_hop,Which C2 services are abused by Fake bank KYC APK banking trojan?,True,"C2 server, SMS exfiltration (hard-coded phone number)"
+22,single_hop,Which CVEs are exploited by malware Androxgh0st?,True,"CVE-2017-9841, CVE-2021-41773, CVE-2018-15133"
+23,single_hop,Which techniques does malware Androxgh0st use?,True,"T1552.001, T1098, T1505.003"
+24,single_hop,Which tool does malware Androxgh0st use for protocol abuse?,True,SMTP
+25,single_hop,Which CVE is exploited by malware P2PInfect?,True,CVE-2022-0543
+26,single_hop,Which victim is targeted by incident unit42-p2pinfect-2023-07-11?,True,Redis instances
+27,single_hop,Which malware is used by threat actor Ragnar Locker?,True,Ragnar Locker
+28,single_hop,Which CVE is exploited by malware Ragnar Locker?,True,CVE-2017-0213
+29,single_hop,Which mitigation mitigates incident google-tag-citizenlab-iphone-0day-predator?,True,Patch iOS to iOS 16.7 / iOS 17.0.1
+30,single_hop,Which CVE is mitigated by Office Defense in Depth update?,True,CVE-2023-36884
+31,multi_hop,How many techniques are linked to incident jupyter_variant_increase_since_2020_observed_late_october?,True,4
+32,multi_hop,What tactics appear among techniques used by the Jupyter variant incident?,True,"Execution, Defense Evasion, Command and Control"
+33,multi_hop,Which sources support the malware Jupyter?,True,"VMware Carbon Black, Morphisec, BlackBerry"
+34,multi_hop,Which technique IDs are used by malware involved in the Jupyter variant incident?,True,T1059.001
+35,multi_hop,How many CVEs are exploited by Androxgh0st and supported by its CISA/FBI source?,True,3
+36,multi_hop,Which CVEs are exploited by Androxgh0st and supported by the same source?,True,"CVE-2017-9841, CVE-2021-41773, CVE-2018-15133"
+37,multi_hop,How many techniques does Ragnar Locker profile incident use?,True,5
+38,multi_hop,Which technique tactics are included in Ragnar Locker profile incident?,True,"Initial Access, Credential Access, Defense Evasion, Exfiltration"
+39,multi_hop,How many incidents are attributed to threat actor Akira?,True,2
+40,multi_hop,List incident dates attributed to Akira in the dataset.,True,"2023-08-01, 2023-09-06"
+41,multi_hop,Which C2 service is abused by both Megazord malware and its incident?,True,TOX messenger
+42,multi_hop,How many distinct techniques are used by threat actor BlackCat?,True,3
+43,multi_hop,Which technique IDs are used by threat actor BlackCat?,True,"T1021, T1135, T1105"
+44,multi_hop,Which malware is propagated by Munchkin and used by threat actor BlackCat?,True,BlackCat
+45,multi_hop,How many CVEs are exploited in incident google-tag-citizenlab-iphone-0day-predator?,True,3
+46,unanswerable,What phone number is hard-coded for SMS exfiltration in the WhatsApp phishing case?,False,
+47,unanswerable,What file hash identifies the Fake bank KYC APK banking trojan sample?,False,
+48,unanswerable,Which organizations were victimized by the Akira incident on 2023-09-06?,False,
+49,unanswerable,What CVSS score is assigned to CVE-2023-34048 in this graph?,False,
+50,unanswerable,What is the detection timestamp for the first observed Kasseika ransomware event?,False,

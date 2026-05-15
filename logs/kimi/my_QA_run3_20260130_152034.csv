@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is set for Midnight Blizzard?,True,Russia
+2,simple,What is the incident type for microsoft-corp-email-breach-2023-11-legacy-test-tenant?,True,intrusion
+3,simple,What date is stored on incident avast-lazarus-cve-2024-21338-2023?,True,2023-01-01
+4,simple,What malware family is assigned to FudModule?,True,Rootkit
+5,simple,What is the MITRE technique tactic for T1068?,True,Privilege Escalation
+6,simple,What publisher is recorded for source avast?,True,Avast
+7,simple,What malware family is recorded for ChromeLoader?,True,Browser hijacker
+8,simple,What publisher is recorded for source malwarebytes_labs_blog_posts_chromeloader?,True,Malwarebytes Labs
+9,simple,What framework is set for mitigation Disable ms-appinstaller protocol handler?,True,Microsoft
+10,simple,What control_id is set for mitigation Security Updates?,True,PATCHING
+11,simple,What category is set on incident INC-CVE-2024-23222-WEBKIT-ZERODAY?,True,C2
+12,simple,What sector is set for victim Online gambling sites?,True,Other
+13,simple,What incident type is set for text:github:keys-rotated:cve-2024-0200-0507?,True,vulnerability
+14,simple,What sponsor is set for threat actor H0lyGh0st?,True,North Korea
+15,simple,What tactic is stored for technique T1218?,True,Defense Evasion
+16,single_hop,Which motivation type is linked from APT29 via motivated_by?,True,espionage
+17,single_hop,Which date value is connected from microsoft-corp-email-breach via occurred_on?,True,2024-01-12
+18,single_hop,Which technique ID is connected from microsoft-corp-email-breach via used_technique?,True,T1110.003
+19,single_hop,What confidence is stored on the attributed_to link from inc_ms to Midnight Blizzard?,True,high
+20,single_hop,Which tool does malware ChromeLoader use?,True,PowerShell
+21,single_hop,Which capability is leveraged by H0lyGh0st ransomware?,True,Automation
+22,single_hop,Which service is abused by DEV-0530?,True,.onion site
+23,single_hop,Which tool is used by Storm-1674 besides MSIX?,True,Microsoft Teams
+24,single_hop,Which C2 infrastructure service is abused by Storm-0569?,True,ms-appinstaller (App Installer) URI scheme
+25,single_hop,Which tool is used by Volt Typhoon for initial access?,True,Fortinet FortiGuard device
+26,single_hop,Which C2 infrastructure service is abused by Volt Typhoon?,True,Compromised SOHO network edge devices
+27,single_hop,Which CVE is exploited by malware FudModule?,True,CVE-2024-21338
+28,single_hop,Which victim is targeted by incident operation-earth-kitsune-kancc-redirect-chrome-exploit?,True,"Korean American National Coordinating Council (KANCC), Hanseattle"
+29,single_hop,Which CVEs are linked from incident text:github:keys-rotated via exploited_in?,True,"CVE-2024-0200, CVE-2024-0507"
+30,single_hop,Which malware families are used by Earth Berberoka?,True,"PlugX, Gh0st RAT, PuppetLoader"
+31,multi_hop,Which aliases are linked from Midnight Blizzard through has_alias?,True,"Nobelium, APT29"
+32,multi_hop,Which sponsor is shared by Midnight Blizzard and its aliases?,True,Russia
+33,multi_hop,Which motivation type applies to Midnight Blizzard and its aliases?,True,espionage
+34,multi_hop,What technique name was used in the Microsoft corporate email breach incident?,True,Password Spraying
+35,multi_hop,Which publisher supports the Microsoft corporate email breach incident?,True,Microsoft
+36,multi_hop,What evidence text is on inc_ms attributed_to Midnight Blizzard?,True,Microsoft investigation determined the attack was conducted by Russian threat actors known as Midnight Blizzard (Nobelium/APT29).
+37,multi_hop,Which CVE is exploited in incident involving Lazarus and FudModule?,True,CVE-2024-21338
+38,multi_hop,Which technique ID is used in the Lazarus CVE-2024-21338 incident?,True,T1068
+39,multi_hop,Which publisher supports ChromeLoader’s use of PowerShell?,True,Malwarebytes Labs
+40,multi_hop,Which technique IDs are used by incident msti-appinstaller-observed-2023-11?,True,"T1218, T1566"
+41,multi_hop,Which mitigation is applied to the ms-appinstaller observed incident?,True,Disable ms-appinstaller protocol handler
+42,multi_hop,Which technique IDs are mitigated by Do not expose management interfaces mitigation?,True,"T1190, T1090"
+43,multi_hop,How many threat actors are attributed to incident msti-appinstaller-observed-2023-11?,True,4
+44,multi_hop,How many distinct tools are used by Storm-1674?,True,2
+45,multi_hop,How many malware samples are included in Operation Earth Kitsune campaign?,True,3
+46,unanswerable,What CVSS score is assigned to CVE-2024-21338?,False,
+47,unanswerable,Which country is targeted by Volt Typhoon in this dataset?,False,
+48,unanswerable,What patch release date is stored for CVE-2024-23222?,False,
+49,unanswerable,Which file hash identifies any Earth Kitsune malware sample?,False,
+50,unanswerable,What ransom amount is demanded by H0lyGh0st ransomware?,False,
