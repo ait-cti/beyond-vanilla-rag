@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor country is listed for APT35?,True,Iran
+2,simple,What motivation is recorded for APT35?,True,espionage
+3,simple,What is the incident type for clop-goanywhere-2023?,True,ransomware
+4,simple,What is the occurred_on date value for the GoAnywhere incident Date node?,True,2023-01-18
+5,simple,What is the published_date for CVE-2023-0669?,True,2023-01-01
+6,simple,What malware family is assigned to JinxLoader?,True,Loader
+7,simple,What malware family is assigned to Formbook?,True,Infostealer
+8,simple,What malware family is assigned to XLoader?,True,Infostealer
+9,simple,What malware family is assigned to Remcos RAT?,True,RAT
+10,simple,What malware family is assigned to SystemBC?,True,Proxy
+11,simple,What version is mentioned in Meduza Stealer’s summary?,True,2.2
+12,simple,What technique tactic is stored for technique_id T1566?,True,Initial Access
+13,simple,What technique tactic is stored for technique_id T1204?,True,Execution
+14,simple,What sector is set on the victim Hitachi Energy?,True,Energy
+15,simple,What sector is set on the victim Saks Fifth Avenue?,True,Retail
+16,single_hop,What date is stored on APT35’s has_alias relationship to Charming Kitten?,True,2014-01-01
+17,single_hop,What date is stored on APT35’s has_alias relationship to Phosphorus?,True,2014-01-01
+18,single_hop,What confidence is recorded on inc_2019 attributed_to APT35?,True,stated
+19,single_hop,What confidence is recorded on inc_2020 attributed_to APT35?,True,stated
+20,single_hop,What confidence is recorded on inc_2021 attributed_to APT35?,True,stated
+21,single_hop,What confidence is recorded on inc_2022 attributed_to APT35?,True,stated
+22,single_hop,Which sector does incident text:apt35:2019-academia-targeting target?,True,Education
+23,single_hop,Which sector does incident text:apt35:2020-medical-research-targeting target?,True,Healthcare
+24,single_hop,Which region does incident text:apt35:2019-academia-targeting occurred_in?,True,Middle East
+25,single_hop,Which country is Academic institutions (U.S.) located in?,True,United States
+26,single_hop,Which country is Academic institutions (France) located in?,True,France
+27,single_hop,Which country is Medical research organizations (Israel) located in?,True,Israel
+28,single_hop,Which CVE does tool GoAnywhere MFT exploit?,True,CVE-2023-0669
+29,single_hop,Which technique does clop-goanywhere-2023 record in used_technique?,True,T1190
+30,single_hop,What phase is stored on inc_jinxloader_adnoc_phishing used_technique to T1204?,True,Execution
+31,multi_hop,Which countries contain victims targeted by incident text:apt35:2020-medical-research-targeting?,True,"Israel, United States"
+32,multi_hop,Which countries contain victims targeted by incident text:apt35:2019-academia-targeting?,True,"United States, France"
+33,multi_hop,How many distinct victims are targeted by clop-goanywhere-2023?,True,8
+34,multi_hop,How many distinct threat actors is inc:hikvision:cve-2021-36260:collaboration-russian-forums attributed_to?,True,3
+35,multi_hop,List the sponsors of threat actors attributed_to text:1-inc-1.,True,"China, Russia"
+36,multi_hop,Which technique_id is shared by inc_2021 and clop-goanywhere-2023?,True,T1190
+37,multi_hop,How many incidents attributed_to APT35 have type intrusion?,True,4
+38,multi_hop,What is the earliest incident date among incidents attributed_to APT35?,True,2019-01-01
+39,multi_hop,What is the latest incident date among incidents attributed_to APT35?,True,2022-01-01
+40,multi_hop,How many techniques are used by incident inc_jinxloader_adnoc_phishing?,True,2
+41,multi_hop,How many malwares are involved in incident inc_jinxloader_adnoc_phishing?,True,3
+42,multi_hop,Which malware families appear in incident inc_jinxloader_adnoc_phishing?,True,"Loader, Infostealer"
+43,multi_hop,How many distinct malware does TA544 use?,True,3
+44,multi_hop,Which malware families are used by TA544?,True,"Loader, RAT, Proxy"
+45,multi_hop,How many incidents involved in CVE-2021-36260 also used technique T1190?,True,2
+46,unanswerable,What CVSS score property is stored for CVE-2021-36260?,False,
+47,unanswerable,Which specific Microsoft Exchange CVE identifiers make up ProxyShell in this graph?,False,
+48,unanswerable,What attachment password value was used for the ADNOC phishing RAR files?,False,
+49,unanswerable,Which encryption algorithm did Clop ransomware use in the GoAnywhere incident?,False,
+50,unanswerable,What industry sectors are assigned to Crown Resorts and Rubrik victims?,False,

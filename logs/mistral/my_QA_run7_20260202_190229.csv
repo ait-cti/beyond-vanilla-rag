@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What family is assigned to Magniber malware?,True,Ransomware
+2,simple,What is the published date for CVE-2022-44698?,True,2022-12-01
+3,simple,What tactic is recorded for technique T1566?,True,Initial Access
+4,simple,What is the incident type for inc-clop-servu-2021-11?,True,ransomware
+5,simple,What value is stored in incident inc-clop-servu-2021-11 exfiltration?,True,true
+6,simple,What sponsor is set for Flax Typhoon?,True,China
+7,simple,What motivation is set for Flax Typhoon?,True,espionage
+8,simple,What technique ID corresponds to Network Sniffing?,True,T1040
+9,simple,What is the incident date for inc-zuorat-soho-routers-2020-04?,True,2020-04-01
+10,simple,What is the summary publisher for source NVD-CVE-2023-6345?,True,NIST
+11,simple,What sector is set for the victim Maritime services giant (Singapore HQ)?,True,Transportation
+12,simple,What is the NIST score mentioned in CVE-2021-36260 summary?,True,9.8/10
+13,simple,What family is recorded for malware Rhysida?,True,ransomware
+14,simple,What ransomware note filename is stated in Rhysida malware summary?,True,CriticalBreachDetected.pdf
+15,simple,What is the published date for CVE-2022-22047?,True,2022-01-01
+16,single_hop,Which country is Organizations in South Korea located in?,True,South Korea
+17,single_hop,Which tool did incident magniber-2017-targeted-south-korea-via-magnitude-ek involve?,True,Magnitude Exploit Kit
+18,single_hop,Which CVE was exploited in incident magniber-2022-10-phishing-js-cve-2022-44698?,True,CVE-2022-44698
+19,single_hop,Which technique was used by incident vultur-sms-callback-and-modified-mcafee-delivery?,True,Phishing
+20,single_hop,Which C2 service is abused by Vultur?,True,FCM
+21,single_hop,Which malware does ToddyCat use dated 2020-12-01?,True,"Samurai, Ninja"
+22,single_hop,Which victim is targeted by incident inc-clop-servu-2021-11?,True,Maritime services giant (Singapore HQ)
+23,single_hop,Which country did incident inc-clop-servu-2021-11 occur in?,True,Singapore
+24,single_hop,Which CVE does SolarWinds Serv-U exploit?,True,CVE-2021-35211
+25,single_hop,Which sector is targeted by incident inc:hikvision:cve-2021-36260:collaboration-darkweb?,True,Technology
+26,single_hop,Which CVE is mitigated by Patch Management?,True,CVE-2022-22047
+27,single_hop,Which technique is used by incident inc-zuorat-soho-routers-2020-04 for packet capture?,True,Network Sniffing
+28,single_hop,Which source supports CVE-2023-6345 with a public exploit quote?,True,GOOGLE-ADV-CVE-2023-6345
+29,single_hop,Which malware is involved in incident inc-ransomexx-2022-03-scottish-mental-health-charity?,True,RansomExx
+30,single_hop,Which country is Prospect Medical Holdings located in?,True,United States
+31,multi_hop,How many distinct tools does Rhysida threat actor use?,True,3
+32,multi_hop,List tools involved in rhysida_prospect_medical_holdings_2023-05 incident.,True,"Cobalt Strike, PsExec, PowerShell"
+33,multi_hop,How many techniques are used in inc-clop-servu-2021-11 incident?,True,3
+34,multi_hop,Which tactics are covered by techniques used in inc-clop-servu-2021-11?,True,"Initial Access, Impact, Exfiltration"
+35,multi_hop,Which CVE is exploited via a tool used by Clop actor?,True,CVE-2021-35211
+36,multi_hop,How many victims are targeted by Flax Typhoon activity incident?,True,4
+37,multi_hop,Which sectors do Flax Typhoon targeted victims belong to?,True,"Government, Education, Manufacturing, Technology"
+38,multi_hop,How many distinct techniques are used in flax-typhoon-activity-2021?,True,7
+39,multi_hop,How many tools are both used by and involved in flax-typhoon-activity-2021?,True,5
+40,multi_hop,Which malware used by ToddyCat also attacked the campaign’s targeted victim?,True,"Samurai, Ninja"
+41,multi_hop,How many malware are included in ToddyCat Exchange Server Campaign?,True,2
+42,multi_hop,What is the earliest incident date involving Magniber malware?,True,2017-01-01
+43,multi_hop,How many CVEs are exploited by Magniber across incidents and malware links?,True,2
+44,multi_hop,Which victims are connected to Magniber via attacked relationship?,True,Organizations in South Korea
+45,multi_hop,How many incidents are attributed_to a threat actor with confidence reported?,True,2
+46,unanswerable,What CVSS score is stored as a numeric property for CVE-2021-35211?,False,
+47,unanswerable,What phone number was used in the Vultur SMS callback lure?,False,
+48,unanswerable,Which specific SOHO router brands were targeted in the ZuoRAT incident?,False,
+49,unanswerable,What is the URL for the Google advisory source on CVE-2023-6345?,False,
+50,unanswerable,Which malware file hash is associated with the Magniber JavaScript payload?,False,

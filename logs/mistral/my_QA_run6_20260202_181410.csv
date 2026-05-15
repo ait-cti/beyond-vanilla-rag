@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the publisher of source proofpoint-follina-state-sponsored-phishing?,True,Proofpoint
+2,simple,What is the motivation type linked to the Clop operation node?,True,financial
+3,simple,What date value is stored for the BlackCat activity date node?,True,2021-11-01
+4,simple,What is the incident type for incident-cve-2023-22527-exploitation-attempts?,True,intrusion
+5,simple,What is the technique tactic for T1566?,True,Initial Access
+6,simple,What sector is assigned to victim Magento ecommerce websites?,True,Retail
+7,simple,What is the CVSS stated in the CVE-2024-20720 summary?,True,9.1
+8,simple,What is the published_date for CVE-2024-23222?,True,2024-01-01
+9,simple,What is the family field for malware BlackCat?,True,Ransomware
+10,simple,What is the tactic for technique T1082?,True,Discovery
+11,simple,What is the framework value for mitigation Clear GPU local memory?,True,General
+12,simple,What sponsor value is set for threat actor Clop?,True,cyber-crime
+13,simple,What is the exfiltration flag on incident clop-goanywhere-2023?,True,true
+14,simple,What is the technique name for T1498?,True,Network Denial of Service
+15,simple,What published_date is stored for CVE-2024-20720?,True,2024-02-01
+16,single_hop,Which motivation type is ta_StateSponsoredUnknown motivated by?,True,espionage
+17,single_hop,Which technique is used by incident INC-CVE-2024-23222 for Initial Access?,True,T1189
+18,single_hop,Which CVE is exploited in incident sansec-cve-2024-20720-magento-backdoor?,True,CVE-2024-20720
+19,single_hop,Which victims are targeted by campaign Follina phishing recruitment pitch campaigns (Proofpoint)?,True,"U.S. government workers, E.U. government workers"
+20,single_hop,Which tool is involved in incident clop-goanywhere-2023?,True,GoAnywhere MFT
+21,single_hop,Which technique is mitigated by Clear GPU local memory?,True,T1040
+22,single_hop,Which malware is used by threat actor Earth Berberoka?,True,"PlugX, Gh0st RAT, PuppetLoader"
+23,single_hop,Which capability is leveraged by technique T1040?,True,AI/GenAI
+24,single_hop,Which CVE is exploited in incident incident-cve-2023-22527-exploitation-attempts?,True,CVE-2023-22527
+25,single_hop,Which threat actor is the incident proofpoint-follina-cve-2022-30190-state-sponsored-phishing attributed to?,True,Unidentified state-sponsored hackers (Proofpoint)
+26,single_hop,Which sector is targeted by incident proofpoint-follina-cve-2022-30190-state-sponsored-phishing?,True,Government
+27,single_hop,Which malware is involved in incident blackcat-mid-nov-2021-observed?,True,BlackCat
+28,single_hop,Which threat actor is incident clop-accellion-fta-2021 attributed to?,True,Clop
+29,single_hop,Which malware does threat actor Clop use for file encryption?,True,Ransom.Clop
+30,single_hop,Which date node is linked by occurred_on from campaign BlackCat/ALPHV ransomware activity?,True,2021-11-01
+31,multi_hop,How many victims are targeted by the Follina phishing recruitment pitch campaign?,True,2
+32,multi_hop,Which victims are attacked by the actor attributed to the Proofpoint Follina incident?,True,"U.S. government workers, E.U. government workers"
+33,multi_hop,Which technique IDs are used by incident incident-cve-2023-22527-exploitation-attempts?,True,"T1190, T1082"
+34,multi_hop,How many techniques are used in incident sansec-cve-2024-20720-magento-backdoor?,True,3
+35,multi_hop,Which technique tactics appear in the Sansec Magento backdoor incident?,True,"Initial Access, Execution, Persistence"
+36,multi_hop,How many malware families are involved in the Sansec Magento backdoor incident?,True,2
+37,multi_hop,Which CVE is exploited by the malware used by Unknown threat actors (Sansec report)?,True,CVE-2024-20720
+38,multi_hop,How many distinct CVEs are linked to incidents attributed to Clop?,True,1
+39,multi_hop,Which technique ID is used as Initial Access in Clop’s GoAnywhere incident?,True,T1190
+40,multi_hop,How many threat-actor aliases does Clop have in the graph?,True,3
+41,multi_hop,How many threat-actor aliases does BlackCat have with date 2021-11-01?,True,3
+42,multi_hop,Which tool is used by malware involved in the blackcat-mid-nov-2021-observed incident?,True,Rust
+43,multi_hop,Which CVE has mitigation Patch Magento/Adobe Commerce applied to it?,True,CVE-2024-20720
+44,multi_hop,"Between CVE-2024-23222 and CVE-2024-20720, which has the later published_date?",True,CVE-2024-20720
+45,multi_hop,How many incidents are explicitly typed as intrusion across all statements?,True,5
+46,unanswerable,What is the CVSS score of CVE-2022-30190 in this graph?,False,
+47,unanswerable,Which specific Accellion FTA CVE IDs were exploited in the 2021 Clop incident?,False,
+48,unanswerable,What operating system versions are affected by CVE-2024-23222?,False,
+49,unanswerable,What ransom amount was demanded in the BlackCat mid-November 2021 incident?,False,
+50,unanswerable,Which country hosts the infrastructure used in the Proofpoint Follina campaign?,False,

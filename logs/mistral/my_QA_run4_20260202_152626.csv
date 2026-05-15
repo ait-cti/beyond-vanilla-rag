@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for FROZENBARENTS?,True,Russian Armed Forces GRU Unit 74455
+2,simple,What confidence is set on inc-blackcat-2021-11-first-observed attribution?,True,medium
+3,simple,What malware family is assigned to BlackCat malware?,True,ransomware
+4,simple,What technique tactic is recorded for T1498?,True,Impact
+5,simple,What incident type is cert-ua-uac-0050-remcos-2023-02?,True,phishing
+6,simple,What published date is stored for CVE-2022-2856?,True,2022-01-01
+7,simple,What publisher is stored for source google-chrome-advisory-cve-2022-2856?,True,Google
+8,simple,What sponsor is stored for APT41?,True,China
+9,simple,What sponsor is stored for Unknown Russian threat actor groups?,True,Russia
+10,simple,What date is recorded for incident frozenbarents-exim-compromised-hosts-2019-08?,True,2019-08-01
+11,simple,What is the sector property of victim Defense organizations?,True,Government
+12,simple,What is the sector property of victim Humanitarian organizations?,True,Other
+13,simple,What country name is stored for iso2 US?,True,United States
+14,simple,What incident type is inc-hikvision-cve-2021-36260-unpatched-2021?,True,intrusion
+15,simple,What technique tactic is stored for T1059?,True,Execution
+16,single_hop,Which malware does UAC-0050 use?,True,Remcos RAT
+17,single_hop,Which malware does BlackCat threat actor use?,True,BlackCat
+18,single_hop,Which capability is leveraged by BlackCat malware?,True,Rust
+19,single_hop,Which technique was used in incident inc-blackcat-2021-11-first-observed?,True,T1498
+20,single_hop,Which motivation is linked to FROZENBARENTS via motivated_by?,True,espionage
+21,single_hop,Which C2 service does FROZENBARENTS abuse?,True,Telegram
+22,single_hop,Which two victims does Operation Earth Kitsune target?,True,"Korean American National Coordinating Council (KANCC), Hanseattle"
+23,single_hop,Which CVE does Operation Earth Kitsune exploit?,True,CVE-2019-5782
+24,single_hop,How many malware samples are included in Operation Earth Kitsune?,True,3
+25,single_hop,Which incident is attributed to UAC-0050?,True,cert-ua-uac-0050-remcos-2023-02
+26,single_hop,Which technique is used by cert-ua-uac-0050-remcos-2023-02?,True,T1566
+27,single_hop,Which victim is targeted by inc-hikvision-cve-2021-36260-unpatched-2021?,True,Hangzhou Hikvision Digital Technology (Hikvision)
+28,single_hop,Which CVE is exploited_in by inc-hikvision-cve-2021-36260-unpatched-2021?,True,CVE-2021-36260
+29,single_hop,Which source supports inc-hikvision-cve-2021-36260-unpatched-2021?,True,text-1
+30,single_hop,Which incident is supported_by source text-1?,True,inc-hikvision-cve-2021-36260-unpatched-2021
+31,multi_hop,How many techniques are linked to incident star-blizzard-credential-theft-since-2017?,True,3
+32,multi_hop,List technique IDs used in star-blizzard-credential-theft-since-2017.,True,"T1566, T1566.001, T1566.002"
+33,multi_hop,How many motivations are linked to Star Blizzard?,True,2
+34,multi_hop,How many aliases does Star Blizzard have?,True,4
+35,multi_hop,How many victims are targeted by star-blizzard-credential-theft-since-2017?,True,2
+36,multi_hop,How many sectors are targeted by star-blizzard-credential-theft-since-2017?,True,4
+37,multi_hop,How many sectors are targeted by frozenbarents-exim-compromised-hosts-2019-08?,True,5
+38,multi_hop,Which Initial Access techniques were used in frozenbarents-exim-compromised-hosts-2019-08?,True,"T1566, T1133"
+39,multi_hop,What is the date on FROZENBARENTS has_alias Sandworm?,True,2019-08-01
+40,multi_hop,Which threat actor is linked to incident frozenbarents-exim-compromised-hosts-2019-08?,True,FROZENBARENTS
+41,multi_hop,What confidence is used for frozenbarents-exim-compromised-hosts-2019-08 attribution?,True,high
+42,multi_hop,How many incidents in the dataset are dated 2021-01-01?,True,1
+43,multi_hop,Which threat actors are speculatively attributed in the Hikvision 2021 incident?,True,"APT41, APT10, Unknown Russian threat actor groups"
+44,multi_hop,How many threat actors are speculatively attributed in the Hikvision 2021 incident?,True,3
+45,multi_hop,Which threat actor is the alias target of MISSION2025?,True,APT41
+46,unanswerable,What CVSS score is stored for CVE-2022-2856?,False,
+47,unanswerable,Which operating systems are explicitly listed as targets of Remcos RAT?,False,
+48,unanswerable,What URL is stored for source google-chrome-advisory-cve-2022-2856?,False,
+49,unanswerable,What publication date is stored for CVE-2019-5782?,False,
+50,unanswerable,Which threat actor is attributed to Operation Earth Kitsune?,False,

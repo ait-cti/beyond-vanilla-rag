@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for COLDRIVER?,True,Russian government
+2,simple,What motivation is recorded for COLDRIVER?,True,espionage
+3,simple,What type is assigned to incident TAG-COLDRIVER-credential-phishing-activity?,True,intrusion
+4,simple,What tactic is set for technique T1566?,True,Initial Access
+5,simple,What tactic is set for technique T1585?,True,Resource Development
+6,simple,What sector is assigned to victim Academic institutions?,True,Education
+7,simple,What summary type is described for CVE-2023-6549?,True,denial-of-service
+8,simple,What framework is recorded for mitigation Patch Management?,True,General
+9,simple,What date is stored on incident citrix-netscaler-zero-days-cve-2023-6548-6549?,True,2023-01-01
+10,simple,What sponsor is listed for Sea Turtle?,True,state-sponsored
+11,simple,What service is defined for C2 infrastructure used by SnappyTCP?,True,Reverse TCP shell
+12,simple,What family is recorded for malware FudModule?,True,rootkit
+13,simple,What boolean value is incident blackcat_first_observed_2021_11 exfiltration set to?,True,true
+14,simple,What technique ID corresponds to Password Spraying in the graph?,True,T1110.003
+15,simple,What ISO2 code is stored for country Ukraine?,True,UA
+16,single_hop,What quote supports COLDRIVER via supported_by relationship?,True,COLDRIVER ... a Russian threat group focused on credential phishing ...
+17,single_hop,What confidence is set on attribution from TAG-COLDRIVER incident to COLDRIVER?,True,medium
+18,single_hop,What phase is recorded for TAG-COLDRIVER incident using technique T1589?,True,Reconnaissance
+19,single_hop,Which sectors does TAG-COLDRIVER incident target via targets_sector?,True,"Government, Education, Other"
+20,single_hop,What date does inc_cve_2024_0519_exploited_in_wild_2024 occur on?,True,2024-01-01
+21,single_hop,Which tools are linked as involved_tool in the CVE-2024-0519 incident?,True,"Google Chrome, Chrome V8 JavaScript engine"
+22,single_hop,Which CVEs are exploited_in by the Citrix NetScaler zero-days incident?,True,"CVE-2023-6548, CVE-2023-6549"
+23,single_hop,Which incident is mitigated by Patch Management?,True,citrix-netscaler-zero-days-cve-2023-6548-6549
+24,single_hop,What region is Sea Turtle linked to via attacked relationship?,True,Middle East and North Africa
+25,single_hop,Which tool does Sea Turtle use dated 2021-01-01?,True,SnappyTCP
+26,single_hop,Which C2 service does SnappyTCP abuse?,True,Reverse TCP shell
+27,single_hop,Which country does incident uac-0099-ukraine-lonepage-2023 occur in?,True,Ukraine
+28,single_hop,Which CVE is exploited by malware LONEPAGE?,True,CVE-2023-38831
+29,single_hop,Which CVE is exploited_in by incident zimbra-cve-2023-37580-zero-day-exploitation-2023-06?,True,CVE-2023-37580
+30,single_hop,What observed_effectiveness is recorded for Zimbra hotfix mitigation?,True,Zimbra patched 2023-07-25; hotfix 2023-07-05
+31,multi_hop,How many aliases does COLDRIVER have via has_alias?,True,3
+32,multi_hop,How many techniques are used by TAG-COLDRIVER incident?,True,3
+33,multi_hop,What tactics correspond to techniques used in TAG-COLDRIVER incident?,True,"Initial Access, Resource Development, Reconnaissance"
+34,multi_hop,How many victims are targeted by TAG-COLDRIVER incident?,True,7
+35,multi_hop,Which victim sectors appear among TAG-COLDRIVER targeted victims?,True,"Other, Government, Education"
+36,multi_hop,Which CVEs are linked to incidents dated 2023-01-01?,True,"CVE-2023-6548, CVE-2023-6549, CVE-2024-21338"
+37,multi_hop,Which technique does Patch Management mitigate that was used in the Citrix incident?,True,T1190
+38,multi_hop,How many distinct CVEs are exploited_in by any incident in the dataset?,True,5
+39,multi_hop,List CVEs exploited_in by incidents that also have involved_tool relationships.,True,"CVE-2024-0519, CVE-2023-6548, CVE-2023-6549"
+40,multi_hop,Which tools are linked to CVE-2024-0519 both as involved_tool and exploits?,True,"Google Chrome, Chrome V8 JavaScript engine"
+41,multi_hop,How many threat actors are attributed_to the Zimbra zero-day incident?,True,4
+42,multi_hop,What confidence value is used for all attributions in the Zimbra incident?,True,low
+43,multi_hop,How many techniques are used by Peach Sandstorm password spray incident?,True,4
+44,multi_hop,Which tactics are covered by techniques used in Peach Sandstorm incident?,True,"Credential Access, Discovery, Persistence, Lateral Movement"
+45,multi_hop,Count sectors targeted by Peach Sandstorm campaign and also by its incidents.,True,3
+46,unanswerable,What CVSS score is recorded for CVE-2024-21338?,False,
+47,unanswerable,Which specific publicly available tool names were used by Peach Sandstorm?,False,
+48,unanswerable,What operating system versions were impacted by CVE-2024-0519?,False,
+49,unanswerable,How many organizations were actually compromised in Peach Sandstorm campaign?,False,
+50,unanswerable,What encryption algorithm is used by BlackCat ransomware in this dataset?,False,

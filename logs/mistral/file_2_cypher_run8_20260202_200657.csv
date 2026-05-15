@@ -1,0 +1,399 @@
+filename,cypher
+threat-brief-cve-2023-4966-netscaler-citrix-bleed.json,"MERGE (cve_2023_4966:CVE {id:'CVE-2023-4966'})
+ON CREATE SET
+  cve_2023_4966.published_date = date('2023-10-10'),
+  cve_2023_4966.summary = 'Citrix Bleed vulnerability in NetScaler ADC/Gateway that can leak sensitive memory (including session tokens), enabling session hijacking and foothold; observed exploited by threat actors including ransomware groups.'
+ON MATCH SET
+  cve_2023_4966.published_date = CASE WHEN cve_2023_4966.published_date IS NULL THEN date('2023-10-10') ELSE cve_2023_4966.published_date END,
+  cve_2023_4966.summary = CASE WHEN (cve_2023_4966.summary IS NULL OR trim(cve_2023_4966.summary) = '') THEN 'Citrix Bleed vulnerability in NetScaler ADC/Gateway that can leak sensitive memory (including session tokens), enabling session hijacking and foothold; observed exploited by threat actors including ransomware groups.' ELSE cve_2023_4966.summary END
+MERGE (tech_session_hijacking:Technique {technique_id:'T1185'})
+ON CREATE SET
+  tech_session_hijacking.name = 'Man-in-the-Middle',
+  tech_session_hijacking.tactic = 'Credential Access',
+  tech_session_hijacking.summary = 'Attackers use intercepted or stolen session tokens/credentials to hijack sessions and gain access.'
+ON MATCH SET
+  tech_session_hijacking.name = CASE WHEN (tech_session_hijacking.name IS NULL OR trim(tech_session_hijacking.name) = '') THEN 'Man-in-the-Middle' ELSE tech_session_hijacking.name END,
+  tech_session_hijacking.tactic = CASE WHEN (tech_session_hijacking.tactic IS NULL OR trim(tech_session_hijacking.tactic) = '') THEN 'Credential Access' ELSE tech_session_hijacking.tactic END,
+  tech_session_hijacking.summary = CASE WHEN (tech_session_hijacking.summary IS NULL OR trim(tech_session_hijacking.summary) = '') THEN 'Attackers use intercepted or stolen session tokens/credentials to hijack sessions and gain access.' ELSE tech_session_hijacking.summary END
+MERGE (tech_rce:Technique {technique_id:'T1203'})
+ON CREATE SET
+  tech_rce.name = 'Exploitation for Client Execution',
+  tech_rce.tactic = 'Execution',
+  tech_rce.summary = 'Remote code execution resulting from exploitation of a vulnerability.'
+ON MATCH SET
+  tech_rce.name = CASE WHEN (tech_rce.name IS NULL OR trim(tech_rce.name) = '') THEN 'Exploitation for Client Execution' ELSE tech_rce.name END,
+  tech_rce.tactic = CASE WHEN (tech_rce.tactic IS NULL OR trim(tech_rce.tactic) = '') THEN 'Execution' ELSE tech_rce.tactic END,
+  tech_rce.summary = CASE WHEN (tech_rce.summary IS NULL OR trim(tech_rce.summary) = '') THEN 'Remote code execution resulting from exploitation of a vulnerability.' ELSE tech_rce.summary END
+MERGE (mit_patch:Mitigation {name:'Patch Management'})
+ON CREATE SET
+  mit_patch.framework = 'General',
+  mit_patch.control_id = 'PATCH',
+  mit_patch.summary = 'Apply vendor patches to remediate known vulnerabilities.'
+ON MATCH SET
+  mit_patch.framework = CASE WHEN (mit_patch.framework IS NULL OR trim(mit_patch.framework) = '') THEN 'General' ELSE mit_patch.framework END,
+  mit_patch.control_id = CASE WHEN (mit_patch.control_id IS NULL OR trim(mit_patch.control_id) = '') THEN 'PATCH' ELSE mit_patch.control_id END,
+  mit_patch.summary = CASE WHEN (mit_patch.summary IS NULL OR trim(mit_patch.summary) = '') THEN 'Apply vendor patches to remediate known vulnerabilities.' ELSE mit_patch.summary END
+MERGE (incident_citrixbleed_2023_10_10:Incident {id:'citrixbleed-observed-exploitation-2023-10-10'})
+ON CREATE SET
+  incident_citrixbleed_2023_10_10.date = date('2023-10-10'),
+  incident_citrixbleed_2023_10_10.type = 'intrusion',
+  incident_citrixbleed_2023_10_10.summary = 'Post-patch observations indicated threat actors (including ransomware groups) exploiting Citrix Bleed (CVE-2023-4966) affecting NetScaler ADC/Gateway; session token leakage enabling session hijacking, and apparent remote executions from NetScaler gateways associated with exploitation.'
+ON MATCH SET
+  incident_citrixbleed_2023_10_10.date = CASE WHEN incident_citrixbleed_2023_10_10.date IS NULL THEN date('2023-10-10') ELSE incident_citrixbleed_2023_10_10.date END,
+  incident_citrixbleed_2023_10_10.type = CASE WHEN (incident_citrixbleed_2023_10_10.type IS NULL OR trim(incident_citrixbleed_2023_10_10.type) = '') THEN 'intrusion' ELSE incident_citrixbleed_2023_10_10.type END,
+  incident_citrixbleed_2023_10_10.summary = CASE WHEN (incident_citrixbleed_2023_10_10.summary IS NULL OR trim(incident_citrixbleed_2023_10_10.summary) = '') THEN 'Post-patch observations indicated threat actors (including ransomware groups) exploiting Citrix Bleed (CVE-2023-4966) affecting NetScaler ADC/Gateway; session token leakage enabling session hijacking, and apparent remote executions from NetScaler gateways associated with exploitation.' ELSE incident_citrixbleed_2023_10_10.summary END
+MERGE (date_2023_10_10:Date {value:date('2023-10-10')})
+MERGE (incident_citrixbleed_2023_10_10)-[r_occurred_on_2023_10_10:occurred_on]->(date_2023_10_10)
+ON CREATE SET r_occurred_on_2023_10_10.date = date('2023-10-10')
+ON MATCH SET r_occurred_on_2023_10_10.date = CASE WHEN r_occurred_on_2023_10_10.date IS NULL THEN date('2023-10-10') ELSE r_occurred_on_2023_10_10.date END
+MERGE (incident_citrixbleed_2023_10_10)-[r_exploited_in_cve_2023_4966:exploited_in]->(cve_2023_4966)
+ON CREATE SET
+  r_exploited_in_cve_2023_4966.first_seen = date('2023-10-10'),
+  r_exploited_in_cve_2023_4966.evidence = 'Citrix patched NetScaler ADC/Gateway on Oct. 10, 2023 for CVE-2023-4966; Citrix later stated they observed threat actors using it; Unit 42 teams observed ransomware groups exploiting it and apparent remote executions from NetScaler gateways associated with exploitation.'
+ON MATCH SET
+  r_exploited_in_cve_2023_4966.first_seen = CASE WHEN r_exploited_in_cve_2023_4966.first_seen IS NULL THEN date('2023-10-10') ELSE r_exploited_in_cve_2023_4966.first_seen END,
+  r_exploited_in_cve_2023_4966.evidence = CASE WHEN (r_exploited_in_cve_2023_4966.evidence IS NULL OR trim(r_exploited_in_cve_2023_4966.evidence) = '') THEN 'Citrix patched NetScaler ADC/Gateway on Oct. 10, 2023 for CVE-2023-4966; Citrix later stated they observed threat actors using it; Unit 42 teams observed ransomware groups exploiting it and apparent remote executions from NetScaler gateways associated with exploitation.' ELSE r_exploited_in_cve_2023_4966.evidence END
+MERGE (incident_citrixbleed_2023_10_10)-[r_used_session_hijacking:used_technique]->(tech_session_hijacking)
+ON CREATE SET
+  r_used_session_hijacking.phase = 'Initial Access',
+  r_used_session_hijacking.details = 'Session tokens leaked from device memory used for session hijacking to gain a foothold.',
+  r_used_session_hijacking.evidence = 'Vulnerability can leak session tokens from memory; attackers can use these credentials via session hijacking to gain a foothold.'
+ON MATCH SET
+  r_used_session_hijacking.phase = CASE WHEN (r_used_session_hijacking.phase IS NULL OR trim(r_used_session_hijacking.phase) = '') THEN 'Initial Access' ELSE r_used_session_hijacking.phase END,
+  r_used_session_hijacking.details = CASE WHEN (r_used_session_hijacking.details IS NULL OR trim(r_used_session_hijacking.details) = '') THEN 'Session tokens leaked from device memory used for session hijacking to gain a foothold.' ELSE r_used_session_hijacking.details END,
+  r_used_session_hijacking.evidence = CASE WHEN (r_used_session_hijacking.evidence IS NULL OR trim(r_used_session_hijacking.evidence) = '') THEN 'Vulnerability can leak session tokens from memory; attackers can use these credentials via session hijacking to gain a foothold.' ELSE r_used_session_hijacking.evidence END
+MERGE (incident_citrixbleed_2023_10_10)-[r_used_rce:used_technique]->(tech_rce)
+ON CREATE SET
+  r_used_rce.phase = 'Execution',
+  r_used_rce.details = 'Apparent remote executions from NetScaler gateways observed in association with exploitation.',
+  r_used_rce.evidence = 'Managed Threat Hunting observed what appeared to be remote executions from NetScaler gateways associated with exploitation.'
+ON MATCH SET
+  r_used_rce.phase = CASE WHEN (r_used_rce.phase IS NULL OR trim(r_used_rce.phase) = '') THEN 'Execution' ELSE r_used_rce.phase END,
+  r_used_rce.details = CASE WHEN (r_used_rce.details IS NULL OR trim(r_used_rce.details) = '') THEN 'Apparent remote executions from NetScaler gateways observed in association with exploitation.' ELSE r_used_rce.details END,
+  r_used_rce.evidence = CASE WHEN (r_used_rce.evidence IS NULL OR trim(r_used_rce.evidence) = '') THEN 'Managed Threat Hunting observed what appeared to be remote executions from NetScaler gateways associated with exploitation.' ELSE r_used_rce.evidence END
+MERGE (mit_patch)-[r_mitigates_cvebleed:mitigates]->(incident_citrixbleed_2023_10_10)
+ON CREATE SET
+  r_mitigates_cvebleed.status = 'recommended',
+  r_mitigates_cvebleed.observed_effectiveness = 'Vendor patch intended to mitigate CVE-2023-4966 (Citrix Bleed).',
+  r_mitigates_cvebleed.evidence = 'On Oct. 10, 2023, Citrix published a patch for NetScaler ADC/Gateway intended to mitigate CVE-2023-4966.'
+ON MATCH SET
+  r_mitigates_cvebleed.status = CASE WHEN (r_mitigates_cvebleed.status IS NULL OR trim(r_mitigates_cvebleed.status) = '') THEN 'recommended' ELSE r_mitigates_cvebleed.status END,
+  r_mitigates_cvebleed.observed_effectiveness = CASE WHEN (r_mitigates_cvebleed.observed_effectiveness IS NULL OR trim(r_mitigates_cvebleed.observed_effectiveness) = '') THEN 'Vendor patch intended to mitigate CVE-2023-4966 (Citrix Bleed).' ELSE r_mitigates_cvebleed.observed_effectiveness END,
+  r_mitigates_cvebleed.evidence = CASE WHEN (r_mitigates_cvebleed.evidence IS NULL OR trim(r_mitigates_cvebleed.evidence) = '') THEN 'On Oct. 10, 2023, Citrix published a patch for NetScaler ADC/Gateway intended to mitigate CVE-2023-4966.' ELSE r_mitigates_cvebleed.evidence END"
+spectralblur-new-macos-backdoor-threat.json,"MERGE (malware_spectralblur:Malware {name:'SpectralBlur'})
+ON CREATE SET malware_spectralblur.summary = 'Apple macOS backdoor; overlaps with a known malware family attributed to North Korean threat actors; can upload/download files, run a shell, update configuration, delete files, hibernate/sleep based on C2 commands.'
+ON MATCH SET malware_spectralblur.summary = CASE WHEN malware_spectralblur.summary IS NULL OR malware_spectralblur.summary = '' THEN 'Apple macOS backdoor; overlaps with a known malware family attributed to North Korean threat actors; can upload/download files, run a shell, update configuration, delete files, hibernate/sleep based on C2 commands.' ELSE malware_spectralblur.summary END
+WITH malware_spectralblur
+
+MERGE (malware_kandykorn:Malware {name:'KANDYKORN'})
+ON CREATE SET malware_kandykorn.summary = 'Advanced implant (aka SockRacket) functioning as a remote access trojan capable of taking control of a compromised host.'
+ON MATCH SET malware_kandykorn.summary = CASE WHEN malware_kandykorn.summary IS NULL OR malware_kandykorn.summary = '' THEN 'Advanced implant (aka SockRacket) functioning as a remote access trojan capable of taking control of a compromised host.' ELSE malware_kandykorn.summary END
+WITH malware_spectralblur, malware_kandykorn
+
+MERGE (malware_sockracket:Malware {name:'SockRacket'})
+ON CREATE SET malware_sockracket.summary = 'Alias for KANDYKORN.'
+ON MATCH SET malware_sockracket.summary = CASE WHEN malware_sockracket.summary IS NULL OR malware_sockracket.summary = '' THEN 'Alias for KANDYKORN.' ELSE malware_sockracket.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket
+
+MERGE (malware_rustbucket:Malware {name:'RustBucket'})
+ON CREATE SET malware_rustbucket.summary = 'Backdoor associated with BlueNoroff-related activity; also referenced as droppers used to deliver KANDYKORN.'
+ON MATCH SET malware_rustbucket.summary = CASE WHEN malware_rustbucket.summary IS NULL OR malware_rustbucket.summary = '' THEN 'Backdoor associated with BlueNoroff-related activity; also referenced as droppers used to deliver KANDYKORN.' ELSE malware_rustbucket.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket
+
+MERGE (malware_objcshellz:Malware {name:'ObjCShellz'})
+ON CREATE SET malware_objcshellz.summary = 'Late-stage payload mentioned in BlueNoroff-related infection chain.'
+ON MATCH SET malware_objcshellz.summary = CASE WHEN malware_objcshellz.summary IS NULL OR malware_objcshellz.summary = '' THEN 'Late-stage payload mentioned in BlueNoroff-related infection chain.' ELSE malware_objcshellz.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz
+
+MERGE (ta_lazarus:ThreatActor {name:'Lazarus'})
+ON CREATE SET ta_lazarus.sponsor = 'North Korea'
+ON MATCH SET ta_lazarus.sponsor = CASE WHEN ta_lazarus.sponsor IS NULL OR ta_lazarus.sponsor = '' THEN 'North Korea' ELSE ta_lazarus.sponsor END
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz, ta_lazarus
+
+MERGE (ta_bluenoroff:ThreatActor {name:'BlueNoroff'})
+ON CREATE SET ta_bluenoroff.sponsor = 'North Korea'
+ON MATCH SET ta_bluenoroff.sponsor = CASE WHEN ta_bluenoroff.sponsor IS NULL OR ta_bluenoroff.sponsor = '' THEN 'North Korea' ELSE ta_bluenoroff.sponsor END
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff
+
+MERGE (ta_ta444:ThreatActor {name:'TA444'})
+ON CREATE SET ta_ta444.summary = 'Alias for BlueNoroff.'
+ON MATCH SET ta_ta444.summary = CASE WHEN ta_ta444.summary IS NULL OR ta_ta444.summary = '' THEN 'Alias for BlueNoroff.' ELSE ta_ta444.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444
+
+MERGE (mot_espionage:Motivation {type:'espionage'})
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage
+
+MERGE (ta_lazarus)-[:has_alias]->(ta_bluenoroff)
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage
+
+MERGE (ta_bluenoroff)-[:has_alias]->(ta_ta444)
+WITH malware_spectralblur, malware_kandykorn, malware_sockracket, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage
+
+MERGE (malware_kandykorn)-[:uses {evidence:'KANDYKORN (aka SockRacket), an advanced implant that functions as a remote access trojan', source_id:'', page:''}]->(malware_sockracket)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage
+
+MERGE (ta_lazarus)-[:motivated_by]->(mot_espionage)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage
+
+MERGE (ta_bluenoroff)-[:motivated_by]->(mot_espionage)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage
+
+MERGE (c2_generic:C2_Infrastructure {service:'C2 Server'})
+ON CREATE SET c2_generic.summary = 'Generic command-and-control server referenced as issuing commands to the backdoor.'
+ON MATCH SET c2_generic.summary = CASE WHEN c2_generic.summary IS NULL OR c2_generic.summary = '' THEN 'Generic command-and-control server referenced as issuing commands to the backdoor.' ELSE c2_generic.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic
+
+MERGE (malware_spectralblur)-[:abuses {evidence:'Commands issued from the command-and-control server control SpectralBlur functionality', source_id:'', page:''}]->(c2_generic)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic
+
+MERGE (incident_sb:Incident {id:'spectralblur-macos-backdoor-discovery'})
+ON CREATE SET incident_sb.type = 'intrusion',
+              incident_sb.summary = 'Discovery of macOS backdoor SpectralBlur overlapping with malware family attributed to North Korean threat actors; activity intersects with BlueNoroff chain and use of RustBucket droppers to deliver KANDYKORN; targets high-value cryptocurrency and blockchain industries.'
+ON MATCH SET incident_sb.type = CASE WHEN incident_sb.type IS NULL OR incident_sb.type = '' THEN 'intrusion' ELSE incident_sb.type END,
+              incident_sb.summary = CASE WHEN incident_sb.summary IS NULL OR incident_sb.summary = '' THEN 'Discovery of macOS backdoor SpectralBlur overlapping with malware family attributed to North Korean threat actors; activity intersects with BlueNoroff chain and use of RustBucket droppers to deliver KANDYKORN; targets high-value cryptocurrency and blockchain industries.' ELSE incident_sb.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb
+
+MERGE (tech_ta0011:Technique {technique_id:'TA0011'})
+ON CREATE SET tech_ta0011.name = 'Command and Control',
+              tech_ta0011.tactic = 'Command and Control',
+              tech_ta0011.summary = 'C2 communications used to issue commands to malware/backdoors.'
+ON MATCH SET tech_ta0011.name = CASE WHEN tech_ta0011.name IS NULL OR tech_ta0011.name = '' THEN 'Command and Control' ELSE tech_ta0011.name END,
+              tech_ta0011.tactic = CASE WHEN tech_ta0011.tactic IS NULL OR tech_ta0011.tactic = '' THEN 'Command and Control' ELSE tech_ta0011.tactic END,
+              tech_ta0011.summary = CASE WHEN tech_ta0011.summary IS NULL OR tech_ta0011.summary = '' THEN 'C2 communications used to issue commands to malware/backdoors.' ELSE tech_ta0011.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:used_technique {phase:'Command and Control', details:'Backdoor receives commands from a command-and-control server to upload/download files, run shell, update config, delete files, hibernate/sleep', evidence:'SpectralBlur executes actions based on commands issued from the command-and-control server', source_id:'', page:''}]->(tech_ta0011)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:involved_malware {evidence:'New Apple macOS backdoor called SpectralBlur', source_id:'', page:''}]->(malware_spectralblur)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:involved_malware {evidence:'Shares similarities with KANDYKORN (aka SockRacket)', source_id:'', page:''}]->(malware_kandykorn)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:involved_malware {evidence:'BlueNoroff-related chain includes deployment of RustBucket and late-stage payload ObjCShellz', source_id:'', page:''}]->(malware_rustbucket)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:involved_malware {evidence:'BlueNoroff-related chain culminates in late-stage payload ObjCShellz', source_id:'', page:''}]->(malware_objcshellz)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:attributed_to {confidence:'medium', evidence:'SpectralBlur overlaps with a known malware family attributed to North Korean threat actors', source_id:'', page:''}]->(ta_lazarus)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (incident_sb)-[:attributed_to {confidence:'medium', evidence:'KANDYKORN activity intersects with another campaign orchestrated by the Lazarus sub-group known as BlueNoroff', source_id:'', page:''}]->(ta_bluenoroff)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011
+
+MERGE (campaign_bluenoroff_mac:Campaign {name:'BlueNoroff macOS infection chain (KANDYKORN/RustBucket/ObjCShellz)'})
+ON CREATE SET campaign_bluenoroff_mac.summary = 'Campaign/activity intersection involving BlueNoroff and Lazarus ecosystem culminating in RustBucket and ObjCShellz and leveraging RustBucket droppers to deliver KANDYKORN.'
+ON MATCH SET campaign_bluenoroff_mac.summary = CASE WHEN campaign_bluenoroff_mac.summary IS NULL OR campaign_bluenoroff_mac.summary = '' THEN 'Campaign/activity intersection involving BlueNoroff and Lazarus ecosystem culminating in RustBucket and ObjCShellz and leveraging RustBucket droppers to deliver KANDYKORN.' ELSE campaign_bluenoroff_mac.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac
+
+MERGE (campaign_bluenoroff_mac)-[:includes {evidence:'Campaign orchestrated by BlueNoroff intersects with KANDYKORN activity; deployment of RustBucket and ObjCShellz', source_id:'', page:''}]->(ta_bluenoroff)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac
+
+MERGE (campaign_bluenoroff_mac)-[:includes {evidence:'Culminates in deployment of RustBucket and late-stage payload ObjCShellz', source_id:'', page:''}]->(malware_rustbucket)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac
+
+MERGE (campaign_bluenoroff_mac)-[:includes {evidence:'Culminates in deployment of RustBucket and late-stage payload ObjCShellz', source_id:'', page:''}]->(malware_objcshellz)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac
+
+MERGE (campaign_bluenoroff_mac)-[:includes {evidence:'In recent months, leveraging RustBucket droppers to deliver KANDYKORN', source_id:'', page:''}]->(malware_kandykorn)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac
+
+MERGE (sector_tech:Sector {name:'Technology'})
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac, sector_tech
+
+MERGE (victim_crypto:Victim {name:'Cryptocurrency and blockchain industries'})
+ON CREATE SET victim_crypto.sector = 'Technology',
+              victim_crypto.summary = 'High-value targets within cryptocurrency and blockchain industries.'
+ON MATCH SET victim_crypto.sector = CASE WHEN victim_crypto.sector IS NULL OR victim_crypto.sector = '' THEN 'Technology' ELSE victim_crypto.sector END,
+              victim_crypto.summary = CASE WHEN victim_crypto.summary IS NULL OR victim_crypto.summary = '' THEN 'High-value targets within cryptocurrency and blockchain industries.' ELSE victim_crypto.summary END
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac, sector_tech, victim_crypto
+
+MERGE (victim_crypto)-[:located_in]->(sector_tech)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac, sector_tech, victim_crypto
+
+MERGE (incident_sb)-[:targets {evidence:'Setting their sights on macOS to infiltrate high-value targets, particularly those within the cryptocurrency and the blockchain industries', source_id:'', page:''}]->(victim_crypto)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac, sector_tech, victim_crypto
+
+MERGE (incident_sb)-[:targets_sector]->(sector_tech)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac, sector_tech, victim_crypto
+
+MERGE (campaign_bluenoroff_mac)-[:targets {evidence:'Targets high-value cryptocurrency and blockchain industry targets (implied by focus described)', source_id:'', page:''}]->(victim_crypto)
+WITH malware_spectralblur, malware_kandykorn, malware_rustbucket, malware_objcshellz, ta_lazarus, ta_bluenoroff, ta_ta444, mot_espionage, c2_generic, incident_sb, tech_ta0011, campaign_bluenoroff_mac, sector_tech, victim_crypto
+
+MERGE (malware_rustbucket)-[:uses {evidence:'Leveraging RustBucket droppers to deliver KANDYKORN', source_id:'', page:''}]->(malware_kandykorn)"
+purplefox-malware-infects-thousands-of-computers-in-ukraine.json,"MERGE (m_malware_purplefox:Malware {name:'PurpleFox'})
+ON CREATE SET
+  m_malware_purplefox.family = 'PurpleFox',
+  m_malware_purplefox.summary = 'PurpleFox (aka DirtyMoe) is a modular Windows botnet malware first spotted in 2018. It includes a rootkit module for hiding and persistence across reboots, can act as a downloader for second-stage payloads, provides backdoor access, and can function as a DDoS bot. Newer versions were observed using WebSocket C2 for stealth (Oct 2021). A Jan 2022 campaign spread it disguised as a Telegram desktop app. CERT-UA tracked Ukrainian infections as UAC-0027; infections often occur via laced MSI installers and it can self-propagate using exploits for known flaws and password brute-forcing.'
+ON MATCH SET
+  m_malware_purplefox.family = CASE WHEN m_malware_purplefox.family IS NULL OR trim(m_malware_purplefox.family) = '' THEN 'PurpleFox' ELSE m_malware_purplefox.family END,
+  m_malware_purplefox.summary = CASE WHEN m_malware_purplefox.summary IS NULL OR trim(m_malware_purplefox.summary) = '' THEN 'PurpleFox (aka DirtyMoe) is a modular Windows botnet malware first spotted in 2018. It includes a rootkit module for hiding and persistence across reboots, can act as a downloader for second-stage payloads, provides backdoor access, and can function as a DDoS bot. Newer versions were observed using WebSocket C2 for stealth (Oct 2021). A Jan 2022 campaign spread it disguised as a Telegram desktop app. CERT-UA tracked Ukrainian infections as UAC-0027; infections often occur via laced MSI installers and it can self-propagate using exploits for known flaws and password brute-forcing.' ELSE m_malware_purplefox.summary END
+WITH m_malware_purplefox
+
+MERGE (ta_uac0027:ThreatActor {name:'UAC-0027'})
+ON CREATE SET
+  ta_uac0027.summary = 'CERT-UA tracking identifier for activity associated with PurpleFox infections on Ukrainian computers.'
+ON MATCH SET
+  ta_uac0027.summary = CASE WHEN ta_uac0027.summary IS NULL OR trim(ta_uac0027.summary) = '' THEN 'CERT-UA tracking identifier for activity associated with PurpleFox infections on Ukrainian computers.' ELSE ta_uac0027.summary END
+WITH m_malware_purplefox, ta_uac0027
+
+MERGE (ta_dirtymoe:ThreatActor {name:'DirtyMoe'})
+ON CREATE SET
+  ta_dirtymoe.summary = 'Alias name used for the PurpleFox botnet/malware.'
+ON MATCH SET
+  ta_dirtymoe.summary = CASE WHEN ta_dirtymoe.summary IS NULL OR trim(ta_dirtymoe.summary) = '' THEN 'Alias name used for the PurpleFox botnet/malware.' ELSE ta_dirtymoe.summary END
+WITH m_malware_purplefox, ta_uac0027, ta_dirtymoe
+
+MERGE (m_malware_purplefox)-[r_alias_pf_dm:has_alias]->(ta_dirtymoe)
+ON CREATE SET
+  r_alias_pf_dm.date = date('2018-01-01')
+WITH m_malware_purplefox, ta_uac0027
+
+MERGE (c2_websocket:C2_Infrastructure {service:'WebSocket'})
+ON CREATE SET
+  c2_websocket.summary = 'WebSocket protocol used for command-and-control communications for stealth.'
+ON MATCH SET
+  c2_websocket.summary = CASE WHEN c2_websocket.summary IS NULL OR trim(c2_websocket.summary) = '' THEN 'WebSocket protocol used for command-and-control communications for stealth.' ELSE c2_websocket.summary END
+WITH m_malware_purplefox, ta_uac0027, c2_websocket
+
+MERGE (m_malware_purplefox)-[r_abuse_pf_ws:abuses]->(c2_websocket)
+ON CREATE SET
+  r_abuse_pf_ws.date = date('2021-10-01'),
+  r_abuse_pf_ws.evidence = 'In October 2021, new versions of PurpleFox switched to using WebSocket for C2 communications for stealth.'
+ON MATCH SET
+  r_abuse_pf_ws.date = CASE WHEN r_abuse_pf_ws.date IS NULL THEN date('2021-10-01') ELSE r_abuse_pf_ws.date END,
+  r_abuse_pf_ws.evidence = CASE WHEN r_abuse_pf_ws.evidence IS NULL OR trim(r_abuse_pf_ws.evidence) = '' THEN 'In October 2021, new versions of PurpleFox switched to using WebSocket for C2 communications for stealth.' ELSE r_abuse_pf_ws.evidence END
+WITH m_malware_purplefox, ta_uac0027
+
+MERGE (camp_purplefox_telegram:Campaign {name:'PurpleFox disguised as Telegram Desktop (Jan 2022)'})
+ON CREATE SET
+  camp_purplefox_telegram.summary = 'Campaign in January 2022 that spread PurpleFox malware under the guise of a Telegram desktop application.'
+ON MATCH SET
+  camp_purplefox_telegram.summary = CASE WHEN camp_purplefox_telegram.summary IS NULL OR trim(camp_purplefox_telegram.summary) = '' THEN 'Campaign in January 2022 that spread PurpleFox malware under the guise of a Telegram desktop application.' ELSE camp_purplefox_telegram.summary END
+WITH m_malware_purplefox, ta_uac0027, camp_purplefox_telegram
+
+MERGE (d_2022_01_01:Date {value:date('2022-01-01')})
+WITH m_malware_purplefox, ta_uac0027, camp_purplefox_telegram, d_2022_01_01
+
+MERGE (camp_purplefox_telegram)-[r_camp_date:occurred_on]->(d_2022_01_01)
+ON CREATE SET
+  r_camp_date.date = date('2022-01-01')
+ON MATCH SET
+  r_camp_date.date = CASE WHEN r_camp_date.date IS NULL THEN date('2022-01-01') ELSE r_camp_date.date END
+WITH m_malware_purplefox, ta_uac0027, camp_purplefox_telegram
+
+MERGE (camp_purplefox_telegram)-[r_camp_incl_mw:includes]->(m_malware_purplefox)
+ON CREATE SET
+  r_camp_incl_mw.date = date('2022-01-01'),
+  r_camp_incl_mw.evidence = 'In January 2022, a campaign spread PurpleFox malware under the guise of a Telegram desktop app.'
+ON MATCH SET
+  r_camp_incl_mw.date = CASE WHEN r_camp_incl_mw.date IS NULL THEN date('2022-01-01') ELSE r_camp_incl_mw.date END,
+  r_camp_incl_mw.evidence = CASE WHEN r_camp_incl_mw.evidence IS NULL OR trim(r_camp_incl_mw.evidence) = '' THEN 'In January 2022, a campaign spread PurpleFox malware under the guise of a Telegram desktop app.' ELSE r_camp_incl_mw.evidence END
+WITH m_malware_purplefox, ta_uac0027, camp_purplefox_telegram
+
+MERGE (inc_uac0027_202201:Incident {id:'UAC-0027-2022-01'})
+ON CREATE SET
+  inc_uac0027_202201.date = date('2022-01-01'),
+  inc_uac0027_202201.type = 'intrusion',
+  inc_uac0027_202201.summary = 'CERT-UA identified PurpleFox malware infections on Ukrainian computers and tracked the activity as UAC-0027; infections often start when victims run laced MSI installers. PurpleFox can self-propagate using exploits for known flaws and password brute-forcing. A January 2022 campaign spread it disguised as a Telegram Desktop app.'
+ON MATCH SET
+  inc_uac0027_202201.date = CASE WHEN inc_uac0027_202201.date IS NULL THEN date('2022-01-01') ELSE inc_uac0027_202201.date END,
+  inc_uac0027_202201.type = CASE WHEN inc_uac0027_202201.type IS NULL OR trim(inc_uac0027_202201.type) = '' THEN 'intrusion' ELSE inc_uac0027_202201.type END,
+  inc_uac0027_202201.summary = CASE WHEN inc_uac0027_202201.summary IS NULL OR trim(inc_uac0027_202201.summary) = '' THEN 'CERT-UA identified PurpleFox malware infections on Ukrainian computers and tracked the activity as UAC-0027; infections often start when victims run laced MSI installers. PurpleFox can self-propagate using exploits for known flaws and password brute-forcing. A January 2022 campaign spread it disguised as a Telegram Desktop app.' ELSE inc_uac0027_202201.summary END
+WITH m_malware_purplefox, ta_uac0027, camp_purplefox_telegram, inc_uac0027_202201
+
+MERGE (inc_uac0027_202201)-[r_attr_uac:attributed_to]->(ta_uac0027)
+ON CREATE SET
+  r_attr_uac.confidence = 'low',
+  r_attr_uac.evidence = 'CERT-UA tracked the activity as UAC-0027 based on PurpleFox infections on Ukrainian computers.'
+ON MATCH SET
+  r_attr_uac.confidence = CASE WHEN r_attr_uac.confidence IS NULL OR trim(r_attr_uac.confidence) = '' THEN 'low' ELSE r_attr_uac.confidence END,
+  r_attr_uac.evidence = CASE WHEN r_attr_uac.evidence IS NULL OR trim(r_attr_uac.evidence) = '' THEN 'CERT-UA tracked the activity as UAC-0027 based on PurpleFox infections on Ukrainian computers.' ELSE r_attr_uac.evidence END
+WITH m_malware_purplefox, camp_purplefox_telegram, inc_uac0027_202201
+
+MERGE (inc_uac0027_202201)-[r_inc_mw:involved_malware]->(m_malware_purplefox)
+ON CREATE SET
+  r_inc_mw.evidence = 'CERT-UA identified PurpleFox malware infections on Ukrainian computers (tracked as UAC-0027).'
+ON MATCH SET
+  r_inc_mw.evidence = CASE WHEN r_inc_mw.evidence IS NULL OR trim(r_inc_mw.evidence) = '' THEN 'CERT-UA identified PurpleFox malware infections on Ukrainian computers (tracked as UAC-0027).' ELSE r_inc_mw.evidence END
+WITH camp_purplefox_telegram, inc_uac0027_202201
+
+MERGE (inc_uac0027_202201)-[r_inc_campaign:uses]->(camp_purplefox_telegram)
+ON CREATE SET
+  r_inc_campaign.date = date('2022-01-01'),
+  r_inc_campaign.evidence = 'Incident activity includes the January 2022 campaign distributing PurpleFox disguised as Telegram Desktop.'
+ON MATCH SET
+  r_inc_campaign.date = CASE WHEN r_inc_campaign.date IS NULL THEN date('2022-01-01') ELSE r_inc_campaign.date END,
+  r_inc_campaign.evidence = CASE WHEN r_inc_campaign.evidence IS NULL OR trim(r_inc_campaign.evidence) = '' THEN 'Incident activity includes the January 2022 campaign distributing PurpleFox disguised as Telegram Desktop.' ELSE r_inc_campaign.evidence END
+WITH inc_uac0027_202201
+
+MERGE (ct_ua:Country {iso2:'UA'})
+ON CREATE SET
+  ct_ua.name = 'Ukraine'
+ON MATCH SET
+  ct_ua.name = CASE WHEN ct_ua.name IS NULL OR trim(ct_ua.name) = '' THEN 'Ukraine' ELSE ct_ua.name END
+WITH inc_uac0027_202201, ct_ua
+
+MERGE (inc_uac0027_202201)-[:occurred_in]->(ct_ua)
+WITH inc_uac0027_202201
+
+MERGE (t1204:Technique {technique_id:'T1204', name:'User Execution', tactic:'Execution'})
+ON CREATE SET
+  t1204.summary = 'Adversary tricks users into executing malicious content.'
+ON MATCH SET
+  t1204.name = CASE WHEN t1204.name IS NULL OR trim(t1204.name) = '' THEN 'User Execution' ELSE t1204.name END,
+  t1204.tactic = CASE WHEN t1204.tactic IS NULL OR trim(t1204.tactic) = '' THEN 'Execution' ELSE t1204.tactic END,
+  t1204.summary = CASE WHEN t1204.summary IS NULL OR trim(t1204.summary) = '' THEN 'Adversary tricks users into executing malicious content.' ELSE t1204.summary END
+WITH inc_uac0027_202201, t1204
+
+MERGE (inc_uac0027_202201)-[r_tech_userexec:used_technique]->(t1204)
+ON CREATE SET
+  r_tech_userexec.phase = 'Initial Access',
+  r_tech_userexec.details = 'Victims launch laced MSI installers',
+  r_tech_userexec.evidence = 'PurpleFox typically infects systems when victims launch laced MSI installers.'
+ON MATCH SET
+  r_tech_userexec.phase = CASE WHEN r_tech_userexec.phase IS NULL OR trim(r_tech_userexec.phase) = '' THEN 'Initial Access' ELSE r_tech_userexec.phase END,
+  r_tech_userexec.details = CASE WHEN r_tech_userexec.details IS NULL OR trim(r_tech_userexec.details) = '' THEN 'Victims launch laced MSI installers' ELSE r_tech_userexec.details END,
+  r_tech_userexec.evidence = CASE WHEN r_tech_userexec.evidence IS NULL OR trim(r_tech_userexec.evidence) = '' THEN 'PurpleFox typically infects systems when victims launch laced MSI installers.' ELSE r_tech_userexec.evidence END
+WITH inc_uac0027_202201
+
+MERGE (t1110:Technique {technique_id:'T1110', name:'Brute Force', tactic:'Credential Access'})
+ON CREATE SET
+  t1110.summary = 'Attempting to guess credentials via repeated attempts.'
+ON MATCH SET
+  t1110.name = CASE WHEN t1110.name IS NULL OR trim(t1110.name) = '' THEN 'Brute Force' ELSE t1110.name END,
+  t1110.tactic = CASE WHEN t1110.tactic IS NULL OR trim(t1110.tactic) = '' THEN 'Credential Access' ELSE t1110.tactic END,
+  t1110.summary = CASE WHEN t1110.summary IS NULL OR trim(t1110.summary) = '' THEN 'Attempting to guess credentials via repeated attempts.' ELSE t1110.summary END
+WITH inc_uac0027_202201, t1110
+
+MERGE (inc_uac0027_202201)-[r_tech_bruteforce:used_technique]->(t1110)
+ON CREATE SET
+  r_tech_bruteforce.phase = 'Lateral Movement',
+  r_tech_bruteforce.details = 'Self-propagation via password brute-forcing',
+  r_tech_bruteforce.evidence = 'PurpleFox highlights self-propagation capabilities using exploits for known flaws and password brute-forcing.'
+ON MATCH SET
+  r_tech_bruteforce.phase = CASE WHEN r_tech_bruteforce.phase IS NULL OR trim(r_tech_bruteforce.phase) = '' THEN 'Lateral Movement' ELSE r_tech_bruteforce.phase END,
+  r_tech_bruteforce.details = CASE WHEN r_tech_bruteforce.details IS NULL OR trim(r_tech_bruteforce.details) = '' THEN 'Self-propagation via password brute-forcing' ELSE r_tech_bruteforce.details END,
+  r_tech_bruteforce.evidence = CASE WHEN r_tech_bruteforce.evidence IS NULL OR trim(r_tech_bruteforce.evidence) = '' THEN 'PurpleFox highlights self-propagation capabilities using exploits for known flaws and password brute-forcing.' ELSE r_tech_bruteforce.evidence END
+WITH inc_uac0027_202201
+
+MERGE (t1210:Technique {technique_id:'T1210', name:'Exploitation of Remote Services', tactic:'Lateral Movement'})
+ON CREATE SET
+  t1210.summary = 'Exploiting vulnerabilities in remote services to move laterally or propagate.'
+ON MATCH SET
+  t1210.name = CASE WHEN t1210.name IS NULL OR trim(t1210.name) = '' THEN 'Exploitation of Remote Services' ELSE t1210.name END,
+  t1210.tactic = CASE WHEN t1210.tactic IS NULL OR trim(t1210.tactic) = '' THEN 'Lateral Movement' ELSE t1210.tactic END,
+  t1210.summary = CASE WHEN t1210.summary IS NULL OR trim(t1210.summary) = '' THEN 'Exploiting vulnerabilities in remote services to move laterally or propagate.' ELSE t1210.summary END
+WITH inc_uac0027_202201, t1210
+
+MERGE (inc_uac0027_202201)-[r_tech_exploit_remote:used_technique]->(t1210)
+ON CREATE SET
+  r_tech_exploit_remote.phase = 'Lateral Movement',
+  r_tech_exploit_remote.details = 'Self-propagation using exploits for known flaws',
+  r_tech_exploit_remote.evidence = 'PurpleFox highlights self-propagation capabilities using exploits for known flaws and password brute-forcing.'
+ON MATCH SET
+  r_tech_exploit_remote.phase = CASE WHEN r_tech_exploit_remote.phase IS NULL OR trim(r_tech_exploit_remote.phase) = '' THEN 'Lateral Movement' ELSE r_tech_exploit_remote.phase END,
+  r_tech_exploit_remote.details = CASE WHEN r_tech_exploit_remote.details IS NULL OR trim(r_tech_exploit_remote.details) = '' THEN 'Self-propagation using exploits for known flaws' ELSE r_tech_exploit_remote.details END,
+  r_tech_exploit_remote.evidence = CASE WHEN r_tech_exploit_remote.evidence IS NULL OR trim(r_tech_exploit_remote.evidence) = '' THEN 'PurpleFox highlights self-propagation capabilities using exploits for known flaws and password brute-forcing.' ELSE r_tech_exploit_remote.evidence END;"

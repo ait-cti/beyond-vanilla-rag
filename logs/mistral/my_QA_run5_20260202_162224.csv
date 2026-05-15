@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is Mallox malware family value?,True,TargetCompany
+2,simple,What date is stored for incident mallox_activity_2021-06-01?,True,2021-06-01
+3,simple,What type is incident unit42_il_destructive_2023_01_to_10?,True,destructive intrusion
+4,simple,What country ISO2 is stored for Israel?,True,IL
+5,simple,What is the published date of CVE-2022-2856?,True,2022-07-19
+6,simple,What framework is set for mitigation Patch GitLab for CVE-2023-7028?,True,Vendor Advisory
+7,simple,What CVE summary describes a zero-click GitLab password reset takeover flaw?,True,Zero-click account takeover flaw in GitLab password reset flow
+8,simple,What is the tactic for technique T1092?,True,Command and Control
+9,simple,What family is assigned to Trojan.Grokey malware?,True,keylogger
+10,simple,What family is assigned to W32.Fanni malware?,True,worm
+11,simple,What type is incident INC-CVE-2023-7028-EXPOSED-GITLAB?,True,vulnerability_exposure
+12,simple,What publisher is stored for source cisa-fivehands-2021-05-06?,True,CISA
+13,simple,What is the published_on date for source cisa-fivehands-2021-05-06?,True,2021-05-06
+14,simple,What malware family is FiveHands?,True,Ransomware
+15,simple,What technique ID corresponds to Service Execution?,True,T1569.002
+16,single_hop,Which CVEs are linked by exploited_in from incident mallox_activity_2021-06-01?,True,"CVE-2020-0618, CVE-2019-1068"
+17,single_hop,Which techniques are used by incident mallox_activity_2021-06-01?,True,"T1190, T1110, T1566, T1059, T1490, T1070, T1041, T1046"
+18,single_hop,Which sectors are targeted by incident mallox_activity_2021-06-01?,True,"Manufacturing, Legal, Retail"
+19,single_hop,Which malware is involved in incident unit42_il_destructive_2023_01_to_10?,True,Wiper malware
+20,single_hop,Which technique is used by incident unit42_il_destructive_2023_01_to_10?,True,T1485
+21,single_hop,Which victims are targeted by incident unit42_il_destructive_2023_01_to_10?,True,"Education sector organizations in Israel, Technology sector organizations in Israel"
+22,single_hop,Which country is incident unit42_il_destructive_2023_01_to_10 occurred_in?,True,Israel
+23,single_hop,Which tool is involved in incident INC-CVE-2023-7028-EXPOSED-GITLAB?,True,GitLab
+24,single_hop,Which CVE is linked by exploited_in from incident INC-CVE-2023-7028-EXPOSED-GITLAB?,True,CVE-2023-7028
+25,single_hop,Which technique is used by incident INC-CVE-2023-7028-EXPOSED-GITLAB?,True,T1190
+26,single_hop,Which threat actor uses W32.Fanni?,True,Equation
+27,single_hop,Which technique does W32.Fanni use for removable-media communication?,True,T1092
+28,single_hop,Which malware family is involved in incident cisa-fivehands-2021-05-06-incident-1?,True,"FiveHands, SombRAT"
+29,single_hop,Which tools are involved in incident cisa-fivehands-2021-05-06-incident-1?,True,"SoftPerfect Network Scanner, PsExec.exe, ServeManager.exe, RouterScan.exe, grabff.exe, rclone.exe, s3browser-9-5-3.exe"
+30,single_hop,Which techniques are used by incident cisa-fivehands-2021-05-06-incident-1?,True,"T1190, T1016, T1569.002, T1490, T1486"
+31,multi_hop,How many techniques are linked to Mallox through its incident?,True,8
+32,multi_hop,How many CVEs are exploited in Mallox incident mallox_activity_2021-06-01?,True,2
+33,multi_hop,Which tactics appear among techniques used in mallox_activity_2021-06-01?,True,"Initial Access, Credential Access, Execution, Impact, Defense Evasion, Exfiltration, Discovery"
+34,multi_hop,How many distinct tactics are represented in mallox_activity_2021-06-01 techniques?,True,7
+35,multi_hop,Which technique IDs have phase Initial Access in mallox_activity_2021-06-01?,True,"T1190, T1566"
+36,multi_hop,Which sectors are targeted by incidents occurring in Israel?,True,"Education, Technology"
+37,multi_hop,How many victims are located in Israel?,True,2
+38,multi_hop,Which victim sectors are targeted by the Israel destructive intrusion incident?,True,"Education, Technology"
+39,multi_hop,Which incidents are supported by source unit42_mallox_text?,True,mallox_activity_2021-06-01
+40,multi_hop,Which CVE is mitigated by a Vendor Advisory mitigation?,True,CVE-2023-7028
+41,multi_hop,How many incidents are linked to technique T1190?,True,3
+42,multi_hop,Which incidents are linked to technique T1190?,True,"mallox_activity_2021-06-01, INC-CVE-2023-7028-EXPOSED-GITLAB, cisa-fivehands-2021-05-06-incident-1"
+43,multi_hop,What is the earliest occurred_on date among all incidents?,True,2021-05-06
+44,multi_hop,How many tools are involved in the CISA FiveHands incident?,True,7
+45,multi_hop,Which tool is explicitly tied to discovery technique T1016 in the CISA incident?,True,SoftPerfect Network Scanner
+46,unanswerable,What CVSS score is stored as a property for CVE-2023-7028?,False,
+47,unanswerable,Which specific VPN product name contained the zero-day in the CISA FiveHands incident?,False,
+48,unanswerable,What file hash is recorded for ServeManager.exe?,False,
+49,unanswerable,Which attacker group conducted the Israel destructive intrusion incident?,False,
+50,unanswerable,"How many internet-exposed GitLab instances were vulnerable, as a numeric property?",False,

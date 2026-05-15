@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What published date is recorded for CVE-2023-4966?,True,2023-10-10
+2,simple,What type is the incident citrixbleed-observed-exploitation-2023-10-10?,True,intrusion
+3,simple,What type is the incident spectralblur-macos-backdoor-discovery?,True,intrusion
+4,simple,What sponsor is listed for the threat actor Lazarus?,True,North Korea
+5,simple,What sponsor is listed for the threat actor BlueNoroff?,True,North Korea
+6,simple,What is the motivation type node linked to Lazarus?,True,espionage
+7,simple,What technique tactic is recorded for technique T1185?,True,Credential Access
+8,simple,What technique tactic is recorded for technique T1203?,True,Execution
+9,simple,What technique tactic is recorded for technique T1110?,True,Credential Access
+10,simple,What technique tactic is recorded for technique T1210?,True,Lateral Movement
+11,simple,What framework is recorded for mitigation Patch Management?,True,General
+12,simple,What control_id is recorded for mitigation Patch Management?,True,PATCH
+13,simple,What country name corresponds to iso2 UA?,True,Ukraine
+14,simple,What sector property is set on victim Cryptocurrency and blockchain industries?,True,Technology
+15,simple,What service value is set for the generic C2 infrastructure?,True,C2 Server
+16,single_hop,Which CVE does the CitrixBleed incident exploit?,True,CVE-2023-4966
+17,single_hop,On what date did the CitrixBleed incident occur?,True,2023-10-10
+18,single_hop,Which mitigation is linked to the CitrixBleed incident?,True,Patch Management
+19,single_hop,Which techniques are used by the CitrixBleed incident?,True,"T1185, T1203"
+20,single_hop,Which malware are involved in the SpectralBlur discovery incident?,True,"SpectralBlur, KANDYKORN, RustBucket, ObjCShellz"
+21,single_hop,Which threat actors is the SpectralBlur discovery incident attributed to?,True,"Lazarus, BlueNoroff"
+22,single_hop,Which victim is targeted by the SpectralBlur discovery incident?,True,Cryptocurrency and blockchain industries
+23,single_hop,Which technique is used for command and control in the SpectralBlur discovery incident?,True,TA0011
+24,single_hop,Which malware abuses the C2 infrastructure service C2 Server?,True,SpectralBlur
+25,single_hop,Which C2 service does PurpleFox abuse?,True,WebSocket
+26,single_hop,Which campaign includes the malware PurpleFox?,True,PurpleFox disguised as Telegram Desktop (Jan 2022)
+27,single_hop,In which country did incident UAC-0027-2022-01 occur?,True,Ukraine
+28,single_hop,Which techniques are used by incident UAC-0027-2022-01?,True,"T1204, T1110, T1210"
+29,single_hop,Which campaign does incident UAC-0027-2022-01 use?,True,PurpleFox disguised as Telegram Desktop (Jan 2022)
+30,single_hop,Which threat actor is incident UAC-0027-2022-01 attributed to?,True,UAC-0027
+31,multi_hop,How many techniques are linked to the CitrixBleed incident?,True,2
+32,multi_hop,What are the technique tactics used in the CitrixBleed incident?,True,"Credential Access, Execution"
+33,multi_hop,What is the time gap between CVE publication and first_seen exploitation?,True,0 days
+34,multi_hop,Which technique phases are recorded for the CitrixBleed incident?,True,"Initial Access, Execution"
+35,multi_hop,Which CVE exploited in CitrixBleed maps to the incident’s used techniques?,True,CVE-2023-4966
+36,multi_hop,Which sponsor is shared by Lazarus and BlueNoroff?,True,North Korea
+37,multi_hop,Which motivation type is shared by Lazarus and BlueNoroff?,True,espionage
+38,multi_hop,How many distinct threat actors are attributed to the SpectralBlur discovery incident?,True,2
+39,multi_hop,How many malware are included in the BlueNoroff macOS infection chain campaign?,True,3
+40,multi_hop,Which malware are both in the campaign and in the SpectralBlur incident?,True,"KANDYKORN, RustBucket, ObjCShellz"
+41,multi_hop,Which threat actor included in the campaign is an alias of Lazarus?,True,BlueNoroff
+42,multi_hop,Which campaign includes a threat actor attributed to the SpectralBlur incident?,True,BlueNoroff macOS infection chain (KANDYKORN/RustBucket/ObjCShellz)
+43,multi_hop,How many techniques in incident UAC-0027-2022-01 have phase Lateral Movement?,True,2
+44,multi_hop,Which technique IDs in incident UAC-0027-2022-01 use phase Lateral Movement?,True,"T1110, T1210"
+45,multi_hop,What date is shared by the PurpleFox campaign occurrence and incident date?,True,2022-01-01
+46,unanswerable,What CVSS base score is recorded for CVE-2023-4966?,False,
+47,unanswerable,Which exact NetScaler product versions are affected by CVE-2023-4966?,False,
+48,unanswerable,What file hash is associated with the SpectralBlur malware sample?,False,
+49,unanswerable,What specific exploit CVE does PurpleFox use for remote propagation?,False,
+50,unanswerable,What command-and-control domain is used by PurpleFox WebSocket infrastructure?,False,

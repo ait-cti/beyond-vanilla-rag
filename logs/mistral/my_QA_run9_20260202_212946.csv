@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What motivation is recorded for Royal?,True,financial
+2,simple,What sponsor is listed for Seedworm?,True,Iran (MOIS)
+3,simple,What type is assigned to incident seedworm-telecom-eg-sd-tz-2023-11?,True,intrusion
+4,simple,What date is set for incident royal-activity-ramp-2022-09?,True,2022-09-01
+5,simple,What category is set for incident inc-cve-2023-37580-google-tag-2023-06?,True,C1
+6,simple,What technique tactic is assigned to T1053.005?,True,Persistence
+7,simple,What technique tactic is assigned to T1059.001?,True,Execution
+8,simple,What file extension does Royal ransomware use for encrypted files?,True,.Royal
+9,simple,What file extension does CACTUS use for encrypted files?,True,.cts1
+10,simple,What is the published date for CVE-2023-37580?,True,2023-06-01
+11,simple,What is the publisher of source deep-instinct-muddyc2go?,True,Deep Instinct
+12,simple,What is the publisher of source kroll_cactus_2023_05?,True,Kroll
+13,simple,What is the published_on date for symantec_threat_hunter_yanluowang_2021?,True,2021-10-01
+14,simple,What is the ISO2 code for United Kingdom in the graph?,True,GB
+15,simple,What is the service name of the C2 channel used via infected removable media?,True,USB removable media
+16,single_hop,Which malware family does Royal use?,True,Royal ransomware
+17,single_hop,Which encryptor is Royal observed using besides its own ransomware?,True,BlackCat
+18,single_hop,Which threat actor is an alias of Royal per has_alias?,True,DEV-0569
+19,single_hop,Which country is Silverstone Circuit located in?,True,United Kingdom
+20,single_hop,Which technique was used in incident royal-activity-ramp-2022-09 for malicious attachments?,True,T1566.001
+21,single_hop,Which technique was used in royal-activity-ramp-2022-09 for malvertising?,True,T1583
+22,single_hop,Which C2 service does CACTUS abuse for extortion communications?,True,Tox
+23,single_hop,Which CVE does Zimbra Collaboration exploit?,True,CVE-2023-37580
+24,single_hop,Which technique is used by incident inc-cve-2023-37580-google-tag-2023-06?,True,T1189
+25,single_hop,Which source supports incident inc-cve-2023-37580-google-tag-2023-06?,True,google-tag-cve-2023-37580
+26,single_hop,Which tool is used by Equation as a custom keylogger?,True,Trojan.Grokey
+27,single_hop,Which malware does Equation use that targets air-gapped networks?,True,W32.Fanni
+28,single_hop,Which C2 infrastructure service is abused by W32.Fanni?,True,USB removable media
+29,single_hop,Which capability is leveraged by CVE-2023-4969?,True,AI/GenAI
+30,single_hop,Which tool is involved in Symantec’s Oct 2021 Yanluowang incident?,True,AdFind
+31,multi_hop,How many tools are involved in incident kroll_cactus_activity_2023_03?,True,8
+32,multi_hop,How many techniques are used in incident kroll_cactus_activity_2023_03?,True,4
+33,multi_hop,How many incidents are attributed to Royal?,True,2
+34,multi_hop,How many victims are targeted by incident seedworm-telecom-eg-sd-tz-2023-11?,True,3
+35,multi_hop,How many countries are linked via occurred_in for seedworm-telecom-eg-sd-tz-2023-11?,True,3
+36,multi_hop,How many tools does Seedworm use dated 2023-11-01?,True,4
+37,multi_hop,What countries were targeted in Seedworm’s November 2023 incident?,True,"Egypt, Sudan, Tanzania"
+38,multi_hop,Which tools used by Seedworm were also involved in its November 2023 incident?,True,"SimpleHelp, Venom Proxy, Custom keylogging tool, MuddyC2Go PowerShell launcher"
+39,multi_hop,"Which C2 infrastructure does Seedworm abuse, supported by Deep Instinct?",True,MuddyC2Go
+40,multi_hop,Which CVEs are exploited by both W32.Fanni and Stuxnet?,True,"ZERO-DAY-UNKNOWN-1, ZERO-DAY-UNKNOWN-2"
+41,multi_hop,How many CVEs are exploited by both W32.Fanni and Stuxnet?,True,2
+42,multi_hop,Which tool has a supported_by quote from Symantec about MuddyC2Go?,True,MuddyC2Go PowerShell launcher
+43,multi_hop,Which country is both targeted and occurred_in for Royal’s Silverstone incident?,True,United Kingdom
+44,multi_hop,Which techniques share tactic Initial Access in Royal’s ramp incident?,True,T1566.001
+45,multi_hop,"Which techniques are used in CACTUS incident, with their phases?",True,"T1190 Initial Access, T1059.001 Discovery, T1053.005 Persistence, T1562.001 Defense Evasion"
+46,unanswerable,What CVSS score is recorded for CVE-2023-37580?,False,
+47,unanswerable,Which specific VPN appliance product was exploited in CACTUS initial access?,False,
+48,unanswerable,What ransom amount was demanded in the Silverstone Circuit attack?,False,
+49,unanswerable,What hash value identifies the Yanluowang ransomware sample?,False,
+50,unanswerable,What victim leak site URL is associated with CACTUS?,False,
