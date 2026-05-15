@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is set for Lazarus?,True,North Korea
+2,simple,What malware family is assigned to FudModule?,True,Rootkit
+3,simple,What is the published date of CVE-2023-7024?,True,2023-12-19
+4,simple,What sector is assigned to Unnamed Middle East government victim?,True,Government
+5,simple,What type is recorded for incident crambus-middle-east-gov-2023-02-09?,True,intrusion
+6,simple,What tactic is recorded for technique T1110.003?,True,Credential Access
+7,simple,What incident date is recorded for microsoft-midnight-blizzard-2024-01-12?,True,2024-01-12
+8,simple,What family is recorded for Magniber malware?,True,ransomware
+9,simple,What ISO2 code is stored for country South Korea?,True,KR
+10,simple,What tactic is recorded for technique T1496?,True,Impact
+11,simple,What sponsor is set for Midnight Blizzard?,True,Russia
+12,simple,What confidence is set on Xamalicious incident attribution?,True,low
+13,simple,What incident type is set for lockbit-linux-esxi-2021-10?,True,ransomware
+14,simple,What sponsor is set for Diamond Sleet?,True,North Korea
+15,simple,What sector is assigned to CyberLink Corp.?,True,Technology
+16,single_hop,Which mitigation is marked as recommended for Password Spraying?,True,MFA
+17,single_hop,Which CVE is supported by the Google source google-chrome-cve-2023-7024?,True,CVE-2023-7024
+18,single_hop,Which malware is involved in incident avast-lazarus-cve-2024-21338-2023-observed?,True,FudModule
+19,single_hop,Which threat actor is incident avast-lazarus-cve-2024-21338-2023-observed attributed to?,True,Lazarus
+20,single_hop,Which technique is used in incident avast-lazarus-cve-2024-21338-2023-observed?,True,T1068
+21,single_hop,Which victim is targeted by incident crambus-middle-east-gov-2023-02-09?,True,Unnamed Middle East government
+22,single_hop,Which region did incident crambus-middle-east-gov-2023-02-09 occur in?,True,Middle East
+23,single_hop,Which tool is involved in the Crambus Middle East intrusion incident?,True,Plink
+24,single_hop,Which malware does Crambus use in the 2023 intrusion?,True,PowerExchange
+25,single_hop,Which malware does Earth Berberoka use that is labeled brand-new multistage?,True,PuppetLoader
+26,single_hop,Which tool does APT29 use in the TeamCity exploitation alert?,True,JetBrains TeamCity
+27,single_hop,Which CVE is exploited in incident inc-apt29-teamcity-cve-2023-42793-2023-09?,True,CVE-2023-42793
+28,single_hop,Which country is the 2017 Magniber incident recorded as occurring in?,True,South Korea
+29,single_hop,Which capability does StealBit leverage?,True,Automation
+30,single_hop,Which C2 infrastructure does W32.Fanni abuse?,True,Infected USB sticks
+31,multi_hop,Which CVE is exploited by malware used by Lazarus?,True,CVE-2024-21338
+32,multi_hop,Which technique ID is linked to Lazarus exploitation incident via used_technique?,True,T1068
+33,multi_hop,Which publisher supports the Lazarus–FudModule relationship?,True,Avast
+34,multi_hop,Which tactics are associated with techniques used in Crambus incident?,True,"Lateral Movement, Defense Evasion, Collection, Credential Access"
+35,multi_hop,Which tool enabled remote services technique in the Crambus incident?,True,Plink
+36,multi_hop,Which technique name is mitigated by MFA?,True,Password Spraying
+37,multi_hop,How many sectors are targeted by microsoft-midnight-blizzard-2024-01-12?,True,3
+38,multi_hop,How many aliases are linked from APT29 in the TeamCity alert?,True,4
+39,multi_hop,How many distinct incident dates are linked to microsoft-midnight-blizzard-2024-01-12?,True,2
+40,multi_hop,What is the earliest date among incidents involving Magniber?,True,2017-01-01
+41,multi_hop,How many distinct CVEs are linked to Magniber incidents via exploited_in?,True,2
+42,multi_hop,How many countries is the Diamond Sleet supply chain incident recorded in?,True,4
+43,multi_hop,Which countries are linked to the Diamond Sleet supply chain incident?,True,"Japan, Taiwan, Canada, United States"
+44,multi_hop,How many techniques are linked to the Xamalicious distribution incident?,True,3
+45,multi_hop,Which tool is used by malware involved in Xamalicious incident?,True,Xamarin
+46,unanswerable,What CVSS score is recorded for CVE-2024-21338?,False,
+47,unanswerable,What is the exact patch release date for CVE-2024-21338?,False,
+48,unanswerable,Which specific Android app package names contained Xamalicious?,False,
+49,unanswerable,What encryption algorithm is used by Linux-ESXI Locker 1.0?,False,
+50,unanswerable,What exact countries were targeted in Magniber’s 2018 Asia expansion?,False,

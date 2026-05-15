@@ -1,0 +1,417 @@
+filename,cypher
+russian-hackers-stole-microsoft-corporate-emails-in-month-long-breach.json,"MERGE (ta_midnight:ThreatActor {name:'Midnight Blizzard'})
+ON CREATE SET ta_midnight.sponsor = 'Russia',
+              ta_midnight.summary = 'Russian state-sponsored hacking group identified by Microsoft as responsible for breaching some Microsoft corporate email accounts and stealing emails and attachments via password spray against a legacy non-production test tenant account in Nov 2023; detected Jan 12.'
+ON MATCH SET ta_midnight.sponsor = COALESCE(ta_midnight.sponsor, 'Russia'),
+             ta_midnight.summary = CASE WHEN ta_midnight.summary IS NULL OR ta_midnight.summary = '' THEN 'Russian state-sponsored hacking group identified by Microsoft as responsible for breaching some Microsoft corporate email accounts and stealing emails and attachments via password spray against a legacy non-production test tenant account in Nov 2023; detected Jan 12.' ELSE ta_midnight.summary END
+MERGE (ta_nobelium:ThreatActor {name:'Nobelium'})
+ON CREATE SET ta_nobelium.sponsor = 'Russia',
+              ta_nobelium.summary = 'Alias/name used for the Russian threat actors Microsoft assessed were responsible for the Midnight Blizzard intrusion.'
+ON MATCH SET ta_nobelium.sponsor = COALESCE(ta_nobelium.sponsor, 'Russia'),
+             ta_nobelium.summary = CASE WHEN ta_nobelium.summary IS NULL OR ta_nobelium.summary = '' THEN 'Alias/name used for the Russian threat actors Microsoft assessed were responsible for the Midnight Blizzard intrusion.' ELSE ta_nobelium.summary END
+MERGE (ta_apt29:ThreatActor {name:'APT29'})
+ON CREATE SET ta_apt29.sponsor = 'Russia',
+              ta_apt29.summary = 'Alias/name used for the Russian threat actors Microsoft assessed were responsible for the Midnight Blizzard intrusion.'
+ON MATCH SET ta_apt29.sponsor = COALESCE(ta_apt29.sponsor, 'Russia'),
+             ta_apt29.summary = CASE WHEN ta_apt29.summary IS NULL OR ta_apt29.summary = '' THEN 'Alias/name used for the Russian threat actors Microsoft assessed were responsible for the Midnight Blizzard intrusion.' ELSE ta_apt29.summary END
+MERGE (ta_midnight)-[:has_alias {date:date('2024-01-12')}]->(ta_nobelium)
+MERGE (ta_midnight)-[:has_alias {date:date('2024-01-12')}]->(ta_apt29)
+MERGE (victim_ms:Victim {name:'Microsoft'})
+ON CREATE SET victim_ms.summary = 'Corporate email accounts (including leadership team and employees in cybersecurity and legal departments) were breached; emails and attachments were stolen.'
+ON MATCH SET victim_ms.summary = CASE WHEN victim_ms.summary IS NULL OR victim_ms.summary = '' THEN 'Corporate email accounts (including leadership team and employees in cybersecurity and legal departments) were breached; emails and attachments were stolen.' ELSE victim_ms.summary END
+MERGE (src_ms:Source {id:'microsoft-corporate-email-breach-midnight-blizzard'})
+ON CREATE SET src_ms.publisher = 'Microsoft',
+              src_ms.title = 'Microsoft warning: corporate email accounts breached; data stolen by Midnight Blizzard',
+              src_ms.published_on = date('2024-01-12')
+ON MATCH SET src_ms.publisher = COALESCE(src_ms.publisher, 'Microsoft'),
+             src_ms.title = COALESCE(src_ms.title, 'Microsoft warning: corporate email accounts breached; data stolen by Midnight Blizzard'),
+             src_ms.published_on = COALESCE(src_ms.published_on, date('2024-01-12'))
+MERGE (inc_ms:Incident {id:'microsoft-midnight-blizzard-2023-11'})
+ON CREATE SET inc_ms.date = date('2023-11-01'),
+              inc_ms.type = 'intrusion',
+              inc_ms.summary = 'Microsoft determined that Russian state-sponsored threat actors (Midnight Blizzard, also known as Nobelium/APT29) breached a legacy non-production test tenant account via password spray in Nov 2023, leading to compromise of some corporate email accounts and theft of emails and attachments.'
+ON MATCH SET inc_ms.date = COALESCE(inc_ms.date, date('2023-11-01')),
+             inc_ms.type = COALESCE(inc_ms.type, 'intrusion'),
+             inc_ms.summary = CASE WHEN inc_ms.summary IS NULL OR inc_ms.summary = '' THEN 'Microsoft determined that Russian state-sponsored threat actors (Midnight Blizzard, also known as Nobelium/APT29) breached a legacy non-production test tenant account via password spray in Nov 2023, leading to compromise of some corporate email accounts and theft of emails and attachments.' ELSE inc_ms.summary END
+MERGE (date_detect:Date {value:date('2024-01-12')})
+MERGE (inc_ms)-[:occurred_on {date:date('2024-01-12')}]->(date_detect)
+MERGE (inc_ms)-[:attributed_to {confidence:'high', evidence:'Microsoft investigation ultimately determined the attack was conducted by Russian threat actors known as Midnight Blizzard (more commonly Nobelium/APT29).', source_id:'microsoft-corporate-email-breach-midnight-blizzard', page:''}]->(ta_midnight)
+MERGE (inc_ms)-[:targets {date:date('2023-11-01'), evidence:'Microsoft corporate email accounts were breached and data stolen.', source_id:'microsoft-corporate-email-breach-midnight-blizzard', page:''}]->(victim_ms)
+MERGE (ta_midnight)-[:attacked {date:date('2023-11-01'), evidence:'Microsoft says its corporate email accounts were breached and data stolen by Midnight Blizzard.', source_id:'microsoft-corporate-email-breach-midnight-blizzard', page:''}]->(victim_ms)
+MERGE (tech_pwd_spray:Technique {technique_id:'T1110.003'})
+ON CREATE SET tech_pwd_spray.name = 'Password Spraying',
+              tech_pwd_spray.tactic = 'Credential Access',
+              tech_pwd_spray.summary = 'Attempting a small number of common passwords against many accounts to avoid lockouts and gain access.'
+ON MATCH SET tech_pwd_spray.name = COALESCE(tech_pwd_spray.name, 'Password Spraying'),
+             tech_pwd_spray.tactic = COALESCE(tech_pwd_spray.tactic, 'Credential Access'),
+             tech_pwd_spray.summary = CASE WHEN tech_pwd_spray.summary IS NULL OR tech_pwd_spray.summary = '' THEN 'Attempting a small number of common passwords against many accounts to avoid lockouts and gain access.' ELSE tech_pwd_spray.summary END
+MERGE (inc_ms)-[:used_technique {phase:'Initial Access', details:'Password spray attack used to access a legacy non-production test tenant account.', evidence:'Microsoft says the threat actors breached their systems in November 2023 when they conducted a password spray attack to access a legacy non-production test tenant account.', source_id:'microsoft-corporate-email-breach-midnight-blizzard', page:''}]->(tech_pwd_spray)
+MERGE (inc_ms)-[:supported_by {page:'', quote:'Microsoft warned that some corporate email accounts were breached and data stolen by a Russian state-sponsored hacking group known as Midnight Blizzard; detected January 12; initial access in November 2023 via password spray against a legacy non-production test tenant account; emails and attachments stolen from leadership and cybersecurity/legal departments.'}]->(src_ms)
+MERGE (ta_midnight)-[:supported_by {page:'', quote:'Microsoft assessed the activity as conducted by Midnight Blizzard (also known as Nobelium/APT29).'}]->(src_ms)
+MERGE (victim_ms)-[:supported_by {page:'', quote:'Breach impacted Microsoft corporate email accounts, including leadership team members and employees in cybersecurity and legal departments; emails and attachments were stolen.'}]->(src_ms)
+MERGE (tech_pwd_spray)-[:supported_by {page:'', quote:'Threat actors conducted a password spray attack to access a legacy non-production test tenant account.'}]->(src_ms);"
+comcast-xfinity-breached-citrix-bleed-35m-customers.json,"MERGE (cve_2023_4966:CVE {id:'CVE-2023-4966'})
+ON CREATE SET cve_2023_4966.summary = 'CitrixBleed: high-severity vulnerability affecting Citrix NetScaler ADC and Gateway networking products.'
+ON MATCH SET cve_2023_4966.summary = CASE WHEN cve_2023_4966.summary IS NULL OR cve_2023_4966.summary = '' THEN 'CitrixBleed: high-severity vulnerability affecting Citrix NetScaler ADC and Gateway networking products.' ELSE cve_2023_4966.summary END
+WITH cve_2023_4966
+MERGE (victim_comcast:Victim {name:'Comcast Xfinity'})
+ON CREATE SET victim_comcast.summary = 'Cable/internet provider that disclosed a CitrixBleed-enabled breach of customer data.'
+ON MATCH SET victim_comcast.summary = CASE WHEN victim_comcast.summary IS NULL OR victim_comcast.summary = '' THEN 'Cable/internet provider that disclosed a CitrixBleed-enabled breach of customer data.' ELSE victim_comcast.summary END
+WITH cve_2023_4966, victim_comcast
+MERGE (sector_tech:Sector {name:'Technology'})
+WITH cve_2023_4966, victim_comcast, sector_tech
+MERGE (incident_xfinity:Incident {id:'comcast-xfinity-citrixbleed-customer-data-breach'})
+ON CREATE SET
+  incident_xfinity.type = 'intrusion',
+  incident_xfinity.summary = 'Comcast Xfinity disclosed a CitrixBleed-enabled breach of customer data, including usernames and hashed passwords; for some, names, contact information, last four digits of Social Security numbers, dates of birth, and security questions/answers.'
+ON MATCH SET
+  incident_xfinity.type = CASE WHEN incident_xfinity.type IS NULL OR incident_xfinity.type = '' THEN 'intrusion' ELSE incident_xfinity.type END,
+  incident_xfinity.summary = CASE WHEN incident_xfinity.summary IS NULL OR incident_xfinity.summary = '' THEN 'Comcast Xfinity disclosed a CitrixBleed-enabled breach of customer data, including usernames and hashed passwords; for some, names, contact information, last four digits of Social Security numbers, dates of birth, and security questions/answers.' ELSE incident_xfinity.summary END
+WITH cve_2023_4966, victim_comcast, sector_tech, incident_xfinity
+MERGE (tech_exploit_public_app:Technique {technique_id:'T1190'})
+ON CREATE SET
+  tech_exploit_public_app.name = 'Exploit Public-Facing Application',
+  tech_exploit_public_app.tactic = 'Initial Access',
+  tech_exploit_public_app.summary = 'Adversaries exploit a weakness in an Internet-facing application to gain access.'
+ON MATCH SET
+  tech_exploit_public_app.name = CASE WHEN tech_exploit_public_app.name IS NULL OR tech_exploit_public_app.name = '' THEN 'Exploit Public-Facing Application' ELSE tech_exploit_public_app.name END,
+  tech_exploit_public_app.tactic = CASE WHEN tech_exploit_public_app.tactic IS NULL OR tech_exploit_public_app.tactic = '' THEN 'Initial Access' ELSE tech_exploit_public_app.tactic END,
+  tech_exploit_public_app.summary = CASE WHEN tech_exploit_public_app.summary IS NULL OR tech_exploit_public_app.summary = '' THEN 'Adversaries exploit a weakness in an Internet-facing application to gain access.' ELSE tech_exploit_public_app.summary END
+WITH cve_2023_4966, victim_comcast, sector_tech, incident_xfinity, tech_exploit_public_app
+MERGE (date_aug_2023:Date {value:date('2023-08-01')})
+WITH cve_2023_4966, victim_comcast, sector_tech, incident_xfinity, tech_exploit_public_app, date_aug_2023
+MERGE (date_oct_2023:Date {value:date('2023-10-01')})
+WITH cve_2023_4966, victim_comcast, sector_tech, incident_xfinity, tech_exploit_public_app, date_aug_2023, date_oct_2023
+MERGE (incident_xfinity)-[:targets]->(victim_comcast)
+MERGE (incident_xfinity)-[:targets_sector]->(sector_tech)
+MERGE (incident_xfinity)-[:used_technique {phase:'Initial Access', details:'Exploitation of Citrix NetScaler ADC/Gateway (CitrixBleed)'}]->(tech_exploit_public_app)
+MERGE (incident_xfinity)-[:exploited_in {first_seen:date('2023-08-01'), evidence:'Attackers have been exploiting CVE-2023-4966 since at least August; Comcast Xfinity disclosed a CitrixBleed-enabled breach.', source_id:'text', page:''}]->(cve_2023_4966)
+MERGE (cve_2023_4966)-[:supported_by {page:'', quote:'Since at least August, attackers have been exploiting CVE-2023-4966 (aka CitrixBleed).'}]->(:Source {id:'text'})
+MERGE (incident_xfinity)-[:supported_by {page:'', quote:'Comcast Xfinity disclosed a CitrixBleed-enabled breach of its customer data, including usernames and hashed passwords, and, for some, names, contact information, last four digits of Social Security numbers, dates of birth, and security questions and answers.'}]->(:Source {id:'text'})
+MERGE (cve_2023_4966)-[:occurred_on {date:date('2023-08-01')}]->(date_aug_2023)
+MERGE (cve_2023_4966)-[:occurred_on {date:date('2023-10-01')}]->(date_oct_2023)"
+amd-apple-qualcomm-gpus-leak-ai-data-in-leftoverlocals-attacks.json,"MERGE (cve_2023_4969:CVE {id:'CVE-2023-4969'})
+ON CREATE SET
+  cve_2023_4969.summary = 'LeftoverLocals is a vulnerability affecting GPUs from AMD, Apple, Qualcomm, and Imagination Technologies that allows retrieving data from uninitialized local memory. Attackers can launch a GPU-kernel ""listener"" to read and dump leftover local-memory values (e.g., from a ""writer"" program), potentially exposing sensitive information from LLM/ML workloads such as model inputs/outputs, weights, and intermediate computations.'
+ON MATCH SET
+  cve_2023_4969.summary = CASE WHEN cve_2023_4969.summary IS NULL OR cve_2023_4969.summary = '' THEN 'LeftoverLocals is a vulnerability affecting GPUs from AMD, Apple, Qualcomm, and Imagination Technologies that allows retrieving data from uninitialized local memory. Attackers can launch a GPU-kernel ""listener"" to read and dump leftover local-memory values (e.g., from a ""writer"" program), potentially exposing sensitive information from LLM/ML workloads such as model inputs/outputs, weights, and intermediate computations.' ELSE cve_2023_4969.summary END
+
+MERGE (cap_ai:Capability {name:'AI/GenAI'})
+ON CREATE SET
+  cap_ai.summary = 'Use of large language models (LLMs) and machine learning (ML) workloads.'
+ON MATCH SET
+  cap_ai.summary = CASE WHEN cap_ai.summary IS NULL OR cap_ai.summary = '' THEN 'Use of large language models (LLMs) and machine learning (ML) workloads.' ELSE cap_ai.summary END
+
+MERGE (mit_clear:Mitigation {name:'Clear GPU local memory'})
+ON CREATE SET
+  mit_clear.framework = 'General'
+ON MATCH SET
+  mit_clear.framework = CASE WHEN mit_clear.framework IS NULL OR mit_clear.framework = '' THEN 'General' ELSE mit_clear.framework END
+
+MERGE (mit_clear)-[mitigates_cve:mitigates]->(cve_2023_4969)
+ON CREATE SET
+  mitigates_cve.status = 'recommended',
+  mitigates_cve.observed_effectiveness = 'Clearing/initializing GPU local memory prevents recovery of leftover values via a listener kernel.',
+  mitigates_cve.evidence = 'If the local memory is not cleared, an attacker can use a listener kernel to read values left behind by a writer program; clearing local memory prevents this.'
+ON MATCH SET
+  mitigates_cve.status = CASE WHEN mitigates_cve.status IS NULL OR mitigates_cve.status = '' THEN 'recommended' ELSE mitigates_cve.status END,
+  mitigates_cve.observed_effectiveness = CASE WHEN mitigates_cve.observed_effectiveness IS NULL OR mitigates_cve.observed_effectiveness = '' THEN 'Clearing/initializing GPU local memory prevents recovery of leftover values via a listener kernel.' ELSE mitigates_cve.observed_effectiveness END,
+  mitigates_cve.evidence = CASE WHEN mitigates_cve.evidence IS NULL OR mitigates_cve.evidence = '' THEN 'If the local memory is not cleared, an attacker can use a listener kernel to read values left behind by a writer program; clearing local memory prevents this.' ELSE mitigates_cve.evidence END
+
+MERGE (cve_2023_4969)-[cve_leverages_ai:leverages]->(cap_ai)
+ON CREATE SET
+  cve_leverages_ai.details = 'Impacts LLM and ML processes by enabling recovery of sensitive computation data (inputs/outputs, weights, intermediates) from GPU local memory.',
+  cve_leverages_ai.evidence = 'The issue enables data recovery from vulnerable GPUs, especially in the context of large language models (LLMs) and machine learning (ML) processes; recovered data can reveal model inputs, outputs, weights, and intermediate computations.'
+ON MATCH SET
+  cve_leverages_ai.details = CASE WHEN cve_leverages_ai.details IS NULL OR cve_leverages_ai.details = '' THEN 'Impacts LLM and ML processes by enabling recovery of sensitive computation data (inputs/outputs, weights, intermediates) from GPU local memory.' ELSE cve_leverages_ai.details END,
+  cve_leverages_ai.evidence = CASE WHEN cve_leverages_ai.evidence IS NULL OR cve_leverages_ai.evidence = '' THEN 'The issue enables data recovery from vulnerable GPUs, especially in the context of large language models (LLMs) and machine learning (ML) processes; recovered data can reveal model inputs, outputs, weights, and intermediate computations.' ELSE cve_leverages_ai.evidence END"
+ukraine-remains-russias-biggest-cyber-focus-in-2023.json,"MERGE (ta_frozenbarents:ThreatActor {name:'FROZENBARENTS'})
+ON CREATE SET
+  ta_frozenbarents.sponsor = 'Russian Armed Forces GRU Unit 74455',
+  ta_frozenbarents.motivation = 'espionage',
+  ta_frozenbarents.summary = 'Also known as Sandworm; attributed to Russian Armed Forces GRU Unit 74455. Focuses heavily on the war in Ukraine with campaigns spanning intelligence collection, information operations (IO), and leaking hacked data through Telegram. Offensive capabilities include credential phishing, mobile activity, malware, and external exploitation of services. Targets government, defense, energy, transportation/logistics, education, and humanitarian organizations. Continues exploiting EXIM mail servers globally and using compromised hosts as part of its operational network since at least August 2019.'
+ON MATCH SET
+  ta_frozenbarents.sponsor = coalesce(ta_frozenbarents.sponsor, 'Russian Armed Forces GRU Unit 74455'),
+  ta_frozenbarents.motivation = coalesce(ta_frozenbarents.motivation, 'espionage'),
+  ta_frozenbarents.summary = coalesce(ta_frozenbarents.summary, 'Also known as Sandworm; attributed to Russian Armed Forces GRU Unit 74455. Focuses heavily on the war in Ukraine with campaigns spanning intelligence collection, information operations (IO), and leaking hacked data through Telegram. Offensive capabilities include credential phishing, mobile activity, malware, and external exploitation of services. Continues exploiting EXIM mail servers globally and using compromised hosts as part of its operational network since at least August 2019.')
+
+MERGE (ta_sandworm:ThreatActor {name:'Sandworm'})
+ON CREATE SET
+  ta_sandworm.summary = 'Alias referenced for FROZENBARENTS.'
+ON MATCH SET
+  ta_sandworm.summary = coalesce(ta_sandworm.summary, 'Alias referenced for FROZENBARENTS.')
+
+MERGE (ta_frozenbarents)-[r_alias:has_alias]->(ta_sandworm)
+ON CREATE SET
+  r_alias.date = date('2019-08-01')
+ON MATCH SET
+  r_alias.date = coalesce(r_alias.date, date('2019-08-01'))
+
+MERGE (mot_esp:Motivation {type:'espionage'})
+MERGE (ta_frozenbarents)-[:motivated_by]->(mot_esp)
+
+MERGE (c2_telegram:C2_Infrastructure {service:'Telegram'})
+ON CREATE SET
+  c2_telegram.summary = 'Messaging platform used to leak hacked data.'
+ON MATCH SET
+  c2_telegram.summary = coalesce(c2_telegram.summary, 'Messaging platform used to leak hacked data.')
+
+MERGE (ta_frozenbarents)-[r_abuse_tg:abuses]->(c2_telegram)
+ON CREATE SET
+  r_abuse_tg.evidence = 'Leaking hacked data through Telegram.',
+  r_abuse_tg.page = null,
+  r_abuse_tg.source_id = null
+ON MATCH SET
+  r_abuse_tg.evidence = coalesce(r_abuse_tg.evidence, 'Leaking hacked data through Telegram.')
+
+MERGE (tech_phishing:Technique {technique_id:'T1566'})
+ON CREATE SET
+  tech_phishing.name = 'Phishing',
+  tech_phishing.tactic = 'Initial Access',
+  tech_phishing.summary = 'Credential phishing capability described for the actor.'
+ON MATCH SET
+  tech_phishing.name = coalesce(tech_phishing.name, 'Phishing'),
+  tech_phishing.tactic = coalesce(tech_phishing.tactic, 'Initial Access'),
+  tech_phishing.summary = coalesce(tech_phishing.summary, 'Credential phishing capability described for the actor.')
+
+MERGE (ta_frozenbarents)-[r_use_phish:uses]->(tech_phishing)
+ON CREATE SET
+  r_use_phish.date = date('2019-08-01'),
+  r_use_phish.evidence = 'Offensive capabilities include credential phishing.',
+  r_use_phish.page = null,
+  r_use_phish.source_id = null
+ON MATCH SET
+  r_use_phish.date = coalesce(r_use_phish.date, date('2019-08-01')),
+  r_use_phish.evidence = coalesce(r_use_phish.evidence, 'Offensive capabilities include credential phishing.')
+
+MERGE (tech_exploit_pub:Technique {technique_id:'T1190'})
+ON CREATE SET
+  tech_exploit_pub.name = 'Exploit Public-Facing Application',
+  tech_exploit_pub.tactic = 'Initial Access',
+  tech_exploit_pub.summary = 'External exploitation of services described; includes exploitation of EXIM mail servers.'
+ON MATCH SET
+  tech_exploit_pub.name = coalesce(tech_exploit_pub.name, 'Exploit Public-Facing Application'),
+  tech_exploit_pub.tactic = coalesce(tech_exploit_pub.tactic, 'Initial Access'),
+  tech_exploit_pub.summary = coalesce(tech_exploit_pub.summary, 'External exploitation of services described; includes exploitation of EXIM mail servers.')
+
+MERGE (ta_frozenbarents)-[r_use_exploit:uses]->(tech_exploit_pub)
+ON CREATE SET
+  r_use_exploit.date = date('2019-08-01'),
+  r_use_exploit.evidence = 'Offensive capabilities include external exploitation of services; continues to exploit EXIM mail servers globally (trend since at least August 2019).',
+  r_use_exploit.page = null,
+  r_use_exploit.source_id = null
+ON MATCH SET
+  r_use_exploit.date = coalesce(r_use_exploit.date, date('2019-08-01')),
+  r_use_exploit.evidence = coalesce(r_use_exploit.evidence, 'Offensive capabilities include external exploitation of services; continues to exploit EXIM mail servers globally (trend since at least August 2019).')
+
+MERGE (inc_exim:Incident {id:'frozenbarents-exim-global-compromised-hosts-2019-08'})
+ON CREATE SET
+  inc_exim.date = date('2019-08-01'),
+  inc_exim.type = 'intrusion',
+  inc_exim.summary = 'FROZENBARENTS continues to exploit EXIM mail servers globally and use compromised hosts as part of its operational network; compromised hosts observed accessing victim networks, interacting with victim accounts, sending malicious emails, and engaging in IO activity.'
+ON MATCH SET
+  inc_exim.date = coalesce(inc_exim.date, date('2019-08-01')),
+  inc_exim.type = coalesce(inc_exim.type, 'intrusion'),
+  inc_exim.summary = coalesce(inc_exim.summary, 'FROZENBARENTS continues to exploit EXIM mail servers globally and use compromised hosts as part of its operational network; compromised hosts observed accessing victim networks, interacting with victim accounts, sending malicious emails, and engaging in IO activity.')
+
+MERGE (inc_exim)-[r_attr:attributed_to]->(ta_frozenbarents)
+ON CREATE SET
+  r_attr.confidence = 'high',
+  r_attr.evidence = 'Attributed to GRU Unit 74455; EXIM exploitation and operational network activity described as conducted by FROZENBARENTS.',
+  r_attr.page = null,
+  r_attr.source_id = null
+ON MATCH SET
+  r_attr.confidence = coalesce(r_attr.confidence, 'high'),
+  r_attr.evidence = coalesce(r_attr.evidence, 'Attributed to GRU Unit 74455; EXIM exploitation and operational network activity described as conducted by FROZENBARENTS.')
+
+MERGE (tool_exim:Tool {name:'EXIM mail servers'})
+ON CREATE SET
+  tool_exim.summary = 'Mail server software targeted/exploited globally; compromised hosts used as part of operational network.'
+ON MATCH SET
+  tool_exim.summary = coalesce(tool_exim.summary, 'Mail server software targeted/exploited globally; compromised hosts used as part of operational network.')
+
+MERGE (inc_exim)-[r_tool:involved_tool]->(tool_exim)
+ON CREATE SET
+  r_tool.evidence = 'Actor continues to exploit EXIM mail servers globally and use compromised hosts as part of their operational network.',
+  r_tool.page = null,
+  r_tool.source_id = null
+ON MATCH SET
+  r_tool.evidence = coalesce(r_tool.evidence, 'Actor continues to exploit EXIM mail servers globally and use compromised hosts as part of their operational network.')
+
+MERGE (inc_exim)-[r_t1190:used_technique]->(tech_exploit_pub)
+ON CREATE SET
+  r_t1190.phase = 'Initial Access',
+  r_t1190.details = 'External exploitation of services; exploitation of EXIM mail servers',
+  r_t1190.evidence = 'Continues to exploit EXIM mail servers globally (trend since at least August 2019).',
+  r_t1190.page = null,
+  r_t1190.source_id = null
+ON MATCH SET
+  r_t1190.phase = coalesce(r_t1190.phase, 'Initial Access'),
+  r_t1190.details = coalesce(r_t1190.details, 'External exploitation of services; exploitation of EXIM mail servers'),
+  r_t1190.evidence = coalesce(r_t1190.evidence, 'Continues to exploit EXIM mail servers globally (trend since at least August 2019).')
+
+MERGE (inc_exim)-[r_t1566:used_technique]->(tech_phishing)
+ON CREATE SET
+  r_t1566.phase = 'Initial Access',
+  r_t1566.details = 'Credential phishing',
+  r_t1566.evidence = 'Offensive capabilities include credential phishing.',
+  r_t1566.page = null,
+  r_t1566.source_id = null
+ON MATCH SET
+  r_t1566.phase = coalesce(r_t1566.phase, 'Initial Access'),
+  r_t1566.details = coalesce(r_t1566.details, 'Credential phishing'),
+  r_t1566.evidence = coalesce(r_t1566.evidence, 'Offensive capabilities include credential phishing.')
+
+MERGE (sector_gov:Sector {name:'Government'})
+MERGE (inc_exim)-[:targets_sector]->(sector_gov)
+
+MERGE (sector_energy:Sector {name:'Energy'})
+MERGE (inc_exim)-[:targets_sector]->(sector_energy)
+
+MERGE (sector_transport:Sector {name:'Transportation'})
+MERGE (inc_exim)-[:targets_sector]->(sector_transport)
+
+MERGE (sector_edu:Sector {name:'Education'})
+MERGE (inc_exim)-[:targets_sector]->(sector_edu)
+
+MERGE (sector_other:Sector {name:'Other'})
+MERGE (inc_exim)-[:targets_sector]->(sector_other)"
+hackers-start-exploiting-critical-atlassian-confluence-rce-flaw.json,"MERGE (cve_2023_22527:CVE {id:'CVE-2023-22527'})
+ON CREATE SET
+  cve_2023_22527.summary = 'Remote code execution flaw in outdated Atlassian Confluence Server/Data Center via template injection allowing unauthenticated attackers to execute code; observed exploitation attempts include callbacks executing whoami to assess privileges.'
+ON MATCH SET
+  cve_2023_22527.summary = CASE WHEN cve_2023_22527.summary IS NULL OR trim(cve_2023_22527.summary) = '' THEN 'Remote code execution flaw in outdated Atlassian Confluence Server/Data Center via template injection allowing unauthenticated attackers to execute code; observed exploitation attempts include callbacks executing whoami to assess privileges.' ELSE cve_2023_22527.summary END
+MERGE (tech_exploit_public:Technique {technique_id:'T1190'})
+ON CREATE SET
+  tech_exploit_public.name = 'Exploit Public-Facing Application',
+  tech_exploit_public.tactic = 'Initial Access',
+  tech_exploit_public.summary = 'Adversaries exploit a vulnerability in an Internet-facing application to gain initial access.'
+ON MATCH SET
+  tech_exploit_public.name = CASE WHEN tech_exploit_public.name IS NULL OR trim(tech_exploit_public.name) = '' THEN 'Exploit Public-Facing Application' ELSE tech_exploit_public.name END,
+  tech_exploit_public.tactic = CASE WHEN tech_exploit_public.tactic IS NULL OR trim(tech_exploit_public.tactic) = '' THEN 'Initial Access' ELSE tech_exploit_public.tactic END,
+  tech_exploit_public.summary = CASE WHEN tech_exploit_public.summary IS NULL OR trim(tech_exploit_public.summary) = '' THEN 'Adversaries exploit a vulnerability in an Internet-facing application to gain initial access.' ELSE tech_exploit_public.summary END
+MERGE (inc_1:Incident {id:'inc-cve-2023-22527-observed-exploitation-attempts'})
+ON CREATE SET
+  inc_1.type = 'intrusion',
+  inc_1.summary = 'Security researchers observed exploitation attempts targeting CVE-2023-22527 (template injection RCE) affecting outdated Atlassian Confluence Server/Data Center. Attackers execute whoami to assess access/privileges.'
+ON MATCH SET
+  inc_1.type = CASE WHEN inc_1.type IS NULL OR trim(inc_1.type) = '' THEN 'intrusion' ELSE inc_1.type END,
+  inc_1.summary = CASE WHEN inc_1.summary IS NULL OR trim(inc_1.summary) = '' THEN 'Security researchers observed exploitation attempts targeting CVE-2023-22527 (template injection RCE) affecting outdated Atlassian Confluence Server/Data Center. Attackers execute whoami to assess access/privileges.' ELSE inc_1.summary END
+MERGE (inc_1)-[r_exploited_in_1:exploited_in]->(cve_2023_22527)
+ON CREATE SET
+  r_exploited_in_1.evidence = 'Researchers observed exploitation attempts for CVE-2023-22527 against outdated Atlassian Confluence; unauthenticated RCE via template injection; attackers execute whoami to assess privileges.'
+ON MATCH SET
+  r_exploited_in_1.evidence = CASE WHEN r_exploited_in_1.evidence IS NULL OR trim(r_exploited_in_1.evidence) = '' THEN 'Researchers observed exploitation attempts for CVE-2023-22527 against outdated Atlassian Confluence; unauthenticated RCE via template injection; attackers execute whoami to assess privileges.' ELSE r_exploited_in_1.evidence END
+MERGE (inc_1)-[r_used_tech_1:used_technique {phase:'Initial Access'}]->(tech_exploit_public)
+ON CREATE SET
+  r_used_tech_1.details = 'Exploitation of a public-facing Atlassian Confluence Server/Data Center endpoint via template injection (unauthenticated RCE) targeting CVE-2023-22527.',
+  r_used_tech_1.evidence = 'Observed exploitation attempts indicate attackers are exploiting a Confluence vulnerability (CVE-2023-22527) for remote code execution.'
+ON MATCH SET
+  r_used_tech_1.details = CASE WHEN r_used_tech_1.details IS NULL OR trim(r_used_tech_1.details) = '' THEN 'Exploitation of a public-facing Atlassian Confluence Server/Data Center endpoint via template injection (unauthenticated RCE) targeting CVE-2023-22527.' ELSE r_used_tech_1.details END,
+  r_used_tech_1.evidence = CASE WHEN r_used_tech_1.evidence IS NULL OR trim(r_used_tech_1.evidence) = '' THEN 'Observed exploitation attempts indicate attackers are exploiting a Confluence vulnerability (CVE-2023-22527) for remote code execution.' ELSE r_used_tech_1.evidence END"
+equation-cyberespionage-group.json,"MERGE (malware_dyre:Malware {name:'Dyre'})
+ON CREATE SET malware_dyre.family = 'Financial Trojan',
+              malware_dyre.summary = 'Dyre is a financial Trojan/infostealer targeting Windows systems, aimed at defrauding customers of over 1,000 banks worldwide by stealing banking and other credentials via major web browsers, and can also be used to deliver additional malware such as adding victims to spam botnets.'
+ON MATCH SET malware_dyre.family = coalesce(malware_dyre.family, 'Financial Trojan'),
+             malware_dyre.summary = coalesce(malware_dyre.summary, 'Dyre is a financial Trojan/infostealer targeting Windows systems, aimed at defrauding customers of over 1,000 banks worldwide by stealing banking and other credentials via major web browsers, and can also be used to deliver additional malware such as adding victims to spam botnets.')
+MERGE (cap_fraud:Capability {name:'Financial Fraud'})
+ON CREATE SET cap_fraud.summary = 'Used to defraud bank customers by stealing credentials.'
+ON MATCH SET cap_fraud.summary = coalesce(cap_fraud.summary, 'Used to defraud bank customers by stealing credentials.')
+MERGE (cap_credential_theft:Capability {name:'Credential Theft'})
+ON CREATE SET cap_credential_theft.summary = 'Capability to steal banking and other credentials.'
+ON MATCH SET cap_credential_theft.summary = coalesce(cap_credential_theft.summary, 'Capability to steal banking and other credentials.')
+MERGE (cap_malware_delivery:Capability {name:'Malware Delivery'})
+ON CREATE SET cap_malware_delivery.summary = 'Capability to infect victims with additional malware or enroll them into botnets.'
+ON MATCH SET cap_malware_delivery.summary = coalesce(cap_malware_delivery.summary, 'Capability to infect victims with additional malware or enroll them into botnets.')
+MERGE (cap_botnet:Capability {name:'Botnet Enrollment'})
+ON CREATE SET cap_botnet.summary = 'Capability to add infected systems to spam botnets.'
+ON MATCH SET cap_botnet.summary = coalesce(cap_botnet.summary, 'Capability to add infected systems to spam botnets.')
+MERGE (malware_dyre)-[lev_fraud:leverages]->(cap_fraud)
+ON CREATE SET lev_fraud.details = 'Configured to defraud customers of more than 1,000 banks and other companies worldwide.'
+ON MATCH SET lev_fraud.details = coalesce(lev_fraud.details, 'Configured to defraud customers of more than 1,000 banks and other companies worldwide.')
+MERGE (malware_dyre)-[lev_cred:leverages]->(cap_credential_theft)
+ON CREATE SET lev_cred.details = 'Steals banking and other credentials by attacking major web browsers.'
+ON MATCH SET lev_cred.details = coalesce(lev_cred.details, 'Steals banking and other credentials by attacking major web browsers.')
+MERGE (malware_dyre)-[lev_delivery:leverages]->(cap_malware_delivery)
+ON CREATE SET lev_delivery.details = 'Can be used to infect victims with other types of malware.'
+ON MATCH SET lev_delivery.details = coalesce(lev_delivery.details, 'Can be used to infect victims with other types of malware.')
+MERGE (malware_dyre)-[lev_botnet:leverages]->(cap_botnet)
+ON CREATE SET lev_botnet.details = 'Can add infected victims to spam botnets.'
+ON MATCH SET lev_botnet.details = coalesce(lev_botnet.details, 'Can add infected victims to spam botnets.')
+MERGE (country_us:Country {iso2:'US'})
+MERGE (victim_us_consumers:Victim {name:'Consumers (US)'})
+ON CREATE SET victim_us_consumers.country_iso2 = 'US',
+              victim_us_consumers.sector = 'Finance',
+              victim_us_consumers.summary = 'Consumers in the United States are described as most at risk from Dyre due to concentration of targeted banks.'
+ON MATCH SET victim_us_consumers.country_iso2 = coalesce(victim_us_consumers.country_iso2, 'US'),
+             victim_us_consumers.sector = coalesce(victim_us_consumers.sector, 'Finance'),
+             victim_us_consumers.summary = coalesce(victim_us_consumers.summary, 'Consumers in the United States are described as most at risk from Dyre due to concentration of targeted banks.')
+MERGE (victim_us_consumers)-[:located_in]->(country_us)
+MERGE (country_uk:Country {iso2:'GB'})
+MERGE (victim_uk_consumers:Victim {name:'Consumers (UK)'})
+ON CREATE SET victim_uk_consumers.country_iso2 = 'GB',
+              victim_uk_consumers.sector = 'Finance',
+              victim_uk_consumers.summary = 'Consumers in the United Kingdom are described as most at risk from Dyre due to concentration of targeted banks.'
+ON MATCH SET victim_uk_consumers.country_iso2 = coalesce(victim_uk_consumers.country_iso2, 'GB'),
+             victim_uk_consumers.sector = coalesce(victim_uk_consumers.sector, 'Finance'),
+             victim_uk_consumers.summary = coalesce(victim_uk_consumers.summary, 'Consumers in the United Kingdom are described as most at risk from Dyre due to concentration of targeted banks.')
+MERGE (victim_uk_consumers)-[:located_in]->(country_uk)
+MERGE (actor_dyre:ThreatActor {name:'Dyre operators'})
+ON CREATE SET actor_dyre.summary = 'Unspecified threat actors operating the Dyre financial Trojan.'
+ON MATCH SET actor_dyre.summary = coalesce(actor_dyre.summary, 'Unspecified threat actors operating the Dyre financial Trojan.')
+MERGE (actor_dyre)-[uses_dyre:uses]->(malware_dyre)
+ON CREATE SET uses_dyre.evidence = 'Dyre has emerged as a major financial fraud tool in operation.'
+ON MATCH SET uses_dyre.evidence = coalesce(uses_dyre.evidence, 'Dyre has emerged as a major financial fraud tool in operation.')
+MERGE (actor_dyre)-[attacks_us:attacked]->(victim_us_consumers)
+ON CREATE SET attacks_us.evidence = 'Consumers in English-speaking countries, particularly the US, are most at risk.'
+ON MATCH SET attacks_us.evidence = coalesce(attacks_us.evidence, 'Consumers in English-speaking countries, particularly the US, are most at risk.')
+MERGE (actor_dyre)-[attacks_uk:attacked]->(victim_uk_consumers)
+ON CREATE SET attacks_uk.evidence = 'Consumers in English-speaking countries, particularly the UK, are most at risk.'
+ON MATCH SET attacks_uk.evidence = coalesce(attacks_uk.evidence, 'Consumers in English-speaking countries, particularly the UK, are most at risk.')
+MERGE (mot_financial:Motivation {type:'financial'})
+MERGE (actor_dyre)-[:motivated_by]->(mot_financial)
+MERGE (cap_infostealer:Capability {name:'Infostealer'})
+ON CREATE SET cap_infostealer.summary = 'Detected as an infostealer (credential-stealing malware).'
+ON MATCH SET cap_infostealer.summary = coalesce(cap_infostealer.summary, 'Detected as an infostealer (credential-stealing malware).')
+MERGE (malware_dyre)-[lev_infostealer:leverages]->(cap_infostealer)
+ON CREATE SET lev_infostealer.details = 'Detected by Symantec as Infostealer.Dyre.'
+ON MATCH SET lev_infostealer.details = coalesce(lev_infostealer.details, 'Detected by Symantec as Infostealer.Dyre.')"
+cybercriminals-are-selling-access-to-chinese-surveillance-cameras.json,"MERGE (cve_2021_36260:CVE {id:'CVE-2021-36260'})
+ON CREATE SET cve_2021_36260.summary = 'Command injection flaw in Hikvision cameras; rated critical (9.8/10) by NIST.'
+ON MATCH SET cve_2021_36260.summary = CASE WHEN cve_2021_36260.summary IS NULL OR cve_2021_36260.summary = '' THEN 'Command injection flaw in Hikvision cameras; rated critical (9.8/10) by NIST.' ELSE cve_2021_36260.summary END
+WITH cve_2021_36260
+MERGE (victim_hikvision:Victim {name:'Hikvision'})
+ON CREATE SET victim_hikvision.summary = 'Hangzhou Hikvision Digital Technology; Chinese state-owned manufacturer of video surveillance equipment.'
+ON MATCH SET victim_hikvision.summary = CASE WHEN victim_hikvision.summary IS NULL OR victim_hikvision.summary = '' THEN 'Hangzhou Hikvision Digital Technology; Chinese state-owned manufacturer of video surveillance equipment.' ELSE victim_hikvision.summary END
+WITH cve_2021_36260, victim_hikvision
+MERGE (country_us:Country {iso2:'US'})
+ON CREATE SET country_us.name = 'United States'
+ON MATCH SET country_us.name = CASE WHEN country_us.name IS NULL OR country_us.name = '' THEN 'United States' ELSE country_us.name END
+WITH cve_2021_36260, victim_hikvision, country_us
+MERGE (victim_hikvision)-[:located_in]->(country_us)
+WITH cve_2021_36260, victim_hikvision
+MERGE (ta_apt41:ThreatActor {name:'APT41'})
+ON CREATE SET ta_apt41.summary = 'Chinese threat group mentioned as potentially able to exploit Hikvision camera vulnerabilities.'
+ON MATCH SET ta_apt41.summary = CASE WHEN ta_apt41.summary IS NULL OR ta_apt41.summary = '' THEN 'Chinese threat group mentioned as potentially able to exploit Hikvision camera vulnerabilities.' ELSE ta_apt41.summary END
+WITH cve_2021_36260, victim_hikvision, ta_apt41
+MERGE (ta_mission2025:ThreatActor {name:'MISSION2025'})
+ON CREATE SET ta_mission2025.summary = 'Threat group name mentioned alongside APT41 as potentially able to exploit Hikvision camera vulnerabilities.'
+ON MATCH SET ta_mission2025.summary = CASE WHEN ta_mission2025.summary IS NULL OR ta_mission2025.summary = '' THEN 'Threat group name mentioned alongside APT41 as potentially able to exploit Hikvision camera vulnerabilities.' ELSE ta_mission2025.summary END
+WITH cve_2021_36260, victim_hikvision, ta_apt41, ta_mission2025
+MERGE (ta_mission2025)-[:has_alias]->(ta_apt41)
+WITH cve_2021_36260, victim_hikvision, ta_apt41, ta_mission2025
+MERGE (ta_apt10:ThreatActor {name:'APT10'})
+ON CREATE SET ta_apt10.summary = 'Chinese threat group mentioned as potentially able to exploit Hikvision camera vulnerabilities.'
+ON MATCH SET ta_apt10.summary = CASE WHEN ta_apt10.summary IS NULL OR ta_apt10.summary = '' THEN 'Chinese threat group mentioned as potentially able to exploit Hikvision camera vulnerabilities.' ELSE ta_apt10.summary END
+WITH cve_2021_36260, victim_hikvision, ta_apt41, ta_mission2025, ta_apt10
+MERGE (ta_apt41)-[:attacked {evidence:'Report speculates Chinese threat groups such as MISSION2025/APT41 could potentially exploit vulnerabilities in these devices.', page:'', source_id:''}]->(victim_hikvision)
+MERGE (ta_apt10)-[:attacked {evidence:'Report speculates APT10 and its affiliates could potentially exploit vulnerabilities in these devices.', page:'', source_id:''}]->(victim_hikvision)
+WITH cve_2021_36260, ta_apt41, ta_apt10, victim_hikvision
+MERGE (incident_hikvision_cve_2021_36260:Incident {id:'hikvision-cve-2021-36260-collaboration-speculation'})
+ON CREATE SET incident_hikvision_cve_2021_36260.summary = 'Researchers reported multiple instances of hackers looking to collaborate on exploiting Hikvision cameras using CVE-2021-36260; leaked credentials offered for sale in Russian dark web forums; damage extent unclear.'
+ON MATCH SET incident_hikvision_cve_2021_36260.summary = CASE WHEN incident_hikvision_cve_2021_36260.summary IS NULL OR incident_hikvision_cve_2021_36260.summary = '' THEN 'Researchers reported multiple instances of hackers looking to collaborate on exploiting Hikvision cameras using CVE-2021-36260; leaked credentials offered for sale in Russian dark web forums; damage extent unclear.' ELSE incident_hikvision_cve_2021_36260.summary END
+WITH incident_hikvision_cve_2021_36260, cve_2021_36260, ta_apt41, ta_apt10, victim_hikvision
+MERGE (incident_hikvision_cve_2021_36260)-[:targets {evidence:'Hikvision cameras were discussed as targets for exploitation via CVE-2021-36260.', page:'', source_id:''}]->(victim_hikvision)
+MERGE (incident_hikvision_cve_2021_36260)-[:exploited_in {evidence:'Hackers discussed collaborating on exploiting Hikvision cameras using the command injection vulnerability CVE-2021-36260.', page:'', source_id:''}]->(cve_2021_36260)
+MERGE (incident_hikvision_cve_2021_36260)-[:attributed_to {confidence:'low', evidence:'Authors could only speculate that Chinese threat groups such as MISSION2025/APT41 could potentially exploit vulnerabilities in these devices.', page:'', source_id:''}]->(ta_apt41)
+MERGE (incident_hikvision_cve_2021_36260)-[:attributed_to {confidence:'low', evidence:'Authors could only speculate that APT10 and its affiliates could potentially exploit vulnerabilities in these devices.', page:'', source_id:''}]->(ta_apt10)"

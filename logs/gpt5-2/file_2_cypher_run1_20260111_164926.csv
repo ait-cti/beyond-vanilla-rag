@@ -1,0 +1,846 @@
+filename,cypher
+google-patches-chromes-fifth-zero-day-of-the-year.json,"MERGE (v_cve_2022_2856:CVE {id:'CVE-2022-2856'})
+ON CREATE SET
+  v_cve_2022_2856.published_date = date('2022-07-19'),
+  v_cve_2022_2856.summary = 'Chrome zero-day vulnerability rated High (CVSS); insufficient validation of untrusted input in Intents; actively exploited; could allow arbitrary code execution.'
+ON MATCH SET
+  v_cve_2022_2856.published_date = CASE WHEN v_cve_2022_2856.published_date IS NULL THEN date('2022-07-19') ELSE v_cve_2022_2856.published_date END,
+  v_cve_2022_2856.summary = CASE WHEN v_cve_2022_2856.summary IS NULL OR trim(v_cve_2022_2856.summary) = '' THEN 'Chrome zero-day vulnerability rated High (CVSS); insufficient validation of untrusted input in Intents; actively exploited; could allow arbitrary code execution.' ELSE v_cve_2022_2856.summary END
+MERGE (v_src:Source {id:'google-chrome-advisory-cve-2022-2856'})
+ON CREATE SET
+  v_src.title = 'Google Chrome stable channel update advisory for CVE-2022-2856',
+  v_src.publisher = 'Google',
+  v_src.published_on = date('2022-07-19')
+ON MATCH SET
+  v_src.title = CASE WHEN v_src.title IS NULL OR trim(v_src.title) = '' THEN 'Google Chrome stable channel update advisory for CVE-2022-2856' ELSE v_src.title END,
+  v_src.publisher = CASE WHEN v_src.publisher IS NULL OR trim(v_src.publisher) = '' THEN 'Google' ELSE v_src.publisher END,
+  v_src.published_on = CASE WHEN v_src.published_on IS NULL THEN date('2022-07-19') ELSE v_src.published_on END
+MERGE (v_cve_2022_2856)-[v_cve_sup:supported_by]->(v_src)
+ON CREATE SET
+  v_cve_sup.quote = 'The bug, tracked as CVE-2022-2856 and rated as high on the CVSS, is associated with “insufficient validation of untrusted input in Intents”. Google credits Ashley Shen and Christian Resell (Google TAG) for reporting the zero-day bug, which could allow for arbitrary code execution, on July 19.'
+ON MATCH SET
+  v_cve_sup.quote = CASE WHEN v_cve_sup.quote IS NULL OR trim(v_cve_sup.quote) = '' THEN 'The bug, tracked as CVE-2022-2856 and rated as high on the CVSS, is associated with “insufficient validation of untrusted input in Intents”. Google credits Ashley Shen and Christian Resell (Google TAG) for reporting the zero-day bug, which could allow for arbitrary code execution, on July 19.' ELSE v_cve_sup.quote END;"
+log4j-vulnerabilities-attacks.json,"MERGE (cve_44228:CVE {id:'CVE-2021-44228'})
+ON CREATE SET cve_44228.published_date = date('2021-12-09'),
+              cve_44228.summary = 'Initial remote code execution vulnerability in Log4j dubbed Log4Shell; exploited to deploy payloads including coin miners, Dridex, and ransomware such as Conti.'
+ON MATCH SET  cve_44228.published_date = coalesce(cve_44228.published_date, date('2021-12-09')),
+              cve_44228.summary = coalesce(cve_44228.summary, 'Initial remote code execution vulnerability in Log4j dubbed Log4Shell; exploited to deploy payloads including coin miners, Dridex, and ransomware such as Conti.')
+
+MERGE (cve_45046:CVE {id:'CVE-2021-45046'})
+ON CREATE SET cve_45046.summary = 'Critical vulnerability in Log4j that can lead to remote code execution.'
+ON MATCH SET  cve_45046.summary = coalesce(cve_45046.summary, 'Critical vulnerability in Log4j that can lead to remote code execution.')
+
+MERGE (cve_45105:CVE {id:'CVE-2021-45105'})
+ON CREATE SET cve_45105.summary = 'Critical vulnerability in Log4j that can lead to denial of service.'
+ON MATCH SET  cve_45105.summary = coalesce(cve_45105.summary, 'Critical vulnerability in Log4j that can lead to denial of service.')
+
+MERGE (malware_dridex:Malware {name:'Dridex'})
+ON CREATE SET malware_dridex.summary = 'Malware mentioned as a payload deployed via exploitation of CVE-2021-44228 (Log4Shell).'
+ON MATCH SET  malware_dridex.summary = coalesce(malware_dridex.summary, 'Malware mentioned as a payload deployed via exploitation of CVE-2021-44228 (Log4Shell).')
+
+MERGE (malware_conti:Malware {name:'Conti'})
+ON CREATE SET malware_conti.family = 'Ransomware',
+              malware_conti.summary = 'Ransomware mentioned as a payload deployed via exploitation of CVE-2021-44228 (Log4Shell).'
+ON MATCH SET  malware_conti.family = coalesce(malware_conti.family, 'Ransomware'),
+              malware_conti.summary = coalesce(malware_conti.summary, 'Ransomware mentioned as a payload deployed via exploitation of CVE-2021-44228 (Log4Shell).')
+
+MERGE (incident_log4shell:Incident {id:'log4shell-cve-2021-44228-exploitation'})
+ON CREATE SET incident_log4shell.date = date('2021-12-09'),
+              incident_log4shell.type = 'intrusion',
+              incident_log4shell.summary = 'After public disclosure of CVE-2021-44228 (Log4Shell) on 2021-12-09, the vulnerability was exploited to deploy payloads including coin miners, Dridex, and ransomware such as Conti.'
+ON MATCH SET  incident_log4shell.date = coalesce(incident_log4shell.date, date('2021-12-09')),
+              incident_log4shell.type = coalesce(incident_log4shell.type, 'intrusion'),
+              incident_log4shell.summary = coalesce(incident_log4shell.summary, 'After public disclosure of CVE-2021-44228 (Log4Shell) on 2021-12-09, the vulnerability was exploited to deploy payloads including coin miners, Dridex, and ransomware such as Conti.')
+
+MERGE (incident_log4shell)-[rel_exploit_44228:exploited_in]->(cve_44228)
+ON CREATE SET rel_exploit_44228.first_seen = date('2021-12-09'),
+              rel_exploit_44228.evidence = 'The vulnerability (CVE-2021-44228, Log4Shell) has been exploited to deploy payloads like coin miners, Dridex malware, and ransomware such as Conti.'
+ON MATCH SET  rel_exploit_44228.first_seen = coalesce(rel_exploit_44228.first_seen, date('2021-12-09')),
+              rel_exploit_44228.evidence = coalesce(rel_exploit_44228.evidence, 'The vulnerability (CVE-2021-44228, Log4Shell) has been exploited to deploy payloads like coin miners, Dridex malware, and ransomware such as Conti.')
+
+MERGE (incident_log4shell)-[rel_inc_malware_dridex:involved_malware]->(malware_dridex)
+ON CREATE SET rel_inc_malware_dridex.evidence = 'Exploitation of CVE-2021-44228 (Log4Shell) has been used to deploy Dridex malware.'
+ON MATCH SET  rel_inc_malware_dridex.evidence = coalesce(rel_inc_malware_dridex.evidence, 'Exploitation of CVE-2021-44228 (Log4Shell) has been used to deploy Dridex malware.')
+
+MERGE (incident_log4shell)-[rel_inc_malware_conti:involved_malware]->(malware_conti)
+ON CREATE SET rel_inc_malware_conti.evidence = 'Exploitation of CVE-2021-44228 (Log4Shell) has been used to deploy ransomware such as Conti.'
+ON MATCH SET  rel_inc_malware_conti.evidence = coalesce(rel_inc_malware_conti.evidence, 'Exploitation of CVE-2021-44228 (Log4Shell) has been used to deploy ransomware such as Conti.')"
+apts-swarm-zimbra-zero-day-to-steal-government-info-worldwide.json,"MERGE (src1:Source {id:'dark-reading_google-tag_cve-2023-37580'})
+ON CREATE SET
+  src1.title = ""Google TAG: Multiple groups exploited Zimbra zero-day CVE-2023-37580"",
+  src1.publisher = ""Dark Reading"",
+  src1.published_on = NULL,
+  src1.url = NULL
+ON MATCH SET
+  src1.title = coalesce(src1.title, ""Google TAG: Multiple groups exploited Zimbra zero-day CVE-2023-37580""),
+  src1.publisher = coalesce(src1.publisher, ""Dark Reading"")
+
+MERGE (cve1:CVE {id:'CVE-2023-37580'})
+ON CREATE SET
+  cve1.published_date = date('2023-07-25'),
+  cve1.summary = ""Reflected cross-site scripting (XSS) vulnerability in Zimbra Collaboration Suite (ZCS) email server; exploited as a zero-day starting in June 2023 to steal email data, user credentials, and authentication tokens.""
+ON MATCH SET
+  cve1.published_date = coalesce(cve1.published_date, date('2023-07-25')),
+  cve1.summary = coalesce(cve1.summary, ""Reflected cross-site scripting (XSS) vulnerability in Zimbra Collaboration Suite (ZCS) email server; exploited as a zero-day starting in June 2023 to steal email data, user credentials, and authentication tokens."")
+
+MERGE (tool1:Tool {name:'Zimbra Collaboration Suite'})
+ON CREATE SET
+  tool1.summary = ""Email server, calendaring, and chat/video platform (ZCS) targeted via CVE-2023-37580.""
+ON MATCH SET
+  tool1.summary = coalesce(tool1.summary, ""Email server, calendaring, and chat/video platform (ZCS) targeted via CVE-2023-37580."")
+
+MERGE (tech1:Technique {technique_id:'T1189'})
+ON CREATE SET
+  tech1.name = ""Drive-by Compromise"",
+  tech1.tactic = ""Initial Access"",
+  tech1.summary = ""Exploitation of a vulnerability (e.g., reflected XSS) to gain access.""
+ON MATCH SET
+  tech1.name = coalesce(tech1.name, ""Drive-by Compromise""),
+  tech1.tactic = coalesce(tech1.tactic, ""Initial Access""),
+  tech1.summary = coalesce(tech1.summary, ""Exploitation of a vulnerability (e.g., reflected XSS) to gain access."")
+
+MERGE (sec1:Sector {name:'Government'})
+
+MERGE (inc1:Incident {id:'inc_zcs_cve-2023-37580_2023-06'})
+ON CREATE SET
+  inc1.date = date('2023-06-01'),
+  inc1.type = ""intrusion"",
+  inc1.summary = ""Zero-day exploitation of Zimbra Collaboration Suite reflected XSS (CVE-2023-37580) beginning in June 2023 by at least four separate cyberattack groups to steal email data, user credentials, and authentication tokens from government organizations globally.""
+ON MATCH SET
+  inc1.date = coalesce(inc1.date, date('2023-06-01')),
+  inc1.type = coalesce(inc1.type, ""intrusion""),
+  inc1.summary = coalesce(inc1.summary, ""Zero-day exploitation of Zimbra Collaboration Suite reflected XSS (CVE-2023-37580) beginning in June 2023 by at least four separate cyberattack groups to steal email data, user credentials, and authentication tokens from government organizations globally."")
+
+MERGE (inc1)-[r_ts1:targets_sector]->(sec1)
+
+MERGE (inc1)-[r_tool1:involved_tool]->(tool1)
+ON CREATE SET
+  r_tool1.evidence = ""Exploitation targeted Zimbra Collaboration Suite (ZCS)."",
+  r_tool1.source_id = 'dark-reading_google-tag_cve-2023-37580',
+  r_tool1.page = NULL
+ON MATCH SET
+  r_tool1.evidence = coalesce(r_tool1.evidence, ""Exploitation targeted Zimbra Collaboration Suite (ZCS).""),
+  r_tool1.source_id = coalesce(r_tool1.source_id, 'dark-reading_google-tag_cve-2023-37580'),
+  r_tool1.page = coalesce(r_tool1.page, NULL)
+
+MERGE (inc1)-[r_cve1:exploited_in]->(cve1)
+ON CREATE SET
+  r_cve1.first_seen = date('2023-06-01'),
+  r_cve1.evidence = ""Zero-day exploitation started in June before remediation; vulnerability patched July 25, 2023 (hotfix July 5)."",
+  r_cve1.source_id = 'dark-reading_google-tag_cve-2023-37580',
+  r_cve1.page = NULL
+ON MATCH SET
+  r_cve1.first_seen = coalesce(r_cve1.first_seen, date('2023-06-01')),
+  r_cve1.evidence = coalesce(r_cve1.evidence, ""Zero-day exploitation started in June before remediation; vulnerability patched July 25, 2023 (hotfix July 5).""),
+  r_cve1.source_id = coalesce(r_cve1.source_id, 'dark-reading_google-tag_cve-2023-37580'),
+  r_cve1.page = coalesce(r_cve1.page, NULL)
+
+MERGE (inc1)-[r_tech1:used_technique]->(tech1)
+ON CREATE SET
+  r_tech1.phase = ""Initial Access"",
+  r_tech1.details = ""Exploitation of reflected XSS zero-day in Zimbra (CVE-2023-37580)."",
+  r_tech1.evidence = ""At least four groups exploited CVE-2023-37580 as a zero-day starting in June 2023."",
+  r_tech1.source_id = 'dark-reading_google-tag_cve-2023-37580',
+  r_tech1.page = NULL
+ON MATCH SET
+  r_tech1.phase = coalesce(r_tech1.phase, ""Initial Access""),
+  r_tech1.details = coalesce(r_tech1.details, ""Exploitation of reflected XSS zero-day in Zimbra (CVE-2023-37580).""),
+  r_tech1.evidence = coalesce(r_tech1.evidence, ""At least four groups exploited CVE-2023-37580 as a zero-day starting in June 2023.""),
+  r_tech1.source_id = coalesce(r_tech1.source_id, 'dark-reading_google-tag_cve-2023-37580'),
+  r_tech1.page = coalesce(r_tech1.page, NULL)
+
+MERGE (inc1)-[r_sup1:supported_by]->(src1)
+ON CREATE SET
+  r_sup1.page = NULL,
+  r_sup1.quote = ""At least four separate cyberattack groups have used ... CVE-2023-37580 ... zero-day exploitation started in June ... patched on July 25 ... hotfix ... July 5.""
+ON MATCH SET
+  r_sup1.page = coalesce(r_sup1.page, NULL),
+  r_sup1.quote = coalesce(r_sup1.quote, ""At least four separate cyberattack groups have used ... CVE-2023-37580 ... zero-day exploitation started in June ... patched on July 25 ... hotfix ... July 5."")"
+malicious-actors-target-comm-apps-such-as-zoom-slack-discord.json,"MERGE (src1:Source {id:'text-1'})
+ON CREATE SET src1.title = 'Discord CDN used to host malware delivered via spam emails', src1.publisher = 'Unknown', src1.url = ''
+WITH src1
+MERGE (c2_1:C2_Infrastructure {service:'Discord'})
+ON CREATE SET c2_1.summary = 'Discord CDN (cdn.discordapp.com) used to host malware payloads linked from malicious spam emails.'
+WITH src1, c2_1
+MERGE (mal_1:Malware {name:'AveMaria'})
+ON CREATE SET mal_1.family = 'AveMaria', mal_1.summary = 'Malware delivered via malicious spam emails; payload hosted on Discord CDN links.'
+WITH src1, c2_1, mal_1
+MERGE (mal_2:Malware {name:'AgentTesla'})
+ON CREATE SET mal_2.family = 'AgentTesla', mal_2.summary = 'Malware delivered via malicious spam emails; payload hosted on Discord CDN links.'
+WITH src1, c2_1, mal_1, mal_2
+MERGE (camp_1:Campaign {name:'Discord-hosted spam-to-malware campaign'})
+ON CREATE SET camp_1.summary = 'Campaign using malicious spam emails (delivery notifications/invoices with DHL/TNT-themed attachments) containing embedded links to Discord CDN URLs hosting AveMaria or AgentTesla executables.'
+WITH src1, c2_1, mal_1, mal_2, camp_1
+MERGE (d_2019:Date {value: date('2019-01-01')})
+WITH src1, c2_1, mal_1, mal_2, camp_1, d_2019
+MERGE (camp_1)-[r1:includes]->(mal_1)
+ON CREATE SET r1.date = date('2019-01-01'), r1.evidence = 'We first observed the use of malicious spam to deliver these malware families in 2019.', r1.source_id = src1.id
+ON MATCH SET r1.date = coalesce(r1.date, date('2019-01-01')), r1.evidence = coalesce(r1.evidence, 'We first observed the use of malicious spam to deliver these malware families in 2019.'), r1.source_id = coalesce(r1.source_id, src1.id)
+WITH src1, c2_1, mal_1, mal_2, camp_1, d_2019
+MERGE (camp_1)-[r2:includes]->(mal_2)
+ON CREATE SET r2.date = date('2019-01-01'), r2.evidence = 'We first observed the use of malicious spam to deliver these malware families in 2019.', r2.source_id = src1.id
+ON MATCH SET r2.date = coalesce(r2.date, date('2019-01-01')), r2.evidence = coalesce(r2.evidence, 'We first observed the use of malicious spam to deliver these malware families in 2019.'), r2.source_id = coalesce(r2.source_id, src1.id)
+WITH src1, c2_1, mal_1, mal_2, camp_1, d_2019
+MERGE (camp_1)-[r3:occurred_on]->(d_2019)
+ON CREATE SET r3.date = date('2019-01-01')
+ON MATCH SET r3.date = coalesce(r3.date, date('2019-01-01'))
+WITH src1, c2_1, mal_1, mal_2, camp_1
+MERGE (mal_1)-[r4:abuses]->(c2_1)
+ON CREATE SET r4.evidence = 'Embedded links in malicious emails point to Discord CDN URLs used to host AveMaria executables.', r4.source_id = src1.id
+ON MATCH SET r4.evidence = coalesce(r4.evidence, 'Embedded links in malicious emails point to Discord CDN URLs used to host AveMaria executables.'), r4.source_id = coalesce(r4.source_id, src1.id)
+WITH src1, c2_1, mal_1, mal_2, camp_1
+MERGE (mal_2)-[r5:abuses]->(c2_1)
+ON CREATE SET r5.evidence = 'Embedded links in malicious emails point to Discord CDN URLs used to host AgentTesla executables.', r5.source_id = src1.id
+ON MATCH SET r5.evidence = coalesce(r5.evidence, 'Embedded links in malicious emails point to Discord CDN URLs used to host AgentTesla executables.'), r5.source_id = coalesce(r5.source_id, src1.id)
+WITH src1, c2_1, mal_1, mal_2, camp_1
+MERGE (camp_1)-[r6:includes]->(c2_1)
+ON CREATE SET r6.evidence = 'Campaign uses embedded links that point to a Discord URL (cdn.discordapp.com/attachments/.../example.exe) to host the payload.', r6.source_id = src1.id
+ON MATCH SET r6.evidence = coalesce(r6.evidence, 'Campaign uses embedded links that point to a Discord URL (cdn.discordapp.com/attachments/.../example.exe) to host the payload.'), r6.source_id = coalesce(r6.source_id, src1.id)"
+windows-zero-day-exploited-by-north-korean-hackers-in-rootkit-attack.json,"MERGE (src_1:Source {id:'avast-cve-2024-21338-lazarus-fudmodule'})
+ON CREATE SET
+  src_1.publisher = 'Avast',
+  src_1.title = 'Lazarus exploited Windows zero-day CVE-2024-21338 with FudModule rootkit'
+ON MATCH SET
+  src_1.publisher = COALESCE(src_1.publisher,'Avast'),
+  src_1.title = COALESCE(src_1.title,'Lazarus exploited Windows zero-day CVE-2024-21338 with FudModule rootkit')
+MERGE (ta_1:ThreatActor {name:'Lazarus'})
+ON CREATE SET
+  ta_1.sponsor = 'North Korea',
+  ta_1.summary = 'North Korean threat group observed exploiting CVE-2024-21338 for privilege escalation in attacks involving the FudModule rootkit.'
+ON MATCH SET
+  ta_1.sponsor = COALESCE(ta_1.sponsor,'North Korea'),
+  ta_1.summary = COALESCE(ta_1.summary,'North Korean threat group observed exploiting CVE-2024-21338 for privilege escalation in attacks involving the FudModule rootkit.')
+MERGE (mot_1:Motivation {type:'espionage'})
+MERGE (ta_1)-[:motivated_by]->(mot_1)
+MERGE (mw_1:Malware {name:'FudModule'})
+ON CREATE SET
+  mw_1.family = 'rootkit',
+  mw_1.summary = 'Rootkit used in Lazarus attacks; updated version enabled direct kernel object manipulation after establishing kernel read/write via CVE-2024-21338.'
+ON MATCH SET
+  mw_1.family = COALESCE(mw_1.family,'rootkit'),
+  mw_1.summary = COALESCE(mw_1.summary,'Rootkit used in Lazarus attacks; updated version enabled direct kernel object manipulation after establishing kernel read/write via CVE-2024-21338.')
+MERGE (cve_1:CVE {id:'CVE-2024-21338'})
+ON CREATE SET
+  cve_1.published_date = date('2024-02-01'),
+  cve_1.summary = 'Windows vulnerability in appid.sys driver associated with Microsoft AppLocker; exploited as a zero-day by Lazarus for privilege escalation; patched in February 2024 Patch Tuesday.'
+ON MATCH SET
+  cve_1.published_date = COALESCE(cve_1.published_date, date('2024-02-01')),
+  cve_1.summary = COALESCE(cve_1.summary,'Windows vulnerability in appid.sys driver associated with Microsoft AppLocker; exploited as a zero-day by Lazarus for privilege escalation; patched in February 2024 Patch Tuesday.')
+MERGE (tech_1:Technique {technique_id:'T1068'})
+ON CREATE SET
+  tech_1.name = 'Exploitation for Privilege Escalation',
+  tech_1.tactic = 'Privilege Escalation',
+  tech_1.summary = 'Adversaries exploit a vulnerability to escalate privileges, including kernel-level escalation via a driver vulnerability.'
+ON MATCH SET
+  tech_1.name = COALESCE(tech_1.name,'Exploitation for Privilege Escalation'),
+  tech_1.tactic = COALESCE(tech_1.tactic,'Privilege Escalation'),
+  tech_1.summary = COALESCE(tech_1.summary,'Adversaries exploit a vulnerability to escalate privileges, including kernel-level escalation via a driver vulnerability.')
+MERGE (inc_1:Incident {id:'avast-lazarus-cve-2024-21338-2023'})
+ON CREATE SET
+  inc_1.date = date('2023-01-01'),
+  inc_1.type = 'intrusion',
+  inc_1.summary = 'Avast observed Lazarus exploiting Windows zero-day CVE-2024-21338 for privilege escalation in attacks involving the FudModule rootkit.'
+ON MATCH SET
+  inc_1.date = COALESCE(inc_1.date, date('2023-01-01')),
+  inc_1.type = COALESCE(inc_1.type,'intrusion'),
+  inc_1.summary = COALESCE(inc_1.summary,'Avast observed Lazarus exploiting Windows zero-day CVE-2024-21338 for privilege escalation in attacks involving the FudModule rootkit.')
+MERGE (dt_1:Date {value:date('2023-01-01')})
+MERGE (inc_1)-[:occurred_on {date:date('2023-01-01')}]->(dt_1)
+MERGE (inc_1)-[r_attr_1:attributed_to]->(ta_1)
+ON CREATE SET
+  r_attr_1.confidence = 'high',
+  r_attr_1.evidence = 'Avast observed CVE-2024-21338 in Lazarus attacks last year.',
+  r_attr_1.source_id = 'avast-cve-2024-21338-lazarus-fudmodule'
+ON MATCH SET
+  r_attr_1.confidence = COALESCE(r_attr_1.confidence,'high'),
+  r_attr_1.evidence = COALESCE(r_attr_1.evidence,'Avast observed CVE-2024-21338 in Lazarus attacks last year.'),
+  r_attr_1.source_id = COALESCE(r_attr_1.source_id,'avast-cve-2024-21338-lazarus-fudmodule')
+MERGE (inc_1)-[r_mw_1:involved_malware]->(mw_1)
+ON CREATE SET
+  r_mw_1.evidence = 'Attacks involving a rootkit named FudModule were observed alongside exploitation of CVE-2024-21338.',
+  r_mw_1.source_id = 'avast-cve-2024-21338-lazarus-fudmodule'
+ON MATCH SET
+  r_mw_1.evidence = COALESCE(r_mw_1.evidence,'Attacks involving a rootkit named FudModule were observed alongside exploitation of CVE-2024-21338.'),
+  r_mw_1.source_id = COALESCE(r_mw_1.source_id,'avast-cve-2024-21338-lazarus-fudmodule')
+MERGE (inc_1)-[r_cve_1:exploited_in]->(cve_1)
+ON CREATE SET
+  r_cve_1.first_seen = date('2023-01-01'),
+  r_cve_1.evidence = 'CVE-2024-21338 was observed by Avast in Lazarus attacks last year; described as a Windows zero-day used for privilege escalation.',
+  r_cve_1.source_id = 'avast-cve-2024-21338-lazarus-fudmodule'
+ON MATCH SET
+  r_cve_1.first_seen = COALESCE(r_cve_1.first_seen, date('2023-01-01')),
+  r_cve_1.evidence = COALESCE(r_cve_1.evidence,'CVE-2024-21338 was observed by Avast in Lazarus attacks last year; described as a Windows zero-day used for privilege escalation.'),
+  r_cve_1.source_id = COALESCE(r_cve_1.source_id,'avast-cve-2024-21338-lazarus-fudmodule')
+MERGE (mw_1)-[r_mw_cve_1:exploits]->(cve_1)
+ON CREATE SET
+  r_mw_cve_1.date = date('2023-01-01'),
+  r_mw_cve_1.evidence = 'FudModule rootkit activity was observed in attacks where CVE-2024-21338 was exploited for privilege escalation.',
+  r_mw_cve_1.source_id = 'avast-cve-2024-21338-lazarus-fudmodule'
+ON MATCH SET
+  r_mw_cve_1.date = COALESCE(r_mw_cve_1.date, date('2023-01-01')),
+  r_mw_cve_1.evidence = COALESCE(r_mw_cve_1.evidence,'FudModule rootkit activity was observed in attacks where CVE-2024-21338 was exploited for privilege escalation.'),
+  r_mw_cve_1.source_id = COALESCE(r_mw_cve_1.source_id,'avast-cve-2024-21338-lazarus-fudmodule')
+MERGE (inc_1)-[r_t_1:used_technique]->(tech_1)
+ON CREATE SET
+  r_t_1.phase = 'Privilege Escalation',
+  r_t_1.details = 'Exploited Windows driver (appid.sys) vulnerability CVE-2024-21338 to elevate privileges and gain kernel read/write primitive.',
+  r_t_1.evidence = 'By exploiting CVE-2024-21338, Lazarus hackers were able to elevate privileges and establish a kernel read/write primitive enabling direct kernel object manipulation.',
+  r_t_1.source_id = 'avast-cve-2024-21338-lazarus-fudmodule'
+ON MATCH SET
+  r_t_1.phase = COALESCE(r_t_1.phase,'Privilege Escalation'),
+  r_t_1.details = COALESCE(r_t_1.details,'Exploited Windows driver (appid.sys) vulnerability CVE-2024-21338 to elevate privileges and gain kernel read/write primitive.'),
+  r_t_1.evidence = COALESCE(r_t_1.evidence,'By exploiting CVE-2024-21338, Lazarus hackers were able to elevate privileges and establish a kernel read/write primitive enabling direct kernel object manipulation.'),
+  r_t_1.source_id = COALESCE(r_t_1.source_id,'avast-cve-2024-21338-lazarus-fudmodule')
+MERGE (ta_1)-[r_use_1:uses]->(mw_1)
+ON CREATE SET
+  r_use_1.date = date('2023-01-01'),
+  r_use_1.evidence = 'Lazarus attacks involved the FudModule rootkit.',
+  r_use_1.source_id = 'avast-cve-2024-21338-lazarus-fudmodule'
+ON MATCH SET
+  r_use_1.date = COALESCE(r_use_1.date, date('2023-01-01')),
+  r_use_1.evidence = COALESCE(r_use_1.evidence,'Lazarus attacks involved the FudModule rootkit.'),
+  r_use_1.source_id = COALESCE(r_use_1.source_id,'avast-cve-2024-21338-lazarus-fudmodule')
+MERGE (ta_1)-[:supported_by {quote:'The notorious North Korean threat group known as Lazarus exploited a Windows zero-day vulnerability for privilege escalation in attacks involving a rootkit named FudModule.'}]->(src_1)
+MERGE (cve_1)-[:supported_by {quote:'The vulnerability is tracked as CVE-2024-21338 and it was observed by Avast in Lazarus attacks last year.'}]->(src_1)
+MERGE (mw_1)-[:supported_by {quote:'...attacks involving a rootkit named FudModule...'}]->(src_1)
+MERGE (inc_1)-[:supported_by {quote:'Avast observed Lazarus exploiting Windows zero-day CVE-2024-21338 for privilege escalation in attacks involving FudModule.'}]->(src_1)"
+chinese-hackers-exploited-new-zero-day.json,"MERGE (src_0:Source {id:'barracuda-esg-unc4841-cve-2023-7102'})
+ON CREATE SET
+  src_0.title = 'Barracuda ESG zero-day exploited to deploy backdoors (UNC4841, CVE-2023-7102)',
+  src_0.publisher = 'Barracuda',
+  src_0.url = ''
+ON MATCH SET
+  src_0.title = coalesce(src_0.title, 'Barracuda ESG zero-day exploited to deploy backdoors (UNC4841, CVE-2023-7102)'),
+  src_0.publisher = coalesce(src_0.publisher, 'Barracuda')
+MERGE (ta_0:ThreatActor {name:'UNC4841'})
+ON CREATE SET
+  ta_0.sponsor = 'China',
+  ta_0.summary = 'Chinese threat actor tracked by Mandiant as UNC4841, attributed with exploiting Barracuda ESG zero-days to deploy backdoor implants.'
+ON MATCH SET
+  ta_0.sponsor = coalesce(ta_0.sponsor, 'China'),
+  ta_0.summary = coalesce(ta_0.summary, 'Chinese threat actor tracked by Mandiant as UNC4841, attributed with exploiting Barracuda ESG zero-days to deploy backdoor implants.')
+MERGE (mot_0:Motivation {type:'espionage'})
+MERGE (ta_0)-[:motivated_by]->(mot_0)
+MERGE (cve_0:CVE {id:'CVE-2023-7102'})
+ON CREATE SET
+  cve_0.summary = 'Zero-day arbitrary code execution in Spreadsheet::ParseExcel used by Amavis in Barracuda Email Security Gateway (ESG) when processing Microsoft Excel email attachments.'
+ON MATCH SET
+  cve_0.summary = coalesce(cve_0.summary, 'Zero-day arbitrary code execution in Spreadsheet::ParseExcel used by Amavis in Barracuda Email Security Gateway (ESG) when processing Microsoft Excel email attachments.')
+MERGE (cve_1:CVE {id:'CVE-2023-2868'})
+ON CREATE SET
+  cve_1.summary = 'Earlier Barracuda device zero-day previously linked to UNC4841 activity.'
+ON MATCH SET
+  cve_1.summary = coalesce(cve_1.summary, 'Earlier Barracuda device zero-day previously linked to UNC4841 activity.')
+MERGE (vic_0:Victim {name:'Barracuda Email Security Gateway (ESG) appliances'})
+ON CREATE SET
+  vic_0.summary = 'Barracuda Email Security Gateway (ESG) appliances; a limited number of devices were impacted by exploitation.'
+ON MATCH SET
+  vic_0.summary = coalesce(vic_0.summary, 'Barracuda Email Security Gateway (ESG) appliances; a limited number of devices were impacted by exploitation.')
+MERGE (inc_0:Incident {id:'barracuda-esg-cve-2023-7102-unc4841'})
+ON CREATE SET
+  inc_0.type = 'intrusion',
+  inc_0.summary = 'Barracuda reported Chinese threat actors (UNC4841) exploited zero-day CVE-2023-7102 in ESG to deploy backdoor implants (SEASPY, SALTWATER) via specially crafted Microsoft Excel email attachments.'
+ON MATCH SET
+  inc_0.type = coalesce(inc_0.type, 'intrusion'),
+  inc_0.summary = coalesce(inc_0.summary, 'Barracuda reported Chinese threat actors (UNC4841) exploited zero-day CVE-2023-7102 in ESG to deploy backdoor implants (SEASPY, SALTWATER) via specially crafted Microsoft Excel email attachments.')
+MERGE (inc_0)-[r_tgt_0:targets {evidence:'Exploited Barracuda Email Security Gateway (ESG) appliances to deploy backdoors on a limited number of devices.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(vic_0)
+MERGE (inc_0)-[r_attr_0:attributed_to {confidence:'high', evidence:'Barracuda attributed the activity to UNC4841 (tracked by Mandiant).', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(ta_0)
+MERGE (inc_0)-[r_exp_0:exploited_in {evidence:'Zero-day CVE-2023-7102 exploited in Barracuda ESG via specially crafted Microsoft Excel email attachment.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(cve_0)
+MERGE (inc_0)-[r_exp_1:exploited_in {evidence:'UNC4841 was previously linked to active exploitation of another Barracuda zero-day (CVE-2023-2868).', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(cve_1)
+MERGE (tech_0:Technique {technique_id:'T1566', name:'Phishing', tactic:'Initial Access'})
+ON CREATE SET
+  tech_0.summary = 'Initial access via phishing; in this context, delivery of a specially crafted Microsoft Excel email attachment.'
+ON MATCH SET
+  tech_0.name = coalesce(tech_0.name, 'Phishing'),
+  tech_0.tactic = coalesce(tech_0.tactic, 'Initial Access'),
+  tech_0.summary = coalesce(tech_0.summary, 'Initial access via phishing; in this context, delivery of a specially crafted Microsoft Excel email attachment.')
+MERGE (inc_0)-[r_tech_0:used_technique {phase:'Initial Access', details:'Specially crafted Microsoft Excel email attachment used to exploit the ESG vulnerability.', evidence:'Successful exploitation is accomplished by means of a specially crafted Microsoft Excel email attachment.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(tech_0)
+MERGE (mal_0:Malware {name:'SEASPY'})
+ON CREATE SET
+  mal_0.summary = 'Known implant/backdoor variant deployed after exploitation; provides persistence and command execution capabilities.'
+ON MATCH SET
+  mal_0.summary = coalesce(mal_0.summary, 'Known implant/backdoor variant deployed after exploitation; provides persistence and command execution capabilities.')
+MERGE (mal_1:Malware {name:'SALTWATER'})
+ON CREATE SET
+  mal_1.summary = 'Known implant/backdoor variant deployed after exploitation; provides persistence and command execution capabilities.'
+ON MATCH SET
+  mal_1.summary = coalesce(mal_1.summary, 'Known implant/backdoor variant deployed after exploitation; provides persistence and command execution capabilities.')
+MERGE (inc_0)-[r_mal_0:involved_malware {evidence:'Deployment of new variants of known implants called SEASPY.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(mal_0)
+MERGE (inc_0)-[r_mal_1:involved_malware {evidence:'Deployment of new variants of known implants called SALTWATER.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(mal_1)
+MERGE (ta_0)-[r_use_0:uses {evidence:'Activity involved deployment of SEASPY implant variants after exploitation.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(mal_0)
+MERGE (ta_0)-[r_use_1:uses {evidence:'Activity involved deployment of SALTWATER implant variants after exploitation.', source_id:'barracuda-esg-unc4841-cve-2023-7102', page:''}]->(mal_1)
+MERGE (ta_0)-[:supported_by {page:'', quote:'Barracuda attributed the activity to a threat actor tracked by Mandiant as UNC4841.'}]->(src_0)
+MERGE (cve_0)-[:supported_by {page:'', quote:'Tracked as CVE-2023-7102... arbitrary code execution... Spreadsheet::ParseExcel... used by the Amavis scanner... to screen Microsoft Excel email attachments.'}]->(src_0)
+MERGE (cve_1)-[:supported_by {page:'', quote:'Previously linked to the active exploitation of another zero-day in Barracuda devices (CVE-2023-2868).'}]->(src_0)
+MERGE (mal_0)-[:supported_by {page:'', quote:'Deployment of new variants of known implants called SEASPY... offer persistence and command execution capabilities.'}]->(src_0)
+MERGE (mal_1)-[:supported_by {page:'', quote:'Deployment of new variants of known implants called SALTWATER... offer persistence and command execution capabilities.'}]->(src_0)
+MERGE (inc_0)-[:supported_by {page:'', quote:'Chinese threat actors exploited a new zero-day in Barracuda ESG appliances to deploy backdoors... via specially crafted Microsoft Excel email attachment.'}]->(src_0)"
+0-days-exploited-by-commercial-surveillance-vendor-in-egypt.json,"MERGE (src_1:Source {id:'google-tag-citizen-lab-intellexa-predator-iphone-0day-2023'})
+ON CREATE SET
+  src_1.title = 'Google TAG and The Citizen Lab: in-the-wild iPhone 0-day exploit chain used to install Predator; Apple patches CVE-2023-41991/41992/41993',
+  src_1.publisher = 'Google Threat Analysis Group (TAG) / The Citizen Lab',
+  src_1.url = NULL
+ON MATCH SET
+  src_1.title = COALESCE(src_1.title, 'Google TAG and The Citizen Lab: in-the-wild iPhone 0-day exploit chain used to install Predator; Apple patches CVE-2023-41991/41992/41993'),
+  src_1.publisher = COALESCE(src_1.publisher, 'Google Threat Analysis Group (TAG) / The Citizen Lab')
+
+MERGE (actor_1:ThreatActor {name:'Intellexa'})
+ON CREATE SET
+  actor_1.summary = 'Commercial surveillance vendor referenced as developer of an iPhone in-the-wild 0-day exploit chain used to install Predator spyware.'
+ON MATCH SET
+  actor_1.summary = COALESCE(actor_1.summary, 'Commercial surveillance vendor referenced as developer of an iPhone in-the-wild 0-day exploit chain used to install Predator spyware.')
+
+MERGE (mal_1:Malware {name:'Predator'})
+ON CREATE SET
+  mal_1.family = 'Spyware',
+  mal_1.summary = 'Spyware installed surreptitiously on iPhones using an in-the-wild 0-day exploit chain attributed in reporting to Intellexa.'
+ON MATCH SET
+  mal_1.family = COALESCE(mal_1.family, 'Spyware'),
+  mal_1.summary = COALESCE(mal_1.summary, 'Spyware installed surreptitiously on iPhones using an in-the-wild 0-day exploit chain attributed in reporting to Intellexa.')
+
+MERGE (inc_1:Incident {id:'intellexa-predator-iphone-0day-chain-2023'})
+ON CREATE SET
+  inc_1.date = date('2023-01-01'),
+  inc_1.type = 'intrusion',
+  inc_1.summary = 'In-the-wild 0-day exploit chain for iPhones used to install Predator spyware; Apple later patched related vulnerabilities as CVE-2023-41991, CVE-2023-41992, and CVE-2023-41993.'
+ON MATCH SET
+  inc_1.date = COALESCE(inc_1.date, date('2023-01-01')),
+  inc_1.type = COALESCE(inc_1.type, 'intrusion'),
+  inc_1.summary = COALESCE(inc_1.summary, 'In-the-wild 0-day exploit chain for iPhones used to install Predator spyware; Apple later patched related vulnerabilities as CVE-2023-41991, CVE-2023-41992, and CVE-2023-41993.')
+
+MERGE (inc_1)-[r_attr_1:attributed_to]->(actor_1)
+ON CREATE SET
+  r_attr_1.confidence = 'medium',
+  r_attr_1.evidence = 'Exploit chain developed by Intellexa and used to install Predator spyware.',
+  r_attr_1.source_id = src_1.id
+ON MATCH SET
+  r_attr_1.confidence = COALESCE(r_attr_1.confidence, 'medium'),
+  r_attr_1.evidence = COALESCE(r_attr_1.evidence, 'Exploit chain developed by Intellexa and used to install Predator spyware.'),
+  r_attr_1.source_id = COALESCE(r_attr_1.source_id, src_1.id)
+
+MERGE (inc_1)-[r_mal_1:involved_malware]->(mal_1)
+ON CREATE SET
+  r_mal_1.evidence = 'Exploit chain used to install Predator spyware surreptitiously onto an iPhone.',
+  r_mal_1.source_id = src_1.id
+ON MATCH SET
+  r_mal_1.evidence = COALESCE(r_mal_1.evidence, 'Exploit chain used to install Predator spyware surreptitiously onto an iPhone.'),
+  r_mal_1.source_id = COALESCE(r_mal_1.source_id, src_1.id)
+
+MERGE (cve_1:CVE {id:'CVE-2023-41991'})
+ON CREATE SET
+  cve_1.summary = 'Apple iOS vulnerability patched in iOS 16.7 and iOS 17.0.1; associated in reporting with an in-the-wild iPhone 0-day exploit chain.'
+ON MATCH SET
+  cve_1.summary = COALESCE(cve_1.summary, 'Apple iOS vulnerability patched in iOS 16.7 and iOS 17.0.1; associated in reporting with an in-the-wild iPhone 0-day exploit chain.')
+
+MERGE (cve_2:CVE {id:'CVE-2023-41992'})
+ON CREATE SET
+  cve_2.summary = 'Apple iOS vulnerability patched in iOS 16.7 and iOS 17.0.1; associated in reporting with an in-the-wild iPhone 0-day exploit chain.'
+ON MATCH SET
+  cve_2.summary = COALESCE(cve_2.summary, 'Apple iOS vulnerability patched in iOS 16.7 and iOS 17.0.1; associated in reporting with an in-the-wild iPhone 0-day exploit chain.')
+
+MERGE (cve_3:CVE {id:'CVE-2023-41993'})
+ON CREATE SET
+  cve_3.summary = 'Apple iOS vulnerability patched in iOS 16.7 and iOS 17.0.1; associated in reporting with an in-the-wild iPhone 0-day exploit chain.'
+ON MATCH SET
+  cve_3.summary = COALESCE(cve_3.summary, 'Apple iOS vulnerability patched in iOS 16.7 and iOS 17.0.1; associated in reporting with an in-the-wild iPhone 0-day exploit chain.')
+
+MERGE (inc_1)-[r_cve_1:exploited_in]->(cve_1)
+ON CREATE SET
+  r_cve_1.evidence = 'Apple patched bugs as CVE-2023-41991 in response to the in-the-wild exploit chain.',
+  r_cve_1.source_id = src_1.id
+ON MATCH SET
+  r_cve_1.evidence = COALESCE(r_cve_1.evidence, 'Apple patched bugs as CVE-2023-41991 in response to the in-the-wild exploit chain.'),
+  r_cve_1.source_id = COALESCE(r_cve_1.source_id, src_1.id)
+
+MERGE (inc_1)-[r_cve_2:exploited_in]->(cve_2)
+ON CREATE SET
+  r_cve_2.evidence = 'Apple patched bugs as CVE-2023-41992 in response to the in-the-wild exploit chain.',
+  r_cve_2.source_id = src_1.id
+ON MATCH SET
+  r_cve_2.evidence = COALESCE(r_cve_2.evidence, 'Apple patched bugs as CVE-2023-41992 in response to the in-the-wild exploit chain.'),
+  r_cve_2.source_id = COALESCE(r_cve_2.source_id, src_1.id)
+
+MERGE (inc_1)-[r_cve_3:exploited_in]->(cve_3)
+ON CREATE SET
+  r_cve_3.evidence = 'Apple patched bugs as CVE-2023-41993 in response to the in-the-wild exploit chain.',
+  r_cve_3.source_id = src_1.id
+ON MATCH SET
+  r_cve_3.evidence = COALESCE(r_cve_3.evidence, 'Apple patched bugs as CVE-2023-41993 in response to the in-the-wild exploit chain.'),
+  r_cve_3.source_id = COALESCE(r_cve_3.source_id, src_1.id)
+
+MERGE (mit_1:Mitigation {name:'Patch iOS (install security updates)'})
+ON CREATE SET
+  mit_1.framework = 'Vendor Update',
+  mit_1.summary = 'Apply Apple iOS security updates (e.g., iOS 16.7 / iOS 17.0.1) to remediate known vulnerabilities.'
+ON MATCH SET
+  mit_1.framework = COALESCE(mit_1.framework, 'Vendor Update'),
+  mit_1.summary = COALESCE(mit_1.summary, 'Apply Apple iOS security updates (e.g., iOS 16.7 / iOS 17.0.1) to remediate known vulnerabilities.')
+
+MERGE (mit_1)-[r_mit_1:mitigates]->(inc_1)
+ON CREATE SET
+  r_mit_1.status = 'recommended',
+  r_mit_1.observed_effectiveness = 'Quick patching helps to better protect users; users encouraged to install updates as soon as possible.',
+  r_mit_1.evidence = 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1; users encouraged to install them as soon as possible.',
+  r_mit_1.source_id = src_1.id
+ON MATCH SET
+  r_mit_1.status = COALESCE(r_mit_1.status, 'recommended'),
+  r_mit_1.observed_effectiveness = COALESCE(r_mit_1.observed_effectiveness, 'Quick patching helps to better protect users; users encouraged to install updates as soon as possible.'),
+  r_mit_1.evidence = COALESCE(r_mit_1.evidence, 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1; users encouraged to install them as soon as possible.'),
+  r_mit_1.source_id = COALESCE(r_mit_1.source_id, src_1.id)
+
+MERGE (actor_1)-[r_sup_actor_1:supported_by]->(src_1)
+ON CREATE SET
+  r_sup_actor_1.quote = 'Developed by the commercial surveillance vendor, Intellexa, this exploit chain is used to install its Predator spyware.'
+ON MATCH SET
+  r_sup_actor_1.quote = COALESCE(r_sup_actor_1.quote, 'Developed by the commercial surveillance vendor, Intellexa, this exploit chain is used to install its Predator spyware.')
+
+MERGE (mal_1)-[r_sup_mal_1:supported_by]->(src_1)
+ON CREATE SET
+  r_sup_mal_1.quote = '...used to install its Predator spyware surreptitiously onto a device.'
+ON MATCH SET
+  r_sup_mal_1.quote = COALESCE(r_sup_mal_1.quote, '...used to install its Predator spyware surreptitiously onto a device.')
+
+MERGE (inc_1)-[r_sup_inc_1:supported_by]->(src_1)
+ON CREATE SET
+  r_sup_inc_1.quote = 'Discovered an in-the-wild 0-day exploit chain for iPhones... Apple patched the bugs... as CVE-2023-41991, CVE-2023-41992, CVE-2023-41993.'
+ON MATCH SET
+  r_sup_inc_1.quote = COALESCE(r_sup_inc_1.quote, 'Discovered an in-the-wild 0-day exploit chain for iPhones... Apple patched the bugs... as CVE-2023-41991, CVE-2023-41992, CVE-2023-41993.')
+
+MERGE (cve_1)-[r_sup_cve_1:supported_by]->(src_1)
+ON CREATE SET
+  r_sup_cve_1.quote = 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as CVE-2023-41991...'
+ON MATCH SET
+  r_sup_cve_1.quote = COALESCE(r_sup_cve_1.quote, 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as CVE-2023-41991...')
+
+MERGE (cve_2)-[r_sup_cve_2:supported_by]->(src_1)
+ON CREATE SET
+  r_sup_cve_2.quote = 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as ... CVE-2023-41992 ...'
+ON MATCH SET
+  r_sup_cve_2.quote = COALESCE(r_sup_cve_2.quote, 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as ... CVE-2023-41992 ...')
+
+MERGE (cve_3)-[r_sup_cve_3:supported_by]->(src_1)
+ON CREATE SET
+  r_sup_cve_3.quote = 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as ... CVE-2023-41993.'
+ON MATCH SET
+  r_sup_cve_3.quote = COALESCE(r_sup_cve_3.quote, 'Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as ... CVE-2023-41993.')"
+chinese-hackers-exploit-vmware-bug-as-zero-day-for-two-years.json,"MERGE (ta_threatactor_unc3886:ThreatActor {name:'UNC3886'})
+ON CREATE SET
+  ta_threatactor_unc3886.sponsor = 'China',
+  ta_threatactor_unc3886.motivation = 'espionage',
+  ta_threatactor_unc3886.summary = 'Chinese cyber espionage group reported by Mandiant; exploited VMware vCenter/ESXi vulnerabilities and deployed VirtualPita/VirtualPie backdoors to harvest and exfiltrate files from guest VMs.'
+ON MATCH SET
+  ta_threatactor_unc3886.sponsor = coalesce(ta_threatactor_unc3886.sponsor, 'China'),
+  ta_threatactor_unc3886.motivation = coalesce(ta_threatactor_unc3886.motivation, 'espionage'),
+  ta_threatactor_unc3886.summary = coalesce(ta_threatactor_unc3886.summary, 'Chinese cyber espionage group reported by Mandiant; exploited VMware vCenter/ESXi vulnerabilities and deployed VirtualPita/VirtualPie backdoors to harvest and exfiltrate files from guest VMs.')
+
+MERGE (mot_motivation_espionage:Motivation {type:'espionage'})
+MERGE (ta_threatactor_unc3886)-[:motivated_by]->(mot_motivation_espionage)
+
+MERGE (src_source_mandiant:Source {id:'mandiant-unc3886-cve-2023-34048'})
+ON CREATE SET
+  src_source_mandiant.publisher = 'Mandiant',
+  src_source_mandiant.title = 'Mandiant report: UNC3886 used CVE-2023-34048 as part of a campaign exposed in June 2023',
+  src_source_mandiant.published_on = date('2023-06-01')
+ON MATCH SET
+  src_source_mandiant.publisher = coalesce(src_source_mandiant.publisher, 'Mandiant'),
+  src_source_mandiant.title = coalesce(src_source_mandiant.title, 'Mandiant report: UNC3886 used CVE-2023-34048 as part of a campaign exposed in June 2023'),
+  src_source_mandiant.published_on = coalesce(src_source_mandiant.published_on, date('2023-06-01'))
+
+MERGE (src_source_vmware:Source {id:'vmware-cve-2023-34048-confirmation'})
+ON CREATE SET
+  src_source_vmware.publisher = 'VMware',
+  src_source_vmware.title = 'VMware confirmation of CVE-2023-34048 in-the-wild exploitation and October patch',
+  src_source_vmware.published_on = date('2023-10-01')
+ON MATCH SET
+  src_source_vmware.publisher = coalesce(src_source_vmware.publisher, 'VMware'),
+  src_source_vmware.title = coalesce(src_source_vmware.title, 'VMware confirmation of CVE-2023-34048 in-the-wild exploitation and October patch'),
+  src_source_vmware.published_on = coalesce(src_source_vmware.published_on, date('2023-10-01'))
+
+MERGE (cve_cve_2023_34048:CVE {id:'CVE-2023-34048'})
+ON CREATE SET
+  cve_cve_2023_34048.summary = 'Critical VMware vCenter Server vulnerability exploited in the wild; reportedly used as a zero-day since at least late 2021 and patched in October 2023.'
+ON MATCH SET
+  cve_cve_2023_34048.summary = coalesce(cve_cve_2023_34048.summary, 'Critical VMware vCenter Server vulnerability exploited in the wild; reportedly used as a zero-day since at least late 2021 and patched in October 2023.')
+
+MERGE (cve_cve_2023_20867:CVE {id:'CVE-2023-20867'})
+ON CREATE SET
+  cve_cve_2023_20867.summary = 'VMware Tools authentication bypass flaw used to escalate privileges.'
+ON MATCH SET
+  cve_cve_2023_20867.summary = coalesce(cve_cve_2023_20867.summary, 'VMware Tools authentication bypass flaw used to escalate privileges.')
+
+MERGE (mw_malware_virtualpita:Malware {name:'VirtualPita'})
+ON CREATE SET
+  mw_malware_virtualpita.family = 'VirtualPita/VirtualPie',
+  mw_malware_virtualpita.summary = 'Backdoor deployed on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).'
+ON MATCH SET
+  mw_malware_virtualpita.family = coalesce(mw_malware_virtualpita.family, 'VirtualPita/VirtualPie'),
+  mw_malware_virtualpita.summary = coalesce(mw_malware_virtualpita.summary, 'Backdoor deployed on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).')
+
+MERGE (mw_malware_virtualpie:Malware {name:'VirtualPie'})
+ON CREATE SET
+  mw_malware_virtualpie.family = 'VirtualPita/VirtualPie',
+  mw_malware_virtualpie.summary = 'Backdoor deployed on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).'
+ON MATCH SET
+  mw_malware_virtualpie.family = coalesce(mw_malware_virtualpie.family, 'VirtualPita/VirtualPie'),
+  mw_malware_virtualpie.summary = coalesce(mw_malware_virtualpie.summary, 'Backdoor deployed on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).')
+
+MERGE (inc_incident_unc3886_vmware_202106:Incident {id:'inc-unc3886-vcenter-esxi-2021late-34048'})
+ON CREATE SET
+  inc_incident_unc3886_vmware_202106.date = date('2021-10-01'),
+  inc_incident_unc3886_vmware_202106.type = 'intrusion',
+  inc_incident_unc3886_vmware_202106.exfiltration = true,
+  inc_incident_unc3886_vmware_202106.summary = 'UNC3886 exploited CVE-2023-34048 as a zero-day since at least late 2021 to breach vCenter servers, then used compromised credentials to deploy VirtualPita/VirtualPie backdoors on ESXi hosts via malicious VIBs; later exploited CVE-2023-20867 to escalate privileges, harvest files, and exfiltrate from guest VMs.'
+ON MATCH SET
+  inc_incident_unc3886_vmware_202106.date = coalesce(inc_incident_unc3886_vmware_202106.date, date('2021-10-01')),
+  inc_incident_unc3886_vmware_202106.type = coalesce(inc_incident_unc3886_vmware_202106.type, 'intrusion'),
+  inc_incident_unc3886_vmware_202106.exfiltration = coalesce(inc_incident_unc3886_vmware_202106.exfiltration, true),
+  inc_incident_unc3886_vmware_202106.summary = coalesce(inc_incident_unc3886_vmware_202106.summary, 'UNC3886 exploited CVE-2023-34048 as a zero-day since at least late 2021 to breach vCenter servers, then used compromised credentials to deploy VirtualPita/VirtualPie backdoors on ESXi hosts via malicious VIBs; later exploited CVE-2023-20867 to escalate privileges, harvest files, and exfiltrate from guest VMs.')
+
+MERGE (date_date_20211001:Date {value:date('2021-10-01')})
+MERGE (inc_incident_unc3886_vmware_202106)-[:occurred_on {date:date('2021-10-01')}]->(date_date_20211001)
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_attr_attributed:attributed_to]->(ta_threatactor_unc3886)
+ON CREATE SET
+  r_attr_attributed.confidence = 'high',
+  r_attr_attributed.evidence = 'Mandiant revealed the vulnerability was used by the UNC3886 Chinese cyber espionage group as part of a previously reported campaign.',
+  r_attr_attributed.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_attr_attributed.confidence = coalesce(r_attr_attributed.confidence, 'high'),
+  r_attr_attributed.evidence = coalesce(r_attr_attributed.evidence, 'Mandiant revealed the vulnerability was used by the UNC3886 Chinese cyber espionage group as part of a previously reported campaign.'),
+  r_attr_attributed.source_id = coalesce(r_attr_attributed.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_expl_34048:exploited_in]->(cve_cve_2023_34048)
+ON CREATE SET
+  r_expl_34048.first_seen = date('2021-10-01'),
+  r_expl_34048.evidence = ""Exploited as a zero-day since at least late 2021; used by UNC3886 to breach targets' vCenter servers."",
+  r_expl_34048.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_expl_34048.first_seen = coalesce(r_expl_34048.first_seen, date('2021-10-01')),
+  r_expl_34048.evidence = coalesce(r_expl_34048.evidence, ""Exploited as a zero-day since at least late 2021; used by UNC3886 to breach targets' vCenter servers.""),
+  r_expl_34048.source_id = coalesce(r_expl_34048.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_expl_20867:exploited_in]->(cve_cve_2023_20867)
+ON CREATE SET
+  r_expl_20867.evidence = 'They exploited the CVE-2023-20867 VMware Tools authentication bypass flaw to escalate privileges, harvest files, and exfiltrate them from guest VMs.',
+  r_expl_20867.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_expl_20867.evidence = coalesce(r_expl_20867.evidence, 'They exploited the CVE-2023-20867 VMware Tools authentication bypass flaw to escalate privileges, harvest files, and exfiltrate them from guest VMs.'),
+  r_expl_20867.source_id = coalesce(r_expl_20867.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_mw_involved_vpita:involved_malware]->(mw_malware_virtualpita)
+ON CREATE SET
+  r_mw_involved_vpita.evidence = 'Deployed VirtualPita backdoor on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).',
+  r_mw_involved_vpita.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_mw_involved_vpita.evidence = coalesce(r_mw_involved_vpita.evidence, 'Deployed VirtualPita backdoor on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).'),
+  r_mw_involved_vpita.source_id = coalesce(r_mw_involved_vpita.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_mw_involved_vpie:involved_malware]->(mw_malware_virtualpie)
+ON CREATE SET
+  r_mw_involved_vpie.evidence = 'Deployed VirtualPie backdoor on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).',
+  r_mw_involved_vpie.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_mw_involved_vpie.evidence = coalesce(r_mw_involved_vpie.evidence, 'Deployed VirtualPie backdoor on ESXi hosts via maliciously crafted vSphere Installation Bundles (VIBs).'),
+  r_mw_involved_vpie.source_id = coalesce(r_mw_involved_vpie.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (ta_threatactor_unc3886)-[r_uses_vpita:uses]->(mw_malware_virtualpita)
+ON CREATE SET
+  r_uses_vpita.evidence = 'Used compromised credentials to deploy VirtualPita backdoor on ESXi hosts.',
+  r_uses_vpita.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_uses_vpita.evidence = coalesce(r_uses_vpita.evidence, 'Used compromised credentials to deploy VirtualPita backdoor on ESXi hosts.'),
+  r_uses_vpita.source_id = coalesce(r_uses_vpita.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (ta_threatactor_unc3886)-[r_uses_vpie:uses]->(mw_malware_virtualpie)
+ON CREATE SET
+  r_uses_vpie.evidence = 'Used compromised credentials to deploy VirtualPie backdoor on ESXi hosts.',
+  r_uses_vpie.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_uses_vpie.evidence = coalesce(r_uses_vpie.evidence, 'Used compromised credentials to deploy VirtualPie backdoor on ESXi hosts.'),
+  r_uses_vpie.source_id = coalesce(r_uses_vpie.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (tech_technique_t1190:Technique {technique_id:'T1190'})
+ON CREATE SET
+  tech_technique_t1190.name = 'Exploit Public-Facing Application',
+  tech_technique_t1190.tactic = 'Initial Access',
+  tech_technique_t1190.summary = 'Exploitation of a server-side vulnerability to gain initial access.'
+ON MATCH SET
+  tech_technique_t1190.name = coalesce(tech_technique_t1190.name, 'Exploit Public-Facing Application'),
+  tech_technique_t1190.tactic = coalesce(tech_technique_t1190.tactic, 'Initial Access'),
+  tech_technique_t1190.summary = coalesce(tech_technique_t1190.summary, 'Exploitation of a server-side vulnerability to gain initial access.')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_tech_used_t1190:used_technique]->(tech_technique_t1190)
+ON CREATE SET
+  r_tech_used_t1190.phase = 'Initial Access',
+  r_tech_used_t1190.details = ""Exploited vCenter Server vulnerability CVE-2023-34048 to breach targets' vCenter servers."",
+  r_tech_used_t1190.evidence = ""Used CVE-2023-34048 to breach targets' vCenter servers."",
+  r_tech_used_t1190.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_tech_used_t1190.phase = coalesce(r_tech_used_t1190.phase, 'Initial Access'),
+  r_tech_used_t1190.details = coalesce(r_tech_used_t1190.details, ""Exploited vCenter Server vulnerability CVE-2023-34048 to breach targets' vCenter servers.""),
+  r_tech_used_t1190.evidence = coalesce(r_tech_used_t1190.evidence, ""Used CVE-2023-34048 to breach targets' vCenter servers.""),
+  r_tech_used_t1190.source_id = coalesce(r_tech_used_t1190.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (tech_technique_t1068:Technique {technique_id:'T1068'})
+ON CREATE SET
+  tech_technique_t1068.name = 'Exploitation for Privilege Escalation',
+  tech_technique_t1068.tactic = 'Privilege Escalation',
+  tech_technique_t1068.summary = 'Use of a software vulnerability to elevate privileges.'
+ON MATCH SET
+  tech_technique_t1068.name = coalesce(tech_technique_t1068.name, 'Exploitation for Privilege Escalation'),
+  tech_technique_t1068.tactic = coalesce(tech_technique_t1068.tactic, 'Privilege Escalation'),
+  tech_technique_t1068.summary = coalesce(tech_technique_t1068.summary, 'Use of a software vulnerability to elevate privileges.')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_tech_used_t1068:used_technique]->(tech_technique_t1068)
+ON CREATE SET
+  r_tech_used_t1068.phase = 'Privilege Escalation',
+  r_tech_used_t1068.details = 'Exploited CVE-2023-20867 (VMware Tools authentication bypass) to escalate privileges.',
+  r_tech_used_t1068.evidence = 'Exploited CVE-2023-20867 to escalate privileges.',
+  r_tech_used_t1068.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_tech_used_t1068.phase = coalesce(r_tech_used_t1068.phase, 'Privilege Escalation'),
+  r_tech_used_t1068.details = coalesce(r_tech_used_t1068.details, 'Exploited CVE-2023-20867 (VMware Tools authentication bypass) to escalate privileges.'),
+  r_tech_used_t1068.evidence = coalesce(r_tech_used_t1068.evidence, 'Exploited CVE-2023-20867 to escalate privileges.'),
+  r_tech_used_t1068.source_id = coalesce(r_tech_used_t1068.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (tech_technique_t1020:Technique {technique_id:'T1020'})
+ON CREATE SET
+  tech_technique_t1020.name = 'Automated Exfiltration',
+  tech_technique_t1020.tactic = 'Exfiltration',
+  tech_technique_t1020.summary = 'Exfiltration of data from victim systems.'
+ON MATCH SET
+  tech_technique_t1020.name = coalesce(tech_technique_t1020.name, 'Automated Exfiltration'),
+  tech_technique_t1020.tactic = coalesce(tech_technique_t1020.tactic, 'Exfiltration'),
+  tech_technique_t1020.summary = coalesce(tech_technique_t1020.summary, 'Exfiltration of data from victim systems.')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[r_tech_used_t1020:used_technique]->(tech_technique_t1020)
+ON CREATE SET
+  r_tech_used_t1020.phase = 'Exfiltration',
+  r_tech_used_t1020.details = 'Harvested files and exfiltrated them from guest VMs.',
+  r_tech_used_t1020.evidence = 'Harvest files, and exfiltrate them from guest VMs.',
+  r_tech_used_t1020.source_id = 'mandiant-unc3886-cve-2023-34048'
+ON MATCH SET
+  r_tech_used_t1020.phase = coalesce(r_tech_used_t1020.phase, 'Exfiltration'),
+  r_tech_used_t1020.details = coalesce(r_tech_used_t1020.details, 'Harvested files and exfiltrated them from guest VMs.'),
+  r_tech_used_t1020.evidence = coalesce(r_tech_used_t1020.evidence, 'Harvest files, and exfiltrate them from guest VMs.'),
+  r_tech_used_t1020.source_id = coalesce(r_tech_used_t1020.source_id, 'mandiant-unc3886-cve-2023-34048')
+
+MERGE (inc_incident_unc3886_vmware_202106)-[:supported_by {quote:'Mandiant revealed today the vulnerability was used by the UNC3886 Chinese cyber espionage group as part of a previously reported campaign, exposed in June 2023.'}]->(src_source_mandiant)
+MERGE (cve_cve_2023_34048)-[:supported_by {quote:'VMware confirmed it is aware of CVE-2023-34048 in-the-wild exploitation and the flaw was patched in October 2023.'}]->(src_source_vmware)"
+ukraine-remains-russias-biggest-cyber-focus-in-2023.json,"MERGE (ta_frozenbarents:ThreatActor {name:'FROZENBARENTS'})
+ON CREATE SET
+  ta_frozenbarents.sponsor = 'Russian Armed Forces GRU Unit 74455',
+  ta_frozenbarents.summary = 'Also known as Sandworm; attributed to Russian Armed Forces’ Main Directorate of the General Staff (GRU) Unit 74455. Focuses on the war in Ukraine with campaigns spanning intelligence collection, information operations, and leaking hacked data via Telegram. Offensive capabilities include credential phishing, mobile activity, malware, and external exploitation of services. Targets government, defense, energy, transportation/logistics, education, and humanitarian organizations.'
+ON MATCH SET
+  ta_frozenbarents.sponsor = CASE WHEN ta_frozenbarents.sponsor IS NULL OR ta_frozenbarents.sponsor = '' THEN 'Russian Armed Forces GRU Unit 74455' ELSE ta_frozenbarents.sponsor END,
+  ta_frozenbarents.summary = CASE WHEN ta_frozenbarents.summary IS NULL OR ta_frozenbarents.summary = '' THEN 'Also known as Sandworm; attributed to Russian Armed Forces’ Main Directorate of the General Staff (GRU) Unit 74455. Focuses on the war in Ukraine with campaigns spanning intelligence collection, information operations, and leaking hacked data via Telegram. Offensive capabilities include credential phishing, mobile activity, malware, and external exploitation of services. Targets government, defense, energy, transportation/logistics, education, and humanitarian organizations.' ELSE ta_frozenbarents.summary END
+MERGE (ta_sandworm:ThreatActor {name:'Sandworm'})
+ON CREATE SET
+  ta_sandworm.summary = 'Alias referenced for FROZENBARENTS.'
+ON MATCH SET
+  ta_sandworm.summary = CASE WHEN ta_sandworm.summary IS NULL OR ta_sandworm.summary = '' THEN 'Alias referenced for FROZENBARENTS.' ELSE ta_sandworm.summary END
+MERGE (ta_frozenbarents)-[:has_alias {date: date('2019-01-01')}]->(ta_sandworm)
+
+MERGE (mot_esp:Motivation {type:'espionage'})
+MERGE (ta_frozenbarents)-[:motivated_by]->(mot_esp)
+
+MERGE (cap_io:Capability {name:'Information Operations'})
+ON CREATE SET cap_io.summary = 'Information operations (IO) including leaking hacked data and other IO activity.'
+ON MATCH SET cap_io.summary = CASE WHEN cap_io.summary IS NULL OR cap_io.summary = '' THEN 'Information operations (IO) including leaking hacked data and other IO activity.' ELSE cap_io.summary END
+MERGE (ta_frozenbarents)-[:leverages {details:'Campaigns spanning intelligence collection, IO, and leaking hacked data through Telegram.', evidence:'Campaigns spanning intelligence collection, IO, and leaking hacked data through Telegram.', source_id:'Fog of War report', page:''}]->(cap_io)
+
+MERGE (cap_mobile:Capability {name:'Mobile Operations'})
+ON CREATE SET cap_mobile.summary = 'Mobile activity as part of offensive operations.'
+ON MATCH SET cap_mobile.summary = CASE WHEN cap_mobile.summary IS NULL OR cap_mobile.summary = '' THEN 'Mobile activity as part of offensive operations.' ELSE cap_mobile.summary END
+MERGE (ta_frozenbarents)-[:leverages {details:'Offensive capabilities include mobile activity.', evidence:'Offensive capabilities including ... mobile activity ...', source_id:'Fog of War report', page:''}]->(cap_mobile)
+
+MERGE (cap_exploit:Capability {name:'External Exploitation'})
+ON CREATE SET cap_exploit.summary = 'External exploitation of services as an offensive capability.'
+ON MATCH SET cap_exploit.summary = CASE WHEN cap_exploit.summary IS NULL OR cap_exploit.summary = '' THEN 'External exploitation of services as an offensive capability.' ELSE cap_exploit.summary END
+MERGE (ta_frozenbarents)-[:leverages {details:'Offensive capabilities include external exploitation of services.', evidence:'Offensive capabilities including ... external exploitation of services ...', source_id:'Fog of War report', page:''}]->(cap_exploit)
+
+MERGE (c2_telegram:C2_Infrastructure {service:'Telegram'})
+ON CREATE SET c2_telegram.summary = 'Used to leak hacked data.'
+ON MATCH SET c2_telegram.summary = CASE WHEN c2_telegram.summary IS NULL OR c2_telegram.summary = '' THEN 'Used to leak hacked data.' ELSE c2_telegram.summary END
+MERGE (ta_frozenbarents)-[:abuses {date: date('2019-01-01'), evidence:'Leaking hacked data through Telegram.', source_id:'Fog of War report', page:''}]->(c2_telegram)
+
+MERGE (tech_phish:Technique {technique_id:'T1566', name:'Phishing', tactic:'Initial Access'})
+ON CREATE SET tech_phish.summary = 'Credential phishing capability referenced.'
+ON MATCH SET tech_phish.summary = CASE WHEN tech_phish.summary IS NULL OR tech_phish.summary = '' THEN 'Credential phishing capability referenced.' ELSE tech_phish.summary END
+MERGE (ta_frozenbarents)-[:uses {date: date('2019-01-01'), evidence:'Offensive capabilities including credential phishing.', source_id:'Fog of War report', page:''}]->(tech_phish)
+
+MERGE (tech_exploit:Technique {technique_id:'T1190', name:'Exploit Public-Facing Application', tactic:'Initial Access'})
+ON CREATE SET tech_exploit.summary = 'External exploitation of services referenced, including exploitation of EXIM mail servers globally.'
+ON MATCH SET tech_exploit.summary = CASE WHEN tech_exploit.summary IS NULL OR tech_exploit.summary = '' THEN 'External exploitation of services referenced, including exploitation of EXIM mail servers globally.' ELSE tech_exploit.summary END
+MERGE (ta_frozenbarents)-[:uses {date: date('2019-08-01'), evidence:'Continues to exploit EXIM mail servers globally and use these compromised hosts as part of their operational network (trend going back to at least August 2019).', source_id:'Fog of War report', page:''}]->(tech_exploit)
+
+MERGE (sec_gov:Sector {name:'Government'})
+MERGE (sec_energy:Sector {name:'Energy'})
+MERGE (sec_transport:Sector {name:'Transportation'})
+MERGE (sec_education:Sector {name:'Education'})
+MERGE (sec_other:Sector {name:'Other'})
+
+MERGE (vic_defense:Victim {name:'Defense organizations'})
+ON CREATE SET vic_defense.sector = 'Government', vic_defense.summary = 'Defense organizations targeted for Russian intelligence collection.'
+ON MATCH SET
+  vic_defense.sector = CASE WHEN vic_defense.sector IS NULL OR vic_defense.sector = '' THEN 'Government' ELSE vic_defense.sector END,
+  vic_defense.summary = CASE WHEN vic_defense.summary IS NULL OR vic_defense.summary = '' THEN 'Defense organizations targeted for Russian intelligence collection.' ELSE vic_defense.summary END
+MERGE (ta_frozenbarents)-[:attacked {date: date('2019-01-01'), evidence:'They target sectors of interest for Russian intelligence collection including government, defense...', source_id:'Fog of War report', page:''}]->(vic_defense)
+MERGE (vic_defense)-[:located_in]->(sec_gov)
+
+MERGE (vic_gov:Victim {name:'Government organizations'})
+ON CREATE SET vic_gov.sector = 'Government', vic_gov.summary = 'Government organizations targeted for Russian intelligence collection.'
+ON MATCH SET
+  vic_gov.sector = CASE WHEN vic_gov.sector IS NULL OR vic_gov.sector = '' THEN 'Government' ELSE vic_gov.sector END,
+  vic_gov.summary = CASE WHEN vic_gov.summary IS NULL OR vic_gov.summary = '' THEN 'Government organizations targeted for Russian intelligence collection.' ELSE vic_gov.summary END
+MERGE (ta_frozenbarents)-[:attacked {date: date('2019-01-01'), evidence:'They target sectors of interest for Russian intelligence collection including government...', source_id:'Fog of War report', page:''}]->(vic_gov)
+
+MERGE (vic_energy:Victim {name:'Energy organizations'})
+ON CREATE SET vic_energy.sector = 'Energy', vic_energy.summary = 'Energy sector organizations targeted for intelligence collection.'
+ON MATCH SET
+  vic_energy.sector = CASE WHEN vic_energy.sector IS NULL OR vic_energy.sector = '' THEN 'Energy' ELSE vic_energy.sector END,
+  vic_energy.summary = CASE WHEN vic_energy.summary IS NULL OR vic_energy.summary = '' THEN 'Energy sector organizations targeted for intelligence collection.' ELSE vic_energy.summary END
+MERGE (ta_frozenbarents)-[:attacked {date: date('2019-01-01'), evidence:'They target sectors ... including ... energy...', source_id:'Fog of War report', page:''}]->(vic_energy)
+
+MERGE (vic_transport:Victim {name:'Transportation/Logistics organizations'})
+ON CREATE SET vic_transport.sector = 'Transportation', vic_transport.summary = 'Transportation and logistics organizations targeted for intelligence collection.'
+ON MATCH SET
+  vic_transport.sector = CASE WHEN vic_transport.sector IS NULL OR vic_transport.sector = '' THEN 'Transportation' ELSE vic_transport.sector END,
+  vic_transport.summary = CASE WHEN vic_transport.summary IS NULL OR vic_transport.summary = '' THEN 'Transportation and logistics organizations targeted for intelligence collection.' ELSE vic_transport.summary END
+MERGE (ta_frozenbarents)-[:attacked {date: date('2019-01-01'), evidence:'They target sectors ... including ... transportation/logistics...', source_id:'Fog of War report', page:''}]->(vic_transport)
+
+MERGE (vic_education:Victim {name:'Education organizations'})
+ON CREATE SET vic_education.sector = 'Education', vic_education.summary = 'Education organizations targeted for intelligence collection.'
+ON MATCH SET
+  vic_education.sector = CASE WHEN vic_education.sector IS NULL OR vic_education.sector = '' THEN 'Education' ELSE vic_education.sector END,
+  vic_education.summary = CASE WHEN vic_education.summary IS NULL OR vic_education.summary = '' THEN 'Education organizations targeted for intelligence collection.' ELSE vic_education.summary END
+MERGE (ta_frozenbarents)-[:attacked {date: date('2019-01-01'), evidence:'They target sectors ... including ... education...', source_id:'Fog of War report', page:''}]->(vic_education)
+
+MERGE (vic_humanitarian:Victim {name:'Humanitarian organizations'})
+ON CREATE SET vic_humanitarian.sector = 'Other', vic_humanitarian.summary = 'Humanitarian organizations targeted for intelligence collection.'
+ON MATCH SET
+  vic_humanitarian.sector = CASE WHEN vic_humanitarian.sector IS NULL OR vic_humanitarian.sector = '' THEN 'Other' ELSE vic_humanitarian.sector END,
+  vic_humanitarian.summary = CASE WHEN vic_humanitarian.summary IS NULL OR vic_humanitarian.summary = '' THEN 'Humanitarian organizations targeted for intelligence collection.' ELSE vic_humanitarian.summary END
+MERGE (ta_frozenbarents)-[:attacked {date: date('2019-01-01'), evidence:'They target sectors ... including ... humanitarian organizations.', source_id:'Fog of War report', page:''}]->(vic_humanitarian)
+
+MERGE (inc_exim:Incident {id:'FOG-OF-WAR-FROZENBARENTS-EXIM-OPSNET-2019-08'})
+ON CREATE SET
+  inc_exim.date = date('2019-08-01'),
+  inc_exim.type = 'intrusion',
+  inc_exim.summary = 'FROZENBARENTS exploited EXIM mail servers globally and used compromised hosts as part of their operational network; observed accessing victim networks, interacting with victim accounts, sending malicious emails, and conducting information operations.'
+ON MATCH SET
+  inc_exim.date = CASE WHEN inc_exim.date IS NULL THEN date('2019-08-01') ELSE inc_exim.date END,
+  inc_exim.type = CASE WHEN inc_exim.type IS NULL OR inc_exim.type = '' THEN 'intrusion' ELSE inc_exim.type END,
+  inc_exim.summary = CASE WHEN inc_exim.summary IS NULL OR inc_exim.summary = '' THEN 'FROZENBARENTS exploited EXIM mail servers globally and used compromised hosts as part of their operational network; observed accessing victim networks, interacting with victim accounts, sending malicious emails, and conducting information operations.' ELSE inc_exim.summary END
+
+MERGE (inc_exim)-[:attributed_to {confidence:'medium', evidence:'Attributed to GRU Unit 74455 (Sandworm / FROZENBARENTS).', source_id:'Fog of War report', page:''}]->(ta_frozenbarents)
+MERGE (inc_exim)-[:used_technique {phase:'Initial Access', details:'external exploitation of EXIM mail servers', evidence:'Continues to exploit EXIM mail servers globally...', source_id:'Fog of War report', page:''}]->(tech_exploit)
+MERGE (inc_exim)-[:used_technique {phase:'Initial Access', details:'credential phishing', evidence:'Offensive capabilities including credential phishing.', source_id:'Fog of War report', page:''}]->(tech_phish)
+MERGE (inc_exim)-[:leverages {details:'Information operations activity and leaking hacked data through Telegram.', evidence:'... leaking hacked data through Telegram ... engaged in information operations (IO) activity.', source_id:'Fog of War report', page:''}]->(cap_io)
+MERGE (inc_exim)-[:leverages {details:'Uses Telegram to leak hacked data.', evidence:'Leaking hacked data through Telegram.', source_id:'Fog of War report', page:''}]->(c2_telegram)
+
+MERGE (src_fog:Source {id:'Fog of War report'})
+ON CREATE SET src_fog.title = 'Fog of War report'
+ON MATCH SET src_fog.title = CASE WHEN src_fog.title IS NULL OR src_fog.title = '' THEN 'Fog of War report' ELSE src_fog.title END
+MERGE (ta_frozenbarents)-[:supported_by {page:'', quote:'FROZENBARENTS (aka Sandworm)... attributed to ... GRU Unit 74455 ... leaking hacked data through Telegram ... offensive capabilities including credential phishing ... external exploitation ... exploit EXIM mail servers globally ...'}]->(src_fog)
+MERGE (inc_exim)-[:supported_by {page:'', quote:'Trend going back to at least August 2019: exploit EXIM mail servers globally and use compromised hosts as part of operational network; observed accessing victim networks, interacting with victim accounts, sending malicious emails, and IO activity.'}]->(src_fog)"

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What type is incident-cve-2024-28085-wallescape?,True,vulnerability
+2,simple,What confidence is recorded for attributing WallEscape incident to Skyler Ferrante?,True,High
+3,simple,What Chrome version threshold is mentioned for CVE-2023-6345 impact?,True,prior to 119.0.6045.199
+4,simple,What sponsor country is listed for Storm-0978?,True,Russia
+5,simple,What family is assigned to Industrial Spy malware?,True,ransomware
+6,simple,What framework is Office Defense in Depth update associated with?,True,Microsoft
+7,simple,What is the incident type for INC-CVE-2023-36884-Storm-0978-active-exploitation?,True,intrusion
+8,simple,What technique tactic is assigned to T1090?,True,Command and Control
+9,simple,What control_id is set on Restrict management interfaces from the public internet?,True,AttackSurface
+10,simple,What date is stored on incident inc-ms-appinstaller-midnov2023?,True,2023-11-01
+11,simple,Who published source microsoft-ti-ms-appinstaller-2023-11?,True,Microsoft Threat Intelligence
+12,simple,What sponsor is listed for Pensive Ursa?,True,FSB
+13,simple,What country ISO2 code is set for Ukrainian defense sector victim?,True,UA
+14,simple,Does msft_peach_sandstorm_password_spray_2023_02 record exfiltration as true or false?,True,true
+15,simple,What technique ID corresponds to Password Spraying in the dataset?,True,T1110.003
+16,single_hop,Which tool is involved in incident-cve-2024-28085-wallescape?,True,wall
+17,single_hop,Which CVE is exploited_in by incident-cve-2024-28085-wallescape?,True,CVE-2024-28085
+18,single_hop,Who is incident-cve-2024-28085-wallescape attributed_to?,True,Skyler Ferrante
+19,single_hop,Which mitigation mitigates CVE-2023-36884 with applied status?,True,Office Defense in Depth update
+20,single_hop,Which motivation type is linked to Storm-0978 via motivated_by?,True,financial
+21,single_hop,Which malware does Storm-0978 use?,True,Industrial Spy
+22,single_hop,Which tool does Storm-0978 use that relates to MoTW bypass?,True,Microsoft Office
+23,single_hop,Which techniques are connected to Volt Typhoon via used_technique?,True,"T1190, T1003, T1021, T1090"
+24,single_hop,Which capability is leveraged by Volt Typhoon?,True,Automation
+25,single_hop,Which tool does Volt Typhoon use to proxy traffic?,True,SOHO network edge devices
+26,single_hop,Which date node is linked from inc-ms-appinstaller-midnov2023 via occurred_on?,True,2023-11-01
+27,single_hop,Which tool is additionally used by Storm-1674 besides ms-appinstaller?,True,Microsoft Teams
+28,single_hop,Which malware is involved_malware in inc_kazuar_ua_def_2023_07?,True,Kazuar
+29,single_hop,Which victim is targeted by inc_kazuar_ua_def_2023_07?,True,Ukrainian defense sector
+30,single_hop,Which country is the Ukrainian defense sector victim located_in?,True,Ukraine
+31,multi_hop,Which CVE is exploited by malware used by Storm-0978?,True,CVE-2023-36884
+32,multi_hop,Which malware is tied to Kazuar through a uses relationship?,True,Sunburst
+33,multi_hop,Which country is the target victim of inc_kazuar_ua_def_2023_07 located in?,True,Ukraine
+34,multi_hop,Which sponsor is associated with the actor targeted in inc_kazuar_ua_def_2023_07?,True,FSB
+35,multi_hop,Which technique IDs were used in INC-CVE-2023-36884 incident?,True,"T1204, T1566.001"
+36,multi_hop,Which tactics correspond to techniques used in INC-CVE-2023-36884 incident?,True,"Execution, Initial Access"
+37,multi_hop,Which technique phases are recorded for Volt Typhoon used_technique entries?,True,"Initial Access, Credential Access, Lateral Movement, Command and Control"
+38,multi_hop,Which techniques are mitigated by Restrict management interfaces from the public internet?,True,"T1190, T1090"
+39,multi_hop,Which tool is involved in the incident attributed to Peach Sandstorm?,True,"Publicly available tools, Custom tools"
+40,multi_hop,Which capability is leveraged by Peach Sandstorm in its attributed incident?,True,Intelligence Collection
+41,multi_hop,How many threat actors are attributed_to inc-ms-appinstaller-midnov2023?,True,4
+42,multi_hop,How many distinct tools are used by Storm-1674?,True,2
+43,multi_hop,How many techniques are linked to Volt Typhoon via used_technique?,True,4
+44,multi_hop,How many techniques are mitigated by Restrict management interfaces from the public internet?,True,2
+45,multi_hop,How many sectors are targeted by msft_peach_sandstorm_password_spray_2023_02?,True,3
+46,unanswerable,What CVSS severity score is assigned to CVE-2024-28085?,False,
+47,unanswerable,Which specific malware families were distributed via ms-appinstaller in the November 2023 incident?,False,
+48,unanswerable,What exact data volume was exfiltrated in the Peach Sandstorm February 2023 incident?,False,
+49,unanswerable,Which Fortinet FortiGuard device models were exploited by Volt Typhoon?,False,
+50,unanswerable,What patch release date fixed CVE-2023-36884 in Microsoft Office?,False,

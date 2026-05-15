@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What motivation is set for threat actor UAC-0099?,True,espionage
+2,simple,What is the incident type for INC-UAC0099-2023-06-UKRAINE?,True,intrusion
+3,simple,What is the date of incident zuorat-soho-routers-activity-2020-04?,True,2020-04-01
+4,simple,What malware family is assigned to ZuoRAT?,True,RAT
+5,simple,"What sector is assigned to victim SOHO routers (Cisco, Netgear, Asus and others)?",True,Technology
+6,simple,What country name corresponds to iso2 GB?,True,United Kingdom
+7,simple,What malware family is set for Dyre?,True,Financial Trojan
+8,simple,What sponsor is set for threat actor APT29?,True,Russia
+9,simple,What CVSS score is stated in the summary for CVE-2023-42793?,True,9.8
+10,simple,What is the date of incident apt29-teamcity-cve-2023-42793-exploitation-2023-09?,True,2023-09-01
+11,simple,What service label is used for the C2_Infrastructure node?,True,C2 Server
+12,simple,What incident type is set for uac-0050-phishing-remcos-2023-02?,True,phishing
+13,simple,What is the published_date for CVE-2023-49070?,True,2023-01-01
+14,simple,What is the publisher for source text:apache-ofbiz-cve-2023-51467?,True,Unknown
+15,simple,What two boolean flags are true on incident inc-clop-general?,True,"exfiltration, double_extortion"
+16,single_hop,Which motivation type is UAC-0099 linked to via motivated_by?,True,espionage
+17,single_hop,Which two sectors are targeted by incident INC-UAC0099-2023-06-UKRAINE?,True,"Government, Media"
+18,single_hop,Which country does incident INC-UAC0099-2023-06-UKRAINE occur in?,True,Ukraine
+19,single_hop,Which technique is linked by used_technique from INC-UAC0099-2023-06-UKRAINE?,True,T1566
+20,single_hop,Which malware is involved in incident zuorat-soho-routers-activity-2020-04?,True,ZuoRAT
+21,single_hop,Which technique ID is used for Initial Access in the ZuoRAT incident?,True,T1210
+22,single_hop,Which three techniques are used by incident zuorat-soho-routers-activity-2020-04?,True,"T1210, T1040, T1557"
+23,single_hop,Which victim is attacked by Dyre via attacked relationship?,True,Banks and other companies (targeted by Dyre)
+24,single_hop,Which tools does Dyre use to target credentials?,True,"Internet Explorer, Chrome, Firefox"
+25,single_hop,Which countries is the Dyre victim located in?,True,"United States, United Kingdom"
+26,single_hop,Which aliases does APT29 link to via has_alias?,True,"CozyBear, the Dukes, Midnight Blizzard, Nobelium"
+27,single_hop,Which CVE is linked by exploited_in from the APT29 TeamCity incident?,True,CVE-2023-42793
+28,single_hop,Which two technique IDs are used in the APT29 TeamCity incident?,True,"T1190, T1195"
+29,single_hop,Which malware does threat actor Ryuk use?,True,BazarLoader
+30,single_hop,Which malware does threat actor UAC-0050 use?,True,Remcos RAT
+31,multi_hop,Which CVE is exploited by malware used by UAC-0099?,True,CVE-2023-38831
+32,multi_hop,Which country hosts both victims attacked by UAC-0099?,True,Ukraine
+33,multi_hop,Which technique is used in the incident attributed to UAC-0099?,True,T1566
+34,multi_hop,What is the evidence date on UAC-0099 attacks against its victims?,True,2023-06-01
+35,multi_hop,How many sectors are targeted by incident INC-UAC0099-2023-06-UKRAINE?,True,2
+36,multi_hop,How many distinct techniques are linked to the ZuoRAT incident?,True,3
+37,multi_hop,Which technique tactic corresponds to Network Sniffing used in ZuoRAT incident?,True,Discovery
+38,multi_hop,How many tools are used by Dyre to attack web browsers?,True,3
+39,multi_hop,How many countries is the Dyre victim located in?,True,2
+40,multi_hop,Which country names are linked to the Dyre victim through located_in?,True,"United States, United Kingdom"
+41,multi_hop,How many aliases does APT29 have via has_alias edges?,True,4
+42,multi_hop,Which technique names are used by the APT29 TeamCity incident?,True,"Exploit Public-Facing Application, Supply Chain Compromise"
+43,multi_hop,What confidence is set on attribution of the APT29 TeamCity incident?,True,high
+44,multi_hop,How many techniques are linked to inc-clop-general?,True,2
+45,multi_hop,How many incidents are attributed_to Clop?,True,3
+46,unanswerable,What is the CVSS score for CVE-2023-38831?,False,
+47,unanswerable,Which specific JetBrains TeamCity versions are affected by CVE-2023-42793?,False,
+48,unanswerable,What encryption algorithm does Ransom.Clop use for file encryption?,False,
+49,unanswerable,What are the IP addresses of the C2 servers used by BazarLoader?,False,
+50,unanswerable,What is the total cost_estimate for INC-UAC0099-2023-06-UKRAINE?,False,

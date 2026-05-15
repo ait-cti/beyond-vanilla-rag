@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the published date for CVE-2022-30190?,True,2022-01-01
+2,simple,What type is incident incident-cve-2022-30190-follina?,True,vulnerability
+3,simple,What technique tactic is assigned to T1566?,True,Initial Access
+4,simple,What technique tactic is assigned to T1204?,True,Execution
+5,simple,What is the summary topic of CVE-2024-0204?,True,Authentication bypass in Fortra GoAnywhere MFT
+6,simple,What incident type is CVE-2024-0204-GoAnywhereMFT-PoC?,True,vulnerability exploitation
+7,simple,What confidence is set on attribution for CVE-2024-0204-GoAnywhereMFT-PoC?,True,high
+8,simple,What is the publisher for source microsoft-august-patch-tuesday-dogwalk-cve-2022-34713?,True,Microsoft
+9,simple,What date is stored in incident inc-cve-2022-34713-active-exploitation?,True,2022-08-01
+10,simple,What sponsor is set for threat actor FIN12?,True,Russian cyber crime
+11,simple,What motivation is set for threat actor EXOTIC LILY?,True,financial
+12,simple,What sector value is stored for victim Ukrainian government entities?,True,Government
+13,simple,What ISO2 code is stored for the country Ukraine node?,True,UA
+14,simple,What CVE summary mentions CVSS 10.0 and zero-click takeover?,True,CVE-2023-7028
+15,simple,What family is set for malware SpectralBlur?,True,Backdoor
+16,single_hop,Which CVE is exploited in incident inc-cve-2023-36884-active-exploitation?,True,CVE-2023-36884
+17,single_hop,Which malware is used by Storm-0978?,True,Industrial Spy
+18,single_hop,Which technique is used by incident inc-cve-2022-34713-active-exploitation?,True,T1203
+19,single_hop,Which tool is involved in CVE-2024-0204-GoAnywhereMFT-PoC incident?,True,Fortra GoAnywhere MFT
+20,single_hop,Which threat actor is attributed to uptycs_unc-0050_latest_campaign incident?,True,UNC-0050
+21,single_hop,Which country is Ukrainian government entities victim located in?,True,Ukraine
+22,single_hop,Which technique is linked to uptycs_unc-0050_latest_campaign via used_technique?,True,T1020
+23,single_hop,Which malware is involved in incident inc-zuorat-soho-routers-2020-04?,True,ZuoRAT
+24,single_hop,Which technique represents man-in-the-middle in inc-zuorat-soho-routers-2020-04?,True,T1557
+25,single_hop,Which victim is targeted by incident INC-JinxLoader-ADNOC-Phishing-RAR?,True,Abu Dhabi National Oil Company (ADNOC)
+26,single_hop,Which technique is used for initial access in INC-JinxLoader-ADNOC-Phishing-RAR?,True,T1566
+27,single_hop,Which actor is attributed to incident INC-TA444-SpectralBlur-2024-08?,True,TA444
+28,single_hop,Which malware abuses the Command-and-control server infrastructure?,True,SpectralBlur
+29,single_hop,Which mitigation is recommended to mitigate gitlab-cve-2023-7028-internet-exposed-instances?,True,Patch Management
+30,single_hop,Which motivation type is linked from Peach Sandstorm via motivated_by?,True,espionage
+31,multi_hop,How many techniques are used by incident incident-cve-2022-30190-follina?,True,3
+32,multi_hop,List techniques and phases used in incident CVE-2024-0204-GoAnywhereMFT-PoC.,True,"T1190 Initial Access, T1006, T1078"
+33,multi_hop,How many malware families are used by EXOTIC LILY?,True,2
+34,multi_hop,Which sectors are targeted by TAG-EXOTIC-LILY-2021-09 incident?,True,"Technology, Healthcare"
+35,multi_hop,How many sectors does incident inc_peach_sandstorm_password_spray_2023_02 target?,True,3
+36,multi_hop,How many victims are attacked by Peach Sandstorm?,True,3
+37,multi_hop,Which three tactics are covered by techniques used in inc_peach_sandstorm_password_spray_2023_02?,True,"Credential Access, Discovery, Persistence"
+38,multi_hop,How many tools are used by Peach Sandstorm?,True,2
+39,multi_hop,How many malwares are involved in incident INC-TA544-IDAT-Loader-Remcos-SystemBC?,True,3
+40,multi_hop,List payloads deployed by IDAT Loader in INC-TA544-IDAT-Loader-Remcos-SystemBC.,True,"Remcos RAT, SystemBC"
+41,multi_hop,Which incident involving RemcosRAT occurred in Ukraine?,True,uptycs_unc-0050_latest_campaign
+42,multi_hop,How many aliases does TA444 have?,True,6
+43,multi_hop,How many aliases does Storm-0978 have?,True,2
+44,multi_hop,How many CVEs are linked via exploited_in from any incident?,True,6
+45,multi_hop,Which incident has the earliest occurred_on date?,True,inc-zuorat-soho-routers-2020-04
+46,unanswerable,What CVSS score is stored as a numeric property for CVE-2024-0204?,False,
+47,unanswerable,Which specific organizations were victims in the TA444 SpectralBlur incident?,False,
+48,unanswerable,What file hash identifies the JinxLoader RAR attachment?,False,
+49,unanswerable,Which IP address hosted the SpectralBlur command-and-control server?,False,
+50,unanswerable,What exact GoAnywhere MFT version is vulnerable to CVE-2024-0204?,False,

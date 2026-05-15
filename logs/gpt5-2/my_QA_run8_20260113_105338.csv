@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the publisher of source microsoft_peach_sandstorm_sep2023?,True,Microsoft
+2,simple,What published_on date is set for source microsoft_peach_sandstorm_sep2023?,True,2023-09-01
+3,simple,What is the published_date for CVE-2023-36460?,True,2023-07-01
+4,simple,What CVSS value is stated in the summary of CVE-2023-38831?,True,7.8
+5,simple,What sponsor is recorded for Fancy Bear?,True,Russian government
+6,simple,What motivation is recorded for COLDRIVER?,True,espionage
+7,simple,What is the type of incident conti_ttp_batch_1?,True,ransomware
+8,simple,What is the double_extortion value for incident conti_ttp_batch_1?,True,true
+9,simple,What is the exfiltration value for incident conti_ttp_batch_1?,True,true
+10,simple,What is the date of incident incident-forcedentry-pegasus-2021-02?,True,2021-02-01
+11,simple,What tactic is set for technique T1110.003?,True,Credential Access
+12,simple,What tactic is set for technique T1068?,True,Privilege Escalation
+13,simple,What sector is recorded for victim Journalists?,True,Media
+14,simple,What sector is recorded for victim NATO governments?,True,Government
+15,simple,What name is set for country with iso2 UA?,True,Ukraine
+16,single_hop,Which motivation type is Grayfly motivated_by?,True,espionage
+17,single_hop,Which malware does ToddyCat use?,True,"Samurai, Ninja"
+18,single_hop,Which technique is used_technique by incident microsoft_ps_password_spray_2023-02_2023-07?,True,T1110.003
+19,single_hop,Which victims are targeted by incident fancybear-2016-dnc?,True,Democratic National Committee (DNC)
+20,single_hop,Which CVE is exploited_in incident fancybear-2022-07-follina?,True,CVE-2022-30190
+21,single_hop,Which sectors are targets_sector for incident grayfly-activity-2017-03?,True,"Finance, Healthcare, Manufacturing, Technology, Media, Other, Retail"
+22,single_hop,Which regions are occurred_in for incident toddycat-exchange-2020-12?,True,"Asia, Europe"
+23,single_hop,Which victims does COLDRIVER attacked?,True,"NGOs, NATO governments, Academic institutions, Ukraine, High-profile individuals (former intelligence and military officers)"
+24,single_hop,Which C2 infrastructure service does BazarLoader abuse?,True,C&C Server
+25,single_hop,Which mitigation mitigates technique T1078?,True,Secure cloud identities
+26,single_hop,Which CVEs does Conti malware exploits?,True,"CVE-2018-13379, CVE-2018-13374, CVE-2020-1472, CVE-2021-1675"
+27,single_hop,Which sectors are targets_sector for incident CERT-UA-2023-06-UAC-0099-activity?,True,"Government, Media"
+28,single_hop,Which tool does Ryuk use?,True,BazarLoader
+29,single_hop,Which techniques are included in SQL Server SQLi-to-cloud-identity lateral movement campaign?,True,"T1190, T1210, T1078"
+30,single_hop,Which source supports campaign Peach Sandstorm FalseFont delivery campaign?,True,microsoft_peach_sandstorm_sep2023
+31,multi_hop,Which CVE is exploited by malware used by NSO Group?,True,CVE-2021-30860
+32,multi_hop,Which victims are targeted by incidents attributed_to Fancy Bear?,True,"Democratic National Committee (DNC), World Anti-Doping Agency (WADA), Ukrainians"
+33,multi_hop,Which sectors are targeted by incidents attributed_to Grayfly?,True,"Finance, Healthcare, Manufacturing, Technology, Media, Other, Retail"
+34,multi_hop,Which victims are targeted by incident attributed_to UAC-0099?,True,"Ukrainian state organizations, Ukrainian media entities"
+35,multi_hop,Which C2 service is abused by malware used by Peach Sandstorm?,True,Command-and-control servers
+36,multi_hop,Which technique IDs are used in incident incident-forcedentry-pegasus-2021-02 attributed to NSO Group?,True,"T1203, T1566"
+37,multi_hop,How many distinct CVEs are exploited_in incident conti_ttp_batch_1?,True,4
+38,multi_hop,How many tools are involved_tool in incident conti_ttp_batch_1?,True,5
+39,multi_hop,How many techniques are used_technique in incident conti_ttp_batch_1?,True,6
+40,multi_hop,How many distinct regions occurred_in incidents attributed_to Fancy Bear?,True,0
+41,multi_hop,How many victims are targeted by incidents attributed_to Peach Sandstorm?,True,3
+42,multi_hop,How many aliases does Peach Sandstorm have_alias?,True,4
+43,multi_hop,How many threat actors are included in ToddyCat Exchange Server Campaign (Dec 2020)?,True,1
+44,multi_hop,What is the earliest occurred_on date among incidents attributed_to Fancy Bear?,True,2016-01-01
+45,multi_hop,Which victims are targeted by incident attributed_to NSO Group and involving Pegasus?,True,"Journalists, Activists"
+46,unanswerable,What patch version fixed CVE-2021-30860 in iOS?,False,
+47,unanswerable,What is the CVSS score for CVE-2022-30190?,False,
+48,unanswerable,Which specific Microsoft Exchange CVEs are included in ProxyShell for Conti?,False,
+49,unanswerable,What file hash is associated with the FalseFont backdoor sample?,False,
+50,unanswerable,What C2 domain name is used by LONEPAGE?,False,

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What date is stored for incident log4shell-cve-2021-44228-exploitation?,True,2021-12-09
+2,simple,What type is recorded for incident inc_zcs_cve-2023-37580_2023-06?,True,intrusion
+3,simple,What tactic is set for technique T1189?,True,Initial Access
+4,simple,What family value is assigned to malware Conti?,True,Ransomware
+5,simple,What published date is set for CVE-2024-21338?,True,2024-02-01
+6,simple,What sponsor is listed for threat actor Lazarus?,True,North Korea
+7,simple,What framework is set for mitigation Patch iOS (install security updates)?,True,Vendor Update
+8,simple,What family is set for malware Predator?,True,Spyware
+9,simple,What service is specified for C2 infrastructure c2_telegram?,True,Telegram
+10,simple,What sponsor is listed for threat actor UNC4841?,True,China
+11,simple,What summary topic is described for CVE-2023-7102?,True,Arbitrary code execution in Spreadsheet::ParseExcel
+12,simple,What date is stored for incident FOG-OF-WAR-FROZENBARENTS-EXIM-OPSNET-2019-08?,True,2019-08-01
+13,simple,What sponsor is listed for threat actor FROZENBARENTS?,True,Russian Armed Forces GRU Unit 74455
+14,simple,What value is stored in Date node d_2019?,True,2019-01-01
+15,simple,What publisher is set for source mandiant-unc3886-cve-2023-34048?,True,Mandiant
+16,single_hop,Which source publisher supports CVE-2024-21338?,True,Avast
+17,single_hop,What confidence is set on incident avast-lazarus-cve-2024-21338-2023 attributed_to Lazarus?,True,high
+18,single_hop,Which motivation type is linked from Lazarus via motivated_by?,True,espionage
+19,single_hop,Which malware is involved in incident barracuda-esg-cve-2023-7102-unc4841?,True,"SEASPY, SALTWATER"
+20,single_hop,Which CVEs are linked from incident intellexa-predator-iphone-0day-chain-2023 via exploited_in?,True,"CVE-2023-41991, CVE-2023-41992, CVE-2023-41993"
+21,single_hop,What status is recorded on mitigation mitigates relationship to intellexa-predator-iphone-0day-chain-2023?,True,recommended
+22,single_hop,Which technique is used by incident inc_zcs_cve-2023-37580_2023-06?,True,T1189
+23,single_hop,Which tool is involved in incident inc_zcs_cve-2023-37580_2023-06?,True,Zimbra Collaboration Suite
+24,single_hop,Which sector is targeted by incident inc_zcs_cve-2023-37580_2023-06?,True,Government
+25,single_hop,What confidence is set when incident intellexa-predator-iphone-0day-chain-2023 is attributed_to Intellexa?,True,medium
+26,single_hop,Which C2 service is abused by malware AveMaria?,True,Discord
+27,single_hop,Which C2 service is abused by malware AgentTesla?,True,Discord
+28,single_hop,Which victim is targeted by incident barracuda-esg-cve-2023-7102-unc4841?,True,Barracuda Email Security Gateway (ESG) appliances
+29,single_hop,Which two CVEs are linked from incident inc-unc3886-vcenter-esxi-2021late-34048 via exploited_in?,True,"CVE-2023-34048, CVE-2023-20867"
+30,single_hop,Which malware does threat actor UNC3886 use?,True,"VirtualPita, VirtualPie"
+31,multi_hop,Which CVE is exploited by malware FudModule used by Lazarus?,True,CVE-2024-21338
+32,multi_hop,Which techniques are used in the incident attributed to UNC3886?,True,"T1190, T1068, T1020"
+33,multi_hop,What tactic is associated with technique T1068 used by Lazarus incident?,True,Privilege Escalation
+34,multi_hop,Which source publisher supports the incident that exploited CVE-2022-2856?,True,Google
+35,multi_hop,Which malware families are in the campaign occurred on 2019-01-01?,True,"AveMaria, AgentTesla"
+36,multi_hop,Which C2 service is included in the campaign that includes AgentTesla?,True,Discord
+37,multi_hop,How many CVEs are exploited in the Intellexa Predator iPhone incident?,True,3
+38,multi_hop,How many distinct malware are involved across all incidents?,True,7
+39,multi_hop,How many incidents are attributed to a threat actor with confidence high?,True,3
+40,multi_hop,How many incidents have an occurred_on Date node linked?,True,3
+41,multi_hop,Which incident that leveraged Telegram also used technique T1566?,True,FOG-OF-WAR-FROZENBARENTS-EXIM-OPSNET-2019-08
+42,multi_hop,How many sectors are attacked by FROZENBARENTS via attacked relationships?,True,6
+43,multi_hop,Which techniques does FROZENBARENTS use with dates recorded?,True,"T1566, T1190"
+44,multi_hop,Which malware is involved in an incident that exploited CVE-2021-44228?,True,"Dridex, Conti"
+45,multi_hop,Which source publisher supports the actor attributed to Predator exploit-chain incident?,True,Google Threat Analysis Group (TAG) / The Citizen Lab
+46,unanswerable,What CVSS score is recorded for CVE-2024-21338?,False,
+47,unanswerable,Which country were the Zimbra CVE-2023-37580 victims located in?,False,
+48,unanswerable,What file hash identifies the AveMaria payload hosted on Discord?,False,
+49,unanswerable,Which exact Barracuda ESG firmware versions were impacted by CVE-2023-7102?,False,
+50,unanswerable,What remediation date was applied for CVE-2023-20867?,False,

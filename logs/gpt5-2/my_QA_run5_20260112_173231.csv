@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source cisa-fivehands-2021-05-06?,True,CISA
+2,simple,What date is stored on incident inc-fivehands-2021-05-06-cisa?,True,2021-05-06
+3,simple,What incident type is recorded for microsoft_teamcity_cve-2023-42793_diamond_sleet_2023-10?,True,intrusion
+4,simple,What sponsor is set for threat actor Diamond Sleet?,True,North Korea
+5,simple,What motivation is stored for threat actor Clop?,True,financial
+6,simple,What sponsor is stored for threat actor APT35?,True,Iran
+7,simple,What motivation is stored for threat actor APT35?,True,espionage
+8,simple,What sector value is stored on victim Academic institutions?,True,Education
+9,simple,What sector value is stored on victim Medical research organizations?,True,Healthcare
+10,simple,What is the published_date for CVE-2023-40477?,True,2023-08-17
+11,simple,What incident type is recorded for meduza-stealer-v2.2-release?,True,malware_release
+12,simple,What family is stored for malware FiveHands?,True,Ransomware
+13,simple,What family is stored for malware SombRAT?,True,RAT
+14,simple,What country ISO2 is stored on victim Bank customers in India?,True,IN
+15,simple,What date is stored on incident uac-0050_phishing_remcos_2023-02?,True,2023-02-01
+16,single_hop,Which date did incident inc-fivehands-2021-05-06-cisa occur on?,True,2021-05-06
+17,single_hop,Which victim is targeted by incident inc-fivehands-2021-05-06-cisa?,True,Unspecified organization
+18,single_hop,Which technique ID is used by incident inc-fivehands-2021-05-06-cisa for initial access?,True,T1190
+19,single_hop,Which tool is involved in incident inc-fivehands-2021-05-06-cisa for remote execution?,True,PsExec.exe
+20,single_hop,Which CVE is exploited by threat actor Diamond Sleet?,True,CVE-2023-42793
+21,single_hop,Which threat actor is incident microsoft_teamcity_cve-2023-42793_onyx_sleet_2023-10 attributed to?,True,Onyx Sleet
+22,single_hop,Which CVE is linked to incident clop-goanywhere-mft-cve-2023-0669 via exploited_in?,True,CVE-2023-0669
+23,single_hop,Which technique ID does threat actor Clop use for exfiltration?,True,T1537
+24,single_hop,Which malware does threat actor Clop use for file encryption?,True,Ransom.Clop
+25,single_hop,Which tool does incident whatsapp-phishing-banking-trojan-1 involve?,True,WhatsApp
+26,single_hop,Which C2 services are abused by malware [redacted]-BANK.apk?,True,"C2 server, SMS (hard-coded phone number)"
+27,single_hop,Which malware is involved in incident INC-CVE-2023-40477-fake-poc-2023-08-21?,True,VenomRAT
+28,single_hop,Which capability does threat actor whalersplonk leverage?,True,Automation
+29,single_hop,Which country are victims Ukrainian entities located in?,True,Ukraine
+30,single_hop,Which two payloads does JinxLoader deliver via uses relationships?,True,"Formbook, XLoader"
+31,multi_hop,How many distinct tools are involved in incident inc-fivehands-2021-05-06-cisa?,True,8
+32,multi_hop,Which tactics are covered by techniques used in inc-fivehands-2021-05-06-cisa?,True,"Initial Access, Discovery, Execution, Impact"
+33,multi_hop,Which tool is tied to technique T1046 through inc-fivehands-2021-05-06-cisa?,True,SoftPerfect Network Scanner
+34,multi_hop,Which malware families are involved in inc-fivehands-2021-05-06-cisa?,True,"Ransomware, RAT"
+35,multi_hop,How many incidents are attributed to APT35?,True,5
+36,multi_hop,Which countries or regions are linked to APT35 targeting incidents?,True,"United States, France, Middle East, Israel"
+37,multi_hop,How many CVEs are exploited in incident apt35-2021-proxyshell-exchange?,True,3
+38,multi_hop,Which CVEs are exploited in apt35-2021-proxyshell-exchange?,True,"CVE-2021-34473, CVE-2021-34523, CVE-2021-31207"
+39,multi_hop,How many distinct threat actors are tied to CVE-2023-42793 via exploits?,True,2
+40,multi_hop,Which incident IDs are both attributed to and exploited_in CVE-2023-42793?,True,"microsoft_teamcity_cve-2023-42793_diamond_sleet_2023-10, microsoft_teamcity_cve-2023-42793_onyx_sleet_2023-10"
+41,multi_hop,How many notable victims are targeted in incident inc-clop-goanywhere-2023?,True,8
+42,multi_hop,Which targeted victim has sector Retail in inc-clop-goanywhere-2023?,True,Saks Fifth Avenue
+43,multi_hop,What is the earliest exploited_in first_seen date across all incidents?,True,2021-01-01
+44,multi_hop,How many techniques are used by incident text-1-inc-2019-spam-discord-avemaria-agenttesla?,True,2
+45,multi_hop,Which technique tactics are used in incident text-1-inc-2019-spam-discord-avemaria-agenttesla?,True,"Initial Access, Execution"
+46,unanswerable,What CVSS severity is assigned to CVE-2023-0669?,False,
+47,unanswerable,What hash value identifies the VenomRAT payload in INC-CVE-2023-40477-fake-poc-2023-08-21?,False,
+48,unanswerable,Which email sender domain was used in the Discord CDN spam campaign?,False,
+49,unanswerable,What specific VPN product contained the zero-day in inc-fivehands-2021-05-06-cisa?,False,
+50,unanswerable,What ransom amount was demanded by FiveHands in the 2021 incident?,False,

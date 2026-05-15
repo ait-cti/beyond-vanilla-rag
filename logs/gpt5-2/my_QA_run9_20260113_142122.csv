@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for Midnight Blizzard?,True,Russia
+2,simple,What date is stored on incident microsoft-midnight-blizzard-2023-11?,True,2023-11-01
+3,simple,What type is incident inc-comcast-xfinity-citrixbleed-cve-2023-4966?,True,breach
+4,simple,What sector is assigned to victim Comcast Xfinity?,True,Technology
+5,simple,What technique tactic is recorded for T1110.003?,True,Credential Access
+6,simple,What technique tactic is recorded for T1566?,True,Initial Access
+7,simple,What technique tactic is recorded for T1190?,True,Initial Access
+8,simple,What motivation is recorded for FROZENBARENTS?,True,espionage
+9,simple,What sponsor is recorded for FROZENBARENTS?,True,Russian Armed Forces GRU Unit 74455
+10,simple,What framework is listed for mitigation Clear GPU local memory?,True,General
+11,simple,What status is set on mitigates from Clear GPU local memory?,True,recommended
+12,simple,What family is assigned to malware Dyre?,True,Financial Trojan
+13,simple,What sector is assigned to victim Consumers (US)?,True,Finance
+14,simple,What ISO2 code is stored for country United Kingdom node?,True,GB
+15,simple,What severity score is mentioned in CVE-2021-36260 summary?,True,9.8/10
+16,single_hop,Which aliases does Midnight Blizzard have?,True,"Nobelium, APT29"
+17,single_hop,Which victim was attacked by Midnight Blizzard?,True,Microsoft
+18,single_hop,Which technique was used by incident microsoft-midnight-blizzard-2023-11?,True,T1110.003 Password Spraying
+19,single_hop,Which date node is linked from incident microsoft-midnight-blizzard-2023-11 occurred_on?,True,2024-01-12
+20,single_hop,Which source publisher supported incident microsoft-midnight-blizzard-2023-11?,True,Microsoft
+21,single_hop,Which CVE was exploited in incident inc-comcast-xfinity-citrixbleed-cve-2023-4966?,True,CVE-2023-4966
+22,single_hop,What first_seen date is on exploited_in from incident inc-comcast-xfinity-citrixbleed-cve-2023-4966?,True,2023-08-01
+23,single_hop,Which victim is targeted by incident inc-comcast-xfinity-citrixbleed?,True,Comcast Xfinity
+24,single_hop,Which capability is leveraged by CVE-2023-4969?,True,AI/GenAI
+25,single_hop,Which CVE is mitigated by Clear GPU local memory?,True,CVE-2023-4969
+26,single_hop,Which C2 service does FROZENBARENTS abuse?,True,Telegram
+27,single_hop,Which techniques does FROZENBARENTS use?,True,"T1566, T1190"
+28,single_hop,Which tool is involved in incident frozenbarents-exim-global-compromised-hosts-2019-08?,True,EXIM mail servers
+29,single_hop,Which malware is used by threat actor Dyre operators?,True,Dyre
+30,single_hop,Which country is Consumers (UK) located in?,True,GB
+31,multi_hop,Which techniques were used in the Microsoft incident attributed to Midnight Blizzard?,True,T1110.003 Password Spraying
+32,multi_hop,Which victims are targeted by incidents attributed to Midnight Blizzard?,True,Microsoft
+33,multi_hop,Which technique IDs are used by incidents attributed to FROZENBARENTS?,True,"T1190, T1566"
+34,multi_hop,Which sectors are targeted by the incident attributed to FROZENBARENTS?,True,"Government, Energy, Transportation, Education, Other"
+35,multi_hop,Which victim is targeted by the incident exploiting CVE-2021-36260?,True,Hikvision
+36,multi_hop,Which actors are attributed to the incident targeting Hikvision cameras?,True,"APT41, APT10"
+37,multi_hop,Which CVEs are exploited in incidents that target Comcast Xfinity?,True,CVE-2023-4966
+38,multi_hop,What is the first_seen date for the CVE exploited in Comcast Xfinity breach incidents?,True,2023-08-01
+39,multi_hop,Which countries are associated with victims attacked by Dyre operators?,True,"US, GB"
+40,multi_hop,Which capabilities are leveraged by malware used by Dyre operators?,True,"Financial Fraud, Credential Theft, Malware Delivery, Botnet Enrollment, Infostealer"
+41,multi_hop,How many capabilities does Dyre malware leverage?,True,5
+42,multi_hop,How many victims does Dyre operators attack?,True,2
+43,multi_hop,How many techniques are used by incidents attributed to FROZENBARENTS?,True,2
+44,multi_hop,How many sectors are targeted by frozenbarents-exim-global-compromised-hosts-2019-08?,True,5
+45,multi_hop,How many unique CVEs are linked via exploited_in across all incidents?,True,4
+46,unanswerable,What URL is listed for the Microsoft breach source microsoft-corporate-email-breach-midnight-blizzard?,False,
+47,unanswerable,What CVSS score is recorded for CVE-2023-4966?,False,
+48,unanswerable,Which malware family exploited CVE-2023-4966 in the Comcast Xfinity breach?,False,
+49,unanswerable,What remediation deadline was given for CVE-2023-22527?,False,
+50,unanswerable,Which dark web forum name hosted Hikvision credential sales?,False,

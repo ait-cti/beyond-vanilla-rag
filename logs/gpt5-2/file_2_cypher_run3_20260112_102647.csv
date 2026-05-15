@@ -1,0 +1,1293 @@
+filename,cypher
+blackcat-ransomware-releases-new-utility-munchkin.json,"MERGE (src_1:Source {id:'unit42-blackcat-munchkin'})
+ON CREATE SET src_1.title = 'BlackCat tooling update: Munchkin utility and customized Alpine VM deployment',
+              src_1.publisher = 'Unit 42',
+              src_1.url = 'unit42-blackcat-munchkin'
+ON MATCH SET src_1.title = CASE WHEN src_1.title IS NULL OR trim(src_1.title) = '' THEN 'BlackCat tooling update: Munchkin utility and customized Alpine VM deployment' ELSE src_1.title END,
+             src_1.publisher = CASE WHEN src_1.publisher IS NULL OR trim(src_1.publisher) = '' THEN 'Unit 42' ELSE src_1.publisher END,
+             src_1.url = CASE WHEN src_1.url IS NULL OR trim(src_1.url) = '' THEN 'unit42-blackcat-munchkin' ELSE src_1.url END
+MERGE (ta_1:ThreatActor {name:'BlackCat'})
+ON CREATE SET ta_1.motivation = 'financial',
+              ta_1.summary = 'BlackCat ransomware operators; evolving tooling within a ransomware-as-a-service (RaaS) model; deploying payloads via customized Alpine VM to circumvent security solutions.'
+ON MATCH SET ta_1.motivation = CASE WHEN ta_1.motivation IS NULL OR trim(ta_1.motivation) = '' THEN 'financial' ELSE ta_1.motivation END,
+             ta_1.summary = CASE WHEN ta_1.summary IS NULL OR trim(ta_1.summary) = '' THEN 'BlackCat ransomware operators; evolving tooling within a ransomware-as-a-service (RaaS) model; deploying payloads via customized Alpine VM to circumvent security solutions.' ELSE ta_1.summary END
+MERGE (mot_1:Motivation {type:'financial'})
+MERGE (ta_1)-[:motivated_by]->(mot_1)
+MERGE (mal_1:Malware {name:'BlackCat'})
+ON CREATE SET mal_1.family = 'BlackCat',
+              mal_1.summary = 'BlackCat ransomware payload used by BlackCat operators; propagated to remote machines and network shares using Munchkin.'
+ON MATCH SET mal_1.family = CASE WHEN mal_1.family IS NULL OR trim(mal_1.family) = '' THEN 'BlackCat' ELSE mal_1.family END,
+             mal_1.summary = CASE WHEN mal_1.summary IS NULL OR trim(mal_1.summary) = '' THEN 'BlackCat ransomware payload used by BlackCat operators; propagated to remote machines and network shares using Munchkin.' ELSE mal_1.summary END
+MERGE (tool_1:Tool {name:'Munchkin'})
+ON CREATE SET tool_1.summary = 'Utility used by BlackCat operators to propagate the BlackCat payload to remote machines and network shares.'
+ON MATCH SET tool_1.summary = CASE WHEN tool_1.summary IS NULL OR trim(tool_1.summary) = '' THEN 'Utility used by BlackCat operators to propagate the BlackCat payload to remote machines and network shares.' ELSE tool_1.summary END
+MERGE (tech_1:Technique {technique_id:'T1105'})
+ON CREATE SET tech_1.name = 'Ingress Tool Transfer',
+              tech_1.tactic = 'Command and Control',
+              tech_1.summary = 'Transfer of tools or payloads to remote systems (e.g., propagating a ransomware payload to remote machines/shares).'
+ON MATCH SET tech_1.name = CASE WHEN tech_1.name IS NULL OR trim(tech_1.name) = '' THEN 'Ingress Tool Transfer' ELSE tech_1.name END,
+             tech_1.tactic = CASE WHEN tech_1.tactic IS NULL OR trim(tech_1.tactic) = '' THEN 'Command and Control' ELSE tech_1.tactic END,
+             tech_1.summary = CASE WHEN tech_1.summary IS NULL OR trim(tech_1.summary) = '' THEN 'Transfer of tools or payloads to remote systems (e.g., propagating a ransomware payload to remote machines/shares).' ELSE tech_1.summary END
+MERGE (tech_2:Technique {technique_id:'T1564.001'})
+ON CREATE SET tech_2.name = 'Hidden Files and Directories',
+              tech_2.tactic = 'Defense Evasion',
+              tech_2.summary = 'Use of methods to hide artifacts; described here as leveraging a customized VM image to help circumvent security solutions during deployment.'
+ON MATCH SET tech_2.name = CASE WHEN tech_2.name IS NULL OR trim(tech_2.name) = '' THEN 'Hidden Files and Directories' ELSE tech_2.name END,
+             tech_2.tactic = CASE WHEN tech_2.tactic IS NULL OR trim(tech_2.tactic) = '' THEN 'Defense Evasion' ELSE tech_2.tactic END,
+             tech_2.summary = CASE WHEN tech_2.summary IS NULL OR trim(tech_2.summary) = '' THEN 'Use of methods to hide artifacts; described here as leveraging a customized VM image to help circumvent security solutions during deployment.' ELSE tech_2.summary END
+MERGE (cap_1:Capability {name:'Automation'})
+ON CREATE SET cap_1.summary = 'Automation capabilities for propagation/deployment at scale (e.g., distributing payloads to remote machines and shares).'
+ON MATCH SET cap_1.summary = CASE WHEN cap_1.summary IS NULL OR trim(cap_1.summary) = '' THEN 'Automation capabilities for propagation/deployment at scale (e.g., distributing payloads to remote machines and shares).' ELSE cap_1.summary END
+MERGE (ta_1)-[u_1:uses]->(tool_1)
+ON CREATE SET u_1.evidence = 'BlackCat operators announced updates including a utility called Munchkin that allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.',
+              u_1.source_id = 'unit42-blackcat-munchkin'
+ON MATCH SET u_1.evidence = CASE WHEN u_1.evidence IS NULL OR trim(u_1.evidence) = '' THEN 'BlackCat operators announced updates including a utility called Munchkin that allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.' ELSE u_1.evidence END,
+             u_1.source_id = CASE WHEN u_1.source_id IS NULL OR trim(u_1.source_id) = '' THEN 'unit42-blackcat-munchkin' ELSE u_1.source_id END
+MERGE (ta_1)-[u_2:uses]->(mal_1)
+ON CREATE SET u_2.evidence = 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.',
+              u_2.source_id = 'unit42-blackcat-munchkin'
+ON MATCH SET u_2.evidence = CASE WHEN u_2.evidence IS NULL OR trim(u_2.evidence) = '' THEN 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.' ELSE u_2.evidence END,
+             u_2.source_id = CASE WHEN u_2.source_id IS NULL OR trim(u_2.source_id) = '' THEN 'unit42-blackcat-munchkin' ELSE u_2.source_id END
+MERGE (tool_1)-[u_3:uses]->(mal_1)
+ON CREATE SET u_3.evidence = 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.',
+              u_3.source_id = 'unit42-blackcat-munchkin'
+ON MATCH SET u_3.evidence = CASE WHEN u_3.evidence IS NULL OR trim(u_3.evidence) = '' THEN 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.' ELSE u_3.evidence END,
+             u_3.source_id = CASE WHEN u_3.source_id IS NULL OR trim(u_3.source_id) = '' THEN 'unit42-blackcat-munchkin' ELSE u_3.source_id END
+MERGE (tool_1)-[ut_1:used_technique]->(tech_1)
+ON CREATE SET ut_1.phase = 'Lateral Movement',
+              ut_1.details = 'Propagate BlackCat payload to remote machines and shares across a victim organization network.',
+              ut_1.evidence = 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.',
+              ut_1.source_id = 'unit42-blackcat-munchkin'
+ON MATCH SET ut_1.phase = CASE WHEN ut_1.phase IS NULL OR trim(ut_1.phase) = '' THEN 'Lateral Movement' ELSE ut_1.phase END,
+             ut_1.details = CASE WHEN ut_1.details IS NULL OR trim(ut_1.details) = '' THEN 'Propagate BlackCat payload to remote machines and shares across a victim organization network.' ELSE ut_1.details END,
+             ut_1.evidence = CASE WHEN ut_1.evidence IS NULL OR trim(ut_1.evidence) = '' THEN 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.' ELSE ut_1.evidence END,
+             ut_1.source_id = CASE WHEN ut_1.source_id IS NULL OR trim(ut_1.source_id) = '' THEN 'unit42-blackcat-munchkin' ELSE ut_1.source_id END
+MERGE (ta_1)-[ut_2:used_technique]->(tech_2)
+ON CREATE SET ut_2.phase = 'Defense Evasion',
+              ut_2.details = 'Leverages a customized Alpine VM to deploy malware and circumvent security solutions.',
+              ut_2.evidence = 'Researchers acquired an instance of Munchkin loaded in a customized Alpine VM; this tactic allows ransomware threat actors to use VMs to circumvent security solutions in deploying their malware payloads.',
+              ut_2.source_id = 'unit42-blackcat-munchkin'
+ON MATCH SET ut_2.phase = CASE WHEN ut_2.phase IS NULL OR trim(ut_2.phase) = '' THEN 'Defense Evasion' ELSE ut_2.phase END,
+             ut_2.details = CASE WHEN ut_2.details IS NULL OR trim(ut_2.details) = '' THEN 'Leverages a customized Alpine VM to deploy malware and circumvent security solutions.' ELSE ut_2.details END,
+             ut_2.evidence = CASE WHEN ut_2.evidence IS NULL OR trim(ut_2.evidence) = '' THEN 'Researchers acquired an instance of Munchkin loaded in a customized Alpine VM; this tactic allows ransomware threat actors to use VMs to circumvent security solutions in deploying their malware payloads.' ELSE ut_2.evidence END,
+             ut_2.source_id = CASE WHEN ut_2.source_id IS NULL OR trim(ut_2.source_id) = '' THEN 'unit42-blackcat-munchkin' ELSE ut_2.source_id END
+MERGE (ta_1)-[lev_1:leverages]->(cap_1)
+ON CREATE SET lev_1.details = 'Automated/scalable propagation of ransomware payload to remote machines and network shares via Munchkin.',
+              lev_1.evidence = 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.',
+              lev_1.source_id = 'unit42-blackcat-munchkin'
+ON MATCH SET lev_1.details = CASE WHEN lev_1.details IS NULL OR trim(lev_1.details) = '' THEN 'Automated/scalable propagation of ransomware payload to remote machines and network shares via Munchkin.' ELSE lev_1.details END,
+             lev_1.evidence = CASE WHEN lev_1.evidence IS NULL OR trim(lev_1.evidence) = '' THEN 'Munchkin allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.' ELSE lev_1.evidence END,
+             lev_1.source_id = CASE WHEN lev_1.source_id IS NULL OR trim(lev_1.source_id) = '' THEN 'unit42-blackcat-munchkin' ELSE lev_1.source_id END
+MERGE (ta_1)-[sb_1:supported_by]->(src_1)
+ON CREATE SET sb_1.quote = 'BlackCat operators recently announced new updates to their tooling, including a utility called Munchkin that allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.'
+ON MATCH SET sb_1.quote = CASE WHEN sb_1.quote IS NULL OR trim(sb_1.quote) = '' THEN 'BlackCat operators recently announced new updates to their tooling, including a utility called Munchkin that allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network.' ELSE sb_1.quote END
+MERGE (tool_1)-[sb_2:supported_by]->(src_1)
+ON CREATE SET sb_2.quote = 'Unit 42 researchers have acquired an instance of Munchkin that is unique, in that it is loaded in a customized Alpine virtual machine (VM).'
+ON MATCH SET sb_2.quote = CASE WHEN sb_2.quote IS NULL OR trim(sb_2.quote) = '' THEN 'Unit 42 researchers have acquired an instance of Munchkin that is unique, in that it is loaded in a customized Alpine virtual machine (VM).' ELSE sb_2.quote END
+MERGE (mal_1)-[sb_3:supported_by]->(src_1)
+ON CREATE SET sb_3.quote = 'For the past two years, the BlackCat ransomware operators have continued to evolve and iterate their tooling as part of their ransomware-as-a-service (RaaS) business model.'
+ON MATCH SET sb_3.quote = CASE WHEN sb_3.quote IS NULL OR trim(sb_3.quote) = '' THEN 'For the past two years, the BlackCat ransomware operators have continued to evolve and iterate their tooling as part of their ransomware-as-a-service (RaaS) business model.' ELSE sb_3.quote END;"
+north-korea-debuts-spectralblur-malware-amid-macos-onslaught.json,"MERGE (src_1:Source {id:'proofpoint_ta444_spectralblur_2023'})
+ON CREATE SET src_1.title = 'TA444 debuts SpectralBlur macOS backdoor (reported by Proofpoint researcher Greg Lesnewich)',
+              src_1.publisher = 'Proofpoint'
+MERGE (ta_1:ThreatActor {name:'TA444'})
+ON CREATE SET ta_1.sponsor = 'North Korea',
+              ta_1.summary = 'North Korean state-backed threat actor reported to have debuted the macOS-targeting malware SpectralBlur in August; associated with multiple aliases.'
+ON MATCH SET ta_1.sponsor = CASE WHEN ta_1.sponsor IS NULL OR ta_1.sponsor = '' THEN 'North Korea' ELSE ta_1.sponsor END,
+             ta_1.summary = CASE WHEN ta_1.summary IS NULL OR ta_1.summary = '' THEN 'North Korean state-backed threat actor reported to have debuted the macOS-targeting malware SpectralBlur in August; associated with multiple aliases.' ELSE ta_1.summary END
+MERGE (mal_1:Malware {name:'SpectralBlur'})
+ON CREATE SET mal_1.summary = 'Moderately capable backdoor for macOS: can upload/download files, run a shell, update configuration, delete files, and hibernate/sleep based on C2 commands.'
+ON MATCH SET mal_1.summary = CASE WHEN mal_1.summary IS NULL OR mal_1.summary = '' THEN 'Moderately capable backdoor for macOS: can upload/download files, run a shell, update configuration, delete files, and hibernate/sleep based on C2 commands.' ELSE mal_1.summary END
+MERGE (c2_1:C2_Infrastructure {service:'Command-and-control server'})
+ON CREATE SET c2_1.summary = 'C2 server used to issue commands to malware.'
+ON MATCH SET c2_1.summary = CASE WHEN c2_1.summary IS NULL OR c2_1.summary = '' THEN 'C2 server used to issue commands to malware.' ELSE c2_1.summary END
+MERGE (d_1:Date {value: date('2026-08-01')})
+MERGE (ta_2:ThreatActor {name:'APT38'})
+MERGE (ta_3:ThreatActor {name:'BlueNoroff'})
+MERGE (ta_4:ThreatActor {name:'BlackAlicanto'})
+MERGE (ta_5:ThreatActor {name:'Coperenicum'})
+MERGE (ta_6:ThreatActor {name:'Sapphire Sleet'})
+MERGE (ta_7:ThreatActor {name:'Stardust Chollima'})
+MERGE (ta_1)-[ha_1:has_alias]->(ta_2)
+ON CREATE SET ha_1.date = date('2026-08-01')
+MERGE (ta_1)-[ha_2:has_alias]->(ta_3)
+ON CREATE SET ha_2.date = date('2026-08-01')
+MERGE (ta_1)-[ha_3:has_alias]->(ta_4)
+ON CREATE SET ha_3.date = date('2026-08-01')
+MERGE (ta_1)-[ha_4:has_alias]->(ta_5)
+ON CREATE SET ha_4.date = date('2026-08-01')
+MERGE (ta_1)-[ha_5:has_alias]->(ta_6)
+ON CREATE SET ha_5.date = date('2026-08-01')
+MERGE (ta_1)-[ha_6:has_alias]->(ta_7)
+ON CREATE SET ha_6.date = date('2026-08-01')
+MERGE (ta_1)-[u_1:uses]->(mal_1)
+ON CREATE SET u_1.date = date('2026-08-01'),
+              u_1.evidence = 'TA444 debuted the SpectralBlur malware in August.',
+              u_1.source_id = 'proofpoint_ta444_spectralblur_2023'
+ON MATCH SET u_1.date = CASE WHEN u_1.date IS NULL THEN date('2026-08-01') ELSE u_1.date END,
+             u_1.evidence = CASE WHEN u_1.evidence IS NULL OR u_1.evidence = '' THEN 'TA444 debuted the SpectralBlur malware in August.' ELSE u_1.evidence END,
+             u_1.source_id = CASE WHEN u_1.source_id IS NULL OR u_1.source_id = '' THEN 'proofpoint_ta444_spectralblur_2023' ELSE u_1.source_id END
+MERGE (mal_1)-[ab_1:abuses]->(c2_1)
+ON CREATE SET ab_1.evidence = 'Commands issued from the command-and-control server control SpectralBlur capabilities (upload/download, run shell, update config, delete files, hibernate/sleep).',
+              ab_1.source_id = 'proofpoint_ta444_spectralblur_2023'
+ON MATCH SET ab_1.evidence = CASE WHEN ab_1.evidence IS NULL OR ab_1.evidence = '' THEN 'Commands issued from the command-and-control server control SpectralBlur capabilities (upload/download, run shell, update config, delete files, hibernate/sleep).' ELSE ab_1.evidence END,
+             ab_1.source_id = CASE WHEN ab_1.source_id IS NULL OR ab_1.source_id = '' THEN 'proofpoint_ta444_spectralblur_2023' ELSE ab_1.source_id END
+MERGE (ta_1)-[sb_1:supported_by]->(src_1)
+ON CREATE SET sb_1.quote = 'TA444 ... debuted the SpectralBlur malware in August ... moderately capable backdoor ... commands issued from the command-and-control server.'
+MERGE (mal_1)-[sb_2:supported_by]->(src_1)
+ON CREATE SET sb_2.quote = 'SpectralBlur ... moderately capable backdoor ... can upload/download files, run a shell, update its configuration, delete files, hibernate, or sleep ... commands issued from the command-and-control server.'"
+internet-explorer-0-day-exploited-by-north-korean-actor-apt37.json,"MERGE (src_1:Source {id:'google-tag-apt37-cve-2022-41128'})
+ON CREATE SET
+  src_1.title = 'Google TAG: Internet Explorer JScript 0-day CVE-2022-41128 used against users in South Korea',
+  src_1.publisher = 'Google Threat Analysis Group (TAG)'
+ON MATCH SET
+  src_1.title = coalesce(src_1.title, 'Google TAG: Internet Explorer JScript 0-day CVE-2022-41128 used against users in South Korea'),
+  src_1.publisher = coalesce(src_1.publisher, 'Google Threat Analysis Group (TAG)')
+MERGE (ta_1:ThreatActor {name:'APT37'})
+ON CREATE SET
+  ta_1.sponsor = 'North Korean government-backed',
+  ta_1.summary = 'North Korean government-backed threat actor historically targeting South Korean users, North Korean defectors, policy makers, journalists, and human rights activists; associated with Internet Explorer 0-day exploitation.'
+ON MATCH SET
+  ta_1.sponsor = coalesce(ta_1.sponsor, 'North Korean government-backed'),
+  ta_1.summary = coalesce(ta_1.summary, 'North Korean government-backed threat actor historically targeting South Korean users, North Korean defectors, policy makers, journalists, and human rights activists; associated with Internet Explorer 0-day exploitation.')
+MERGE (mot_1:Motivation {type:'espionage'})
+MERGE (ta_1)-[:motivated_by]->(mot_1)
+MERGE (cve_1:CVE {id:'CVE-2022-41128'})
+ON CREATE SET
+  cve_1.summary = 'Internet Explorer 0-day vulnerability in the JScript engine exploited in-the-wild in malicious documents targeting users in South Korea (as reported by Google TAG).'
+ON MATCH SET
+  cve_1.summary = coalesce(cve_1.summary, 'Internet Explorer 0-day vulnerability in the JScript engine exploited in-the-wild in malicious documents targeting users in South Korea (as reported by Google TAG).')
+MERGE (cve_1)-[:supported_by {quote:'These malicious documents exploited an Internet Explorer 0-day vulnerability in the JScript engine, CVE-2022-41128.'}]->(src_1)
+MERGE (inc_1:Incident {id:'google-tag-apt37-ie-0day-2022-10'})
+ON CREATE SET
+  inc_1.date = date('2022-10-01'),
+  inc_1.type = 'intrusion',
+  inc_1.summary = 'Google TAG reported late October 2022 in-the-wild exploitation of the Internet Explorer JScript engine 0-day CVE-2022-41128 via malicious documents targeting users in South Korea; attributed to APT37.'
+ON MATCH SET
+  inc_1.date = coalesce(inc_1.date, date('2022-10-01')),
+  inc_1.type = coalesce(inc_1.type, 'intrusion'),
+  inc_1.summary = coalesce(inc_1.summary, 'Google TAG reported late October 2022 in-the-wild exploitation of the Internet Explorer JScript engine 0-day CVE-2022-41128 via malicious documents targeting users in South Korea; attributed to APT37.')
+MERGE (inc_1)-[:supported_by {quote:'This blog will describe a 0-day vulnerability, discovered by TAG in late October 2022, embedded in malicious documents and used to target users in South Korea. We attribute this activity to a group of North Korean government-backed actors known as APT37.'}]->(src_1)
+MERGE (inc_1)-[:attributed_to {confidence:'high', evidence:'Attributed by Google TAG to North Korean government-backed actors known as APT37.', source_id:'google-tag-apt37-cve-2022-41128'}]->(ta_1)
+MERGE (inc_1)-[:exploited_in {evidence:'Malicious documents exploited Internet Explorer JScript engine 0-day CVE-2022-41128.', source_id:'google-tag-apt37-cve-2022-41128'}]->(cve_1)
+MERGE (tech_1:Technique {technique_id:'T1566', name:'Phishing', tactic:'Initial Access'})
+ON CREATE SET
+  tech_1.summary = 'Use of malicious documents to deliver payloads/exploitation to targets.'
+ON MATCH SET
+  tech_1.name = coalesce(tech_1.name, 'Phishing'),
+  tech_1.tactic = coalesce(tech_1.tactic, 'Initial Access'),
+  tech_1.summary = coalesce(tech_1.summary, 'Use of malicious documents to deliver payloads/exploitation to targets.')
+MERGE (inc_1)-[:used_technique {phase:'Initial Access', details:'Malicious documents embedded with 0-day exploit', evidence:'0-day vulnerability embedded in malicious documents used to target users.', source_id:'google-tag-apt37-cve-2022-41128'}]->(tech_1)
+MERGE (country_1:Country {iso2:'KR'})
+ON CREATE SET
+  country_1.name = 'South Korea'
+ON MATCH SET
+  country_1.name = coalesce(country_1.name, 'South Korea')
+MERGE (inc_1)-[:occurred_in]->(country_1)
+MERGE (vic_1:Victim {name:'Users in South Korea'})
+ON CREATE SET
+  vic_1.country_iso2 = 'KR',
+  vic_1.summary = 'Users in South Korea targeted via malicious documents exploiting an Internet Explorer JScript engine 0-day (CVE-2022-41128) per Google TAG.'
+ON MATCH SET
+  vic_1.country_iso2 = coalesce(vic_1.country_iso2, 'KR'),
+  vic_1.summary = coalesce(vic_1.summary, 'Users in South Korea targeted via malicious documents exploiting an Internet Explorer JScript engine 0-day (CVE-2022-41128) per Google TAG.')
+MERGE (vic_1)-[:located_in]->(country_1)
+MERGE (inc_1)-[:targets {date:date('2022-10-01'), evidence:'Used to target users in South Korea.', source_id:'google-tag-apt37-cve-2022-41128'}]->(vic_1)
+MERGE (ta_1)-[:attacked {date:date('2022-10-01'), evidence:'Activity attributed to APT37 targeting users in South Korea using malicious documents with 0-day exploit.', source_id:'google-tag-apt37-cve-2022-41128'}]->(vic_1)
+MERGE (mit_1:Mitigation {name:'Patch management'})
+ON CREATE SET
+  mit_1.summary = 'Rapid vendor patching and deployment of security updates to remediate exploited vulnerabilities.'
+ON MATCH SET
+  mit_1.summary = coalesce(mit_1.summary, 'Rapid vendor patching and deployment of security updates to remediate exploited vulnerabilities.')
+MERGE (mit_1)-[:mitigates {status:'applied', observed_effectiveness:'Patches were released to protect users within hours of discovery and reporting to the vendor.', evidence:'Within a few hours of discovering this 0-day, we reported it to Microsoft and patches were released to protect users from these attacks.', source_id:'google-tag-apt37-cve-2022-41128'}]->(inc_1)
+MERGE (mit_1)-[:supported_by {quote:'Within a few hours of discovering this 0-day, we reported it to Microsoft and patches were released to protect users from these attacks.'}]->(src_1);"
+fivehands-ransomware-overview.json,"MERGE (src_1:Source {id:'CISA-2021-05-06-FiveHands'})
+ON CREATE SET src_1.title = 'Overview of FiveHands Ransomware variant', src_1.publisher = 'CISA', src_1.published_on = date('2021-05-06')
+MERGE (mal_1:Malware {name:'FiveHands'})
+ON CREATE SET mal_1.family = 'Ransomware', mal_1.summary = 'Novel ransomware variant; uses NTRUEncrypt public key encryption; enumerates and deletes Volume Shadow Copies via WMI; encrypts recovery folder; writes ransom note to each folder/directory.'
+ON MATCH SET mal_1.family = CASE WHEN mal_1.family IS NULL OR mal_1.family = '' THEN 'Ransomware' ELSE mal_1.family END,
+              mal_1.summary = CASE WHEN (mal_1.summary IS NULL OR mal_1.summary = '') THEN 'Novel ransomware variant; uses NTRUEncrypt public key encryption; enumerates and deletes Volume Shadow Copies via WMI; encrypts recovery folder; writes ransom note to each folder/directory.' ELSE mal_1.summary END
+MERGE (mal_2:Malware {name:'SombRAT'})
+ON CREATE SET mal_2.family = 'RAT', mal_2.summary = 'Remote access trojan (RAT) used alongside FiveHands in the reported attack.'
+ON MATCH SET mal_2.family = CASE WHEN mal_2.family IS NULL OR mal_2.family = '' THEN 'RAT' ELSE mal_2.family END,
+              mal_2.summary = CASE WHEN (mal_2.summary IS NULL OR mal_2.summary = '') THEN 'Remote access trojan (RAT) used alongside FiveHands in the reported attack.' ELSE mal_2.summary END
+MERGE (vic_1:Victim {name:'Unnamed organization'})
+ON CREATE SET vic_1.summary = 'Victim organization referenced in CISA overview of FiveHands ransomware; specific identity not provided.'
+ON MATCH SET vic_1.summary = CASE WHEN vic_1.summary IS NULL OR vic_1.summary = '' THEN 'Victim organization referenced in CISA overview of FiveHands ransomware; specific identity not provided.' ELSE vic_1.summary END
+MERGE (inc_1:Incident {id:'CISA-2021-05-06-FiveHands-INC-1'})
+ON CREATE SET inc_1.date = date('2021-05-06'), inc_1.type = 'ransomware', inc_1.summary = 'CISA reports FiveHands ransomware variant used publicly available pen test/exploitation tools plus SombRAT RAT to steal information, obfuscate files, conduct network discovery and credential access, and demand ransom; initial access via a zero-day VPN vulnerability; SoftPerfect Network Scanner used for discovery; PsExec used to execute ServeManager.exe (FiveHands ransomware).'
+ON MATCH SET inc_1.date = CASE WHEN inc_1.date IS NULL THEN date('2021-05-06') ELSE inc_1.date END,
+              inc_1.type = CASE WHEN inc_1.type IS NULL OR inc_1.type = '' THEN 'ransomware' ELSE inc_1.type END,
+              inc_1.summary = CASE WHEN inc_1.summary IS NULL OR inc_1.summary = '' THEN 'CISA reports FiveHands ransomware variant used publicly available pen test/exploitation tools plus SombRAT RAT to steal information, obfuscate files, conduct network discovery and credential access, and demand ransom; initial access via a zero-day VPN vulnerability; SoftPerfect Network Scanner used for discovery; PsExec used to execute ServeManager.exe (FiveHands ransomware).' ELSE inc_1.summary END
+MERGE (dt_1:Date {value:date('2021-05-06')})
+MERGE (inc_1)-[r_occon_1:occurred_on]->(dt_1)
+ON CREATE SET r_occon_1.date = date('2021-05-06')
+MERGE (inc_1)-[r_tgt_1:targets]->(vic_1)
+ON CREATE SET r_tgt_1.date = date('2021-05-06'), r_tgt_1.evidence = 'FiveHands ransomware variant successfully attacked an organization; demand ransom from the victim.', r_tgt_1.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_tgt_1.date = CASE WHEN r_tgt_1.date IS NULL THEN date('2021-05-06') ELSE r_tgt_1.date END,
+             r_tgt_1.evidence = CASE WHEN r_tgt_1.evidence IS NULL OR r_tgt_1.evidence = '' THEN 'FiveHands ransomware variant successfully attacked an organization; demand ransom from the victim.' ELSE r_tgt_1.evidence END,
+             r_tgt_1.source_id = CASE WHEN r_tgt_1.source_id IS NULL OR r_tgt_1.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_tgt_1.source_id END
+MERGE (inc_1)-[r_im_1:involved_malware]->(mal_1)
+ON CREATE SET r_im_1.evidence = 'CISA reports use of FiveHands ransomware in the attack.', r_im_1.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_im_1.evidence = CASE WHEN r_im_1.evidence IS NULL OR r_im_1.evidence = '' THEN 'CISA reports use of FiveHands ransomware in the attack.' ELSE r_im_1.evidence END,
+             r_im_1.source_id = CASE WHEN r_im_1.source_id IS NULL OR r_im_1.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_im_1.source_id END
+MERGE (inc_1)-[r_im_2:involved_malware]->(mal_2)
+ON CREATE SET r_im_2.evidence = 'CISA reports use of SombRAT remote access trojan (RAT) in the attack.', r_im_2.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_im_2.evidence = CASE WHEN r_im_2.evidence IS NULL OR r_im_2.evidence = '' THEN 'CISA reports use of SombRAT remote access trojan (RAT) in the attack.' ELSE r_im_2.evidence END,
+             r_im_2.source_id = CASE WHEN r_im_2.source_id IS NULL OR r_im_2.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_im_2.source_id END
+MERGE (t_ia_1:Technique {technique_id:'T1190'})
+ON CREATE SET t_ia_1.name = 'Exploit Public-Facing Application', t_ia_1.tactic = 'Initial Access', t_ia_1.summary = 'Adversaries exploit a vulnerability in an Internet-facing application to gain access.'
+ON MATCH SET t_ia_1.name = CASE WHEN t_ia_1.name IS NULL OR t_ia_1.name = '' THEN 'Exploit Public-Facing Application' ELSE t_ia_1.name END,
+              t_ia_1.tactic = CASE WHEN t_ia_1.tactic IS NULL OR t_ia_1.tactic = '' THEN 'Initial Access' ELSE t_ia_1.tactic END,
+              t_ia_1.summary = CASE WHEN t_ia_1.summary IS NULL OR t_ia_1.summary = '' THEN 'Adversaries exploit a vulnerability in an Internet-facing application to gain access.' ELSE t_ia_1.summary END
+MERGE (inc_1)-[r_ut_1:used_technique]->(t_ia_1)
+ON CREATE SET r_ut_1.phase = 'Initial Access', r_ut_1.details = 'Initial access via a zero-day vulnerability in a VPN product.', r_ut_1.evidence = 'The initial access vector was a zero-day vulnerability in a VPN product.', r_ut_1.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_ut_1.phase = CASE WHEN r_ut_1.phase IS NULL OR r_ut_1.phase = '' THEN 'Initial Access' ELSE r_ut_1.phase END,
+             r_ut_1.details = CASE WHEN r_ut_1.details IS NULL OR r_ut_1.details = '' THEN 'Initial access via a zero-day vulnerability in a VPN product.' ELSE r_ut_1.details END,
+             r_ut_1.evidence = CASE WHEN r_ut_1.evidence IS NULL OR r_ut_1.evidence = '' THEN 'The initial access vector was a zero-day vulnerability in a VPN product.' ELSE r_ut_1.evidence END,
+             r_ut_1.source_id = CASE WHEN r_ut_1.source_id IS NULL OR r_ut_1.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_ut_1.source_id END
+MERGE (t_disc_1:Technique {technique_id:'T1046'})
+ON CREATE SET t_disc_1.name = 'Network Service Discovery', t_disc_1.tactic = 'Discovery', t_disc_1.summary = 'Adversaries attempt to get a listing of services running on remote hosts.'
+ON MATCH SET t_disc_1.name = CASE WHEN t_disc_1.name IS NULL OR t_disc_1.name = '' THEN 'Network Service Discovery' ELSE t_disc_1.name END,
+              t_disc_1.tactic = CASE WHEN t_disc_1.tactic IS NULL OR t_disc_1.tactic = '' THEN 'Discovery' ELSE t_disc_1.tactic END,
+              t_disc_1.summary = CASE WHEN t_disc_1.summary IS NULL OR t_disc_1.summary = '' THEN 'Adversaries attempt to get a listing of services running on remote hosts.' ELSE t_disc_1.summary END
+MERGE (inc_1)-[r_ut_2:used_technique]->(t_disc_1)
+ON CREATE SET r_ut_2.phase = 'Discovery', r_ut_2.details = 'Discovery of hostnames and network services using SoftPerfect Network Scanner.', r_ut_2.evidence = 'Bad actor used SoftPerfect Network Scanner for the discovery of hostnames and network services.', r_ut_2.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_ut_2.phase = CASE WHEN r_ut_2.phase IS NULL OR r_ut_2.phase = '' THEN 'Discovery' ELSE r_ut_2.phase END,
+             r_ut_2.details = CASE WHEN r_ut_2.details IS NULL OR r_ut_2.details = '' THEN 'Discovery of hostnames and network services using SoftPerfect Network Scanner.' ELSE r_ut_2.details END,
+             r_ut_2.evidence = CASE WHEN r_ut_2.evidence IS NULL OR r_ut_2.evidence = '' THEN 'Bad actor used SoftPerfect Network Scanner for the discovery of hostnames and network services.' ELSE r_ut_2.evidence END,
+             r_ut_2.source_id = CASE WHEN r_ut_2.source_id IS NULL OR r_ut_2.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_ut_2.source_id END
+MERGE (t_exec_1:Technique {technique_id:'T1569.002'})
+ON CREATE SET t_exec_1.name = 'System Services: Service Execution', t_exec_1.tactic = 'Execution', t_exec_1.summary = 'Adversaries may execute a binary by creating or modifying a Windows service.'
+ON MATCH SET t_exec_1.name = CASE WHEN t_exec_1.name IS NULL OR t_exec_1.name = '' THEN 'System Services: Service Execution' ELSE t_exec_1.name END,
+              t_exec_1.tactic = CASE WHEN t_exec_1.tactic IS NULL OR t_exec_1.tactic = '' THEN 'Execution' ELSE t_exec_1.tactic END,
+              t_exec_1.summary = CASE WHEN t_exec_1.summary IS NULL OR t_exec_1.summary = '' THEN 'Adversaries may execute a binary by creating or modifying a Windows service.' ELSE t_exec_1.summary END
+MERGE (inc_1)-[r_ut_3:used_technique]->(t_exec_1)
+ON CREATE SET r_ut_3.phase = 'Execution', r_ut_3.details = 'PsExec used to execute ServeManager.exe (FiveHands ransomware).', r_ut_3.evidence = 'PsExec was then used to execute ServeManager.exe (what CISA calls FiveHands ransomware).', r_ut_3.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_ut_3.phase = CASE WHEN r_ut_3.phase IS NULL OR r_ut_3.phase = '' THEN 'Execution' ELSE r_ut_3.phase END,
+             r_ut_3.details = CASE WHEN r_ut_3.details IS NULL OR r_ut_3.details = '' THEN 'PsExec used to execute ServeManager.exe (FiveHands ransomware).' ELSE r_ut_3.details END,
+             r_ut_3.evidence = CASE WHEN r_ut_3.evidence IS NULL OR r_ut_3.evidence = '' THEN 'PsExec was then used to execute ServeManager.exe (what CISA calls FiveHands ransomware).' ELSE r_ut_3.evidence END,
+             r_ut_3.source_id = CASE WHEN r_ut_3.source_id IS NULL OR r_ut_3.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_ut_3.source_id END
+MERGE (t_inhib_1:Technique {technique_id:'T1490'})
+ON CREATE SET t_inhib_1.name = 'Inhibit System Recovery', t_inhib_1.tactic = 'Impact', t_inhib_1.summary = 'Adversaries may delete backups/shadow copies to prevent recovery.'
+ON MATCH SET t_inhib_1.name = CASE WHEN t_inhib_1.name IS NULL OR t_inhib_1.name = '' THEN 'Inhibit System Recovery' ELSE t_inhib_1.name END,
+              t_inhib_1.tactic = CASE WHEN t_inhib_1.tactic IS NULL OR t_inhib_1.tactic = '' THEN 'Impact' ELSE t_inhib_1.tactic END,
+              t_inhib_1.summary = CASE WHEN t_inhib_1.summary IS NULL OR t_inhib_1.summary = '' THEN 'Adversaries may delete backups/shadow copies to prevent recovery.' ELSE t_inhib_1.summary END
+MERGE (inc_1)-[r_ut_4:used_technique]->(t_inhib_1)
+ON CREATE SET r_ut_4.phase = 'Impact', r_ut_4.details = 'FiveHands uses WMI to enumerate then delete Volume Shadow copies to prevent recovery; encrypts recovery folder.', r_ut_4.evidence = 'To prevent data recovery, FiveHands uses WMI to first enumerate then delete Volume Shadow copies; also encrypts files in the recovery folder.', r_ut_4.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_ut_4.phase = CASE WHEN r_ut_4.phase IS NULL OR r_ut_4.phase = '' THEN 'Impact' ELSE r_ut_4.phase END,
+             r_ut_4.details = CASE WHEN r_ut_4.details IS NULL OR r_ut_4.details = '' THEN 'FiveHands uses WMI to enumerate then delete Volume Shadow copies to prevent recovery; encrypts recovery folder.' ELSE r_ut_4.details END,
+             r_ut_4.evidence = CASE WHEN r_ut_4.evidence IS NULL OR r_ut_4.evidence = '' THEN 'To prevent data recovery, FiveHands uses WMI to first enumerate then delete Volume Shadow copies; also encrypts files in the recovery folder.' ELSE r_ut_4.evidence END,
+             r_ut_4.source_id = CASE WHEN r_ut_4.source_id IS NULL OR r_ut_4.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_ut_4.source_id END
+MERGE (tool_1:Tool {name:'SoftPerfect Network Scanner'})
+ON CREATE SET tool_1.summary = 'Used for discovery of hostnames and network services.'
+ON MATCH SET tool_1.summary = CASE WHEN tool_1.summary IS NULL OR tool_1.summary = '' THEN 'Used for discovery of hostnames and network services.' ELSE tool_1.summary END
+MERGE (tool_2:Tool {name:'PsExec.exe'})
+ON CREATE SET tool_2.summary = 'Used to execute ServeManager.exe (FiveHands ransomware) in the reported incident.'
+ON MATCH SET tool_2.summary = CASE WHEN tool_2.summary IS NULL OR tool_2.summary = '' THEN 'Used to execute ServeManager.exe (FiveHands ransomware) in the reported incident.' ELSE tool_2.summary END
+MERGE (tool_3:Tool {name:'ServeManager.exe'})
+ON CREATE SET tool_3.summary = 'Executable referred to by CISA as FiveHands ransomware payload.'
+ON MATCH SET tool_3.summary = CASE WHEN tool_3.summary IS NULL OR tool_3.summary = '' THEN 'Executable referred to by CISA as FiveHands ransomware payload.' ELSE tool_3.summary END
+MERGE (tool_4:Tool {name:'RouterScan.exe'})
+ON CREATE SET tool_4.summary = 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).'
+ON MATCH SET tool_4.summary = CASE WHEN tool_4.summary IS NULL OR tool_4.summary = '' THEN 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).' ELSE tool_4.summary END
+MERGE (tool_5:Tool {name:'grabff.exe'})
+ON CREATE SET tool_5.summary = 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).'
+ON MATCH SET tool_5.summary = CASE WHEN tool_5.summary IS NULL OR tool_5.summary = '' THEN 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).' ELSE tool_5.summary END
+MERGE (tool_6:Tool {name:'rclone.exe'})
+ON CREATE SET tool_6.summary = 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).'
+ON MATCH SET tool_6.summary = CASE WHEN tool_6.summary IS NULL OR tool_6.summary = '' THEN 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).' ELSE tool_6.summary END
+MERGE (tool_7:Tool {name:'s3browser-9-5-3.exe'})
+ON CREATE SET tool_7.summary = 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).'
+ON MATCH SET tool_7.summary = CASE WHEN tool_7.summary IS NULL OR tool_7.summary = '' THEN 'Publicly available tool reportedly used in the FiveHands incident (listed by CISA).' ELSE tool_7.summary END
+MERGE (inc_1)-[r_it_1:involved_tool]->(tool_1)
+ON CREATE SET r_it_1.evidence = 'Tools used include SoftPerfect Network Scanner.', r_it_1.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_1.evidence = CASE WHEN r_it_1.evidence IS NULL OR r_it_1.evidence = '' THEN 'Tools used include SoftPerfect Network Scanner.' ELSE r_it_1.evidence END,
+             r_it_1.source_id = CASE WHEN r_it_1.source_id IS NULL OR r_it_1.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_1.source_id END
+MERGE (inc_1)-[r_it_2:involved_tool]->(tool_2)
+ON CREATE SET r_it_2.evidence = 'Tools used include PsExec.exe; PsExec was then used to execute ServeManager.exe.', r_it_2.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_2.evidence = CASE WHEN r_it_2.evidence IS NULL OR r_it_2.evidence = '' THEN 'Tools used include PsExec.exe; PsExec was then used to execute ServeManager.exe.' ELSE r_it_2.evidence END,
+             r_it_2.source_id = CASE WHEN r_it_2.source_id IS NULL OR r_it_2.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_2.source_id END
+MERGE (inc_1)-[r_it_3:involved_tool]->(tool_3)
+ON CREATE SET r_it_3.evidence = 'PsExec was used to execute ServeManager.exe (what CISA calls FiveHands ransomware).', r_it_3.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_3.evidence = CASE WHEN r_it_3.evidence IS NULL OR r_it_3.evidence = '' THEN 'PsExec was used to execute ServeManager.exe (what CISA calls FiveHands ransomware).' ELSE r_it_3.evidence END,
+             r_it_3.source_id = CASE WHEN r_it_3.source_id IS NULL OR r_it_3.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_3.source_id END
+MERGE (inc_1)-[r_it_4:involved_tool]->(tool_4)
+ON CREATE SET r_it_4.evidence = 'Tools used include RouterScan.exe.', r_it_4.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_4.evidence = CASE WHEN r_it_4.evidence IS NULL OR r_it_4.evidence = '' THEN 'Tools used include RouterScan.exe.' ELSE r_it_4.evidence END,
+             r_it_4.source_id = CASE WHEN r_it_4.source_id IS NULL OR r_it_4.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_4.source_id END
+MERGE (inc_1)-[r_it_5:involved_tool]->(tool_5)
+ON CREATE SET r_it_5.evidence = 'Tools used include grabff.exe.', r_it_5.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_5.evidence = CASE WHEN r_it_5.evidence IS NULL OR r_it_5.evidence = '' THEN 'Tools used include grabff.exe.' ELSE r_it_5.evidence END,
+             r_it_5.source_id = CASE WHEN r_it_5.source_id IS NULL OR r_it_5.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_5.source_id END
+MERGE (inc_1)-[r_it_6:involved_tool]->(tool_6)
+ON CREATE SET r_it_6.evidence = 'Tools used include rclone.exe.', r_it_6.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_6.evidence = CASE WHEN r_it_6.evidence IS NULL OR r_it_6.evidence = '' THEN 'Tools used include rclone.exe.' ELSE r_it_6.evidence END,
+             r_it_6.source_id = CASE WHEN r_it_6.source_id IS NULL OR r_it_6.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_6.source_id END
+MERGE (inc_1)-[r_it_7:involved_tool]->(tool_7)
+ON CREATE SET r_it_7.evidence = 'Tools used include s3browser-9-5-3.exe.', r_it_7.source_id = 'CISA-2021-05-06-FiveHands'
+ON MATCH SET r_it_7.evidence = CASE WHEN r_it_7.evidence IS NULL OR r_it_7.evidence = '' THEN 'Tools used include s3browser-9-5-3.exe.' ELSE r_it_7.evidence END,
+             r_it_7.source_id = CASE WHEN r_it_7.source_id IS NULL OR r_it_7.source_id = '' THEN 'CISA-2021-05-06-FiveHands' ELSE r_it_7.source_id END
+MERGE (mal_1)-[r_sb_1:supported_by]->(src_1)
+ON CREATE SET r_sb_1.quote = 'FiveHands is a novel ransomware variant that uses a public key encryption scheme called NTRUEncrypt... uses WMI to ... delete Volume Shadow copies... encrypts files in the recovery folder... writes a ransom note.'
+MERGE (mal_2)-[r_sb_2:supported_by]->(src_1)
+ON CREATE SET r_sb_2.quote = '...plus FiveHands ransomware and SombRAT remote access trojan (RAT)...'
+MERGE (inc_1)-[r_sb_3:supported_by]->(src_1)
+ON CREATE SET r_sb_3.quote = 'CISA release date May 6, 2021... initial access vector was a zero-day vulnerability in a VPN product... tools used include ... SoftPerfect Network Scanner ... PsExec ... ServeManager.exe ... SombRAT ...'"
+budworm-tool-update-telecoms-govt.json,"MERGE (src_1:Source {id:'symantec-broadcom-budworm-aug2023'})
+ON CREATE SET
+  src_1.title = 'Symantec Threat Hunter Team: Budworm targets Middle Eastern telecom and Asian government (Aug 2023)',
+  src_1.publisher = 'Symantec (Broadcom)'
+MERGE (ta_1:ThreatActor {name:'Budworm'})
+ON CREATE SET
+  ta_1.summary = 'APT group observed by Symantec using updated tooling and deploying a previously unseen SysUpdate backdoor variant in August 2023 attacks targeting a Middle Eastern telecommunications organization and an Asian government.'
+ON MATCH SET
+  ta_1.summary = CASE WHEN ta_1.summary IS NULL OR ta_1.summary = '' THEN 'APT group observed by Symantec using updated tooling and deploying a previously unseen SysUpdate backdoor variant in August 2023 attacks targeting a Middle Eastern telecommunications organization and an Asian government.' ELSE ta_1.summary END
+MERGE (ta_alias_1:ThreatActor {name:'LuckyMouse'})
+MERGE (ta_1)-[ralias_1:has_alias]->(ta_alias_1)
+ON CREATE SET ralias_1.date = date('2023-08-01')
+MERGE (ta_alias_2:ThreatActor {name:'Emissary Panda'})
+MERGE (ta_1)-[ralias_2:has_alias]->(ta_alias_2)
+ON CREATE SET ralias_2.date = date('2023-08-01')
+MERGE (ta_alias_3:ThreatActor {name:'APT27'})
+MERGE (ta_1)-[ralias_3:has_alias]->(ta_alias_3)
+ON CREATE SET ralias_3.date = date('2023-08-01')
+MERGE (mal_1:Malware {name:'SysUpdate'})
+ON CREATE SET
+  mal_1.summary = 'Backdoor used exclusively by Budworm; observed as a previously unseen variant (inicore_v2.3.30.dll, SysUpdate DLL v2.3.30) in August 2023 intrusions.'
+ON MATCH SET
+  mal_1.summary = CASE WHEN mal_1.summary IS NULL OR mal_1.summary = '' THEN 'Backdoor used exclusively by Budworm; observed as a previously unseen variant (inicore_v2.3.30.dll, SysUpdate DLL v2.3.30) in August 2023 intrusions.' ELSE mal_1.summary END
+MERGE (ta_1)-[ruse_1:uses]->(mal_1)
+ON CREATE SET
+  ruse_1.date = date('2023-08-01'),
+  ruse_1.evidence = 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll). SysUpdate is exclusively used by Budworm.',
+  ruse_1.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  ruse_1.date = CASE WHEN ruse_1.date IS NULL THEN date('2023-08-01') ELSE ruse_1.date END,
+  ruse_1.evidence = CASE WHEN ruse_1.evidence IS NULL OR ruse_1.evidence = '' THEN 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll). SysUpdate is exclusively used by Budworm.' ELSE ruse_1.evidence END,
+  ruse_1.source_id = CASE WHEN ruse_1.source_id IS NULL OR ruse_1.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE ruse_1.source_id END
+MERGE (t_credharv_1:Technique {technique_id:'T1003'})
+ON CREATE SET
+  t_credharv_1.name = 'OS Credential Dumping',
+  t_credharv_1.tactic = 'Credential Access',
+  t_credharv_1.summary = 'Credential harvesting activity observed on infected machines; described as the only malicious activity seen, suggesting the intrusion was stopped early.'
+ON MATCH SET
+  t_credharv_1.name = CASE WHEN t_credharv_1.name IS NULL OR t_credharv_1.name = '' THEN 'OS Credential Dumping' ELSE t_credharv_1.name END,
+  t_credharv_1.tactic = CASE WHEN t_credharv_1.tactic IS NULL OR t_credharv_1.tactic = '' THEN 'Credential Access' ELSE t_credharv_1.tactic END,
+  t_credharv_1.summary = CASE WHEN t_credharv_1.summary IS NULL OR t_credharv_1.summary = '' THEN 'Credential harvesting activity observed on infected machines; described as the only malicious activity seen, suggesting the intrusion was stopped early.' ELSE t_credharv_1.summary END
+MERGE (victim_1:Victim {name:'Middle Eastern telecommunications organization'})
+ON CREATE SET
+  victim_1.sector = 'Technology',
+  victim_1.summary = 'Telecommunications organization in the Middle East targeted by Budworm in August 2023.'
+ON MATCH SET
+  victim_1.sector = CASE WHEN victim_1.sector IS NULL OR victim_1.sector = '' THEN 'Technology' ELSE victim_1.sector END,
+  victim_1.summary = CASE WHEN victim_1.summary IS NULL OR victim_1.summary = '' THEN 'Telecommunications organization in the Middle East targeted by Budworm in August 2023.' ELSE victim_1.summary END
+MERGE (victim_2:Victim {name:'Asian government'})
+ON CREATE SET
+  victim_2.sector = 'Government',
+  victim_2.summary = 'Government entity in Asia targeted by Budworm in August 2023.'
+ON MATCH SET
+  victim_2.sector = CASE WHEN victim_2.sector IS NULL OR victim_2.sector = '' THEN 'Government' ELSE victim_2.sector END,
+  victim_2.summary = CASE WHEN victim_2.summary IS NULL OR victim_2.summary = '' THEN 'Government entity in Asia targeted by Budworm in August 2023.' ELSE victim_2.summary END
+MERGE (inc_1:Incident {id:'symantec-broadcom-budworm-aug2023-1'})
+ON CREATE SET
+  inc_1.date = date('2023-08-01'),
+  inc_1.type = 'intrusion',
+  inc_1.summary = 'August 2023 Budworm intrusion targeting a Middle Eastern telecommunications organization; Budworm used updated tooling and deployed a previously unseen SysUpdate backdoor variant; only malicious activity observed was credential harvesting, suggesting the activity may have been stopped early.'
+ON MATCH SET
+  inc_1.date = CASE WHEN inc_1.date IS NULL THEN date('2023-08-01') ELSE inc_1.date END,
+  inc_1.type = CASE WHEN inc_1.type IS NULL OR inc_1.type = '' THEN 'intrusion' ELSE inc_1.type END,
+  inc_1.summary = CASE WHEN inc_1.summary IS NULL OR inc_1.summary = '' THEN 'August 2023 Budworm intrusion targeting a Middle Eastern telecommunications organization; Budworm used updated tooling and deployed a previously unseen SysUpdate backdoor variant; only malicious activity observed was credential harvesting, suggesting the activity may have been stopped early.' ELSE inc_1.summary END
+MERGE (inc_2:Incident {id:'symantec-broadcom-budworm-aug2023-2'})
+ON CREATE SET
+  inc_2.date = date('2023-08-01'),
+  inc_2.type = 'intrusion',
+  inc_2.summary = 'August 2023 Budworm intrusion targeting an Asian government; Budworm used updated tooling and deployed a previously unseen SysUpdate backdoor variant; only malicious activity observed was credential harvesting, suggesting the activity may have been stopped early.'
+ON MATCH SET
+  inc_2.date = CASE WHEN inc_2.date IS NULL THEN date('2023-08-01') ELSE inc_2.date END,
+  inc_2.type = CASE WHEN inc_2.type IS NULL OR inc_2.type = '' THEN 'intrusion' ELSE inc_2.type END,
+  inc_2.summary = CASE WHEN inc_2.summary IS NULL OR inc_2.summary = '' THEN 'August 2023 Budworm intrusion targeting an Asian government; Budworm used updated tooling and deployed a previously unseen SysUpdate backdoor variant; only malicious activity observed was credential harvesting, suggesting the activity may have been stopped early.' ELSE inc_2.summary END
+MERGE (d_1:Date {value:date('2023-08-01')})
+MERGE (inc_1)-[rod_1:occurred_on]->(d_1)
+ON CREATE SET rod_1.date = date('2023-08-01')
+MERGE (inc_2)-[rod_2:occurred_on]->(d_1)
+ON CREATE SET rod_2.date = date('2023-08-01')
+MERGE (inc_1)-[rtgt_1:targets]->(victim_1)
+ON CREATE SET
+  rtgt_1.date = date('2023-08-01'),
+  rtgt_1.evidence = 'Budworm using an updated version of one of its key tools to target a Middle Eastern telecommunications organization. Both attacks occurred in August 2023.',
+  rtgt_1.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rtgt_1.date = CASE WHEN rtgt_1.date IS NULL THEN date('2023-08-01') ELSE rtgt_1.date END,
+  rtgt_1.evidence = CASE WHEN rtgt_1.evidence IS NULL OR rtgt_1.evidence = '' THEN 'Budworm using an updated version of one of its key tools to target a Middle Eastern telecommunications organization. Both attacks occurred in August 2023.' ELSE rtgt_1.evidence END,
+  rtgt_1.source_id = CASE WHEN rtgt_1.source_id IS NULL OR rtgt_1.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rtgt_1.source_id END
+MERGE (inc_2)-[rtgt_2:targets]->(victim_2)
+ON CREATE SET
+  rtgt_2.date = date('2023-08-01'),
+  rtgt_2.evidence = 'Budworm using an updated version of one of its key tools to target an Asian government. Both attacks occurred in August 2023.',
+  rtgt_2.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rtgt_2.date = CASE WHEN rtgt_2.date IS NULL THEN date('2023-08-01') ELSE rtgt_2.date END,
+  rtgt_2.evidence = CASE WHEN rtgt_2.evidence IS NULL OR rtgt_2.evidence = '' THEN 'Budworm using an updated version of one of its key tools to target an Asian government. Both attacks occurred in August 2023.' ELSE rtgt_2.evidence END,
+  rtgt_2.source_id = CASE WHEN rtgt_2.source_id IS NULL OR rtgt_2.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rtgt_2.source_id END
+MERGE (inc_1)-[rattrib_1:attributed_to]->(ta_1)
+ON CREATE SET
+  rattrib_1.confidence = 'high',
+  rattrib_1.evidence = 'Symantec Threat Hunter Team discovered Budworm using updated tooling and deploying SysUpdate in August 2023 attacks.',
+  rattrib_1.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rattrib_1.confidence = CASE WHEN rattrib_1.confidence IS NULL OR rattrib_1.confidence = '' THEN 'high' ELSE rattrib_1.confidence END,
+  rattrib_1.evidence = CASE WHEN rattrib_1.evidence IS NULL OR rattrib_1.evidence = '' THEN 'Symantec Threat Hunter Team discovered Budworm using updated tooling and deploying SysUpdate in August 2023 attacks.' ELSE rattrib_1.evidence END,
+  rattrib_1.source_id = CASE WHEN rattrib_1.source_id IS NULL OR rattrib_1.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rattrib_1.source_id END
+MERGE (inc_2)-[rattrib_2:attributed_to]->(ta_1)
+ON CREATE SET
+  rattrib_2.confidence = 'high',
+  rattrib_2.evidence = 'Symantec Threat Hunter Team discovered Budworm using updated tooling and deploying SysUpdate in August 2023 attacks.',
+  rattrib_2.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rattrib_2.confidence = CASE WHEN rattrib_2.confidence IS NULL OR rattrib_2.confidence = '' THEN 'high' ELSE rattrib_2.confidence END,
+  rattrib_2.evidence = CASE WHEN rattrib_2.evidence IS NULL OR rattrib_2.evidence = '' THEN 'Symantec Threat Hunter Team discovered Budworm using updated tooling and deploying SysUpdate in August 2023 attacks.' ELSE rattrib_2.evidence END,
+  rattrib_2.source_id = CASE WHEN rattrib_2.source_id IS NULL OR rattrib_2.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rattrib_2.source_id END
+MERGE (inc_1)-[rmal_1:involved_malware]->(mal_1)
+ON CREATE SET
+  rmal_1.evidence = 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll).',
+  rmal_1.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rmal_1.evidence = CASE WHEN rmal_1.evidence IS NULL OR rmal_1.evidence = '' THEN 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll).' ELSE rmal_1.evidence END,
+  rmal_1.source_id = CASE WHEN rmal_1.source_id IS NULL OR rmal_1.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rmal_1.source_id END
+MERGE (inc_2)-[rmal_2:involved_malware]->(mal_1)
+ON CREATE SET
+  rmal_2.evidence = 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll).',
+  rmal_2.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rmal_2.evidence = CASE WHEN rmal_2.evidence IS NULL OR rmal_2.evidence = '' THEN 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll).' ELSE rmal_2.evidence END,
+  rmal_2.source_id = CASE WHEN rmal_2.source_id IS NULL OR rmal_2.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rmal_2.source_id END
+MERGE (inc_1)-[rt_1:used_technique]->(t_credharv_1)
+ON CREATE SET
+  rt_1.phase = 'Credential Access',
+  rt_1.details = 'credential harvesting',
+  rt_1.evidence = 'It appears the activity by the group may have been stopped early in the attack chain as the only malicious activity seen on infected machines is credential harvesting.',
+  rt_1.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rt_1.phase = CASE WHEN rt_1.phase IS NULL OR rt_1.phase = '' THEN 'Credential Access' ELSE rt_1.phase END,
+  rt_1.details = CASE WHEN rt_1.details IS NULL OR rt_1.details = '' THEN 'credential harvesting' ELSE rt_1.details END,
+  rt_1.evidence = CASE WHEN rt_1.evidence IS NULL OR rt_1.evidence = '' THEN 'It appears the activity by the group may have been stopped early in the attack chain as the only malicious activity seen on infected machines is credential harvesting.' ELSE rt_1.evidence END,
+  rt_1.source_id = CASE WHEN rt_1.source_id IS NULL OR rt_1.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rt_1.source_id END
+MERGE (inc_2)-[rt_2:used_technique]->(t_credharv_1)
+ON CREATE SET
+  rt_2.phase = 'Credential Access',
+  rt_2.details = 'credential harvesting',
+  rt_2.evidence = 'It appears the activity by the group may have been stopped early in the attack chain as the only malicious activity seen on infected machines is credential harvesting.',
+  rt_2.source_id = 'symantec-broadcom-budworm-aug2023'
+ON MATCH SET
+  rt_2.phase = CASE WHEN rt_2.phase IS NULL OR rt_2.phase = '' THEN 'Credential Access' ELSE rt_2.phase END,
+  rt_2.details = CASE WHEN rt_2.details IS NULL OR rt_2.details = '' THEN 'credential harvesting' ELSE rt_2.details END,
+  rt_2.evidence = CASE WHEN rt_2.evidence IS NULL OR rt_2.evidence = '' THEN 'It appears the activity by the group may have been stopped early in the attack chain as the only malicious activity seen on infected machines is credential harvesting.' ELSE rt_2.evidence END,
+  rt_2.source_id = CASE WHEN rt_2.source_id IS NULL OR rt_2.source_id = '' THEN 'symantec-broadcom-budworm-aug2023' ELSE rt_2.source_id END
+MERGE (ta_1)-[rsup_1:supported_by]->(src_1)
+ON CREATE SET rsup_1.quote = 'The Threat Hunter Team in Symantec, part of Broadcom, discovered Budworm using an updated version of one of its key tools... Both attacks occurred in August 2023.'
+MERGE (mal_1)-[rsup_2:supported_by]->(src_1)
+ON CREATE SET rsup_2.quote = 'Budworm deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll). SysUpdate is exclusively used by Budworm.'
+MERGE (inc_1)-[rsup_3:supported_by]->(src_1)
+ON CREATE SET rsup_3.quote = 'Both attacks occurred in August 2023... only malicious activity seen on infected machines is credential harvesting.'
+MERGE (inc_2)-[rsup_4:supported_by]->(src_1)
+ON CREATE SET rsup_4.quote = 'Both attacks occurred in August 2023... only malicious activity seen on infected machines is credential harvesting.'"
+malicious-operations-of-exposed-iam-keys-cryptojacking.json,"MERGE (src_1:Source {id:'unit42-elektra-leak'})
+ON CREATE SET
+  src_1.title = 'Unit 42: EleKtra-Leak campaign',
+  src_1.publisher = 'Unit 42'
+ON MATCH SET
+  src_1.title = CASE WHEN src_1.title IS NULL OR src_1.title = '' THEN 'Unit 42: EleKtra-Leak campaign' ELSE src_1.title END,
+  src_1.publisher = CASE WHEN src_1.publisher IS NULL OR src_1.publisher = '' THEN 'Unit 42' ELSE src_1.publisher END
+WITH src_1
+MERGE (camp_1:Campaign {name:'EleKtra-Leak'})
+ON CREATE SET
+  camp_1.summary = 'Active campaign identified by Unit 42 performing automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories; associated actor creates multiple AWS EC2 instances for long-lasting cryptojacking operations.'
+ON MATCH SET
+  camp_1.summary = CASE WHEN camp_1.summary IS NULL OR camp_1.summary = '' THEN 'Active campaign identified by Unit 42 performing automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories; associated actor creates multiple AWS EC2 instances for long-lasting cryptojacking operations.' ELSE camp_1.summary END
+WITH src_1, camp_1
+MERGE (ta_1:ThreatActor {name:'Unknown threat actor (EleKtra-Leak)'})
+ON CREATE SET
+  ta_1.summary = 'Threat actor associated with the EleKtra-Leak campaign; automates targeting of exposed IAM credentials in public GitHub repositories and uses compromised credentials to create AWS EC2 instances for cryptojacking.'
+ON MATCH SET
+  ta_1.summary = CASE WHEN ta_1.summary IS NULL OR ta_1.summary = '' THEN 'Threat actor associated with the EleKtra-Leak campaign; automates targeting of exposed IAM credentials in public GitHub repositories and uses compromised credentials to create AWS EC2 instances for cryptojacking.' ELSE ta_1.summary END
+WITH src_1, camp_1, ta_1
+MERGE (mot_1:Motivation {type:'financial'})
+MERGE (ta_1)-[:motivated_by]->(mot_1)
+WITH src_1, camp_1, ta_1
+MERGE (cap_1:Capability {name:'Automation'})
+ON CREATE SET
+  cap_1.summary = 'Use of automated processes in offensive or defensive operations.'
+ON MATCH SET
+  cap_1.summary = CASE WHEN cap_1.summary IS NULL OR cap_1.summary = '' THEN 'Use of automated processes in offensive or defensive operations.' ELSE cap_1.summary END
+WITH src_1, camp_1, ta_1, cap_1
+MERGE (cap_2:Capability {name:'Cloud'})
+ON CREATE SET
+  cap_2.summary = 'Use or abuse of cloud services/infrastructure.'
+ON MATCH SET
+  cap_2.summary = CASE WHEN cap_2.summary IS NULL OR cap_2.summary = '' THEN 'Use or abuse of cloud services/infrastructure.' ELSE cap_2.summary END
+WITH src_1, camp_1, ta_1, cap_1, cap_2
+MERGE (ta_1)-[lev_1:leverages]->(cap_1)
+ON CREATE SET
+  lev_1.details = 'Automated targeting of exposed IAM credentials within public GitHub repositories.',
+  lev_1.evidence = 'performs automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories',
+  lev_1.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  lev_1.details = CASE WHEN lev_1.details IS NULL OR lev_1.details = '' THEN 'Automated targeting of exposed IAM credentials within public GitHub repositories.' ELSE lev_1.details END,
+  lev_1.evidence = CASE WHEN lev_1.evidence IS NULL OR lev_1.evidence = '' THEN 'performs automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories' ELSE lev_1.evidence END,
+  lev_1.source_id = CASE WHEN lev_1.source_id IS NULL OR lev_1.source_id = '' THEN 'unit42-elektra-leak' ELSE lev_1.source_id END
+WITH src_1, camp_1, ta_1, cap_1, cap_2
+MERGE (ta_1)-[lev_2:leverages]->(cap_2)
+ON CREATE SET
+  lev_2.details = 'Creates multiple AWS EC2 instances for long-lasting cryptojacking operations.',
+  lev_2.evidence = 'able to create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations',
+  lev_2.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  lev_2.details = CASE WHEN lev_2.details IS NULL OR lev_2.details = '' THEN 'Creates multiple AWS EC2 instances for long-lasting cryptojacking operations.' ELSE lev_2.details END,
+  lev_2.evidence = CASE WHEN lev_2.evidence IS NULL OR lev_2.evidence = '' THEN 'able to create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations' ELSE lev_2.evidence END,
+  lev_2.source_id = CASE WHEN lev_2.source_id IS NULL OR lev_2.source_id = '' THEN 'unit42-elektra-leak' ELSE lev_2.source_id END
+WITH src_1, camp_1, ta_1, cap_1, cap_2
+MERGE (tech_1:Technique {technique_id:'T1552'})
+ON CREATE SET
+  tech_1.name = 'Unsecured Credentials',
+  tech_1.tactic = 'Credential Access',
+  tech_1.summary = 'Adversaries may search for and collect credentials stored insecurely, including in code repositories.'
+ON MATCH SET
+  tech_1.name = CASE WHEN tech_1.name IS NULL OR tech_1.name = '' THEN 'Unsecured Credentials' ELSE tech_1.name END,
+  tech_1.tactic = CASE WHEN tech_1.tactic IS NULL OR tech_1.tactic = '' THEN 'Credential Access' ELSE tech_1.tactic END,
+  tech_1.summary = CASE WHEN tech_1.summary IS NULL OR tech_1.summary = '' THEN 'Adversaries may search for and collect credentials stored insecurely, including in code repositories.' ELSE tech_1.summary END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1
+MERGE (tech_2:Technique {technique_id:'T1496'})
+ON CREATE SET
+  tech_2.name = 'Resource Hijacking',
+  tech_2.tactic = 'Impact',
+  tech_2.summary = 'Adversaries may leverage cloud or other resources to mine cryptocurrency or otherwise hijack resources.'
+ON MATCH SET
+  tech_2.name = CASE WHEN tech_2.name IS NULL OR tech_2.name = '' THEN 'Resource Hijacking' ELSE tech_2.name END,
+  tech_2.tactic = CASE WHEN tech_2.tactic IS NULL OR tech_2.tactic = '' THEN 'Impact' ELSE tech_2.tactic END,
+  tech_2.summary = CASE WHEN tech_2.summary IS NULL OR tech_2.summary = '' THEN 'Adversaries may leverage cloud or other resources to mine cryptocurrency or otherwise hijack resources.' ELSE tech_2.summary END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2
+MERGE (camp_1)-[inc_1:includes]->(ta_1)
+ON CREATE SET
+  inc_1.evidence = 'threat actor associated with the campaign',
+  inc_1.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  inc_1.evidence = CASE WHEN inc_1.evidence IS NULL OR inc_1.evidence = '' THEN 'threat actor associated with the campaign' ELSE inc_1.evidence END,
+  inc_1.source_id = CASE WHEN inc_1.source_id IS NULL OR inc_1.source_id = '' THEN 'unit42-elektra-leak' ELSE inc_1.source_id END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2
+MERGE (incd_1:Incident {id:'unit42-elektra-leak-activity'})
+ON CREATE SET
+  incd_1.type = 'cryptojacking',
+  incd_1.summary = 'EleKtra-Leak activity: automated targeting of exposed IAM credentials in public GitHub repositories; when compromised credentials are obtained, actor creates multiple AWS EC2 instances for wide-ranging and long-lasting cryptojacking.'
+ON MATCH SET
+  incd_1.type = CASE WHEN incd_1.type IS NULL OR incd_1.type = '' THEN 'cryptojacking' ELSE incd_1.type END,
+  incd_1.summary = CASE WHEN incd_1.summary IS NULL OR incd_1.summary = '' THEN 'EleKtra-Leak activity: automated targeting of exposed IAM credentials in public GitHub repositories; when compromised credentials are obtained, actor creates multiple AWS EC2 instances for wide-ranging and long-lasting cryptojacking.' ELSE incd_1.summary END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2, incd_1
+MERGE (incd_1)-[attr_1:attributed_to]->(ta_1)
+ON CREATE SET
+  attr_1.confidence = 'believed',
+  attr_1.evidence = 'the threat actor associated with the campaign was able to create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations',
+  attr_1.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  attr_1.confidence = CASE WHEN attr_1.confidence IS NULL OR attr_1.confidence = '' THEN 'believed' ELSE attr_1.confidence END,
+  attr_1.evidence = CASE WHEN attr_1.evidence IS NULL OR attr_1.evidence = '' THEN 'the threat actor associated with the campaign was able to create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations' ELSE attr_1.evidence END,
+  attr_1.source_id = CASE WHEN attr_1.source_id IS NULL OR attr_1.source_id = '' THEN 'unit42-elektra-leak' ELSE attr_1.source_id END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2, incd_1
+MERGE (incd_1)-[ut_1:used_technique]->(tech_1)
+ON CREATE SET
+  ut_1.phase = 'Credential Access',
+  ut_1.details = 'Automated targeting of exposed IAM credentials within public GitHub repositories.',
+  ut_1.evidence = 'automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories',
+  ut_1.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  ut_1.phase = CASE WHEN ut_1.phase IS NULL OR ut_1.phase = '' THEN 'Credential Access' ELSE ut_1.phase END,
+  ut_1.details = CASE WHEN ut_1.details IS NULL OR ut_1.details = '' THEN 'Automated targeting of exposed IAM credentials within public GitHub repositories.' ELSE ut_1.details END,
+  ut_1.evidence = CASE WHEN ut_1.evidence IS NULL OR ut_1.evidence = '' THEN 'automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories' ELSE ut_1.evidence END,
+  ut_1.source_id = CASE WHEN ut_1.source_id IS NULL OR ut_1.source_id = '' THEN 'unit42-elektra-leak' ELSE ut_1.source_id END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2, incd_1
+MERGE (incd_1)-[ut_2:used_technique]->(tech_2)
+ON CREATE SET
+  ut_2.phase = 'Impact',
+  ut_2.details = 'Use of AWS EC2 instances for wide-ranging and long-lasting cryptojacking operations.',
+  ut_2.evidence = 'create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations',
+  ut_2.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  ut_2.phase = CASE WHEN ut_2.phase IS NULL OR ut_2.phase = '' THEN 'Impact' ELSE ut_2.phase END,
+  ut_2.details = CASE WHEN ut_2.details IS NULL OR ut_2.details = '' THEN 'Use of AWS EC2 instances for wide-ranging and long-lasting cryptojacking operations.' ELSE ut_2.details END,
+  ut_2.evidence = CASE WHEN ut_2.evidence IS NULL OR ut_2.evidence = '' THEN 'create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations' ELSE ut_2.evidence END,
+  ut_2.source_id = CASE WHEN ut_2.source_id IS NULL OR ut_2.source_id = '' THEN 'unit42-elektra-leak' ELSE ut_2.source_id END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2, incd_1
+MERGE (mit_1:Mitigation {name:'Credential quarantine policy'})
+ON CREATE SET
+  mit_1.framework = 'AWS',
+  mit_1.summary = 'Automatic protection/quarantine policy applied by AWS to remediate exposed credentials in popular source code repositories.'
+ON MATCH SET
+  mit_1.framework = CASE WHEN mit_1.framework IS NULL OR mit_1.framework = '' THEN 'AWS' ELSE mit_1.framework END,
+  mit_1.summary = CASE WHEN mit_1.summary IS NULL OR mit_1.summary = '' THEN 'Automatic protection/quarantine policy applied by AWS to remediate exposed credentials in popular source code repositories.' ELSE mit_1.summary END
+WITH src_1, camp_1, ta_1, cap_1, cap_2, tech_1, tech_2, incd_1, mit_1
+MERGE (mit_1)-[mitg_1:mitigates]->(tech_1)
+ON CREATE SET
+  mitg_1.status = 'applied',
+  mitg_1.observed_effectiveness = 'Auto-remediates much of the threat of exposed credentials in popular source code repositories.',
+  mitg_1.evidence = 'AWS detects and auto-remediates much of the threat of exposed credentials in popular source code repositories by applying a special quarantine policy',
+  mitg_1.source_id = 'unit42-elektra-leak'
+ON MATCH SET
+  mitg_1.status = CASE WHEN mitg_1.status IS NULL OR mitg_1.status = '' THEN 'applied' ELSE mitg_1.status END,
+  mitg_1.observed_effectiveness = CASE WHEN mitg_1.observed_effectiveness IS NULL OR mitg_1.observed_effectiveness = '' THEN 'Auto-remediates much of the threat of exposed credentials in popular source code repositories.' ELSE mitg_1.observed_effectiveness END,
+  mitg_1.evidence = CASE WHEN mitg_1.evidence IS NULL OR mitg_1.evidence = '' THEN 'AWS detects and auto-remediates much of the threat of exposed credentials in popular source code repositories by applying a special quarantine policy' ELSE mitg_1.evidence END,
+  mitg_1.source_id = CASE WHEN mitg_1.source_id IS NULL OR mitg_1.source_id = '' THEN 'unit42-elektra-leak' ELSE mitg_1.source_id END
+WITH src_1, camp_1, ta_1, incd_1
+MERGE (camp_1)-[sb_1:supported_by]->(src_1)
+ON CREATE SET sb_1.quote = 'Unit 42 researchers have identified an active campaign we are calling EleKtra-Leak, which performs automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories.'
+MERGE (ta_1)-[sb_2:supported_by]->(src_1)
+ON CREATE SET sb_2.quote = 'the threat actor associated with the campaign was able to create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations.'
+MERGE (incd_1)-[sb_3:supported_by]->(src_1)
+ON CREATE SET sb_3.quote = 'We believe these operations have been active for at least two years and are still active today.'"
+mastodon-vulnerability-allows-attackers-to-take-over-accounts.json,"MERGE (cve_2024_23832:CVE {id:'CVE-2024-23832'})
+ON CREATE SET
+  cve_2024_23832.summary = 'Critical Mastodon vulnerability stemming from insufficient origin validation that allows attackers to impersonate users and take over remote accounts.'
+ON MATCH SET
+  cve_2024_23832.summary = CASE
+    WHEN cve_2024_23832.summary IS NULL OR trim(cve_2024_23832.summary) = '' THEN 'Critical Mastodon vulnerability stemming from insufficient origin validation that allows attackers to impersonate users and take over remote accounts.'
+    ELSE cve_2024_23832.summary
+  END
+MERGE (cve_2023_36460:CVE {id:'CVE-2023-36460'})
+ON CREATE SET
+  cve_2023_36460.published_date = date('2023-07-01'),
+  cve_2023_36460.summary = ""Critical Mastodon bug dubbed 'TootRoot' that allowed attackers to send crafted 'toots' creating web shells on target instances; could lead to complete server compromise, access to sensitive user information and communications, and planting backdoors.""
+ON MATCH SET
+  cve_2023_36460.published_date = CASE
+    WHEN cve_2023_36460.published_date IS NULL THEN date('2023-07-01')
+    ELSE cve_2023_36460.published_date
+  END,
+  cve_2023_36460.summary = CASE
+    WHEN cve_2023_36460.summary IS NULL OR trim(cve_2023_36460.summary) = '' THEN ""Critical Mastodon bug dubbed 'TootRoot' that allowed attackers to send crafted 'toots' creating web shells on target instances; could lead to complete server compromise, access to sensitive user information and communications, and planting backdoors.""
+    ELSE cve_2023_36460.summary
+  END
+MERGE (victim_mastodon:Victim {name:'Mastodon'})
+ON CREATE SET
+  victim_mastodon.sector = 'Technology',
+  victim_mastodon.summary = 'Free and open-source decentralized social networking platform.'
+ON MATCH SET
+  victim_mastodon.sector = CASE
+    WHEN victim_mastodon.sector IS NULL OR trim(victim_mastodon.sector) = '' THEN 'Technology'
+    ELSE victim_mastodon.sector
+  END,
+  victim_mastodon.summary = CASE
+    WHEN victim_mastodon.summary IS NULL OR trim(victim_mastodon.summary) = '' THEN 'Free and open-source decentralized social networking platform.'
+    ELSE victim_mastodon.summary
+  END
+MERGE (tool_mastodon:Tool {name:'Mastodon'})
+ON CREATE SET
+  tool_mastodon.summary = 'Free and open-source decentralized social networking platform (software).'
+ON MATCH SET
+  tool_mastodon.summary = CASE
+    WHEN tool_mastodon.summary IS NULL OR trim(tool_mastodon.summary) = '' THEN 'Free and open-source decentralized social networking platform (software).'
+    ELSE tool_mastodon.summary
+  END
+MERGE (tech_webshells:Technique {technique_id:'T1505.003'})
+ON CREATE SET
+  tech_webshells.name = 'Server Software Component: Web Shell',
+  tech_webshells.tactic = 'Persistence',
+  tech_webshells.summary = 'Adversaries may backdoor a server by installing a web shell to execute commands and maintain access.'
+ON MATCH SET
+  tech_webshells.name = CASE WHEN tech_webshells.name IS NULL OR trim(tech_webshells.name) = '' THEN 'Server Software Component: Web Shell' ELSE tech_webshells.name END,
+  tech_webshells.tactic = CASE WHEN tech_webshells.tactic IS NULL OR trim(tech_webshells.tactic) = '' THEN 'Persistence' ELSE tech_webshells.tactic END,
+  tech_webshells.summary = CASE WHEN tech_webshells.summary IS NULL OR trim(tech_webshells.summary) = '' THEN 'Adversaries may backdoor a server by installing a web shell to execute commands and maintain access.' ELSE tech_webshells.summary END
+MERGE (tech_valid_accounts:Technique {technique_id:'T1078'})
+ON CREATE SET
+  tech_valid_accounts.name = 'Valid Accounts',
+  tech_valid_accounts.tactic = 'Defense Evasion',
+  tech_valid_accounts.summary = 'Adversaries may obtain and use valid account credentials or session artifacts to access systems and services.'
+ON MATCH SET
+  tech_valid_accounts.name = CASE WHEN tech_valid_accounts.name IS NULL OR trim(tech_valid_accounts.name) = '' THEN 'Valid Accounts' ELSE tech_valid_accounts.name END,
+  tech_valid_accounts.tactic = CASE WHEN tech_valid_accounts.tactic IS NULL OR trim(tech_valid_accounts.tactic) = '' THEN 'Defense Evasion' ELSE tech_valid_accounts.tactic END,
+  tech_valid_accounts.summary = CASE WHEN tech_valid_accounts.summary IS NULL OR trim(tech_valid_accounts.summary) = '' THEN 'Adversaries may obtain and use valid account credentials or session artifacts to access systems and services.' ELSE tech_valid_accounts.summary END
+MERGE (incident_2024_23832:Incident {id:'mastodon-cve-2024-23832'})
+ON CREATE SET
+  incident_2024_23832.type = 'vulnerability',
+  incident_2024_23832.summary = 'Mastodon fixed a critical vulnerability (CVE-2024-23832) caused by insufficient origin validation that could allow attackers to impersonate and take over remote accounts.'
+ON MATCH SET
+  incident_2024_23832.type = CASE WHEN incident_2024_23832.type IS NULL OR trim(incident_2024_23832.type) = '' THEN 'vulnerability' ELSE incident_2024_23832.type END,
+  incident_2024_23832.summary = CASE WHEN incident_2024_23832.summary IS NULL OR trim(incident_2024_23832.summary) = '' THEN 'Mastodon fixed a critical vulnerability (CVE-2024-23832) caused by insufficient origin validation that could allow attackers to impersonate and take over remote accounts.' ELSE incident_2024_23832.summary END
+MERGE (incident_2023_36460:Incident {id:'mastodon-cve-2023-36460-tootroot'})
+ON CREATE SET
+  incident_2023_36460.date = date('2023-07-01'),
+  incident_2023_36460.type = 'vulnerability',
+  incident_2023_36460.summary = ""In July 2023, Mastodon fixed a critical bug (CVE-2023-36460, 'TootRoot') allowing attackers to send crafted 'toots' that create web shells on target instances, leading to full server compromise and potential backdoors.""
+ON MATCH SET
+  incident_2023_36460.date = CASE WHEN incident_2023_36460.date IS NULL THEN date('2023-07-01') ELSE incident_2023_36460.date END,
+  incident_2023_36460.type = CASE WHEN incident_2023_36460.type IS NULL OR trim(incident_2023_36460.type) = '' THEN 'vulnerability' ELSE incident_2023_36460.type END,
+  incident_2023_36460.summary = CASE WHEN incident_2023_36460.summary IS NULL OR trim(incident_2023_36460.summary) = '' THEN ""In July 2023, Mastodon fixed a critical bug (CVE-2023-36460, 'TootRoot') allowing attackers to send crafted 'toots' that create web shells on target instances, leading to full server compromise and potential backdoors."" ELSE incident_2023_36460.summary END
+MERGE (incident_2024_23832)-[rel_2024_targets:targets]->(victim_mastodon)
+ON CREATE SET rel_2024_targets.evidence = 'Critical vulnerability (CVE-2024-23832) in Mastodon allows attackers to impersonate and take over any remote account.'
+ON MATCH SET rel_2024_targets.evidence = CASE WHEN rel_2024_targets.evidence IS NULL OR trim(rel_2024_targets.evidence) = '' THEN 'Critical vulnerability (CVE-2024-23832) in Mastodon allows attackers to impersonate and take over any remote account.' ELSE rel_2024_targets.evidence END
+MERGE (incident_2023_36460)-[rel_2023_targets:targets]->(victim_mastodon)
+ON CREATE SET rel_2023_targets.date = date('2023-07-01'), rel_2023_targets.evidence = ""CVE-2023-36460 ('TootRoot') affected Mastodon and could lead to compromise of Mastodon servers/instances.""
+ON MATCH SET
+  rel_2023_targets.date = CASE WHEN rel_2023_targets.date IS NULL THEN date('2023-07-01') ELSE rel_2023_targets.date END,
+  rel_2023_targets.evidence = CASE WHEN rel_2023_targets.evidence IS NULL OR trim(rel_2023_targets.evidence) = '' THEN ""CVE-2023-36460 ('TootRoot') affected Mastodon and could lead to compromise of Mastodon servers/instances."" ELSE rel_2023_targets.evidence END
+MERGE (incident_2024_23832)-[rel_2024_exploited:exploited_in]->(cve_2024_23832)
+ON CREATE SET rel_2024_exploited.evidence = 'Flaw tracked as CVE-2024-23832 stems from insufficient origin validation, enabling impersonation and remote account takeover.'
+ON MATCH SET rel_2024_exploited.evidence = CASE WHEN rel_2024_exploited.evidence IS NULL OR trim(rel_2024_exploited.evidence) = '' THEN 'Flaw tracked as CVE-2024-23832 stems from insufficient origin validation, enabling impersonation and remote account takeover.' ELSE rel_2024_exploited.evidence END
+MERGE (incident_2023_36460)-[rel_2023_exploited:exploited_in]->(cve_2023_36460)
+ON CREATE SET rel_2023_exploited.first_seen = date('2023-07-01'), rel_2023_exploited.evidence = ""Bug tracked as CVE-2023-36460 ('TootRoot') allowed crafted 'toots' to create web shells on target instances.""
+ON MATCH SET
+  rel_2023_exploited.first_seen = CASE WHEN rel_2023_exploited.first_seen IS NULL THEN date('2023-07-01') ELSE rel_2023_exploited.first_seen END,
+  rel_2023_exploited.evidence = CASE WHEN rel_2023_exploited.evidence IS NULL OR trim(rel_2023_exploited.evidence) = '' THEN ""Bug tracked as CVE-2023-36460 ('TootRoot') allowed crafted 'toots' to create web shells on target instances."" ELSE rel_2023_exploited.evidence END
+MERGE (incident_2023_36460)-[rel_2023_used_webshell:used_technique]->(tech_webshells)
+ON CREATE SET
+  rel_2023_used_webshell.phase = 'Execution',
+  rel_2023_used_webshell.details = ""Crafted 'toots' would create web shells on target instances."",
+  rel_2023_used_webshell.evidence = ""Allowed attackers to send 'toots' that would create web shells on target instances.""
+ON MATCH SET
+  rel_2023_used_webshell.phase = CASE WHEN rel_2023_used_webshell.phase IS NULL OR trim(rel_2023_used_webshell.phase) = '' THEN 'Execution' ELSE rel_2023_used_webshell.phase END,
+  rel_2023_used_webshell.details = CASE WHEN rel_2023_used_webshell.details IS NULL OR trim(rel_2023_used_webshell.details) = '' THEN ""Crafted 'toots' would create web shells on target instances."" ELSE rel_2023_used_webshell.details END,
+  rel_2023_used_webshell.evidence = CASE WHEN rel_2023_used_webshell.evidence IS NULL OR trim(rel_2023_used_webshell.evidence) = '' THEN ""Allowed attackers to send 'toots' that would create web shells on target instances."" ELSE rel_2023_used_webshell.evidence END
+MERGE (incident_2024_23832)-[rel_2024_used_valid:used_technique]->(tech_valid_accounts)
+ON CREATE SET
+  rel_2024_used_valid.phase = 'Initial Access',
+  rel_2024_used_valid.details = 'Account impersonation and remote account takeover due to insufficient origin validation.',
+  rel_2024_used_valid.evidence = 'Allows attackers to impersonate users and take over their remote accounts.'
+ON MATCH SET
+  rel_2024_used_valid.phase = CASE WHEN rel_2024_used_valid.phase IS NULL OR trim(rel_2024_used_valid.phase) = '' THEN 'Initial Access' ELSE rel_2024_used_valid.phase END,
+  rel_2024_used_valid.details = CASE WHEN rel_2024_used_valid.details IS NULL OR trim(rel_2024_used_valid.details) = '' THEN 'Account impersonation and remote account takeover due to insufficient origin validation.' ELSE rel_2024_used_valid.details END,
+  rel_2024_used_valid.evidence = CASE WHEN rel_2024_used_valid.evidence IS NULL OR trim(rel_2024_used_valid.evidence) = '' THEN 'Allows attackers to impersonate users and take over their remote accounts.' ELSE rel_2024_used_valid.evidence END
+MERGE (tool_mastodon)-[rel_tool_exploits_2024:exploits]->(cve_2024_23832)
+ON CREATE SET rel_tool_exploits_2024.evidence = 'CVE-2024-23832 is a flaw in Mastodon (insufficient origin validation) enabling impersonation and account takeover.'
+ON MATCH SET rel_tool_exploits_2024.evidence = CASE WHEN rel_tool_exploits_2024.evidence IS NULL OR trim(rel_tool_exploits_2024.evidence) = '' THEN 'CVE-2024-23832 is a flaw in Mastodon (insufficient origin validation) enabling impersonation and account takeover.' ELSE rel_tool_exploits_2024.evidence END
+MERGE (tool_mastodon)-[rel_tool_exploits_2023:exploits]->(cve_2023_36460)
+ON CREATE SET rel_tool_exploits_2023.date = date('2023-07-01'), rel_tool_exploits_2023.evidence = ""CVE-2023-36460 ('TootRoot') is a Mastodon vulnerability enabling web shell creation on target instances.""
+ON MATCH SET
+  rel_tool_exploits_2023.date = CASE WHEN rel_tool_exploits_2023.date IS NULL THEN date('2023-07-01') ELSE rel_tool_exploits_2023.date END,
+  rel_tool_exploits_2023.evidence = CASE WHEN rel_tool_exploits_2023.evidence IS NULL OR trim(rel_tool_exploits_2023.evidence) = '' THEN ""CVE-2023-36460 ('TootRoot') is a Mastodon vulnerability enabling web shell creation on target instances."" ELSE rel_tool_exploits_2023.evidence END;"
+russia-star-blizzard-apt-upgrades-stealth-unmasked.json,"MERGE (ta_starBlizzard:ThreatActor {name:'Star Blizzard'})
+ON CREATE SET
+  ta_starBlizzard.sponsor = 'Russia',
+  ta_starBlizzard.motivation = 'espionage',
+  ta_starBlizzard.summary = 'Star Blizzard has conducted email credential theft in support of cyberespionage and cyber influence campaigns since at least 2017, focusing on targets in NATO member countries and, more recently, individuals and organizations supporting Ukraine.'
+ON MATCH SET
+  ta_starBlizzard.sponsor = coalesce(ta_starBlizzard.sponsor, 'Russia'),
+  ta_starBlizzard.motivation = coalesce(ta_starBlizzard.motivation, 'espionage'),
+  ta_starBlizzard.summary = coalesce(ta_starBlizzard.summary, 'Star Blizzard has conducted email credential theft in support of cyberespionage and cyber influence campaigns since at least 2017, focusing on targets in NATO member countries and, more recently, individuals and organizations supporting Ukraine.')
+
+MERGE (ta_seaborgium:ThreatActor {name:'Seaborgium'})
+ON CREATE SET ta_seaborgium.summary = 'Alias of Star Blizzard.'
+ON MATCH SET ta_seaborgium.summary = coalesce(ta_seaborgium.summary, 'Alias of Star Blizzard.')
+MERGE (ta_blueCharlie:ThreatActor {name:'BlueCharlie'})
+ON CREATE SET ta_blueCharlie.summary = 'Alias of Star Blizzard.'
+ON MATCH SET ta_blueCharlie.summary = coalesce(ta_blueCharlie.summary, 'Alias of Star Blizzard.')
+MERGE (ta_callisto:ThreatActor {name:'Callisto Group'})
+ON CREATE SET ta_callisto.summary = 'Alias of Star Blizzard.'
+ON MATCH SET ta_callisto.summary = coalesce(ta_callisto.summary, 'Alias of Star Blizzard.')
+MERGE (ta_coldriver:ThreatActor {name:'Coldriver'})
+ON CREATE SET ta_coldriver.summary = 'Alias of Star Blizzard.'
+ON MATCH SET ta_coldriver.summary = coalesce(ta_coldriver.summary, 'Alias of Star Blizzard.')
+
+MERGE (ta_starBlizzard)-[rel_alias1:has_alias]->(ta_seaborgium)
+ON CREATE SET rel_alias1.date = date('2017-01-01')
+MERGE (ta_starBlizzard)-[rel_alias2:has_alias]->(ta_blueCharlie)
+ON CREATE SET rel_alias2.date = date('2017-01-01')
+MERGE (ta_starBlizzard)-[rel_alias3:has_alias]->(ta_callisto)
+ON CREATE SET rel_alias3.date = date('2017-01-01')
+MERGE (ta_starBlizzard)-[rel_alias4:has_alias]->(ta_coldriver)
+ON CREATE SET rel_alias4.date = date('2017-01-01')
+
+MERGE (mot_esp:Motivation {type:'espionage'})
+MERGE (ta_starBlizzard)-[:motivated_by]->(mot_esp)
+
+MERGE (camp_influence:Campaign {name:'Star Blizzard cyber influence campaigns'})
+ON CREATE SET camp_influence.summary = 'Cyber influence campaigns conducted by Star Blizzard.'
+ON MATCH SET camp_influence.summary = coalesce(camp_influence.summary, 'Cyber influence campaigns conducted by Star Blizzard.')
+MERGE (camp_espionage:Campaign {name:'Star Blizzard cyberespionage campaigns'})
+ON CREATE SET camp_espionage.summary = 'Cyberespionage campaigns conducted by Star Blizzard.'
+ON MATCH SET camp_espionage.summary = coalesce(camp_espionage.summary, 'Cyberespionage campaigns conducted by Star Blizzard.')
+
+MERGE (dt_2017:Date {value:date('2017-01-01')})
+MERGE (camp_influence)-[:occurred_on]->(dt_2017)
+MERGE (camp_espionage)-[:occurred_on]->(dt_2017)
+
+MERGE (camp_influence)-[rel_inc_incl:includes]->(ta_starBlizzard)
+ON CREATE SET
+  rel_inc_incl.date = date('2017-01-01'),
+  rel_inc_incl.evidence = 'Star Blizzard has been carrying out email credential theft in service of cyberespionage and cyber influence campaigns since at least 2017.'
+MERGE (camp_espionage)-[rel_esp_incl:includes]->(ta_starBlizzard)
+ON CREATE SET
+  rel_esp_incl.date = date('2017-01-01'),
+  rel_esp_incl.evidence = 'Star Blizzard has been carrying out email credential theft in service of cyberespionage and cyber influence campaigns since at least 2017.'
+
+MERGE (tech_phishing:TTechnique:Technique {technique_id:'T1566'})
+ON CREATE SET
+  tech_phishing.name = 'Phishing',
+  tech_phishing.tactic = 'Initial Access',
+  tech_phishing.summary = 'Credential theft via phishing emails using lure documents and links.'
+ON MATCH SET
+  tech_phishing.name = coalesce(tech_phishing.name, 'Phishing'),
+  tech_phishing.tactic = coalesce(tech_phishing.tactic, 'Initial Access'),
+  tech_phishing.summary = coalesce(tech_phishing.summary, 'Credential theft via phishing emails using lure documents and links.')
+
+MERGE (inc_sb_credentialtheft_2017:Incident {id:'star-blizzard-credential-theft-since-2017'})
+ON CREATE SET
+  inc_sb_credentialtheft_2017.date = date('2017-01-01'),
+  inc_sb_credentialtheft_2017.type = 'credential theft',
+  inc_sb_credentialtheft_2017.summary = 'Since at least 2017, Star Blizzard has carried out email credential theft supporting cyberespionage and cyber influence campaigns, using password-protected PDF lures and links to cloud file-sharing platforms to bypass email filters.'
+ON MATCH SET
+  inc_sb_credentialtheft_2017.date = coalesce(inc_sb_credentialtheft_2017.date, date('2017-01-01')),
+  inc_sb_credentialtheft_2017.type = coalesce(inc_sb_credentialtheft_2017.type, 'credential theft'),
+  inc_sb_credentialtheft_2017.summary = coalesce(inc_sb_credentialtheft_2017.summary, 'Since at least 2017, Star Blizzard has carried out email credential theft supporting cyberespionage and cyber influence campaigns, using password-protected PDF lures and links to cloud file-sharing platforms to bypass email filters.')
+
+MERGE (inc_sb_credentialtheft_2017)-[rel_attr:attributed_to]->(ta_starBlizzard)
+ON CREATE SET
+  rel_attr.confidence = 'high',
+  rel_attr.evidence = 'Star Blizzard has been carrying out email credential theft in service of cyberespionage and cyber influence campaigns since at least 2017.'
+
+MERGE (inc_sb_credentialtheft_2017)-[rel_usedtech:used_technique]->(tech_phishing)
+ON CREATE SET
+  rel_usedtech.phase = 'Initial Access',
+  rel_usedtech.details = 'Phishing emails delivering password-protected PDF lure documents or links to cloud-based file sharing platforms containing protected PDFs; passwords provided in the same email or shortly after.',
+  rel_usedtech.evidence = 'To aid in sneaking past email filters, Star Blizzard has started using password-protected PDF lure documents, or links to cloud-based file sharing platforms with the protected PDFs; passwords typically provided in the same phishing email or shortly after.'
+
+MERGE (sec_gov:Sector {name:'Government'})
+MERGE (sec_edu:Sector {name:'Education'})
+MERGE (sec_media:Sector {name:'Media'})
+MERGE (sec_other:Sector {name:'Other'})
+
+MERGE (vic_ngos:Victim {name:'NGOs'})
+ON CREATE SET
+  vic_ngos.sector = 'Other',
+  vic_ngos.summary = 'NGOs targeted by Star Blizzard, often in contexts related to politics, defense, and support for Ukraine.'
+ON MATCH SET
+  vic_ngos.sector = coalesce(vic_ngos.sector, 'Other'),
+  vic_ngos.summary = coalesce(vic_ngos.summary, 'NGOs targeted by Star Blizzard, often in contexts related to politics, defense, and support for Ukraine.')
+MERGE (vic_thinktanks:Victim {name:'Think tanks'})
+ON CREATE SET
+  vic_thinktanks.sector = 'Government',
+  vic_thinktanks.summary = 'Think tanks targeted by Star Blizzard, often in contexts related to politics and defense.'
+ON MATCH SET
+  vic_thinktanks.sector = coalesce(vic_thinktanks.sector, 'Government'),
+  vic_thinktanks.summary = coalesce(vic_thinktanks.summary, 'Think tanks targeted by Star Blizzard, often in contexts related to politics and defense.')
+MERGE (vic_journalists:Victim {name:'Journalists'})
+ON CREATE SET
+  vic_journalists.sector = 'Media',
+  vic_journalists.summary = 'Journalists targeted by Star Blizzard.'
+ON MATCH SET
+  vic_journalists.sector = coalesce(vic_journalists.sector, 'Media'),
+  vic_journalists.summary = coalesce(vic_journalists.summary, 'Journalists targeted by Star Blizzard.')
+MERGE (vic_academia:Victim {name:'Academic institutions'})
+ON CREATE SET
+  vic_academia.sector = 'Education',
+  vic_academia.summary = 'Academic institutions targeted by Star Blizzard.'
+ON MATCH SET
+  vic_academia.sector = coalesce(vic_academia.sector, 'Education'),
+  vic_academia.summary = coalesce(vic_academia.summary, 'Academic institutions targeted by Star Blizzard.')
+MERGE (vic_igos:Victim {name:'Intergovernmental organizations'})
+ON CREATE SET
+  vic_igos.sector = 'Government',
+  vic_igos.summary = 'Intergovernmental organizations targeted by Star Blizzard.'
+ON MATCH SET
+  vic_igos.sector = coalesce(vic_igos.sector, 'Government'),
+  vic_igos.summary = coalesce(vic_igos.summary, 'Intergovernmental organizations targeted by Star Blizzard.')
+MERGE (vic_ukr_support:Victim {name:'Organizations supporting Ukraine'})
+ON CREATE SET
+  vic_ukr_support.sector = 'Other',
+  vic_ukr_support.summary = 'Individuals and organizations providing support for Ukraine targeted by Star Blizzard in recent years.'
+ON MATCH SET
+  vic_ukr_support.sector = coalesce(vic_ukr_support.sector, 'Other'),
+  vic_ukr_support.summary = coalesce(vic_ukr_support.summary, 'Individuals and organizations providing support for Ukraine targeted by Star Blizzard in recent years.')
+
+MERGE (inc_sb_credentialtheft_2017)-[:targets_sector]->(sec_other)
+MERGE (inc_sb_credentialtheft_2017)-[:targets_sector]->(sec_gov)
+MERGE (inc_sb_credentialtheft_2017)-[:targets_sector]->(sec_media)
+MERGE (inc_sb_credentialtheft_2017)-[:targets_sector]->(sec_edu)
+
+MERGE (ta_starBlizzard)-[rel_attack_ngos:attacked]->(vic_ngos)
+ON CREATE SET
+  rel_attack_ngos.date = date('2017-01-01'),
+  rel_attack_ngos.evidence = 'Historically, it has focused its aim on public and private organizations in NATO member countries... NGOs...'
+MERGE (ta_starBlizzard)-[rel_attack_thinktanks:attacked]->(vic_thinktanks)
+ON CREATE SET
+  rel_attack_thinktanks.date = date('2017-01-01'),
+  rel_attack_thinktanks.evidence = 'Historically... focused... in fields related to politics, defense... think tanks...'
+MERGE (ta_starBlizzard)-[rel_attack_journos:attacked]->(vic_journalists)
+ON CREATE SET
+  rel_attack_journos.date = date('2017-01-01'),
+  rel_attack_journos.evidence = 'Historically... focused... journalists...'
+MERGE (ta_starBlizzard)-[rel_attack_academia:attacked]->(vic_academia)
+ON CREATE SET
+  rel_attack_academia.date = date('2017-01-01'),
+  rel_attack_academia.evidence = 'Historically... focused... academic institutions...'
+MERGE (ta_starBlizzard)-[rel_attack_igos:attacked]->(vic_igos)
+ON CREATE SET
+  rel_attack_igos.date = date('2017-01-01'),
+  rel_attack_igos.evidence = 'Historically... focused... intergovernmental organizations...'
+MERGE (ta_starBlizzard)-[rel_attack_ukr:attacked]->(vic_ukr_support)
+ON CREATE SET
+  rel_attack_ukr.date = date('2017-01-01'),
+  rel_attack_ukr.evidence = 'In recent years, it has especially targeted individuals and organizations providing support for Ukraine.'
+
+MERGE (inc_sb_credentialtheft_2017)-[rel_inc_targets_ngos:targets]->(vic_ngos)
+ON CREATE SET rel_inc_targets_ngos.evidence = 'Targets include NGOs.'
+MERGE (inc_sb_credentialtheft_2017)-[rel_inc_targets_thinktanks:targets]->(vic_thinktanks)
+ON CREATE SET rel_inc_targets_thinktanks.evidence = 'Targets include think tanks.'
+MERGE (inc_sb_credentialtheft_2017)-[rel_inc_targets_journos:targets]->(vic_journalists)
+ON CREATE SET rel_inc_targets_journos.evidence = 'Targets include journalists.'
+MERGE (inc_sb_credentialtheft_2017)-[rel_inc_targets_academia:targets]->(vic_academia)
+ON CREATE SET rel_inc_targets_academia.evidence = 'Targets include academic institutions.'
+MERGE (inc_sb_credentialtheft_2017)-[rel_inc_targets_igos:targets]->(vic_igos)
+ON CREATE SET rel_inc_targets_igos.evidence = 'Targets include intergovernmental organizations.'
+MERGE (inc_sb_credentialtheft_2017)-[rel_inc_targets_ukr:targets]->(vic_ukr_support)
+ON CREATE SET rel_inc_targets_ukr.evidence = 'In recent years, targets include those providing support for Ukraine.'
+
+MERGE (camp_espionage)-[rel_camp_targets_ngos:targets]->(vic_ngos)
+ON CREATE SET rel_camp_targets_ngos.date = date('2017-01-01'), rel_camp_targets_ngos.evidence = 'Targets include NGOs.'
+MERGE (camp_espionage)-[rel_camp_targets_thinktanks:targets]->(vic_thinktanks)
+ON CREATE SET rel_camp_targets_thinktanks.date = date('2017-01-01'), rel_camp_targets_thinktanks.evidence = 'Targets include think tanks.'
+MERGE (camp_espionage)-[rel_camp_targets_journos:targets]->(vic_journalists)
+ON CREATE SET rel_camp_targets_journos.date = date('2017-01-01'), rel_camp_targets_journos.evidence = 'Targets include journalists.'
+MERGE (camp_espionage)-[rel_camp_targets_academia:targets]->(vic_academia)
+ON CREATE SET rel_camp_targets_academia.date = date('2017-01-01'), rel_camp_targets_academia.evidence = 'Targets include academic institutions.'
+MERGE (camp_espionage)-[rel_camp_targets_igos:targets]->(vic_igos)
+ON CREATE SET rel_camp_targets_igos.date = date('2017-01-01'), rel_camp_targets_igos.evidence = 'Targets include intergovernmental organizations.'
+MERGE (camp_espionage)-[rel_camp_targets_ukr:targets]->(vic_ukr_support)
+ON CREATE SET rel_camp_targets_ukr.date = date('2017-01-01'), rel_camp_targets_ukr.evidence = 'Targets include individuals and organizations supporting Ukraine.'
+
+MERGE (camp_influence)-[rel_campinf_targets_ukr:targets]->(vic_ukr_support)
+ON CREATE SET
+  rel_campinf_targets_ukr.date = date('2017-01-01'),
+  rel_campinf_targets_ukr.evidence = 'Star Blizzard has conducted cyber influence campaigns and in recent years especially targeted those supporting Ukraine.';"
+fake-cve-2023-40477-poc-hides-venomrat.json,"MERGE (source_1:Source {id: 'zdi-cve-2023-40477-public-report-2023-08-17'})
+ON CREATE SET
+  source_1.title = 'Zero Day Initiative public report of CVE-2023-40477 (WinRAR RCE)',
+  source_1.publisher = 'Zero Day Initiative',
+  source_1.published_on = date('2023-08-17')
+ON MATCH SET
+  source_1.title = CASE WHEN source_1.title IS NULL OR trim(source_1.title) = '' THEN 'Zero Day Initiative public report of CVE-2023-40477 (WinRAR RCE)' ELSE source_1.title END,
+  source_1.publisher = CASE WHEN source_1.publisher IS NULL OR trim(source_1.publisher) = '' THEN 'Zero Day Initiative' ELSE source_1.publisher END,
+  source_1.published_on = CASE WHEN source_1.published_on IS NULL THEN date('2023-08-17') ELSE source_1.published_on END
+WITH source_1
+MERGE (cve_1:CVE {id: 'CVE-2023-40477'})
+ON CREATE SET
+  cve_1.summary = 'Remote code execution (RCE) vulnerability in WinRAR publicly reported by Zero Day Initiative on 2023-08-17; disclosed to vendor on 2023-06-08.'
+ON MATCH SET
+  cve_1.summary = CASE WHEN cve_1.summary IS NULL OR trim(cve_1.summary) = '' THEN 'Remote code execution (RCE) vulnerability in WinRAR publicly reported by Zero Day Initiative on 2023-08-17; disclosed to vendor on 2023-06-08.' ELSE cve_1.summary END
+WITH source_1, cve_1
+MERGE (cve_2:CVE {id: 'CVE-2023-25157'})
+ON CREATE SET
+  cve_2.summary = 'SQL injection vulnerability in GeoServer; publicly available PoC script existed and was reused as the basis for a fake PoC targeting CVE-2023-40477.'
+ON MATCH SET
+  cve_2.summary = CASE WHEN cve_2.summary IS NULL OR trim(cve_2.summary) = '' THEN 'SQL injection vulnerability in GeoServer; publicly available PoC script existed and was reused as the basis for a fake PoC targeting CVE-2023-40477.' ELSE cve_2.summary END
+WITH source_1, cve_1, cve_2
+MERGE (tool_1:Tool {name: 'GitHub'})
+ON CREATE SET
+  tool_1.summary = 'Code hosting platform used to publish a fake proof-of-concept (PoC) script.'
+ON MATCH SET
+  tool_1.summary = CASE WHEN tool_1.summary IS NULL OR trim(tool_1.summary) = '' THEN 'Code hosting platform used to publish a fake proof-of-concept (PoC) script.' ELSE tool_1.summary END
+WITH source_1, cve_1, cve_2, tool_1
+MERGE (ta_1:ThreatActor {name: 'whalersplonk'})
+ON CREATE SET
+  ta_1.summary = 'Actor alias observed committing a fake PoC script to a GitHub repository shortly after public reporting of CVE-2023-40477.'
+ON MATCH SET
+  ta_1.summary = CASE WHEN ta_1.summary IS NULL OR trim(ta_1.summary) = '' THEN 'Actor alias observed committing a fake PoC script to a GitHub repository shortly after public reporting of CVE-2023-40477.' ELSE ta_1.summary END
+WITH source_1, cve_1, cve_2, tool_1, ta_1
+MERGE (ta_alias_1:ThreatActor {name: 'whalersplonk'})
+MERGE (ta_1)-[aliasrel_1:has_alias]->(ta_alias_1)
+ON CREATE SET
+  aliasrel_1.date = date('2023-08-21')
+ON MATCH SET
+  aliasrel_1.date = CASE WHEN aliasrel_1.date IS NULL THEN date('2023-08-21') ELSE aliasrel_1.date END
+WITH source_1, cve_1, cve_2, tool_1, ta_1
+MERGE (incident_1:Incident {id: 'incident-whalersplonk-fake-poc-cve-2023-40477-2023-08-21'})
+ON CREATE SET
+  incident_1.date = date('2023-08-21'),
+  incident_1.type = 'intrusion',
+  incident_1.summary = 'Four days after public reporting of CVE-2023-40477, an actor (alias: whalersplonk) committed a fake PoC script to GitHub; analysis of the infection chain showed eventual installation of a VenomRAT payload.'
+ON MATCH SET
+  incident_1.date = CASE WHEN incident_1.date IS NULL THEN date('2023-08-21') ELSE incident_1.date END,
+  incident_1.type = CASE WHEN incident_1.type IS NULL OR trim(incident_1.type) = '' THEN 'intrusion' ELSE incident_1.type END,
+  incident_1.summary = CASE WHEN incident_1.summary IS NULL OR trim(incident_1.summary) = '' THEN 'Four days after public reporting of CVE-2023-40477, an actor (alias: whalersplonk) committed a fake PoC script to GitHub; analysis of the infection chain showed eventual installation of a VenomRAT payload.' ELSE incident_1.summary END
+WITH source_1, cve_1, cve_2, tool_1, ta_1, incident_1
+MERGE (date_1:Date {value: date('2023-08-21')})
+WITH *
+MERGE (incident_1)-[occurredon_1:occurred_on]->(date_1)
+ON CREATE SET occurredon_1.date = date('2023-08-21')
+ON MATCH SET occurredon_1.date = CASE WHEN occurredon_1.date IS NULL THEN date('2023-08-21') ELSE occurredon_1.date END
+WITH *
+MERGE (incident_1)-[attrib_1:attributed_to]->(ta_1)
+ON CREATE SET
+  attrib_1.confidence = 'medium',
+  attrib_1.evidence = 'Actor using alias ""whalersplonk"" committed a fake PoC script four days after the public report of CVE-2023-40477.',
+  attrib_1.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  attrib_1.confidence = CASE WHEN attrib_1.confidence IS NULL OR trim(attrib_1.confidence) = '' THEN 'medium' ELSE attrib_1.confidence END,
+  attrib_1.evidence = CASE WHEN attrib_1.evidence IS NULL OR trim(attrib_1.evidence) = '' THEN 'Actor using alias ""whalersplonk"" committed a fake PoC script four days after the public report of CVE-2023-40477.' ELSE attrib_1.evidence END,
+  attrib_1.source_id = CASE WHEN attrib_1.source_id IS NULL OR trim(attrib_1.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE attrib_1.source_id END
+WITH *
+MERGE (incident_1)-[toolrel_1:involved_tool]->(tool_1)
+ON CREATE SET
+  toolrel_1.evidence = 'Fake PoC script was committed to the actor’s GitHub repository.',
+  toolrel_1.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  toolrel_1.evidence = CASE WHEN toolrel_1.evidence IS NULL OR trim(toolrel_1.evidence) = '' THEN 'Fake PoC script was committed to the actor’s GitHub repository.' ELSE toolrel_1.evidence END,
+  toolrel_1.source_id = CASE WHEN toolrel_1.source_id IS NULL OR trim(toolrel_1.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE toolrel_1.source_id END
+WITH *
+MERGE (incident_1)-[exploitrel_1:exploited_in]->(cve_1)
+ON CREATE SET
+  exploitrel_1.first_seen = date('2023-08-21'),
+  exploitrel_1.evidence = 'Fake PoC intended to exploit WinRAR vulnerability CVE-2023-40477 was committed four days after public reporting.',
+  exploitrel_1.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  exploitrel_1.first_seen = CASE WHEN exploitrel_1.first_seen IS NULL THEN date('2023-08-21') ELSE exploitrel_1.first_seen END,
+  exploitrel_1.evidence = CASE WHEN exploitrel_1.evidence IS NULL OR trim(exploitrel_1.evidence) = '' THEN 'Fake PoC intended to exploit WinRAR vulnerability CVE-2023-40477 was committed four days after public reporting.' ELSE exploitrel_1.evidence END,
+  exploitrel_1.source_id = CASE WHEN exploitrel_1.source_id IS NULL OR trim(exploitrel_1.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE exploitrel_1.source_id END
+WITH *
+MERGE (incident_1)-[exploitrel_2:exploited_in]->(cve_2)
+ON CREATE SET
+  exploitrel_2.evidence = 'Fake PoC was based on a publicly available PoC script that exploited CVE-2023-25157 (GeoServer SQL injection).',
+  exploitrel_2.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  exploitrel_2.evidence = CASE WHEN exploitrel_2.evidence IS NULL OR trim(exploitrel_2.evidence) = '' THEN 'Fake PoC was based on a publicly available PoC script that exploited CVE-2023-25157 (GeoServer SQL injection).' ELSE exploitrel_2.evidence END,
+  exploitrel_2.source_id = CASE WHEN exploitrel_2.source_id IS NULL OR trim(exploitrel_2.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE exploitrel_2.source_id END
+WITH *
+MERGE (tech_1:Technique {technique_id: 'T1587'})
+ON CREATE SET
+  tech_1.name = 'Develop Capabilities',
+  tech_1.tactic = 'Resource Development',
+  tech_1.summary = 'Adversaries may develop capabilities, including malware or tools, which can include repurposing proof-of-concept exploit code.'
+ON MATCH SET
+  tech_1.name = CASE WHEN tech_1.name IS NULL OR trim(tech_1.name) = '' THEN 'Develop Capabilities' ELSE tech_1.name END,
+  tech_1.tactic = CASE WHEN tech_1.tactic IS NULL OR trim(tech_1.tactic) = '' THEN 'Resource Development' ELSE tech_1.tactic END,
+  tech_1.summary = CASE WHEN tech_1.summary IS NULL OR trim(tech_1.summary) = '' THEN 'Adversaries may develop capabilities, including malware or tools, which can include repurposing proof-of-concept exploit code.' ELSE tech_1.summary END
+WITH *
+MERGE (incident_1)-[ttech_1:used_technique]->(tech_1)
+ON CREATE SET
+  ttech_1.phase = 'Resource Development',
+  ttech_1.details = 'Repurposed older publicly available PoC code to craft a fake PoC for a newly released vulnerability (CVE-2023-40477), based on a PoC for CVE-2023-25157.',
+  ttech_1.evidence = 'Threat actors repurposing older PoC code to quickly craft a fake PoC; fake PoC for CVE-2023-40477 based on PoC for CVE-2023-25157.',
+  ttech_1.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  ttech_1.phase = CASE WHEN ttech_1.phase IS NULL OR trim(ttech_1.phase) = '' THEN 'Resource Development' ELSE ttech_1.phase END,
+  ttech_1.details = CASE WHEN ttech_1.details IS NULL OR trim(ttech_1.details) = '' THEN 'Repurposed older publicly available PoC code to craft a fake PoC for a newly released vulnerability (CVE-2023-40477), based on a PoC for CVE-2023-25157.' ELSE ttech_1.details END,
+  ttech_1.evidence = CASE WHEN ttech_1.evidence IS NULL OR trim(ttech_1.evidence) = '' THEN 'Threat actors repurposing older PoC code to quickly craft a fake PoC; fake PoC for CVE-2023-40477 based on PoC for CVE-2023-25157.' ELSE ttech_1.evidence END,
+  ttech_1.source_id = CASE WHEN ttech_1.source_id IS NULL OR trim(ttech_1.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE ttech_1.source_id END
+WITH *
+MERGE (mal_1:Malware {name: 'VenomRAT'})
+ON CREATE SET
+  mal_1.family = 'RAT',
+  mal_1.summary = 'Remote access trojan payload ultimately installed by the analyzed infection chain associated with the fake PoC.'
+ON MATCH SET
+  mal_1.family = CASE WHEN mal_1.family IS NULL OR trim(mal_1.family) = '' THEN 'RAT' ELSE mal_1.family END,
+  mal_1.summary = CASE WHEN mal_1.summary IS NULL OR trim(mal_1.summary) = '' THEN 'Remote access trojan payload ultimately installed by the analyzed infection chain associated with the fake PoC.' ELSE mal_1.summary END
+WITH *
+MERGE (incident_1)-[malrel_1:involved_malware]->(mal_1)
+ON CREATE SET
+  malrel_1.evidence = 'Infection chain ultimately installed a VenomRAT payload.',
+  malrel_1.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  malrel_1.evidence = CASE WHEN malrel_1.evidence IS NULL OR trim(malrel_1.evidence) = '' THEN 'Infection chain ultimately installed a VenomRAT payload.' ELSE malrel_1.evidence END,
+  malrel_1.source_id = CASE WHEN malrel_1.source_id IS NULL OR trim(malrel_1.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE malrel_1.source_id END
+WITH *
+MERGE (ta_1)-[uses_1:uses]->(tool_1)
+ON CREATE SET
+  uses_1.date = date('2023-08-21'),
+  uses_1.evidence = 'Actor (alias: whalersplonk) committed the fake PoC script to a GitHub repository.',
+  uses_1.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  uses_1.date = CASE WHEN uses_1.date IS NULL THEN date('2023-08-21') ELSE uses_1.date END,
+  uses_1.evidence = CASE WHEN uses_1.evidence IS NULL OR trim(uses_1.evidence) = '' THEN 'Actor (alias: whalersplonk) committed the fake PoC script to a GitHub repository.' ELSE uses_1.evidence END,
+  uses_1.source_id = CASE WHEN uses_1.source_id IS NULL OR trim(uses_1.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE uses_1.source_id END
+WITH *
+MERGE (ta_1)-[uses_2:uses]->(mal_1)
+ON CREATE SET
+  uses_2.date = date('2023-08-21'),
+  uses_2.evidence = 'Links in the infection chain ultimately installed a VenomRAT payload.',
+  uses_2.source_id = 'zdi-cve-2023-40477-public-report-2023-08-17'
+ON MATCH SET
+  uses_2.date = CASE WHEN uses_2.date IS NULL THEN date('2023-08-21') ELSE uses_2.date END,
+  uses_2.evidence = CASE WHEN uses_2.evidence IS NULL OR trim(uses_2.evidence) = '' THEN 'Links in the infection chain ultimately installed a VenomRAT payload.' ELSE uses_2.evidence END,
+  uses_2.source_id = CASE WHEN uses_2.source_id IS NULL OR trim(uses_2.source_id) = '' THEN 'zdi-cve-2023-40477-public-report-2023-08-17' ELSE uses_2.source_id END
+WITH *
+MERGE (incident_1)-[supp_1:supported_by]->(source_1)
+ON CREATE SET
+  supp_1.quote = 'On Aug. 17, 2023, the Zero Day Initiative publicly reported ... CVE-2023-40477 ... Four days after the public reporting ... alias of whalersplonk ... fake PoC ... based on ... CVE-2023-25157 ... ultimately installed a VenomRAT payload.'
+ON MATCH SET
+  supp_1.quote = CASE WHEN supp_1.quote IS NULL OR trim(supp_1.quote) = '' THEN 'On Aug. 17, 2023, the Zero Day Initiative publicly reported ... CVE-2023-40477 ... Four days after the public reporting ... alias of whalersplonk ... fake PoC ... based on ... CVE-2023-25157 ... ultimately installed a VenomRAT payload.' ELSE supp_1.quote END
+WITH *
+MERGE (ta_1)-[supp_2:supported_by]->(source_1)
+ON CREATE SET
+  supp_2.quote = 'An actor using an alias of whalersplonk committed a fake PoC script to their GitHub repository.'
+ON MATCH SET
+  supp_2.quote = CASE WHEN supp_2.quote IS NULL OR trim(supp_2.quote) = '' THEN 'An actor using an alias of whalersplonk committed a fake PoC script to their GitHub repository.' ELSE supp_2.quote END
+WITH *
+MERGE (cve_1)-[supp_3:supported_by]->(source_1)
+ON CREATE SET
+  supp_3.quote = 'On Aug. 17, 2023, the Zero Day Initiative publicly reported ... CVE-2023-40477. They had disclosed it to the vendor on June 8, 2023.'
+ON MATCH SET
+  supp_3.quote = CASE WHEN supp_3.quote IS NULL OR trim(supp_3.quote) = '' THEN 'On Aug. 17, 2023, the Zero Day Initiative publicly reported ... CVE-2023-40477. They had disclosed it to the vendor on June 8, 2023.' ELSE supp_3.quote END
+WITH *
+MERGE (cve_2)-[supp_4:supported_by]->(source_1)
+ON CREATE SET
+  supp_4.quote = 'The fake PoC ... was based on a publicly available PoC script that exploited ... GeoServer ... CVE-2023-25157.'
+ON MATCH SET
+  supp_4.quote = CASE WHEN supp_4.quote IS NULL OR trim(supp_4.quote) = '' THEN 'The fake PoC ... was based on a publicly available PoC script that exploited ... GeoServer ... CVE-2023-25157.' ELSE supp_4.quote END
+WITH *
+MERGE (mal_1)-[supp_5:supported_by]->(source_1)
+ON CREATE SET
+  supp_5.quote = '... infection chain, which ultimately installed a VenomRAT payload.'
+ON MATCH SET
+  supp_5.quote = CASE WHEN supp_5.quote IS NULL OR trim(supp_5.quote) = '' THEN '... infection chain, which ultimately installed a VenomRAT payload.' ELSE supp_5.quote END;"
+operation-earth-kitsune-tracking-slub-s-current-operations.json,"MERGE (camp_OperationEarthKitsune:Campaign {name:'Operation Earth Kitsune'})
+ON CREATE SET camp_OperationEarthKitsune.summary = 'Operation Earth Kitsune used multiple C&C servers and a weaponized PoC for CVE-2019-5782 (Google Chrome) to compromise websites and infect victim machines with multiple malware samples.'
+ON MATCH SET camp_OperationEarthKitsune.summary = CASE WHEN camp_OperationEarthKitsune.summary IS NULL OR camp_OperationEarthKitsune.summary = '' THEN 'Operation Earth Kitsune used multiple C&C servers and a weaponized PoC for CVE-2019-5782 (Google Chrome) to compromise websites and infect victim machines with multiple malware samples.' ELSE camp_OperationEarthKitsune.summary END
+
+MERGE (cve_2019_5782:CVE {id:'CVE-2019-5782'})
+ON CREATE SET cve_2019_5782.summary = 'Google Chrome vulnerability (weaponized proof of concept referenced in chromium tracking system).'
+ON MATCH SET cve_2019_5782.summary = CASE WHEN cve_2019_5782.summary IS NULL OR cve_2019_5782.summary = '' THEN 'Google Chrome vulnerability (weaponized proof of concept referenced in chromium tracking system).' ELSE cve_2019_5782.summary END
+
+MERGE (tech_ExploitationForClientExecution:Technique {technique_id:'T1203'})
+ON CREATE SET tech_ExploitationForClientExecution.name = 'Exploitation for Client Execution',
+              tech_ExploitationForClientExecution.tactic = 'Execution',
+              tech_ExploitationForClientExecution.summary = 'Adversary exploits a client application vulnerability to execute code.'
+ON MATCH SET tech_ExploitationForClientExecution.name = CASE WHEN tech_ExploitationForClientExecution.name IS NULL OR tech_ExploitationForClientExecution.name = '' THEN 'Exploitation for Client Execution' ELSE tech_ExploitationForClientExecution.name END,
+             tech_ExploitationForClientExecution.tactic = CASE WHEN tech_ExploitationForClientExecution.tactic IS NULL OR tech_ExploitationForClientExecution.tactic = '' THEN 'Execution' ELSE tech_ExploitationForClientExecution.tactic END,
+             tech_ExploitationForClientExecution.summary = CASE WHEN tech_ExploitationForClientExecution.summary IS NULL OR tech_ExploitationForClientExecution.summary = '' THEN 'Adversary exploits a client application vulnerability to execute code.' ELSE tech_ExploitationForClientExecution.summary END
+
+MERGE (tech_ExploitPublicFacingApp:Technique {technique_id:'T1190'})
+ON CREATE SET tech_ExploitPublicFacingApp.name = 'Exploit Public-Facing Application',
+              tech_ExploitPublicFacingApp.tactic = 'Initial Access',
+              tech_ExploitPublicFacingApp.summary = 'Adversary exploits a vulnerability in a public-facing application to gain access.'
+ON MATCH SET tech_ExploitPublicFacingApp.name = CASE WHEN tech_ExploitPublicFacingApp.name IS NULL OR tech_ExploitPublicFacingApp.name = '' THEN 'Exploit Public-Facing Application' ELSE tech_ExploitPublicFacingApp.name END,
+             tech_ExploitPublicFacingApp.tactic = CASE WHEN tech_ExploitPublicFacingApp.tactic IS NULL OR tech_ExploitPublicFacingApp.tactic = '' THEN 'Initial Access' ELSE tech_ExploitPublicFacingApp.tactic END,
+             tech_ExploitPublicFacingApp.summary = CASE WHEN tech_ExploitPublicFacingApp.summary IS NULL OR tech_ExploitPublicFacingApp.summary = '' THEN 'Adversary exploits a vulnerability in a public-facing application to gain access.' ELSE tech_ExploitPublicFacingApp.summary END
+
+MERGE (victim_KANCC:Victim {name:'Korean American National Coordinating Council (KANCC)'})
+ON CREATE SET victim_KANCC.summary = 'KANCC website observed redirecting visitors to another site in the described incident.'
+ON MATCH SET victim_KANCC.summary = CASE WHEN victim_KANCC.summary IS NULL OR victim_KANCC.summary = '' THEN 'KANCC website observed redirecting visitors to another site in the described incident.' ELSE victim_KANCC.summary END
+
+MERGE (victim_Hanseattle:Victim {name:'Hanseattle'})
+ON CREATE SET victim_Hanseattle.summary = 'Website to which KANCC visitors were redirected; involved in the described infection chain.'
+ON MATCH SET victim_Hanseattle.summary = CASE WHEN victim_Hanseattle.summary IS NULL OR victim_Hanseattle.summary = '' THEN 'Website to which KANCC visitors were redirected; involved in the described infection chain.' ELSE victim_Hanseattle.summary END
+
+MERGE (c2_Generic: C2_Infrastructure {service:'C&C servers'})
+ON CREATE SET c2_Generic.summary = 'Command-and-control servers used in Operation Earth Kitsune (reported total: five).'
+ON MATCH SET c2_Generic.summary = CASE WHEN c2_Generic.summary IS NULL OR c2_Generic.summary = '' THEN 'Command-and-control servers used in Operation Earth Kitsune (reported total: five).' ELSE c2_Generic.summary END
+
+MERGE (incident_EarthKitsune_KANCC_Redirect:Incident {id:'operation-earth-kitsune-kancc-redirect'})
+ON CREATE SET incident_EarthKitsune_KANCC_Redirect.type = 'intrusion',
+              incident_EarthKitsune_KANCC_Redirect.summary = 'KANCC website redirect led users to Hanseattle and then to a weaponized PoC for CVE-2019-5782 (Google Chrome), resulting in infection with three separate malware samples.'
+ON MATCH SET incident_EarthKitsune_KANCC_Redirect.type = CASE WHEN incident_EarthKitsune_KANCC_Redirect.type IS NULL OR incident_EarthKitsune_KANCC_Redirect.type = '' THEN 'intrusion' ELSE incident_EarthKitsune_KANCC_Redirect.type END,
+             incident_EarthKitsune_KANCC_Redirect.summary = CASE WHEN incident_EarthKitsune_KANCC_Redirect.summary IS NULL OR incident_EarthKitsune_KANCC_Redirect.summary = '' THEN 'KANCC website redirect led users to Hanseattle and then to a weaponized PoC for CVE-2019-5782 (Google Chrome), resulting in infection with three separate malware samples.' ELSE incident_EarthKitsune_KANCC_Redirect.summary END
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_targets_kancc:targets]->(victim_KANCC)
+ON CREATE SET rel_inc_targets_kancc.evidence = 'Investigation began after noticing the KANCC website was redirecting visitors to the Hanseattle website.'
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_targets_hanseattle:targets]->(victim_Hanseattle)
+ON CREATE SET rel_inc_targets_hanseattle.evidence = 'Users who accessed the site were redirected to a weaponized proof of concept (PoC) exploit chain hosted via the redirection to Hanseattle.'
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_exploited:CVE_EXPLOITED_IN]->(cve_2019_5782)
+ON CREATE SET rel_inc_exploited.evidence = 'Users were redirected to a weaponized version of a PoC for the CVE-2019-5782 Google Chrome vulnerability.'
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_tech_clientexec:used_technique]->(tech_ExploitationForClientExecution)
+ON CREATE SET rel_inc_tech_clientexec.phase = 'Execution',
+              rel_inc_tech_clientexec.details = 'Weaponized PoC exploit for Google Chrome (CVE-2019-5782).',
+              rel_inc_tech_clientexec.evidence = 'Redirect led users to a weaponized PoC for CVE-2019-5782; exploit infected victim machines.'
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_tech_publicfacing:used_technique]->(tech_ExploitPublicFacingApp)
+ON CREATE SET rel_inc_tech_publicfacing.phase = 'Initial Access',
+              rel_inc_tech_publicfacing.details = 'Compromise websites to host malware and deliver exploit via redirection.',
+              rel_inc_tech_publicfacing.evidence = 'Operation aimed to compromise websites to host malware; KANCC site redirected visitors as part of delivery.'
+
+MERGE (camp_OperationEarthKitsune)-[rel_camp_includes_incident:includes]->(incident_EarthKitsune_KANCC_Redirect)
+ON CREATE SET rel_camp_includes_incident.evidence = 'Described activity is part of Operation Earth Kitsune.'
+
+MERGE (camp_OperationEarthKitsune)-[rel_camp_abuses_c2:targets]->(victim_KANCC)
+ON CREATE SET rel_camp_abuses_c2.evidence = 'Operation Earth Kitsune activity observed via KANCC website redirection.'
+
+MERGE (camp_OperationEarthKitsune)-[rel_camp_uses_c2:includes]->(c2_Generic)
+ON CREATE SET rel_camp_uses_c2.evidence = 'Operation Earth Kitsune used a total of five C&C servers.'
+
+MERGE (malware_UnnamedSample1:Malware {name:'Unnamed malware sample 1'})
+ON CREATE SET malware_UnnamedSample1.summary = 'One of three separate malware samples delivered via the weaponized CVE-2019-5782 exploit chain.'
+ON MATCH SET malware_UnnamedSample1.summary = CASE WHEN malware_UnnamedSample1.summary IS NULL OR malware_UnnamedSample1.summary = '' THEN 'One of three separate malware samples delivered via the weaponized CVE-2019-5782 exploit chain.' ELSE malware_UnnamedSample1.summary END
+
+MERGE (malware_UnnamedSample2:Malware {name:'Unnamed malware sample 2'})
+ON CREATE SET malware_UnnamedSample2.summary = 'One of three separate malware samples delivered via the weaponized CVE-2019-5782 exploit chain.'
+ON MATCH SET malware_UnnamedSample2.summary = CASE WHEN malware_UnnamedSample2.summary IS NULL OR malware_UnnamedSample2.summary = '' THEN 'One of three separate malware samples delivered via the weaponized CVE-2019-5782 exploit chain.' ELSE malware_UnnamedSample2.summary END
+
+MERGE (malware_UnnamedSample3:Malware {name:'Unnamed malware sample 3'})
+ON CREATE SET malware_UnnamedSample3.summary = 'One of three separate malware samples delivered via the weaponized CVE-2019-5782 exploit chain.'
+ON MATCH SET malware_UnnamedSample3.summary = CASE WHEN malware_UnnamedSample3.summary IS NULL OR malware_UnnamedSample3.summary = '' THEN 'One of three separate malware samples delivered via the weaponized CVE-2019-5782 exploit chain.' ELSE malware_UnnamedSample3.summary END
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_mal1:involved_malware]->(malware_UnnamedSample1)
+ON CREATE SET rel_inc_mal1.evidence = 'Exploit infected the victim machine with three separate malware samples.'
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_mal2:involved_malware]->(malware_UnnamedSample2)
+ON CREATE SET rel_inc_mal2.evidence = 'Exploit infected the victim machine with three separate malware samples.'
+
+MERGE (incident_EarthKitsune_KANCC_Redirect)-[rel_inc_mal3:involved_malware]->(malware_UnnamedSample3)
+ON CREATE SET rel_inc_mal3.evidence = 'Exploit infected the victim machine with three separate malware samples.'"
+microsoft-warns-of-new-falsefont.json,"MERGE (src_1:Source {id:'microsoft_peach_sandstorm_report_2023_09'})
+ON CREATE SET src_1.publisher = 'Microsoft', src_1.published_on = date('2023-09-01')
+WITH src_1
+MERGE (ta_1:ThreatActor {name:'Peach Sandstorm'})
+ON CREATE SET ta_1.sponsor = 'Iran', ta_1.motivation = 'espionage', ta_1.summary = 'Iranian threat actor tracked by Microsoft (formerly Holmium) associated with password spray activity and intelligence collection in support of Iranian state interests; active since at least 2013.'
+ON MATCH SET ta_1.sponsor = CASE WHEN ta_1.sponsor IS NULL OR ta_1.sponsor = '' THEN 'Iran' ELSE ta_1.sponsor END,
+              ta_1.motivation = CASE WHEN ta_1.motivation IS NULL OR ta_1.motivation = '' THEN 'espionage' ELSE ta_1.motivation END,
+              ta_1.summary = CASE WHEN ta_1.summary IS NULL OR ta_1.summary = '' THEN 'Iranian threat actor tracked by Microsoft (formerly Holmium) associated with password spray activity and intelligence collection in support of Iranian state interests; active since at least 2013.' ELSE ta_1.summary END
+MERGE (ta_alias_1:ThreatActor {name:'Holmium'})
+MERGE (ta_1)-[:has_alias {date: date('2023-09-01')}]->(ta_alias_1)
+MERGE (ta_alias_2:ThreatActor {name:'APT33'})
+MERGE (ta_1)-[:has_alias {date: date('2023-09-01')}]->(ta_alias_2)
+MERGE (ta_alias_3:ThreatActor {name:'Elfin'})
+MERGE (ta_1)-[:has_alias {date: date('2023-09-01')}]->(ta_alias_3)
+MERGE (ta_alias_4:ThreatActor {name:'Refined Kitten'})
+MERGE (ta_1)-[:has_alias {date: date('2023-09-01')}]->(ta_alias_4)
+MERGE (mot_1:Motivation {type:'espionage'})
+MERGE (ta_1)-[:motivated_by]->(mot_1)
+MERGE (camp_1:Campaign {name:'Peach Sandstorm FalseFont campaign'})
+ON CREATE SET camp_1.summary = 'Campaign attributed to Peach Sandstorm designed to deliver the custom FalseFont backdoor and enable intelligence collection in support of Iranian state interests.'
+ON MATCH SET camp_1.summary = CASE WHEN camp_1.summary IS NULL OR camp_1.summary = '' THEN 'Campaign attributed to Peach Sandstorm designed to deliver the custom FalseFont backdoor and enable intelligence collection in support of Iranian state interests.' ELSE camp_1.summary END
+MERGE (camp_1)-[:includes {date: date('2023-09-01'), evidence:'Microsoft is tracking the activity under its moniker Peach Sandstorm (formerly Holmium), also known as APT33/Elfin/Refined Kitten.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(ta_1)
+MERGE (mal_1:Malware {name:'FalseFont'})
+ON CREATE SET mal_1.family = 'Backdoor', mal_1.summary = 'Custom backdoor with functionality to remotely access infected systems, launch additional files, and send information to command-and-control servers.'
+ON MATCH SET mal_1.family = CASE WHEN mal_1.family IS NULL OR mal_1.family = '' THEN 'Backdoor' ELSE mal_1.family END,
+              mal_1.summary = CASE WHEN mal_1.summary IS NULL OR mal_1.summary = '' THEN 'Custom backdoor with functionality to remotely access infected systems, launch additional files, and send information to command-and-control servers.' ELSE mal_1.summary END
+MERGE (camp_1)-[:includes {date: date('2023-09-01'), evidence:'Campaign designed to deliver a never-before-seen backdoor called FalseFont.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(mal_1)
+MERGE (ta_1)-[:uses {date: date('2023-09-01'), evidence:'Campaign designed to deliver a never-before-seen backdoor called FalseFont.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(mal_1)
+MERGE (c2_1:C2_Infrastructure {service:'Command-and-control servers'})
+ON CREATE SET c2_1.summary = 'C2 servers used for receiving information from infected systems.'
+ON MATCH SET c2_1.summary = CASE WHEN c2_1.summary IS NULL OR c2_1.summary = '' THEN 'C2 servers used for receiving information from infected systems.' ELSE c2_1.summary END
+MERGE (mal_1)-[:abuses {date: date('2023-09-01'), evidence:'FalseFont can send information to its command-and-control servers.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(c2_1)
+MERGE (d_1:Date {value: date('2023-02-01')})
+MERGE (camp_1)-[:occurred_on {date: date('2023-02-01')}]->(d_1)
+MERGE (d_2:Date {value: date('2023-07-01')})
+MERGE (camp_1)-[:occurred_on {date: date('2023-07-01')}]->(d_2)
+MERGE (inc_1:Incident {id:'microsoft_peach_sandstorm_password_spray_2023-02_2023-07'})
+ON CREATE SET inc_1.date = date('2023-02-01'),
+              inc_1.type = 'intrusion',
+              inc_1.summary = 'Microsoft linked Peach Sandstorm to password spray attacks carried out against thousands of organizations globally between February and July 2023; intrusions primarily singled out satellite, defense, and pharmaceutical sectors.'
+ON MATCH SET inc_1.date = CASE WHEN inc_1.date IS NULL THEN date('2023-02-01') ELSE inc_1.date END,
+              inc_1.type = CASE WHEN inc_1.type IS NULL OR inc_1.type = '' THEN 'intrusion' ELSE inc_1.type END,
+              inc_1.summary = CASE WHEN inc_1.summary IS NULL OR inc_1.summary = '' THEN 'Microsoft linked Peach Sandstorm to password spray attacks carried out against thousands of organizations globally between February and July 2023; intrusions primarily singled out satellite, defense, and pharmaceutical sectors.' ELSE inc_1.summary END
+MERGE (inc_1)-[:attributed_to {confidence:'reported', evidence:'Microsoft linked the group to password spray attacks carried out against thousands of organizations globally between February and July 2023.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(ta_1)
+MERGE (tech_1:Technique {technique_id:'T1110', name:'Brute Force', tactic:'Credential Access'})
+ON CREATE SET tech_1.summary = 'Attempts to gain access by guessing passwords, including password spraying.'
+ON MATCH SET tech_1.name = CASE WHEN tech_1.name IS NULL OR tech_1.name = '' THEN 'Brute Force' ELSE tech_1.name END,
+              tech_1.tactic = CASE WHEN tech_1.tactic IS NULL OR tech_1.tactic = '' THEN 'Credential Access' ELSE tech_1.tactic END,
+              tech_1.summary = CASE WHEN tech_1.summary IS NULL OR tech_1.summary = '' THEN 'Attempts to gain access by guessing passwords, including password spraying.' ELSE tech_1.summary END
+MERGE (inc_1)-[:used_technique {phase:'Initial Access', details:'password spraying', evidence:'Microsoft linked the group to password spray attacks carried out against thousands of organizations globally between February and July 2023.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(tech_1)
+MERGE (sec_1:Sector {name:'Government'})
+MERGE (inc_1)-[:targets_sector]->(sec_1)
+MERGE (sec_2:Sector {name:'Manufacturing'})
+MERGE (inc_1)-[:targets_sector]->(sec_2)
+MERGE (sec_3:Sector {name:'Healthcare'})
+MERGE (inc_1)-[:targets_sector]->(sec_3)
+MERGE (vic_1:Victim {name:'Defense Industrial Base (DIB)'})
+ON CREATE SET vic_1.sector = 'Government', vic_1.summary = 'Organizations in the Defense Industrial Base sector described as in the crosshairs of Peach Sandstorm.'
+ON MATCH SET vic_1.sector = CASE WHEN vic_1.sector IS NULL OR vic_1.sector = '' THEN 'Government' ELSE vic_1.sector END,
+              vic_1.summary = CASE WHEN vic_1.summary IS NULL OR vic_1.summary = '' THEN 'Organizations in the Defense Industrial Base sector described as in the crosshairs of Peach Sandstorm.' ELSE vic_1.summary END
+MERGE (ta_1)-[:attacked {date: date('2023-09-01'), evidence:'Organizations in the Defense Industrial Base (DIB) sector are in the crosshairs of an Iranian threat actor as part of a campaign designed to deliver FalseFont.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(vic_1)
+MERGE (camp_1)-[:targets {date: date('2023-09-01'), evidence:'Organizations in the Defense Industrial Base (DIB) sector are in the crosshairs as part of a campaign designed to deliver FalseFont.', source_id:'microsoft_peach_sandstorm_report_2023_09'}]->(vic_1)
+MERGE (ta_1)-[:supported_by {page:'', quote:'In a report published in September 2023, Microsoft linked the group to password spray attacks carried out against thousands of organizations globally between February and July 2023.'}]->(src_1)
+MERGE (mal_1)-[:supported_by {page:'', quote:'...a never-before-seen backdoor called FalseFont.'}]->(src_1)
+MERGE (inc_1)-[:supported_by {page:'', quote:'...password spray attacks ... between February and July 2023.'}]->(src_1)
+MERGE (camp_1)-[:supported_by {page:'', quote:'...campaign designed to deliver ... FalseFont.'}]->(src_1);"

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What date is recorded for incident clop-goanywhere-2023?,True,2023-01-01
+2,simple,What incident type is buckeye-doublepulsar-2016-03?,True,intrusion
+3,simple,What sponsor country is listed for APT35?,True,Iran
+4,simple,What motivation value is set on UAC-0050 node?,True,espionage
+5,simple,What is the family value for malware FiveHands?,True,ransomware
+6,simple,Which encryption scheme is stated in FiveHands summary?,True,NTRUEncrypt
+7,simple,What is the family value for malware SombRAT?,True,RAT
+8,simple,What country ISO2 is stored for victim South Korea (targets)?,True,KR
+9,simple,What sector is stored for victim Hitachi Energy?,True,Energy
+10,simple,What sector is stored for victim Saks Fifth Avenue?,True,Retail
+11,simple,What is the CVE-2023-0669 summary’s exploit start date?,True,2023-01-18
+12,simple,What is the type of incident ragnar-locker-activity-2019-12?,True,ransomware
+13,simple,"Is exfiltration flagged on ragnar-locker-activity-2019-12, and how?",True,true
+14,simple,What tactic is assigned to technique T1055.012?,True,Defense Evasion
+15,simple,Which publisher is set for source vmware-carbonblack-mdr?,True,VMware Carbon Black
+16,single_hop,Which CVE is exploited by GoAnywhere MFT?,True,CVE-2023-0669
+17,single_hop,Which motivation type is linked to Clop via motivated_by?,True,financial
+18,single_hop,Which malware does Buckeye use?,True,DoublePulsar
+19,single_hop,Which tool does Buckeye use to deliver DoublePulsar?,True,Bemstour
+20,single_hop,Which CVE is exploited by EternalSynergy?,True,CVE-2017-0143
+21,single_hop,Which malware is involved in incident magniber-2017-kr-magnitude-ek?,True,Magniber
+22,single_hop,Which technique is used by incident magniber-2022-10-phishing-cve-2022-44698?,True,T1566
+23,single_hop,Which CVE is exploited by Magniber?,True,"CVE-2022-44698, CVE-2018-8174"
+24,single_hop,Which country is victim Ukrainian entities located in?,True,Ukraine
+25,single_hop,Which malware is delivered in incident inc_uac-0050_2023-02_cert-ua_phishing_remcos?,True,Remcos RAT
+26,single_hop,Which technique is used by Jupyter for command-and-control?,True,T1573
+27,single_hop,Which sources support Jupyter malware?,True,"vmware-carbonblack-mdr, morphisec-tracking-jupyter, blackberry-tracking-jupyter"
+28,single_hop,Which threat actor is incident shadow-brokers-release-2017 attributed to?,True,Shadow Brokers
+29,single_hop,Which victims are directly attacked by Clop?,True,"Crown Resorts, CHS, Hatch Bank, Rubrik, City of Toronto, Hitachi Energy, Procter & Gamble, Saks Fifth Avenue"
+30,single_hop,Which victim is targeted by incident CISA_FiveHands_2021-05-06_incident_1?,True,Unknown victim organization
+31,multi_hop,Which CVE is exploited in Clop’s GoAnywhere incident via involved tool?,True,CVE-2023-0669
+32,multi_hop,How many distinct CVEs are exploited by tools used in Buckeye’s incident?,True,2
+33,multi_hop,Which CVEs are exploited by tools released in the Shadow Brokers leak incident?,True,CVE-2017-0143
+34,multi_hop,How many tools in shadow-brokers-release-2017 exploit CVE-2017-0143?,True,2
+35,multi_hop,How many victims are both targeted and attacked by Clop?,True,8
+36,multi_hop,Which victims targeted by Clop have a sector property set?,True,"Hitachi Energy, Saks Fifth Avenue"
+37,multi_hop,How many incidents are attributed to APT35 across all years?,True,5
+38,multi_hop,List countries/regions where APT35-2019-academic-targeting occurred.,True,"United States, France, Middle East"
+39,multi_hop,How many different locations are linked to APT35-2020-medical-research-targeting?,True,2
+40,multi_hop,Which tool used by APT35 in 2022 is for extracting emails?,True,Hyperscrape
+41,multi_hop,How many techniques are used by incident ragnar-locker-activity-2019-12?,True,4
+42,multi_hop,Which CVE is tied to Ragnar Locker via both malware exploits and incident exploited_in?,True,CVE-2017-0213
+43,multi_hop,How many distinct techniques are used across all Magniber incidents?,True,2
+44,multi_hop,Which Magniber incident used technique T1190 and exploited CVE-2018-8174?,True,magniber-2018-asia-cve-2018-8174
+45,multi_hop,How many CVEs are exploited by malware involved in buckeye-doublepulsar-2016-03?,True,2
+46,unanswerable,What is the ransom amount demanded in the FiveHands incident?,False,
+47,unanswerable,What hash value identifies ServeManager.exe in the dataset?,False,
+48,unanswerable,Which MITRE sub-technique ID is used for the VPN zero-day access?,False,
+49,unanswerable,What was the exact number of systems infected by Jupyter since late October?,False,
+50,unanswerable,Which specific Microsoft Exchange CVE numbers form the ProxyShell chain?,False,

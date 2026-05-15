@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What motivation type is assigned to BlackCat?,True,financial
+2,simple,What technique tactic is recorded for T1105?,True,Command and Control
+3,simple,What phase is stored on Munchkin used_technique for T1105?,True,Lateral Movement
+4,simple,What sponsor is set for TA444?,True,North Korea
+5,simple,What service label is used for the C2 infrastructure tied to SpectralBlur?,True,Command-and-control server
+6,simple,What is the incident type for google-tag-apt37-ie-0day-2022-10?,True,intrusion
+7,simple,What date is stored for the APT37 Internet Explorer 0-day incident?,True,2022-10-01
+8,simple,What status is recorded on the Patch management mitigates relationship?,True,applied
+9,simple,What malware family is set for FiveHands?,True,Ransomware
+10,simple,What technique tactic is recorded for T1490?,True,Impact
+11,simple,What date is stored for incident CISA-2021-05-06-FiveHands-INC-1?,True,2021-05-06
+12,simple,What sector value is set for the victim Asian government?,True,Government
+13,simple,What technique ID represents OS Credential Dumping in the dataset?,True,T1003
+14,simple,What incident type is stored for unit42-elektra-leak-activity?,True,cryptojacking
+15,simple,What framework is set for the Credential quarantine policy mitigation?,True,AWS
+16,single_hop,Which tool does BlackCat use to propagate the ransomware payload?,True,Munchkin
+17,single_hop,Which malware is directly used by TA444?,True,SpectralBlur
+18,single_hop,Which infrastructure service is abused by SpectralBlur?,True,Command-and-control server
+19,single_hop,Which technique is used by the APT37 0-day incident for initial access?,True,T1566
+20,single_hop,Which country did the APT37 incident occur in?,True,South Korea
+21,single_hop,Which CVE was exploited in the APT37 Internet Explorer incident?,True,CVE-2022-41128
+22,single_hop,Which victim was attacked by APT37 on 2022-10-01?,True,Users in South Korea
+23,single_hop,Which malware items are involved in the FiveHands CISA incident?,True,"FiveHands, SombRAT"
+24,single_hop,Which technique describes discovery in the FiveHands incident?,True,T1046
+25,single_hop,Which tool is listed as involved for discovery of hostnames and services?,True,SoftPerfect Network Scanner
+26,single_hop,Which tool executed ServeManager.exe in the FiveHands incident?,True,PsExec.exe
+27,single_hop,Which malware does Budworm directly use in August 2023?,True,SysUpdate
+28,single_hop,Which two victims are targeted by Budworm incidents in August 2023?,True,"Middle Eastern telecommunications organization, Asian government"
+29,single_hop,Which capability is leveraged for creating AWS EC2 instances in EleKtra-Leak?,True,Cloud
+30,single_hop,Which mitigation mitigates the Unsecured Credentials technique?,True,Credential quarantine policy
+31,multi_hop,Which malware does BlackCat deploy using the Munchkin tool?,True,BlackCat
+32,multi_hop,Which technique tactic maps to the tool used by BlackCat for propagation?,True,Command and Control
+33,multi_hop,Which source publisher supports both TA444 and SpectralBlur?,True,Proofpoint
+34,multi_hop,How many aliases are linked to TA444 via has_alias?,True,6
+35,multi_hop,What is the has_alias relationship date used for TA444 aliases?,True,2026-08-01
+36,multi_hop,Which country is associated with the victim targeted by the APT37 incident?,True,South Korea
+37,multi_hop,Which mitigation name is applied to the APT37 0-day incident?,True,Patch management
+38,multi_hop,How many techniques are linked to the FiveHands incident via used_technique?,True,4
+39,multi_hop,How many tools are involved in the FiveHands incident?,True,7
+40,multi_hop,Which tool is tied to the Execution technique in the FiveHands incident?,True,PsExec.exe
+41,multi_hop,How many incidents are attributed to Budworm in August 2023?,True,2
+42,multi_hop,How many unique sectors are targeted across Budworm’s two incidents?,True,2
+43,multi_hop,Which malware variant identifier is mentioned in SysUpdate’s summary?,True,inicore_v2.3.30.dll
+44,multi_hop,How many techniques are used by unit42-elektra-leak-activity?,True,2
+45,multi_hop,Which technique is mitigated by AWS Credential quarantine policy and used in EleKtra-Leak activity?,True,T1552
+46,unanswerable,What is the CVSS severity score for CVE-2022-41128?,False,
+47,unanswerable,What is the specific VPN product affected by the zero-day in the FiveHands incident?,False,
+48,unanswerable,What file hash identifies the SpectralBlur sample used by TA444?,False,
+49,unanswerable,Which malware families were the three Operation Earth Kitsune samples?,False,
+50,unanswerable,Which organizations were compromised in Peach Sandstorm password spray attacks?,False,
