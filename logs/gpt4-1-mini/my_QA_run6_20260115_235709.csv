@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What country ISO2 is recorded for Bank customers (India)?,True,IN
+2,simple,What sector is assigned to Bank customers (India)?,True,Finance
+3,simple,What incident type is set for whatsapp-phishing-banking-trojan-android-apk?,True,intrusion
+4,simple,What is the exfiltration flag for whatsapp-phishing-banking-trojan-android-apk?,True,true
+5,simple,What family is set for Android banking trojan (malicious APK)?,True,Banking Trojan
+6,simple,What technique tactic is recorded for T1204?,True,Execution
+7,simple,What technique tactic is recorded for T1456?,True,Collection
+8,simple,What sponsor is recorded for UNC3886?,True,China
+9,simple,What motivation is recorded for UNC3886?,True,espionage
+10,simple,What malware family is set for VirtualPita?,True,backdoor
+11,simple,What is the incident date for inc_unc3886_vmware_vcenter_esxi_2023_06?,True,2023-06-01
+12,simple,What confidence is set on CVE-2024-28085-WallEscape attributed_to relationship?,True,high
+13,simple,What published date is set for CVE-2024-28085?,True,2024-01-01
+14,simple,What framework is set for mitigation Disable public management interfaces?,True,General
+15,simple,What sponsor is recorded for Peach Sandstorm?,True,Iran
+16,single_hop,Where is Bank customers (India) located_in?,True,India
+17,single_hop,In which country did whatsapp-phishing-banking-trojan-android-apk occurred_in?,True,India
+18,single_hop,Which sector does whatsapp-phishing-banking-trojan-android-apk targets_sector?,True,Finance
+19,single_hop,Which malware does WhatsApp phishing campaign includes?,True,Android banking trojan (malicious APK)
+20,single_hop,Which victim does WhatsApp phishing campaign targets?,True,Bank customers (India)
+21,single_hop,Which tool is involved in microsoft_midnight_blizzard_teams_social_engineering?,True,Microsoft Teams
+22,single_hop,Which threat actor is attributed_to microsoft_midnight_blizzard_teams_social_engineering?,True,Midnight Blizzard
+23,single_hop,Which actor is credited in CVE-2024-28085-WallEscape attributed_to?,True,Skyler Ferrante
+24,single_hop,Which CVE is exploited_in by inc_unc3886_vmware_vcenter_esxi_2023_06 with first_seen set?,True,CVE-2023-34048
+25,single_hop,What is the first_seen date on the inc_unc3886_vmware_vcenter_esxi_2023_06 exploited_in CVE-2023-34048 relationship?,True,2021-01-01
+26,single_hop,Which tool exploits CVE-2023-6345 besides Google Chrome?,True,Skia
+27,single_hop,Which mitigation mitigates technique T1621?,True,MFA prompt verification
+28,single_hop,Which technique is mitigated by Disable public management interfaces?,True,"T1190, T1090"
+29,single_hop,Which malware is used by UNC3886 via uses relationships?,True,"VirtualPita, VirtualPie"
+30,single_hop,Which sectors are targeted by peach-sandstorm-password-spray-2023-02?,True,"Government, Healthcare, Technology"
+31,multi_hop,Which CVEs were exploited in the incident attributed to UNC3886?,True,"CVE-2023-34048, CVE-2023-20867"
+32,multi_hop,Which malware families are involved in incidents attributed to UNC3886?,True,backdoor
+33,multi_hop,Which techniques and phases appear in microsoft_midnight_blizzard_teams_social_engineering?,True,"T1566 Initial Access, T1621 Credential Access"
+34,multi_hop,Which tactic is mitigated by MFA prompt verification through its mitigated technique?,True,Credential Access
+35,multi_hop,Which sponsor is associated with the actor behind inc_unc3886_vmware_vcenter_esxi_2023_06?,True,China
+36,multi_hop,Which motivation type is linked to the actor attributed to peach-sandstorm-password-spray-2023-02?,True,espionage
+37,multi_hop,Which techniques and phases are used by Volt Typhoon via used_technique edges?,True,"T1190 Initial Access, T1003 Credential Access, T1078 Lateral Movement, T1090 Command and Control"
+38,multi_hop,Which tool is shared by both a tool node and C2 infrastructure in Volt Typhoon data?,True,SOHO network edge devices
+39,multi_hop,How many unique tools are involved across all incidents?,True,6
+40,multi_hop,How many unique CVEs are referenced across all incidents via exploited_in?,True,4
+41,multi_hop,How many incidents are marked exfiltration true?,True,3
+42,multi_hop,How many techniques are linked to whatsapp-phishing-banking-trojan-android-apk via used_technique?,True,4
+43,multi_hop,How many distinct sectors are targeted across all incidents?,True,4
+44,multi_hop,Which incident occurred earliest by occurred_on date?,True,inc_unc3886_vmware_vcenter_esxi_2023_06
+45,multi_hop,How many malware are included in UNC3886 vCenter/ESXi zero-day campaign?,True,2
+46,unanswerable,What Android package name or signing certificate identifies the malicious APK?,False,
+47,unanswerable,What specific C2 domain or IP address was used by the Android banking trojan?,False,
+48,unanswerable,What CVSS base score is assigned to CVE-2023-34048?,False,
+49,unanswerable,Which exact Fortinet vulnerability CVE enabled Volt Typhoon initial access?,False,
+50,unanswerable,Which organizations were targeted in the Microsoft Teams phishing activity?,False,

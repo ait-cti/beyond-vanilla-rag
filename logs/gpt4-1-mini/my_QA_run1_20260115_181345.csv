@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for FROZENBARENTS?,True,Russian Armed Forces GRU Unit 74455
+2,simple,What is the incident type for inc-clop-goanywhere-2023?,True,ransomware
+3,simple,What date is recorded for incident inc-comcast-xfinity-citrixbleed?,True,2023-10-01
+4,simple,What first_seen date is set for CVE-2023-4966 exploitation in inc-comcast-xfinity-citrixbleed?,True,2023-08-01
+5,simple,What is the tactic of Technique T1190 in the dataset?,True,Initial Access
+6,simple,What is the tactic for Technique T1025?,True,Collection
+7,simple,What is the family of malware Trojan.Grokey?,True,Keylogger
+8,simple,What is the malware family of W32.Fanni?,True,Worm
+9,simple,What service is specified for the C2_Infrastructure node abused by FROZENBARENTS?,True,Telegram
+10,simple,What date is set for incident FROZENBARENTS-EXIM-COMPROMISES-2019-08?,True,2019-08-01
+11,simple,What region is recorded as reg_MENA?,True,Middle East and North Africa
+12,simple,What is the sponsor value for Sea Turtle?,True,state-sponsored
+13,simple,What is the family of malware SnappyTCP?,True,reverse TCP shell
+14,simple,What sector is set for Victim Comcast Xfinity’s incident targets_sector relationship?,True,Technology
+15,simple,What ISO2 code is stored for the United Kingdom country node?,True,GB
+16,single_hop,Which malware does Equation use?,True,"Trojan.Grokey, W32.Fanni"
+17,single_hop,Which technique does W32.Fanni use in the Collection phase?,True,T1025
+18,single_hop,Which technique does W32.Fanni use in the Command and Control phase?,True,T1105
+19,single_hop,Which tool is used by Clop according to the uses relationship?,True,GoAnywhere MFT
+20,single_hop,Which CVE is linked via exploited_in from inc-clop-goanywhere-2023?,True,CVE-2023-0669
+21,single_hop,Which technique is linked by used_technique from inc-clop-goanywhere-2023?,True,T1190
+22,single_hop,Which threat actor is inc-clop-goanywhere-2023 attributed to?,True,Clop
+23,single_hop,Which malware is involved in inc-clop-goanywhere-2023?,True,Clop ransomware
+24,single_hop,Which victim is targeted by inc-comcast-xfinity-citrixbleed?,True,Comcast Xfinity
+25,single_hop,Which CVE is exploited in inc-comcast-xfinity-citrixbleed?,True,CVE-2023-4966
+26,single_hop,Which country is Consumers (United States) located in?,True,United States
+27,single_hop,Which country is Consumers (United Kingdom) located in?,True,United Kingdom
+28,single_hop,Which victim does Dyre malware attack besides banks worldwide?,True,"Consumers (United States), Consumers (United Kingdom)"
+29,single_hop,Which motivation is linked to MISSION2025/APT41?,True,espionage
+30,single_hop,Which actor is an alias of FROZENBARENTS via has_alias?,True,Sandworm
+31,multi_hop,Which CVE was exploited in the incident attributed to Clop?,True,CVE-2023-0669
+32,multi_hop,Which technique tactic was used by the incident that exploited CVE-2023-0669?,True,Initial Access
+33,multi_hop,Which tool is connected to Clop through the incident inc-clop-goanywhere-2023?,True,GoAnywhere MFT
+34,multi_hop,Which date node value is linked from inc-clop-goanywhere-2023 via occurred_on?,True,2023-01-18
+35,multi_hop,Which publisher supports incident inc-clop-goanywhere-2023 via supported_by?,True,Fortra
+36,multi_hop,Which technique IDs are used by incident FROZENBARENTS-EXIM-COMPROMISES-2019-08?,True,"T1190, T1566"
+37,multi_hop,Which sectors are targeted by incident FROZENBARENTS-EXIM-COMPROMISES-2019-08?,True,"Government, Energy, Transportation, Education, Other"
+38,multi_hop,Which campaign includes FROZENBARENTS and targets humanitarian organizations?,True,War in Ukraine Operations
+39,multi_hop,Which incident attributed to Sea Turtle occurred in Middle East and North Africa earliest?,True,sea-turtle-2017-01-dns-hijacking-credential-harvest
+40,multi_hop,Which malware is used by Sea Turtle and involved in its 2021 incident?,True,SnappyTCP
+41,multi_hop,How many victims are linked to Clop via attacked relationships?,True,8
+42,multi_hop,How many incidents in the dataset are dated in 2023?,True,2
+43,multi_hop,How many incidents are attributed_to Sea Turtle?,True,2
+44,multi_hop,How many distinct techniques are used by incident inc-clop-goanywhere-2023?,True,1
+45,multi_hop,How many threat actors are attributed to the Hikvision speculative exploitation incident?,True,3
+46,unanswerable,What CVSS base score is recorded for CVE-2023-0669?,False,
+47,unanswerable,Which specific Hikvision camera models are affected by CVE-2021-36260?,False,
+48,unanswerable,What encryption algorithm was used for the hashed passwords in the Comcast Xfinity breach?,False,
+49,unanswerable,What operating system versions are impacted by CVE-2023-45866?,False,
+50,unanswerable,What ransom amount was demanded in the GoAnywhere MFT incident?,False,

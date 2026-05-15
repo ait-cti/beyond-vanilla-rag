@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the type of incident conti-ttp-summary?,True,ransomware
+2,simple,Does incident conti-ttp-summary indicate data exfiltration?,True,true
+3,simple,Does incident conti-ttp-summary indicate double extortion?,True,true
+4,simple,What tactic is assigned to technique T1021?,True,Lateral Movement
+5,simple,What tactic is assigned to technique T1090?,True,Command and Control
+6,simple,What tactic is assigned to technique T1505.003?,True,Persistence
+7,simple,What tactic is assigned to technique T1110?,True,Credential Access
+8,simple,What is the published_on date for source microsoft-sep-2023-peach-sandstorm-falsefont?,True,2023-09-01
+9,simple,What is the sponsor set for threat actor Peach Sandstorm?,True,Iran
+10,simple,What is the sponsor set for threat actor COLDRIVER?,True,Russian government
+11,simple,What sector is stored on victim Ziv Hospital?,True,Healthcare
+12,simple,What ISO2 code is used for the country node named Ukraine?,True,UA
+13,simple,What is the type of incident mastodon-cve-2024-23832?,True,account takeover
+14,simple,What is the date of incident grayfly-activity-since-2017-03?,True,2017-03-01
+15,simple,What service label is stored for C2_Infrastructure node used by BazarLoader?,True,C&C server
+16,single_hop,Which motivation type is Grayfly linked to via motivated_by?,True,espionage
+17,single_hop,Which tool alias is connected from Cobalt Strike via has_alias?,True,Trojan.Agentemis
+18,single_hop,What technique ID does incident conti-ttp-summary use for phishing?,True,T1566
+19,single_hop,Which CVE is linked from incident fancy-bear-2022-07-follina via exploited_in?,True,CVE-2022-30190
+20,single_hop,Which malware is involved in incident inc-uac-0099-ukraine-2023-06?,True,LONEPAGE
+21,single_hop,Which CVE is exploited in incident inc-uac-0099-ukraine-2023-06?,True,CVE-2023-38831
+22,single_hop,Which malware does threat actor Ryuk use?,True,BazarLoader
+23,single_hop,Which C2 service does BazarLoader abuse?,True,C&C server
+24,single_hop,Which two services are abused by malware Samurai?,True,"HTTP/80, HTTPS/443"
+25,single_hop,Which malware is used by threat actor ToddyCat besides Ninja?,True,Samurai
+26,single_hop,Which incident is attributed to Hezbollah?,True,incd-attempted-targeting-ziv-hospital
+27,single_hop,Which victim is targeted by campaign FalseFont delivery campaign?,True,Defense Industrial Base (DIB)
+28,single_hop,Which technique does Peach Sandstorm use for password spraying?,True,Brute Force
+29,single_hop,Which malware does Peach Sandstorm use according to Microsoft?,True,FalseFont
+30,single_hop,Which CVEs are exploited in incident conti-ttp-summary?,True,"CVE-2018-13379, CVE-2018-13374, CVE-2020-1472, CVE-2021-1675"
+31,multi_hop,How many malware items are used by ToddyCat and included in its Exchange campaign?,True,2
+32,multi_hop,Which C2 services are abused by malware used by ToddyCat?,True,"HTTP/80, HTTPS/443"
+33,multi_hop,How many sectors are targeted by incident grayfly-activity-since-2017-03?,True,6
+34,multi_hop,How many regions are linked to incident grayfly-activity-since-2017-03 via occurred_in?,True,3
+35,multi_hop,How many distinct techniques are used by incident grayfly-activity-2017-03?,True,3
+36,multi_hop,What tactics are represented by techniques used in incident grayfly-activity-2017-03?,True,"Persistence, Lateral Movement, Command and Control"
+37,multi_hop,"How many victims are attacked by COLDRIVER, and which victim sectors appear?",True,"5; Other, Government, Education"
+38,multi_hop,Which technique tactics are used by COLDRIVER via used_technique?,True,"Initial Access, Resource Development"
+39,multi_hop,How many victims are targeted by campaign Quantum BazarCall (Jormungandr) campaigns?,True,6
+40,multi_hop,Which malware is included in Quantum BazarCall campaigns and used by Quantum Locker?,True,Jormungandr
+41,multi_hop,What date is campaign Quantum BazarCall (Jormungandr) campaigns occurred_on?,True,2022-06-01
+42,multi_hop,How many unique CVEs are exploited across Mastodon incidents and Conti incident combined?,True,6
+43,multi_hop,Which technique ID is shared by Conti incident and BazarLoader malware?,True,T1566
+44,multi_hop,How many tools are both used by Conti actor and involved in conti-ttp-summary?,True,5
+45,multi_hop,List tools both used by Conti actor and involved in conti-ttp-summary.,True,"Cobalt Strike, Whoami, Nltest, Net, ShareFinder"
+46,unanswerable,What CVSS severity score is assigned to CVE-2023-38831?,False,
+47,unanswerable,Which file hashes identify the LONEPAGE payload?,False,
+48,unanswerable,What specific Microsoft Exchange versions were targeted by ToddyCat?,False,
+49,unanswerable,Which country is Ziv Hospital located in?,False,
+50,unanswerable,What ransom amount is demanded in conti-ttp-summary?,False,

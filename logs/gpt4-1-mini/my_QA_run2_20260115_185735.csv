@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source cisa-fivehands-2021-05-06?,True,CISA
+2,simple,What date is stored on incident inc-fivehands-2021-05-06-1?,True,2021-05-06
+3,simple,What family classification is set for malware FiveHands?,True,Ransomware
+4,simple,What family classification is set for malware SombRAT?,True,RAT
+5,simple,What technique tactic is assigned to T1018?,True,Discovery
+6,simple,What technique name corresponds to technique_id T1569.002?,True,System Services: Service Execution
+7,simple,What sponsor is recorded for threat actor State-sponsored hackers (unattributed)?,True,Unknown government
+8,simple,What date is stored on incident proofpoint-follina-ss-2022?,True,2022-01-01
+9,simple,What sector is set for victim U.S. government targets?,True,Government
+10,simple,What summary describes CVE-2022-30190?,True,Microsoft Office remote code execution vulnerability dubbed Follina.
+11,simple,What exfiltration value is stored on inc:clop-goanywhere-mft-cve-2023-0669-early-2023?,True,true
+12,simple,What date is recorded on tool GoAnywhere MFT exploiting CVE-2023-0669?,True,2023-01-18
+13,simple,What family is set for malware DoublePulsar?,True,Backdoor.Doublepulsar
+14,simple,What date is stored on incident buckeye-doublepulsar-bemstour-2016-03?,True,2016-03-01
+15,simple,What double_extortion value is stored on incident ragnar-locker-activity-2019-12?,True,true
+16,single_hop,Which victims are directly targeted by incident proofpoint-follina-ss-2022?,True,"U.S. government targets, E.U. government targets"
+17,single_hop,What confidence is set on proofpoint-follina-ss-2022 attributed_to relationship?,True,medium
+18,single_hop,Which malware are involved in incident inc-fivehands-2021-05-06-1?,True,"FiveHands, SombRAT"
+19,single_hop,Which tools are involved in incident inc-fivehands-2021-05-06-1?,True,"SoftPerfect Network Scanner, PsExec.exe, ServeManager.exe, RouterScan.exe, grabff.exe, rclone.exe, s3browser-9-5-3.exe"
+20,single_hop,Which techniques are used by incident inc-fivehands-2021-05-06-1?,True,"T1190, T1018, T1569.002, T1047, T1490, T1486"
+21,single_hop,Which motivation type directly motivates State-sponsored hackers (unattributed)?,True,espionage
+22,single_hop,Which CVE is exploited_in incident proofpoint-follina-ss-2022?,True,CVE-2022-30190
+23,single_hop,Which malware does threat actor Clop use?,True,Clop ransomware
+24,single_hop,Which region did inc:clop-goanywhere-mft-cve-2023-0669-early-2023 occur in?,True,Global
+25,single_hop,Which victims are targeted by inc:clop-goanywhere-mft-cve-2023-0669-early-2023?,True,"Crown Resorts, CHS, Hatch Bank, Rubrik, City of Toronto, Hitachi Energy, Procter & Gamble, Saks Fifth Avenue"
+26,single_hop,Which CVEs does tool Bemstour exploit?,True,"CVE-2019-0703, CVE-2017-0143"
+27,single_hop,Which incident is attributed_to threat actor Buckeye?,True,buckeye-doublepulsar-bemstour-2016-03
+28,single_hop,Which techniques are used by incident ragnar-locker-activity-2019-12?,True,"T1133, T1110, T1078, T1068, T1027"
+29,single_hop,Which malware is involved in incident symantec-broadcom-budworm-aug2023-gov-asia?,True,SysUpdate
+30,single_hop,Which aliases are linked from threat actor Budworm via has_alias?,True,"LuckyMouse, Emissary Panda, APT27"
+31,multi_hop,Which CVEs are linked to Buckeye via tools it uses?,True,"CVE-2019-0703, CVE-2017-0143"
+32,multi_hop,Which CVE is tied to Ragnar Locker via used technique T1068 evidence?,True,CVE-2017-0213
+33,multi_hop,Which countries host victims targeted in UAC-0050 February 2023 incident?,True,"Ukraine, Poland"
+34,multi_hop,Which techniques were used in inc-fivehands-2021-05-06-1 and have tactic Impact?,True,"T1047, T1490, T1486"
+35,multi_hop,How many distinct victims are targeted by the Clop GoAnywhere early-2023 incident?,True,8
+36,multi_hop,How many incidents are attributed to Budworm in August 2023?,True,2
+37,multi_hop,How many techniques are used by ragnar-locker-activity-2019-12?,True,5
+38,multi_hop,How many CVEs are exploited_in buckeye-doublepulsar-bemstour-2016-03?,True,2
+39,multi_hop,How many techniques does inc_jupyter_2020 use?,True,4
+40,multi_hop,List techniques shared by both Jupyter incidents inc-jupyter-since-2020 and inc-jupyter-late-october-variant.,True,T1059.001
+41,multi_hop,How many sources directly support malware Jupyter?,True,3
+42,multi_hop,Which sectors are targeted by inc-jupyter-since-2020 based on target victims?,True,"Finance, Technology"
+43,multi_hop,"What is the earliest incident date among Buckeye, Ragnar Locker, and FiveHands incidents?",True,2016-03-01
+44,multi_hop,Which technique IDs appear in both FiveHands incident and APT35 2021 incident?,True,T1190
+45,multi_hop,How many unique countries or regions did APT35 2019 incident occur in?,True,3
+46,unanswerable,What CVSS score is recorded for CVE-2023-0669?,False,
+47,unanswerable,What file hash is provided for inicore_v2.3.30.dll?,False,
+48,unanswerable,Which email subject line was used in the Proofpoint Follina phishing lure?,False,
+49,unanswerable,What ransomware payment amount was demanded in the FiveHands incident?,False,
+50,unanswerable,Which MITRE technique ID is assigned to Hyperscrape tool usage?,False,

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the published_date for CVE-2022-30190?,True,2022-01-01
+2,simple,What tactic is assigned to technique T1059.001?,True,Execution
+3,simple,What family value is set for malware Follina Exploit?,True,Exploit
+4,simple,What type is incident INC-CVE-2024-0204-GoAnywhere-PoC?,True,intrusion
+5,simple,What confidence is recorded on the incident attribution to Horizon3 Attack Team?,True,low
+6,simple,What country ISO2 is set for victim Silverstone Circuit?,True,GB
+7,simple,What date is set for incident royal-ramp-up-2022-09?,True,2022-09-01
+8,simple,What first_seen date is set for incident-to-CVE link on CVE-2022-34713?,True,2022-08-01
+9,simple,What status is recorded for Patch Management mitigating INC-CVE-2022-34713-2022-08?,True,recommended
+10,simple,What motivation type is stored for threat actor EXOTIC LILY?,True,financial
+11,simple,What sponsor value is set for threat actor Peach Sandstorm?,True,Iran
+12,simple,What is the exfiltration flag on microsoft-observed-peach-sandstorm-password-spray-2023-02?,True,true
+13,simple,What sector is assigned to victim Abu Dhabi National Oil Company (ADNOC)?,True,Energy
+14,simple,What family is set for malware ZuoRAT?,True,RAT
+15,simple,What sponsor is set for threat actor TA444?,True,North Korea
+16,single_hop,Which CVE is exploited by malware Follina Exploit?,True,CVE-2022-30190
+17,single_hop,Which tool is used by malware Follina Exploit?,True,Microsoft Support Diagnostic Tool (MSDT)
+18,single_hop,Which CVE is exploited by Fortra GoAnywhere MFT?,True,CVE-2024-0204
+19,single_hop,Which technique is used in incident INC-CVE-2024-0204-GoAnywhere-PoC?,True,T1190
+20,single_hop,Which threat actor is incident TAG-EXOTIC-LILY-2021-09 attributed to?,True,EXOTIC LILY
+21,single_hop,Which CVE is linked as exploited_in for incident TAG-EXOTIC-LILY-2021-09?,True,CVE-2021-40444
+22,single_hop,Which sectors are targeted by incident TAG-EXOTIC-LILY-2021-09?,True,"Technology, Healthcare"
+23,single_hop,Which malware does Earth Berberoka use?,True,"PlugX, Gh0st RAT, PuppetLoader"
+24,single_hop,Which victim is attacked by Earth Berberoka?,True,Online gambling sites
+25,single_hop,Which malware is involved in incident uptycs_unc-0050_ukraine_gov_campaign?,True,RemcosRAT
+26,single_hop,Which country did incident uptycs_unc-0050_ukraine_gov_campaign occur in?,True,Ukraine
+27,single_hop,Which technique is used by incident uptycs_unc-0050_ukraine_gov_campaign?,True,T1036
+28,single_hop,Which C2 infrastructure service is abused by JinxLoader?,True,Command-and-Control
+29,single_hop,Which CVE is exploited in incident inc-cve-2023-36884-storm-0978-active-exploitation?,True,CVE-2023-36884
+30,single_hop,Which malware is used by Storm-0978?,True,Industrial Spy
+31,multi_hop,Which CVE does Horizon3 Attack Team reach via uses to tool then exploits?,True,CVE-2024-0204
+32,multi_hop,Which tool is tied to Horizon3 via incident involved_tool?,True,Fortra GoAnywhere MFT
+33,multi_hop,Which country is the target victim of incident royal-silverstone-2022-11 located in?,True,United Kingdom
+34,multi_hop,Which ransomware encryptor besides Royal ransomware is used by Royal operators?,True,BlackCat
+35,multi_hop,Which technique IDs are used by the earliest-dated incident in the dataset?,True,"T1190, T1557, T1040"
+36,multi_hop,Which C2 services are abused by ZuoRAT?,True,"DNS, HTTPS"
+37,multi_hop,Which techniques are used in incident zuorat-soho-routers-2020-04?,True,"T1190, T1557, T1040"
+38,multi_hop,Which malware is involved in TAG-EXOTIC-LILY-2021-09 and also directly used by EXOTIC LILY?,True,"Conti, Diavol"
+39,multi_hop,How many sectors are targeted by microsoft-observed-peach-sandstorm-password-spray-2023-02?,True,3
+40,multi_hop,How many tools are involved in microsoft-observed-peach-sandstorm-password-spray-2023-02?,True,2
+41,multi_hop,How many pieces of malware are involved in incident incident_jinxloader_adnoc_phishing?,True,3
+42,multi_hop,How many next-stage payloads does JinxLoader deliver via involved malware chain?,True,2
+43,multi_hop,Which malware set is deployed by TA544 through IDAT Loader?,True,"Remcos RAT, SystemBC"
+44,multi_hop,How many aliases are linked from TA444 via has_alias?,True,6
+45,multi_hop,How many techniques are used in incident TAG-EXOTIC-LILY-2021-09?,True,1
+46,unanswerable,What CVSS score is assigned to CVE-2024-0204?,False,
+47,unanswerable,What file hash identifies the JinxLoader executable used in phishing?,False,
+48,unanswerable,Which specific SOHO router models were targeted by ZuoRAT?,False,
+49,unanswerable,What email subject lines were used in the ADNOC-impersonation phishing campaign?,False,
+50,unanswerable,What patched software version remediates CVE-2022-34713?,False,

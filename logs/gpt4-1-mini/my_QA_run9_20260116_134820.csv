@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the motivation of Unknown threat actors (CryptoClippy campaign)?,True,financial
+2,simple,What family is CryptoClippy malware classified as?,True,Cryptocurrency clipper
+3,simple,What is the type of incident unit42-cryptoclippy-pt-001?,True,malware campaign
+4,simple,What is the technique tactic for T1115 Clipboard Data?,True,Collection
+5,simple,What is the summary focus of CVE-2023-4966?,True,Affects Citrix NetScaler ADC and Gateway products
+6,simple,What is the exfiltration flag for inc-comcast-xfinity-citrixbleed-2023?,True,true
+7,simple,What is the service name of the C2_Infrastructure used for leaking?,True,Telegram
+8,simple,What sponsor is listed for FROZENBARENTS?,True,Russian Armed Forces GRU Unit 74455
+9,simple,What is the date value stored for fog-of-war-frozenbarents-exim-2019-08?,True,2019-08-01
+10,simple,What vulnerability type is described for CVE-2023-22527?,True,Unauthenticated template injection RCE
+11,simple,What programming language is mentioned for BlackCat ransomware?,True,Rust
+12,simple,What is the incident type for blackcat-2021-11-first-observed?,True,ransomware
+13,simple,What publisher is set for TAG-Disclosure-2021-01-NK-0day-security-researchers source?,True,Threat Analysis Group
+14,simple,What family is Dyre malware categorized under?,True,Financial Trojan
+15,simple,What NIST score is mentioned in CVE-2021-36260 summary?,True,9.8/10
+16,single_hop,Which malware is included in the CryptoClippy Portuguese-speaker campaign?,True,CryptoClippy
+17,single_hop,Which victim does the CryptoClippy Portuguese-speaker campaign target?,True,Portuguese-speaking users (work machines)
+18,single_hop,Which sectors are targeted by incident unit42-cryptoclippy-pt-001?,True,"Manufacturing, Technology, Other"
+19,single_hop,Which threat actor is incident inc-comcast-xfinity-citrixbleed-2023 attributed to?,True,Unknown attackers
+20,single_hop,Which CVE is exploited in incident inc-comcast-xfinity-citrixbleed-2023?,True,CVE-2023-4966
+21,single_hop,Which technique is used by incident obs-cve-2023-22527-exploitation-attempts?,True,T1190 Exploit Public-Facing Application
+22,single_hop,Which capability does CVE-2023-4969 leverage?,True,AI/GenAI
+23,single_hop,Which alias is linked from FROZENBARENTS via has_alias?,True,Sandworm
+24,single_hop,Which motivation node is linked from FROZENBARENTS?,True,espionage
+25,single_hop,Which service does FROZENBARENTS abuse for leaking hacked data?,True,Telegram
+26,single_hop,Which threat actor is included in FROZENBARENTS War in Ukraine Operations campaign?,True,FROZENBARENTS
+27,single_hop,Which date did FROZENBARENTS War in Ukraine Operations occur on?,True,2019-08-01
+28,single_hop,Which malware does ALPHV use?,True,BlackCat
+29,single_hop,Which country nodes is Dyre victims node located in?,True,"US, GB"
+30,single_hop,Which threat actors are attributed to incident inc-cve-2021-36260-hikvision?,True,"MISSION2025/APT41, APT10, Unknown Russian threat actor groups"
+31,multi_hop,Which technique IDs are used by unit42-cryptoclippy-pt-001 incident?,True,"T1566, T1583, T1115, T1565"
+32,multi_hop,Which tactic phases are represented by CryptoClippy incident techniques?,True,"Initial Access, Resource Development, Collection, Impact"
+33,multi_hop,How many sectors are targeted by unit42-cryptoclippy-pt-001?,True,3
+34,multi_hop,Which technique IDs does Ragnar Locker incident inc-ragnar-locker-2019-12-activity use?,True,"T1133, T1110, T1078, T1486, T1041, T1068"
+35,multi_hop,How many techniques are linked to inc-ragnar-locker-2019-12-activity?,True,6
+36,multi_hop,Which CVE is exploited for privilege escalation in Ragnar Locker incident?,True,CVE-2017-0213
+37,multi_hop,Which technique name is associated with CVE-2017-0213 exploitation in Ragnar Locker incident?,True,Exploitation for Privilege Escalation
+38,multi_hop,How many distinct CVEs are exploited in incidents labeled intrusion?,True,3
+39,multi_hop,List intrusion incidents that exploited CVEs first seen on 2023-08-01.,True,"inc-comcast-xfinity-citrixbleed-2023, text-1-incident-1"
+40,multi_hop,How many tools are involved in inc-comcast-xfinity-citrixbleed-2023?,True,2
+41,multi_hop,Which tools involved in inc-comcast-xfinity-citrixbleed-2023 also exploit its CVE?,True,"Citrix NetScaler ADC, Citrix NetScaler Gateway"
+42,multi_hop,How many victims are targeted by FROZENBARENTS War in Ukraine Operations campaign?,True,6
+43,multi_hop,Which sectors are represented by FROZENBARENTS campaign targeted victims’ sector property?,True,"Government, Energy, Transportation, Education, Other"
+44,multi_hop,How many different Technique nodes have technique_id T1190 across the graph?,True,4
+45,multi_hop,Which T1190-linked incidents have different CVEs exploited?,True,"inc-comcast-xfinity-citrixbleed-2023, obs-cve-2023-22527-exploitation-attempts, inc-cve-2021-36260-hikvision"
+46,unanswerable,What is the CVSS vector string for CVE-2021-36260?,False,
+47,unanswerable,Which ransomware payment amount is demanded in Ragnar Locker incident?,False,
+48,unanswerable,What is the URL for fog-of-war-report source?,False,
+49,unanswerable,Which specific Hikvision camera models are affected by CVE-2021-36260?,False,
+50,unanswerable,What encryption algorithm does BlackCat use for file encryption?,False,

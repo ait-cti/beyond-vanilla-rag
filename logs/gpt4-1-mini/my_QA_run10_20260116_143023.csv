@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is recorded for source checkpoint_magnet_goblin_nerbian_warpwire?,True,Check Point
+2,simple,What motivation is set on threat actor Magnet Goblin?,True,financial
+3,simple,What family is assigned to malware FudModule?,True,Rootkit
+4,simple,What published date is stored for CVE-2024-21338?,True,2024-02-01
+5,simple,What sponsor is stored for threat actor Lazarus?,True,North Korea
+6,simple,What type is incident microsoft-patch-tuesday-feb-2024-cve-2024-21338?,True,patch
+7,simple,What date is set for incident purplefox-2021-10-websocket-c2?,True,2021-10-01
+8,simple,What ISO2 country code is used for Ukraine?,True,UA
+9,simple,What sector is stored for victim NATO governments?,True,Government
+10,simple,What tactic is stored for technique T1068?,True,Privilege Escalation
+11,simple,What type is incident ransomexx_scottish_mental_health_charity_2022_03?,True,ransomware
+12,simple,What exfiltration value is stored for the March 2022 RansomEXX incident?,True,true
+13,simple,What double_extortion value is stored for the March 2022 RansomEXX incident?,True,true
+14,simple,What family is recorded for malware RansomEXX?,True,Ransomware
+15,simple,What published date is stored for CVE-2023-32369?,True,2023-05-18
+16,single_hop,Which motivation type is Magnet Goblin linked to via motivated_by?,True,financial
+17,single_hop,Which malware does Lazarus use according to uses relationships?,True,FudModule
+18,single_hop,Which CVE does malware FudModule exploit?,True,CVE-2024-21338
+19,single_hop,Which C2 service does malware PurpleFox abuse?,True,WebSocket
+20,single_hop,Which tool is involved in incident purplefox-2022-01-telegram-desktop-lure?,True,Telegram Desktop
+21,single_hop,Which country is the Scottish mental health charity victim located in?,True,United Kingdom
+22,single_hop,Which threat actor is the March 2022 Scottish mental health charity incident attributed to?,True,RansomEXX
+23,single_hop,Which technique is used by incident uac-0027-purplefox-ua for MSI execution?,True,T1566
+24,single_hop,Which technique is used by incident uac-0027-purplefox-ua for brute forcing?,True,T1110
+25,single_hop,Which threat actor is incident uac-0027-purplefox-ua attributed to?,True,UAC-0027
+26,single_hop,Which malware does threat actor Ryuk use?,True,BazarLoader
+27,single_hop,Which C2 infrastructure service does BazarLoader abuse?,True,C&C server
+28,single_hop,Which technique does BazarLoader use for spearphishing attachments?,True,T1566.001
+29,single_hop,Which technique does BazarLoader use for spearphishing links?,True,T1566.002
+30,single_hop,Which capability does PurpleFox leverage to provide denial-of-service functionality?,True,DDoS
+31,multi_hop,How many CVEs are exploited across all Magnet Goblin attributed incidents?,True,8
+32,multi_hop,List CVEs exploited in Magnet Goblin’s Ivanti incident checkpoint_magnet_goblin_ivanti_2024.,True,"CVE-2023-46805, CVE-2024-21887, CVE-2024-21888, CVE-2024-21893"
+33,multi_hop,How many tools are involved across all Magnet Goblin incidents?,True,2
+34,multi_hop,Which malware are involved in the 2022 Magento incident attributed to Magnet Goblin?,True,"NerbianRAT, MiniNerbian"
+35,multi_hop,Which C2 service is abused by Warpwire in the Magento 2022 incident?,True,Magento servers
+36,multi_hop,How many distinct techniques are used in incident tag:coldriver:credential-phishing?,True,2
+37,multi_hop,List the sectors linked via targets_sector in COLDRIVER generic phishing incident.,True,"Government, Education, Other"
+38,multi_hop,How many victims are targeted by COLDRIVER generic phishing incident?,True,6
+39,multi_hop,Which COLDRIVER alias nodes are linked by has_alias relationships?,True,"UNC4057, Star Blizzard, Callisto"
+40,multi_hop,How many incidents are linked to CVE-2024-21338 via exploited_in?,True,3
+41,multi_hop,What is the earliest occurred_on date among incidents tied to CVE-2024-21338?,True,2023-01-01
+42,multi_hop,How many incidents involve malware PurpleFox?,True,3
+43,multi_hop,Which techniques are used by incident uac-0027-purplefox-ua?,True,"T1566, T1110, T1210"
+44,multi_hop,Which country is linked to Ukrainian computers targeted by UAC-0027 incident?,True,Ukraine
+45,multi_hop,How many tools does TA558 use in its travel/hospitality campaign incident?,True,2
+46,unanswerable,What CVSS score is recorded for CVE-2024-21338?,False,
+47,unanswerable,What file hash is associated with the FudModule rootkit sample?,False,
+48,unanswerable,Which specific Ivanti product versions are affected in checkpoint_magnet_goblin_ivanti_2024?,False,
+49,unanswerable,What ransomware note filename is stored for the RansomEXX March 2022 incident?,False,
+50,unanswerable,Which email sender domain was used in TA558 fake reservation emails?,False,

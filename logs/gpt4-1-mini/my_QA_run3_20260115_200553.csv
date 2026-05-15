@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source mcafee_mobile_research_xamalicious?,True,McAfee Mobile Research Team
+2,simple,What type is incident inc_xamalicious_android_backdoor_discovery?,True,malware
+3,simple,What technique tactic is recorded for technique T1407?,True,Execution
+4,simple,What capability summary is stored for Automation in the McAfee Xamalicious entry?,True,Automated or programmatic actions executed without user consent
+5,simple,What publisher is listed for source unit42-blackcat-munchkin?,True,Unit 42
+6,simple,What tactic is set for technique T1570?,True,Lateral Movement
+7,simple,What family value is set for malware SpectralBlur?,True,Backdoor
+8,simple,On what date was source proofpoint_ta444_spectralblur_2024_08 published?,True,2024-08-01
+9,simple,What country ISO2 code is stored for victim Users in South Korea?,True,KR
+10,simple,What date is stored on incident google-tag-apt37-cve-2022-41128-2022-10?,True,2022-10-01
+11,simple,What status is stored on mitigation Patch management mitigating the Google TAG incident?,True,applied
+12,simple,What sector is stored for victim Asian government?,True,Government
+13,simple,What technique tactic is stored for T1003?,True,Credential Access
+14,simple,What date value is used for the Discord-hosted spam campaign occurrence?,True,2019-01-01
+15,simple,What technique name is stored for T1203?,True,Exploitation for Client Execution
+16,single_hop,Which motivation type is TA444 linked to via motivated_by?,True,espionage
+17,single_hop,Which motivation type is APT37 linked to via motivated_by?,True,espionage
+18,single_hop,Which malware does TA444 use according to uses relationship?,True,SpectralBlur
+19,single_hop,Which tool is used by Xamalicious malware?,True,Xamarin
+20,single_hop,Which capability is leveraged by tool Munchkin?,True,Automation
+21,single_hop,Which technique ID is linked to BlackCat via used_technique?,True,"T1570, T1564"
+22,single_hop,Which malware does BlackCat threat actor use?,True,BlackCat
+23,single_hop,Which victim is located in country South Korea?,True,Users in South Korea
+24,single_hop,Which CVE is exploited in incident google-tag-apt37-cve-2022-41128-2022-10?,True,CVE-2022-41128
+25,single_hop,"Which technique is used by the Google TAG incident, by technique name?",True,Phishing
+26,single_hop,Which victims are targeted by incidents attributed to Budworm?,True,"Middle Eastern telecommunications organization, Asian government"
+27,single_hop,Which malware is involved in budworm_aug2023_asia_government incident?,True,SysUpdate
+28,single_hop,Which C2 infrastructure service is abused by AveMaria?,True,Discord
+29,single_hop,Which date is set on Star Blizzard has_alias relationships?,True,2017-01-01
+30,single_hop,Which victims are targeted by incident star-blizzard-email-credential-theft-since-2017?,True,"NGOs, Think tanks, Journalists, Academic institutions, Intergovernmental organizations, Organizations/individuals supporting Ukraine"
+31,multi_hop,Which malware used by TA444 abuses what C2 service?,True,SpectralBlur; Command-and-control server
+32,multi_hop,Which two tactics are linked to BlackCat via used_technique?,True,"Lateral Movement, Defense Evasion"
+33,multi_hop,Which incident type is mitigated by Patch management?,True,intrusion
+34,multi_hop,Which country name is linked to the APT37 victim via located_in?,True,South Korea
+35,multi_hop,Which malware is used by an actor with financial motivation?,True,Xamalicious
+36,multi_hop,Which campaign includes a technique with tactic Initial Access?,True,Discord-hosted spam delivery of AveMaria/AgentTesla
+37,multi_hop,How many malware are included in the Discord-hosted spam campaign?,True,2
+38,multi_hop,How many entities are included by the Discord-hosted spam campaign?,True,4
+39,multi_hop,How many unique victims are targeted by Budworm incidents?,True,2
+40,multi_hop,How many incidents are attributed_to Budworm?,True,2
+41,multi_hop,How many malware samples are involved in incident text-1-inc-1?,True,3
+42,multi_hop,How many victims are targeted by incident text-1-inc-1?,True,2
+43,multi_hop,How many C2 services are abused by the three Earth Kitsune malware samples?,True,1
+44,multi_hop,Which CVE is exploited in the incident that uses technique T1203?,True,CVE-2019-5782
+45,multi_hop,"Across APT37 and Star Blizzard, how many incidents use technique T1566?",True,2
+46,unanswerable,What CVSS score is assigned to CVE-2022-41128?,False,
+47,unanswerable,What hash value identifies inicore_v2.3.30.dll?,False,
+48,unanswerable,Which specific email subjects were used in the Discord-hosted spam campaign?,False,
+49,unanswerable,Which operating system versions were affected by CVE-2019-5782?,False,
+50,unanswerable,Which C2 domain names were used by the Operation Earth Kitsune C&C servers?,False,
