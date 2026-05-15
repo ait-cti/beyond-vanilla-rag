@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the incident type for apple-zero-day-active-attack-2022-08?,True,intrusion
+2,simple,What is the published_on date of source apple-security-update-2022-08-zero-days?,True,2022-08-01
+3,simple,What framework is listed for mitigation Install Apple security updates?,True,Vendor Update
+4,simple,What tactic is assigned to technique T1498?,True,Impact
+5,simple,What is the stored date of incident blackcat_first_observed_2021_11?,True,2021-11-01
+6,simple,What malware family is recorded for BlackCat malware?,True,BlackCat
+7,simple,What is the family of malware Trojan.Grokey?,True,keylogger
+8,simple,What is the technique_id for Network Share Discovery?,True,T1135
+9,simple,What is the incident type of ransomexx-scottish-mental-health-charity-2022-03?,True,ransomware
+10,simple,What sector is assigned to victim Scottish mental health charity?,True,Healthcare
+11,simple,What is the iso2 code for the country node named United Kingdom?,True,GB
+12,simple,What is the motivation type linked to Kasseika?,True,financial
+13,simple,What is the tactic for technique T1569.002?,True,Execution
+14,simple,What malware family is set for IDAT Loader?,True,Loader
+15,simple,What is the version number mentioned in Meduza Stealer release incident summary?,True,2.2
+16,single_hop,Which CVE is supported by source apple-security-update-2022-08-zero-days?,True,CVE-2022-32894
+17,single_hop,Which incident does mitigation Install Apple security updates mitigate?,True,apple-zero-day-active-attack-2022-08
+18,single_hop,Which CVE is exploited in incident apple-zero-day-active-attack-2022-08?,True,CVE-2022-32894
+19,single_hop,Which technique is used by incident blackcat_first_observed_2021_11 besides T1498?,True,T1486
+20,single_hop,Which capability does BlackCat malware leverage?,True,Automation
+21,single_hop,Which threat actor is the incident equation-fanny-airgapped-usb-exfil attributed to?,True,Equation
+22,single_hop,Which malware is involved in incident equation-fanny-airgapped-usb-exfil?,True,W32.Fanni
+23,single_hop,Which technique is used for Collection in equation-fanny-airgapped-usb-exfil?,True,T1025
+24,single_hop,Which threat actor has alias Narwal Spider?,True,TA544
+25,single_hop,Which malware does incident incident-ta544-idatloader-deployments attribute deployments to?,True,"IDAT Loader, Remcos RAT, SystemBC"
+26,single_hop,Which victim is targeted by incident incident-jinxloader-adnoc-phishing?,True,Abu Dhabi National Oil Company (ADNOC)
+27,single_hop,Which technique is used by incident incident-jinxloader-adnoc-phishing?,True,T1566
+28,single_hop,Which malware is included in campaign Surge in DarkGate distribution campaigns?,True,DarkGate
+29,single_hop,Which country is Scottish mental health charity located in?,True,United Kingdom
+30,single_hop,Which CVE does Conti malware exploit related to path traversal?,True,CVE-2018-13379
+31,multi_hop,Which tools are involved in incident text:conti-ttps via involved_tool?,True,"Cobalt Strike, Whoami, Nltest, Net, ShareFinder"
+32,multi_hop,How many CVEs are linked to incident text:conti-ttps via exploited_in?,True,4
+33,multi_hop,Which CVEs in text:conti-ttps are privilege escalation techniques tied to?,True,"CVE-2020-1472, CVE-2021-1675"
+34,multi_hop,How many techniques does Conti threat actor use via used_technique?,True,5
+35,multi_hop,List technique IDs used by incident text:conti-ttps.,True,"T1566, T1190, T1082, T1135, T1068"
+36,multi_hop,How many distinct tools does Conti threat actor use via uses relationships?,True,4
+37,multi_hop,Which tool does Conti malware use that is also involved in text:conti-ttps?,True,Cobalt Strike
+38,multi_hop,How many malware nodes are involved in incident text:conti-ttps?,True,2
+39,multi_hop,Which malware does Conti threat actor use that is also involved in text:conti-ttps?,True,Conti
+40,multi_hop,How many incidents are marked type ransomware across the dataset?,True,4
+41,multi_hop,Which incident dates are recorded for ransomware incidents?,True,"2021-11-01, 2022-03-01"
+42,multi_hop,How many threat actors are motivated by financial motivation?,True,2
+43,multi_hop,Which aliases are linked to BlackCat threat actor via has_alias?,True,"ALPHV, AlphaVM, AlphaV"
+44,multi_hop,How many malware payloads does JinxLoader deliver via uses edges?,True,2
+45,multi_hop,Which malware is both involved in incident-jinxloader-adnoc-phishing and used by JinxLoader?,True,"Formbook, XLoader"
+46,unanswerable,What CVSS score is assigned to CVE-2022-32894?,False,
+47,unanswerable,Which organization did Conti target in the incident text:conti-ttps?,False,
+48,unanswerable,What encryption algorithm does BlackCat ransomware use?,False,
+49,unanswerable,What is the file hash of the JinxLoader sample in the ADNOC incident?,False,
+50,unanswerable,Which specific antivirus products were disabled by Kasseika’s BYOVD workflow?,False,

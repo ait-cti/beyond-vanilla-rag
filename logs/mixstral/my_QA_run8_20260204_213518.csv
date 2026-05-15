@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What CVSS score is quoted for CVE-2023-7028?,True,10.0
+2,simple,What framework is listed for the Patch Management mitigation?,True,General
+3,simple,What control_id is assigned to Patch Management?,True,PATCH
+4,simple,What control_id is assigned to Disable or Restrict Internet Exposure?,True,EXPOSURE
+5,simple,What sponsor is stated for Pensive Ursa?,True,FSB
+6,simple,What country name corresponds to iso2 UA?,True,Ukraine
+7,simple,What incident type is recorded for ua-2023-07-kazuar-variant-targeting?,True,intrusion
+8,simple,What date is set on incident jupyter-targeting-since-2020?,True,2020-01-01
+9,simple,What family is recorded for Jupyter malware?,True,Information Stealer
+10,simple,What publisher is listed for source vmware-carbonblack-mdr?,True,VMware Carbon Black
+11,simple,What CVE published_date is set for CVE-2023-36460?,True,2023-07-01
+12,simple,What file extension does FARGO append to encrypted files?,True,.Fargo3
+13,simple,What date is set for incident fargo-sql-2022-02?,True,2022-02-01
+14,simple,What is the sponsor value for Sea Turtle?,True,state-sponsored
+15,simple,What published_on date is set for source cisco-talos-2019-04-sea-turtle?,True,2019-04-01
+16,single_hop,Which motivation type is linked from Pensive Ursa via motivated_by?,True,espionage
+17,single_hop,What malware does Pensive Ursa use?,True,Kazuar
+18,single_hop,Which victim is attacked by Pensive Ursa?,True,Ukrainian defense sector
+19,single_hop,Which country is Ukrainian defense sector located_in?,True,Ukraine
+20,single_hop,Which malware is involved in incident ua-2023-07-kazuar-variant-targeting?,True,Kazuar
+21,single_hop,Which threat actor is incident ua-2023-07-kazuar-variant-targeting attributed_to?,True,Pensive Ursa
+22,single_hop,Which tool is involved in incident jupyter-new-variant-since-late-october?,True,PowerShell
+23,single_hop,Which sector is targeted by victim Crypto-wallet users?,True,Finance
+24,single_hop,Which two victims are targeted by incident jupyter-targets-crypto-wallets-and-remote-access?,True,"Crypto-wallet users, Remote access application users"
+25,single_hop,Which mitigation mitigates incident fargo-sql-ransomware-latest with status recommended?,True,Security Patching
+26,single_hop,Which mitigation also mitigates incident fargo-sql-ransomware-latest with status recommended?,True,Strong Passwords
+27,single_hop,Which malware is used by Sea Turtle?,True,SnappyTCP
+28,single_hop,Which technique is used_technique by Sea Turtle for initial access?,True,DNS Hijacking
+29,single_hop,Which region node is supported_by a quote about targeting Middle East and North Africa?,True,Middle East and North Africa
+30,single_hop,Which two motivations are linked from the Wagemole DPRK actor?,True,"espionage, financial"
+31,multi_hop,Which aliases are connected to Pensive Ursa via has_alias?,True,"Turla, Uroburos"
+32,multi_hop,Which publisher supports the claim that Pensive Ursa uses Kazuar?,True,Unit 42
+33,multi_hop,What confidence is set on attribution of ua-2023-07-kazuar-variant-targeting to Pensive Ursa?,True,reported
+34,multi_hop,Which country did incident sea-turtle-2017-dns-hijacking-activity occur in?,True,Middle East and North Africa
+35,multi_hop,Which source publisher supports SnappyTCP malware details?,True,PricewaterhouseCoopers (PwC) Threat Intelligence
+36,multi_hop,How many sources supported_by incident sea-turtle-2017-dns-hijacking-activity?,True,1
+37,multi_hop,How many techniques are linked from incident UAC-0027 via used_technique?,True,3
+38,multi_hop,List technique_ids used by incident UAC-0027.,True,"T1204, T1190, T1110"
+39,multi_hop,How many victims are targeted by incident star_blizzard_credential_theft_since_2017?,True,5
+40,multi_hop,Which sectors are targeted by incident star_blizzard_credential_theft_since_2017?,True,"Government, Education, Media, Other"
+41,multi_hop,How many aliases are linked from Star Blizzard via has_alias?,True,4
+42,multi_hop,How many incidents are attributed_to FARGO threat actors?,True,3
+43,multi_hop,What is the latest dated incident attributed_to FARGO threat actors?,True,2022-07-01
+44,multi_hop,How many distinct techniques are used across all FARGO incidents?,True,2
+45,multi_hop,Which technique_ids are used across FARGO incidents?,True,"T1133, T1110"
+46,unanswerable,What CVSS severity score is stored for CVE-2024-23832?,False,
+47,unanswerable,Which specific Microsoft SQL CVEs are exploited in the FARGO incidents?,False,
+48,unanswerable,What URL is provided for source unit42-kazuar-pensive-ursa?,False,
+49,unanswerable,How many systems were infected in the Jupyter late-October incident?,False,
+50,unanswerable,What MITRE technique_id maps to Kazuar second-stage delivery in this dataset?,False,

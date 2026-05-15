@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for Fancy Bear?,True,Russian government
+2,simple,What motivation is listed for Fancy Bear?,True,intelligence gathering
+3,simple,What date is set for incident fancybear-2016-dnc?,True,2016-01-01
+4,simple,What is the type of incident fancybear-2016-wada?,True,intrusion
+5,simple,What exfiltration value is set for incident fancybear-2016-wada?,True,true
+6,simple,What CVE summary is stored for CVE-2022-30190?,True,Microsoft zero-day Follina.
+7,simple,What publisher is stored for source malwarebytes_observation_2022-07?,True,Malwarebytes
+8,simple,What published_on date is stored for malwarebytes_observation_2022-07?,True,2022-07-01
+9,simple,What tactic is stored for technique T1566?,True,Initial Access
+10,simple,What tactic is stored for technique T1552?,True,Credential Access
+11,simple,What summary describes campaign Operation Earth Kitsune?,True,Used C&C servers and CVE-2019-5782 PoC to infect visitors.
+12,simple,What tactic is stored for technique T1203?,True,Execution
+13,simple,What is the incident type for text-1-inc-1?,True,vulnerability
+14,simple,What published_date is stored for CVE-2023-4966?,True,2023-10-10
+15,simple,What sponsor is listed for APT35?,True,Iran
+16,single_hop,What date is recorded on Fancy Bear's has_alias link to APT 28?,True,2008-01-01
+17,single_hop,What motivation type is linked from Ransomware groups via motivated_by?,True,financial
+18,single_hop,What phase is recorded when fancybear-2016-dnc used technique T1566?,True,Initial Access
+19,single_hop,What details are recorded when fancybear-2016-wada used technique T1552?,True,credential harvesting
+20,single_hop,What first_seen date is on fancybear-2022-07-follina exploited_in CVE-2022-30190?,True,2022-07-01
+21,single_hop,Which sector node is linked from victim Democratic National Committee (DNC) by property sector?,True,Government
+22,single_hop,What evidence text is stored on incident operation-earth-kitsune-1 targets KANCC?,True,Victim traffic to KANCC site was redirected as part of the incident.
+23,single_hop,What evidence is stored on operation-earth-kitsune-1 exploited_in CVE-2019-5782?,True,Users redirected to weaponized PoC for CVE-2019-5782.
+24,single_hop,What is the status on mitigation Patch management mitigates CVE-2022-34713?,True,recommended
+25,single_hop,What publisher is on the Source supporting CVE-2022-34713?,True,Microsoft
+26,single_hop,What evidence is on text-1-inc-1 targets GitHub?,True,GitHub rotated keys potentially exposed by vulnerabilities and fixed flaws.
+27,single_hop,What evidence is on text-1-inc-1 exploited_in CVE-2024-0507?,True,Enterprise Server command injection allows editor-role user privilege escalation.
+28,single_hop,What confidence is on unit42-citrixbleed-observed-exploitation-2023 attributed_to Ransomware groups?,True,observed
+29,single_hop,What phase is stored on unit42-citrixbleed-observed-exploitation-2023 used_technique T1059?,True,Execution
+30,single_hop,What date is recorded on APT35 has_alias link to Phosphorus?,True,2014-01-01
+31,multi_hop,How many incidents are attributed_to Fancy Bear?,True,4
+32,multi_hop,What is the earliest occurred_on date among Fancy Bear attributed incidents?,True,2008-01-01
+33,multi_hop,Which technique_ids were used across all Fancy Bear incidents?,True,"T1566,T1552"
+34,multi_hop,How many distinct sectors are linked via targets_sector from Fancy Bear incidents?,True,4
+35,multi_hop,Which sectors are linked via targets_sector from incident fancybear-2008-operations?,True,"Energy,Government,Media,Other"
+36,multi_hop,How many victims are targeted by operation-earth-kitsune-1?,True,2
+37,multi_hop,How many malware samples are involved_malware in operation-earth-kitsune-1?,True,3
+38,multi_hop,Which CVEs are exploited_in by incident text-1-inc-1?,True,"CVE-2024-0200,CVE-2024-0507"
+39,multi_hop,How many CVEs are supported_by source text-1?,True,2
+40,multi_hop,How many mitigations are linked that mitigate a CVE node?,True,3
+41,multi_hop,Which mitigations mitigate CVEs that have a supported_by source?,True,"Patch management,Vendor patch"
+42,multi_hop,What is the first_seen date on exploited_in for CVE-2023-4966?,True,2023-10-10
+43,multi_hop,Which technique_id is used in the same incident that exploited CVE-2023-4966?,True,T1059
+44,multi_hop,How many victims targeted by APT35 incidents have country_iso2 set?,True,4
+45,multi_hop,Which countries are linked via located_in from APT35-targeted victims?,True,"United States,France,Israel"
+46,unanswerable,What CVSS score is recorded for CVE-2024-0507?,False,
+47,unanswerable,What GitHub Enterprise Server version is affected by CVE-2024-0200?,False,
+48,unanswerable,What specific NetScaler gateway hostnames were involved in CVE-2023-4966 exploitation?,False,
+49,unanswerable,What malware family name is assigned to the three Earth Kitsune samples?,False,
+50,unanswerable,What URL was used for source text-1?,False,

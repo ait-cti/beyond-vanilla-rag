@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the published_date for CVE-2022-22047?,True,2022-01-01
+2,simple,What control_id is set for the Mitigation named Patching?,True,PATCH
+3,simple,What framework is listed for the Mitigation Install Apple security updates?,True,Vendor Advisory
+4,simple,What is the sponsor country for threat actor APT35?,True,Iran
+5,simple,What motivation is stored on threat actor Magnet Goblin?,True,financial
+6,simple,What tactic is set on Technique T1190?,True,Initial Access
+7,simple,What tactic is set on Technique T1102?,True,Command and Control
+8,simple,What is the type of incident inc_diamond_sleet_cyberlink_supply_chain?,True,supply chain attack
+9,simple,What confidence is assigned to attribution of the TA558 incident?,True,medium
+10,simple,What is the date value for Incident APT35-2020-medical-research-targeting?,True,2020-10-01
+11,simple,What sector is set for victim Medical research organizations (Israel)?,True,Healthcare
+12,simple,What country_iso2 is set for victim Academic institutions (France)?,True,FR
+13,simple,What publisher is set for Source checkpoint_magnet_goblin_nerbian_one_day?,True,Check Point
+14,simple,What family is set for malware Trojanized CyberLink application installer?,True,Supply chain trojanized installer
+15,simple,What tactic is set for technique T1056?,True,Collection
+16,single_hop,Which motivation type is Magnet Goblin connected to via motivated_by?,True,financial
+17,single_hop,Which malware family does Magnet Goblin use that steals credentials in JavaScript?,True,Warpwire
+18,single_hop,Which tool does Magnet Goblin use described as an open source tunneling tool?,True,Ligolo
+19,single_hop,Which CVE is exploited_in by incident inc-cve-2022-22047-exploited-in-wild?,True,CVE-2022-22047
+20,single_hop,Which technique is used_technique by incident inc-cve-2022-22047-exploited-in-wild?,True,T1068
+21,single_hop,Which mitigation directly mitigates CVE-2022-22047?,True,Patching
+22,single_hop,Which incident is mitigated by Install Apple security updates?,True,apple-zero-day-active-attack-cve-2022-32894
+23,single_hop,Which CVE is mitigated by Install Apple security updates?,True,CVE-2022-32894
+24,single_hop,Which CVE is exploited_in by incident CVE-2023-45866-KEYSTROKE-INJECTION?,True,CVE-2023-45866
+25,single_hop,Which tool is involved_tool in incident CVE-2023-45866-KEYSTROKE-INJECTION?,True,Python script (emulated Bluetooth keyboard)
+26,single_hop,Which technique IDs are used_technique in the Bluetooth keystroke injection incident?,True,"T1056, T1204"
+27,single_hop,Which two sectors are targeted by campaign TA558 Travel & Hospitality Fake Reservation Email Campaign?,True,"Transportation, Other"
+28,single_hop,Which threat actor is the TA558 campaign included under via includes?,True,TA558
+29,single_hop,Which technique is used_technique by incident proofpoint-ta558-travel-hospitality-campaign for attachments?,True,T1566.001
+30,single_hop,Which alias is connected from Diamond Sleet via has_alias?,True,ZINC
+31,multi_hop,How many CVEs does Magnet Goblin exploit via exploits relationships?,True,8
+32,multi_hop,List CVE IDs exploited by Magnet Goblin that start with CVE-2024.,True,"CVE-2024-21887, CVE-2024-21888, CVE-2024-21893"
+33,multi_hop,How many Nerbian-family malware nodes are used by Magnet Goblin?,True,4
+34,multi_hop,Which Magnet Goblin-used malware were involved in checkpoint_magnet_goblin_magento_2022?,True,"Warpwire, MiniNerbian, NerbianRAT (Windows)"
+35,multi_hop,What date did checkpoint_magnet_goblin_magento_2022 occur on via occurred_on?,True,2022-01-01
+36,multi_hop,How many malware items are involved in checkpoint_magnet_goblin_magento_2022?,True,3
+37,multi_hop,Which technique ID is used for C2 in the 2022 Magento incident?,True,T1102
+38,multi_hop,How many victims are targeted by incident APT35-2019-academia-targeting?,True,3
+39,multi_hop,Which countries or regions did APT35-2019-academia-targeting occur in?,True,"US, FR, Middle East"
+40,multi_hop,What is the earliest occurred_on date among APT35 incidents?,True,2014-01-01
+41,multi_hop,How many distinct incident types are recorded for APT35-attributed incidents?,True,2
+42,multi_hop,Count the number of APT35-attributed incidents recorded in the graph.,True,4
+43,multi_hop,Which CVE or vulnerability is exploited in the APT35 Exchange intrusion incident?,True,ProxyShell
+44,multi_hop,Which APT35 tool involved in 2022 is used to extract emails?,True,Hyperscrape
+45,multi_hop,How many techniques are linked to the TA558 intrusion incident?,True,3
+46,unanswerable,What CVSS score is assigned to CVE-2023-45866?,False,
+47,unanswerable,Which specific CyberLink application name was trojanized in the Diamond Sleet incident?,False,
+48,unanswerable,What file hash identifies the Trojanized CyberLink application installer?,False,
+49,unanswerable,Which email subject line was used in TA558 fake reservation emails?,False,
+50,unanswerable,Which Microsoft Exchange versions were affected by ProxyShell in this dataset?,False,

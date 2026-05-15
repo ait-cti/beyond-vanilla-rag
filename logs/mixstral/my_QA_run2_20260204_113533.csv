@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is recorded for source microsoft_storm-0324_teams_2023?,True,Microsoft
+2,simple,What motivation is set on threat actor Storm-0324?,True,financial
+3,simple,What incident type is storm-0324_teams_phishing_2023-07?,True,intrusion
+4,simple,What technique tactic is stored for T1566.003?,True,Initial Access
+5,simple,What service is listed for the C2 infrastructure used in Teams phishing?,True,Microsoft Teams
+6,simple,What malware family is recorded for Gozi?,True,infostealer
+7,simple,What malware family is recorded for Nymaim?,True,downloader/locker
+8,simple,What is the summary focus of CVE-2023-22527?,True,Confluence template injection unauthenticated RCE
+9,simple,What technique tactic is stored for T1082?,True,Discovery
+10,simple,What incident type is incident-cve-2023-22527-exploitation-attempts?,True,intrusion
+11,simple,What malware family is recorded for Vultur?,True,Banking
+12,simple,What date value is linked to Vultur as occurred_on?,True,2021-03-01
+13,simple,What publisher is recorded for source ncc-group-vultur-update?,True,NCC Group
+14,simple,What incident type is ncc-group-vultur-infection-chain?,True,banking malware
+15,simple,What sector is stored for victim The Philadelphia Inquirer?,True,Media
+16,single_hop,Which motivation type is Storm-0324 motivated_by?,True,financial
+17,single_hop,What date is attached to Storm-0324’s has_alias relationship to DEV-0324?,True,2023-01-01
+18,single_hop,What confidence is set on storm-0324_teams_phishing_2023-07 attributed_to Storm-0324?,True,high
+19,single_hop,Which tool is involved_tool in storm-0324_teams_phishing_2023-07?,True,Open-source Microsoft Teams phishing tool
+20,single_hop,Which technique is used_technique in storm-0324_teams_phishing_2023-07?,True,T1566.003
+21,single_hop,Which capability does Storm-0324 leverages?,True,Automation
+22,single_hop,Which malware is involved_malware in storm-0324_teams_phishing_2023-07?,True,JSSLoader
+23,single_hop,Which CVE is exploited_in by incident-cve-2023-22527-exploitation-attempts?,True,CVE-2023-22527
+24,single_hop,Which technique is used_technique with phase Discovery in the Confluence exploitation incident?,True,T1082
+25,single_hop,Which service is abused by Vultur via abuses relationship?,True,Firebase Cloud Messaging
+26,single_hop,Which tool does Vultur use for tunneling remote access?,True,ngrok
+27,single_hop,Which tool is involved_tool in ncc-group-vultur-infection-chain?,True,Brunhilda
+28,single_hop,Which technique is used_technique for screen recording in the Vultur infection chain?,True,T1113
+29,single_hop,Which sector is targeted by cuba-targeting-nov-2021 via targets_sector?,True,"Government, Healthcare, Technology, Manufacturing, Finance"
+30,single_hop,Which victim is targeted by cuba-philadelphia-inquirer-claimed?,True,The Philadelphia Inquirer
+31,multi_hop,How many distinct malware does Storm-0324 use?,True,3
+32,multi_hop,List Storm-0324-used malware families with non-empty family values.,True,"infostealer, downloader/locker"
+33,multi_hop,How many aliases are linked to Sangria Tempest via has_alias?,True,3
+34,multi_hop,Which threat actors are attributed_to incidents dated 2022-01-01?,True,"Cuba, RomCom, Industrial Spy"
+35,multi_hop,How many incidents are attributed_to Cuba across the dataset?,True,4
+36,multi_hop,What is the earliest incident date among incidents attributed_to Cuba?,True,2019-01-01
+37,multi_hop,How many sectors are targeted in cuba-targeting-nov-2021?,True,5
+38,multi_hop,Which malware families appear in incidents attributed_to Cuba?,True,"ransomware, RAT"
+39,multi_hop,How many distinct techniques are used_technique by ncc-group-vultur-infection-chain?,True,3
+40,multi_hop,Which tactics are covered by techniques used in the Vultur infection chain?,True,"Initial Access, Collection"
+41,multi_hop,Which tools are linked to Vultur through uses relationships?,True,"AlphaVNC, ngrok, Brunhilda"
+42,multi_hop,How many tools are linked to Vultur via uses?,True,3
+43,multi_hop,Which incident has the greatest number of used_technique relationships?,True,ncc-group-vultur-infection-chain
+44,multi_hop,How many techniques are connected to incident-cve-2023-22527-exploitation-attempts?,True,2
+45,multi_hop,Which CVE is tied to a technique with name JavaScript via the same incident?,True,CVE-2023-37580
+46,unanswerable,What CVSS base score is assigned to CVE-2023-22527?,False,
+47,unanswerable,Which four groups exploited CVE-2023-37580 according to TAG?,False,
+48,unanswerable,What phone number was used in the Vultur SMS lure?,False,
+49,unanswerable,Which country is listed as sponsor for threat actor Cuba?,False,
+50,unanswerable,What specific Confluence versions are vulnerable to CVE-2023-22527?,False,

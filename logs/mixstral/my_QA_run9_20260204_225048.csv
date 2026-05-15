@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What type is incident inc-zimbra-cve-2023-37580-2023-06?,True,intrusion
+2,simple,What date is recorded for incident unit42-cl0p-activity-2023-01?,True,2023-01-01
+3,simple,What is the publisher of source deep-instinct-muddyc2go?,True,Deep Instinct
+4,simple,What sponsor is assigned to threat actor Seedworm?,True,Iran
+5,simple,What motivation is assigned to threat actor Seedworm?,True,espionage
+6,simple,What tactic is set for technique T1056.001?,True,Collection
+7,simple,What family is set for malware Trojan.Grokey?,True,Keylogger
+8,simple,What family is set for malware W32.Fanni?,True,Worm
+9,simple,What family is set for malware CL0P?,True,ransomware
+10,simple,What type is incident equation-fanny-airgap-usb?,True,intrusion
+11,simple,What service is listed for C2 infrastructure MuddyC2Go?,True,MuddyC2Go
+12,simple,What service is listed for C2 infrastructure WebSocket?,True,WebSocket
+13,simple,What ISO2 code is stored for country Egypt?,True,EG
+14,simple,What sector is assigned to victim Telecommunications organizations (Tanzania)?,True,Technology
+15,simple,What tactic is recorded for technique T1190 in the Confluence CVE entry?,True,Initial Access
+16,single_hop,Which malware does Equation use?,True,"Trojan.Grokey, W32.Fanni"
+17,single_hop,Which C2 channel does W32.Fanni abuse?,True,USB removable media
+18,single_hop,Which tool does CL0P use to distribute victim data?,True,Torrents
+19,single_hop,Which tool is involved in incident unit42-cl0p-torrent-distribution-shift-01?,True,Torrents
+20,single_hop,Which technique is used in incident incident-cve-2023-22527-exploitation-attempts?,True,T1190
+21,single_hop,Which CVE is exploited in incident incident-cve-2023-22527-exploitation-attempts?,True,CVE-2023-22527
+22,single_hop,Which technique is used in incident inc-zimbra-cve-2023-37580-2023-06?,True,T1059.007
+23,single_hop,Which CVE is exploited in incident inc-zimbra-cve-2023-37580-2023-06?,True,CVE-2023-37580
+24,single_hop,Which tool is involved in incident inc-zimbra-cve-2023-37580-2023-06?,True,Zimbra Collaboration
+25,single_hop,Which threat actor is attributed to incident equation-fanny-airgap-usb?,True,Equation
+26,single_hop,Which malware is involved in incident equation-fanny-airgap-usb?,True,W32.Fanni
+27,single_hop,Which techniques are used in incident equation-fanny-airgap-usb?,True,"T1092, T1020"
+28,single_hop,Which victims are targeted by incident seedworm-telecom-eg-sd-tz-2023-11?,True,"Telecommunications organizations (Egypt), Telecommunications organizations (Sudan), Telecommunications organizations (Tanzania)"
+29,single_hop,Which countries did incident seedworm-telecom-eg-sd-tz-2023-11 occur in?,True,"Egypt, Sudan, Tanzania"
+30,single_hop,Which malware does threat actor UAC-0027 use?,True,PurpleFox
+31,multi_hop,What is the publisher of the source supporting incident inc-zimbra-cve-2023-37580-2023-06?,True,Google Threat Analysis Group (TAG)
+32,multi_hop,Which tactic is associated with the technique used by the Zimbra 0-day incident?,True,Execution
+33,multi_hop,What is the date value for incident unit42-cl0p-activity-2023-01 via occurred_on?,True,2023-01-01
+34,multi_hop,What confidence is recorded for attribution of incident equation-fanny-airgap-usb to its actor?,True,medium
+35,multi_hop,Which tactics are covered by techniques used in incident equation-fanny-airgap-usb?,True,"Command and Control, Exfiltration"
+36,multi_hop,Which technique IDs are used in Seedworm’s November 2023 incident?,True,"T1090, T1056.001, T1059.001"
+37,multi_hop,Which tools are both used by Seedworm and involved in its November 2023 incident?,True,"SimpleHelp, Venom Proxy, Custom keylogging tool"
+38,multi_hop,Which countries host victims targeted by the Seedworm November 2023 incident?,True,"Egypt, Sudan, Tanzania"
+39,multi_hop,How many distinct tools are involved in Seedworm’s November 2023 incident?,True,4
+40,multi_hop,How many victims are targeted by Seedworm’s November 2023 incident?,True,3
+41,multi_hop,How many techniques are used in Seedworm’s November 2023 incident?,True,3
+42,multi_hop,How many incidents are attributed to CL0P?,True,2
+43,multi_hop,How many incidents involve malware CL0P?,True,2
+44,multi_hop,How many techniques are used in the PurpleFox Ukraine January 2022 incident?,True,3
+45,multi_hop,What is the earliest occurred_on date across dated incidents?,True,2022-01-01
+46,unanswerable,What CVSS severity score is recorded for CVE-2023-22527?,False,
+47,unanswerable,Which specific Confluence versions are affected by CVE-2023-22527?,False,
+48,unanswerable,What is the published_on date for source Unit42?,False,
+49,unanswerable,What MITRE technique ID is assigned to COLDRIVER credential phishing in the victims snippet?,False,
+50,unanswerable,What file hash identifies the PurpleFox MSI installer used in Ukraine?,False,

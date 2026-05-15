@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What is the type of incident kasseika-byovd-martini?,True,ransomware
+2,simple,What motivation type is recorded for Kasseika?,True,financial
+3,simple,What tactic is assigned to technique BYOVD?,True,Defense Evasion
+4,simple,What is the family of Martini driver malware?,True,TG Soft VirtIT Agent System
+5,simple,What is the date of incident INC-CVE-2023-40477-fakepoc-2023-08-21?,True,2023-08-21
+6,simple,What is the published_date of CVE-2023-40477?,True,2023-08-17
+7,simple,What confidence is set on inc1 attributed_to whalersplonk?,True,medium
+8,simple,What sponsor is recorded for Pensive Ursa?,True,FSB
+9,simple,What country ISO2 is stored on victim Ukrainian defense sector?,True,UA
+10,simple,What date is stored on Sea Turtle DNS hijacking incident?,True,2017-01-01
+11,simple,What malware family is SnappyTCP?,True,Reverse TCP shell
+12,simple,What is the summary focus of CVE-2024-0519?,True,Chrome V8 out-of-bounds memory access
+13,simple,What is the publisher of source google-chrome-update-cve-2024-0519?,True,Google
+14,simple,Does incident kroll-cactus-activity-2023-03 have exfiltration set true?,True,true
+15,simple,What service is used by C2 infrastructure abused by CACTUS?,True,Tox
+16,single_hop,Which tool does Kasseika use for remote execution abuse?,True,PsExec
+17,single_hop,Which malware does Kasseika abuse for BYOVD defense evasion?,True,Martini driver
+18,single_hop,Which malware payload was involved in incident INC-CVE-2023-40477-fakepoc-2023-08-21?,True,VenomRAT
+19,single_hop,Which two CVEs were exploited in the fake PoC incident?,True,"CVE-2023-40477, CVE-2023-25157"
+20,single_hop,Which capability does whalersplonk leverage?,True,Automation
+21,single_hop,Which country is Pensive Ursa recorded as occurred_in?,True,Russia
+22,single_hop,Which malware does Pensive Ursa use as second-stage payload?,True,Kazuar
+23,single_hop,Which victim was targeted by incident ua-cert-2023-07-kazuar-variant-targeting-ua-defense?,True,Ukrainian defense sector
+24,single_hop,Which three capabilities were leveraged by the July 2023 Kazuar targeting incident?,True,"Signal Messages, Source Control Data, Cloud Platform Data"
+25,single_hop,Which regions did Sea Turtle DNS hijacking incident occur_in?,True,"Middle East, North Africa"
+26,single_hop,Which malware is Sea Turtle recorded as using starting 2021-01-01?,True,SnappyTCP
+27,single_hop,Which technique was used for credential harvesting in Sea Turtle DNS hijacking incident?,True,T1565.001
+28,single_hop,Which technique ID is linked to reverse shell execution in Sea Turtle 2021-2023 incident?,True,T1059
+29,single_hop,Which C2 service is abused by CACTUS malware?,True,Tox
+30,single_hop,Which technique ID was used for initial access in kroll-cactus-activity-2023-03?,True,T1190
+31,multi_hop,Which tactics are covered by techniques used in kasseika-byovd-martini incident?,True,"Initial Access, Reconnaissance, Execution, Lateral Movement, Defense Evasion"
+32,multi_hop,How many techniques are linked to incident kasseika-byovd-martini?,True,5
+33,multi_hop,"From Sea Turtle, list techniques used across its incidents. Provide technique IDs.",True,"T1565.001, T1059"
+34,multi_hop,How many distinct regions are connected to Sea Turtle via its incidents?,True,2
+35,multi_hop,Which countries are linked to the Ukrainian defense sector victim via located_in?,True,Ukraine
+36,multi_hop,"For incident ua-cert-2023-07-kazuar-variant-targeting-ua-defense, what sector node is targeted?",True,Government
+37,multi_hop,How many aliases are attached to Sea Turtle via has_alias?,True,4
+38,multi_hop,How many aliases are attached to Pensive Ursa via has_alias?,True,2
+39,multi_hop,Which malware is used by Sunburst backdoor according to the graph?,True,Kazuar
+40,multi_hop,How many incidents are attributed_to Sea Turtle?,True,2
+41,multi_hop,How many tools are involved in kroll-cactus-activity-2023-03 incident?,True,8
+42,multi_hop,List all tool names involved in kroll-cactus-activity-2023-03 incident.,True,"SoftPerfect Network Scanner, PowerShell, Splashtop, AnyDesk, SuperOps RMM, Cobalt Strike, Chisel, TotalExec"
+43,multi_hop,Which technique tactics are represented in kroll-cactus-activity-2023-03?,True,"Initial Access, Discovery, Persistence, Defense Evasion"
+44,multi_hop,How many techniques are used in kroll-cactus-activity-2023-03 incident?,True,5
+45,multi_hop,How many CVEs are exploited in incident INC-CVE-2023-40477-fakepoc-2023-08-21?,True,2
+46,unanswerable,What CVSS base score is assigned to CVE-2024-0519?,False,
+47,unanswerable,What GitHub repository URL did whalersplonk use for the fake PoC commit?,False,
+48,unanswerable,Which specific VPN appliance vendor was exploited in CACTUS initial access?,False,
+49,unanswerable,What file hash identifies the VenomRAT payload in the incident?,False,
+50,unanswerable,What was the exact number of infected endpoints in Sea Turtle 2021-2023 attacks?,False,

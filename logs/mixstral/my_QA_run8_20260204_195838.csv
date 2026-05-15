@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for Pensive Ursa?,True,Russian Federal Security Service (FSB)
+2,simple,What is the incident type for ua_cert_2023_07_kazuar_targeting_ukr_defense?,True,intrusion
+3,simple,What date is set on incident inc-cve-2023-38831-fin-traders-2023-04?,True,2023-04-01
+4,simple,What is the published date for CVE-2023-38831?,True,2023-08-01
+5,simple,What technique tactic is assigned to T1204?,True,Execution
+6,simple,What motivation is recorded for the threat actor Cybercrime actors?,True,financial
+7,simple,What family is set for the malware Jupyter?,True,Information Stealer
+8,simple,What date is stored on incident jupyter-variant-increase-late-october?,True,2020-01-01
+9,simple,What is the summary topic of CVE-2024-23832?,True,Insufficient origin validation in Mastodon enables account takeover
+10,simple,What exfiltration value is set for incident unit42-2023-israel-wiper-series?,True,true
+11,simple,What malware family is assigned to Xamalicious?,True,Android backdoor
+12,simple,What date is set on incident xamalicious_active_threat_mid_2020?,True,2020-06-01
+13,simple,What motivation is recorded for Star Blizzard?,True,espionage
+14,simple,What sponsor is recorded for Sea Turtle?,True,state-sponsored
+15,simple,What region name is stored for reg_MENA?,True,Middle East and North Africa
+16,single_hop,Which country does the Ukrainian defense sector victim node link to?,True,Ukraine
+17,single_hop,Which malware is linked by uses from Pensive Ursa?,True,Kazuar
+18,single_hop,Which CVE is targeted by WinRAR via exploits?,True,CVE-2023-38831
+19,single_hop,Which technique is used by the traders incident via used_technique?,True,T1204
+20,single_hop,Which victim is targeted by incident inc-cve-2023-38831-fin-traders-2023-04?,True,Financial traders
+21,single_hop,Which threat actor is the financial traders incident attributed to?,True,Cybercrime actors
+22,single_hop,Which tool does Jupyter malware use with evidence about command modifications?,True,PowerShell
+23,single_hop,Which infrastructure service does Jupyter malware abuse?,True,C2
+24,single_hop,Which victims are attacked by Jupyter malware?,True,"Ethereum Wallet, MyMonero Wallet, Atomic Wallet"
+25,single_hop,Which technique is recorded for incident unit42-2023-israel-wiper-series?,True,T1005
+26,single_hop,Which malware is involved in the Israel wiper series incident?,True,Wiper
+27,single_hop,Which tool is used by Xamalicious via a uses relationship?,True,Xamarin
+28,single_hop,Which C2 infrastructure service is abused by Xamalicious?,True,C2 server
+29,single_hop,List Star Blizzard aliases connected via has_alias relationships.,True,"Seaborgium, BlueCharlie, Callisto Group, Coldriver"
+30,single_hop,Which malware does Sea Turtle use according to uses?,True,SnappyTCP
+31,multi_hop,Which malware is involved in the incident targeting Ukrainian defense sector?,True,Kazuar
+32,multi_hop,Which country is connected to incident ua_cert_2023_07_kazuar_targeting_ukr_defense via occurred_in?,True,Ukraine
+33,multi_hop,Which motivation type is linked to Cybercrime actors via motivated_by?,True,financial
+34,multi_hop,Which CVE is exploited in the incident that targeted Financial traders?,True,CVE-2023-38831
+35,multi_hop,Which tool is involved in the incident that exploited CVE-2023-38831?,True,WinRAR
+36,multi_hop,Which tactic is associated with the technique used in Star Blizzard’s 2017 incident?,True,Initial Access
+37,multi_hop,Which region did Sea Turtle incidents occur in according to occurred_in?,True,Middle East and North Africa
+38,multi_hop,Which capability is leveraged by malware used by Sea Turtle?,True,Command-and-Control
+39,multi_hop,How many occurred_on dates are linked to unit42-2023-israel-wiper-series?,True,2
+40,multi_hop,How many sectors are targeted by the Israel wiper series incident?,True,2
+41,multi_hop,How many victims are targeted by Star Blizzard’s 2017 credential-theft incident?,True,6
+42,multi_hop,How many aliases are attached to Star Blizzard via has_alias?,True,4
+43,multi_hop,How many incidents are attributed to Sea Turtle?,True,2
+44,multi_hop,How many techniques are used by the Jupyter variant increase incident?,True,2
+45,multi_hop,How many tools does Jupyter malware use via uses?,True,3
+46,unanswerable,What CVSS score is assigned to CVE-2023-38831?,False,
+47,unanswerable,Which specific Mastodon version is affected by CVE-2024-23832?,False,
+48,unanswerable,What file hash is associated with the Kazuar upgraded variant?,False,
+49,unanswerable,Which email domain was used in Star Blizzard’s phishing lures?,False,
+50,unanswerable,Which Google Play app package names distributed Xamalicious?,False,

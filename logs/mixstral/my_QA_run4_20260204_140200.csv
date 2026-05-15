@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor value is set for Sea Turtle?,True,state-sponsored
+2,simple,What date is stored for incident blackcat-observed-2021-11?,True,2021-11-01
+3,simple,What type is set for incident INC-CVE-2023-7028-GITLAB-EXPOSED?,True,vulnerability_exposure
+4,simple,What tactic is recorded for technique T1486?,True,Impact
+5,simple,What family is assigned to malware BlackCat?,True,Ransomware
+6,simple,What is the technique name for ID DNS_HIJACKING?,True,DNS hijacking
+7,simple,What publisher is set for source cisco-talos-2019-04-sea-turtle?,True,Cisco Talos
+8,simple,What published_on date is set for source cisco-talos-2019-04-sea-turtle?,True,2019-04-01
+9,simple,What motivation value is set for Pensive Ursa?,True,espionage
+10,simple,What sponsor value is set for Pensive Ursa?,True,Russia
+11,simple,What sector property is set for victim Ukrainian defense sector?,True,Government
+12,simple,What country_iso2 is stored on victim Ukrainian defense sector?,True,UA
+13,simple,What technique tactic is recorded for T1203?,True,Execution
+14,simple,What date is set for incident fancy-bear-follina-jul-2022?,True,2022-07-01
+15,simple,What ISO2 code is stored for the country named Ukraine?,True,UA
+16,single_hop,What capability does BlackCat malware leverage?,True,Automation
+17,single_hop,What malware is Sea Turtle reported to use starting 2021-01-01?,True,SnappyTCP
+18,single_hop,What C2 service is abused by SnappyTCP?,True,Reverse TCP
+19,single_hop,What region did incident sea-turtle-dns-hijacking-mena-2017 occur in?,True,Middle East and North Africa
+20,single_hop,Which technique did incident sea-turtle-dns-hijacking-mena-2017 use for initial access?,True,DNS hijacking
+21,single_hop,Which CVE is linked via exploited_in from INC-CVE-2023-7028-GITLAB-EXPOSED?,True,CVE-2023-7028
+22,single_hop,Which technique is associated to INC-CVE-2023-7028-GITLAB-EXPOSED via used_technique?,True,Phishing
+23,single_hop,Which technique did incident inc:cve-2023-22527-exploitation-attempts use in Initial Access?,True,Exploit Public-Facing Application
+24,single_hop,Which technique did incident inc:cve-2023-22527-exploitation-attempts use in Execution?,True,Command and Scripting Interpreter
+25,single_hop,Which threat actor is incident ua-defense-kazuar-2023-07 attributed to?,True,Pensive Ursa
+26,single_hop,Which malware is involved in incident ua-defense-kazuar-2023-07?,True,Kazuar
+27,single_hop,Which victim is targeted by incident fancy-bear-dnc-2016?,True,Democratic National Committee
+28,single_hop,Which victim is targeted by incident fancy-bear-wada-2016?,True,World Anti-Doping Agency
+29,single_hop,Which sector is targeted by incident fancy-bear-activity-2008 besides Government?,True,"Energy, Media, Other"
+30,single_hop,Which threat actor does campaign TA558 Travel/Reservation Email Campaign include?,True,TA558
+31,multi_hop,What malware families are used by actors with sponsor Russia or Russian government?,True,Kazuar
+32,multi_hop,How many aliases are defined for Sea Turtle?,True,4
+33,multi_hop,How many aliases are defined for Fancy Bear?,True,3
+34,multi_hop,How many techniques are linked to incident blackcat-observed-2021-11?,True,2
+35,multi_hop,How many incidents are attributed to Fancy Bear?,True,4
+36,multi_hop,How many distinct sectors are targeted across all Fancy Bear incidents?,True,4
+37,multi_hop,Which CVEs are exploited in incidents attributed to Fancy Bear?,True,CVE-2022-30190
+38,multi_hop,Which CVE is associated with techniques T1190 and T1059 in one incident?,True,CVE-2023-22527
+39,multi_hop,How many CVEs are exploited across all incidents in the graph?,True,3
+40,multi_hop,What is the earliest incident date among those attributed to Fancy Bear?,True,2008-01-01
+41,multi_hop,Which victim country is linked to incident ua-defense-kazuar-2023-07?,True,Ukraine
+42,multi_hop,Which sources support Sea Turtle and have a published_on date set?,True,cisco-talos-2019-04-sea-turtle
+43,multi_hop,How many sources support Sea Turtle?,True,2
+44,multi_hop,Which actor uses malware that abuses Reverse TCP infrastructure?,True,Sea Turtle
+45,multi_hop,How many techniques use the tactic Impact across the dataset?,True,2
+46,unanswerable,What CVSS score is recorded for CVE-2023-7028?,False,
+47,unanswerable,What specific GitLab version range is vulnerable to CVE-2023-7028?,False,
+48,unanswerable,Which file hashes are associated with the SnappyTCP malware samples?,False,
+49,unanswerable,What URL is provided for the Proofpoint TA558 reservation email report?,False,
+50,unanswerable,What DDoS target service was threatened in BlackCat triple extortion?,False,

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What publisher is listed for source apple-2022-zero-days-ios15-6-1-macos12-5-1?,True,Apple
+2,simple,What published_on date is set for source google-chrome-cve-2023-7024?,True,2023-12-19
+3,simple,What is the framework value for mitigation Patch Management?,True,General
+4,simple,What control_id is assigned to Apple security updates mitigation?,True,APPLE-UPDATE-2022-08
+5,simple,What type is incident inc:royal:2022-11:silverstone-circuit?,True,ransomware
+6,simple,What date is set on incident text-1-inc-1?,True,2019-01-01
+7,simple,What tactic is stored for technique T1190?,True,Initial Access
+8,simple,What tactic is stored for technique T1078?,True,Defense Evasion
+9,simple,What sponsor is recorded for threat actor FROZENBARENTS?,True,Russian Armed Forces Main Directorate of the General Staff (GRU) Unit 74455
+10,simple,What sponsor is recorded for threat actor APT37?,True,North Korean government
+11,simple,What country name corresponds to iso2 GB?,True,United Kingdom
+12,simple,What country name corresponds to iso2 KR?,True,South Korea
+13,simple,What service value is stored for C2_Infrastructure used for leaking data?,True,Telegram
+14,simple,What service value is stored for C2_Infrastructure hosting spam payloads?,True,Discord
+15,simple,What family value is set for malware AveMaria?,True,AveMaria
+16,single_hop,Which country is Silverstone Circuit located in?,True,United Kingdom
+17,single_hop,Which country are Entities within the U.S. located in?,True,United States
+18,single_hop,Which malware does the Royal threat actor use dated 2022-09-01?,True,BlackCat
+19,single_hop,Which malware does the Royal threat actor use dated 2022-01-01?,True,Royal ransomware
+20,single_hop,Which technique did incident text-1-inc-1 use?,True,T1566
+21,single_hop,Which CVE is mitigated by Apple security updates mitigation?,True,CVE-2022-32894
+22,single_hop,Which CVE is supported by source google-chrome-cve-2023-7024?,True,CVE-2023-7024
+23,single_hop,Which motivation type is linked from APT37 via motivated_by?,True,espionage
+24,single_hop,Which motivation type is linked from FROZENBARENTS via motivated_by?,True,espionage
+25,single_hop,Which technique_id is used by FROZENBARENTS for exploiting public-facing applications?,True,T1190
+26,single_hop,Which C2 service is abused by FROZENBARENTS?,True,Telegram
+27,single_hop,Which malware abuses the Discord C2 infrastructure?,True,"AveMaria, AgentTesla"
+28,single_hop,Which sector is targeted by victim Energy organizations via targets_sector?,True,Energy
+29,single_hop,Which date node does campaign Royal ransomware campaigns occur on?,True,2022-01-01
+30,single_hop,Which threat actor is incident inc:royal:2022-11:silverstone-circuit attributed to?,True,Royal
+31,multi_hop,Which country did the Royal-attributed Silverstone incident occur in?,True,United Kingdom
+32,multi_hop,Which CVE was exploited in the incident attributed to APT37?,True,CVE-2022-41128
+33,multi_hop,Which techniques were used in the APT37 incident targeting Users in South Korea?,True,"T1203, T1566"
+34,multi_hop,"Which technique_ids does FROZENBARENTS use, across all used_technique relationships?",True,"T1566, T1190, T1078"
+35,multi_hop,Which malware is included in the 2019 Discord-hosted spam campaign?,True,"AveMaria, AgentTesla"
+36,multi_hop,Which C2 service is abused by malware involved in incident text-1-inc-1?,True,Discord
+37,multi_hop,Which techniques were used by the incident that involved Royal ransomware?,True,"T1566, T1583"
+38,multi_hop,Which country is attacked by Royal via its victim location?,True,United States
+39,multi_hop,How many sectors have victims attacked by FROZENBARENTS?,True,5
+40,multi_hop,How many victims are attacked by FROZENBARENTS?,True,6
+41,multi_hop,How many malware are included in campaign Royal ransomware campaigns?,True,1
+42,multi_hop,How many technique relationships are attached to incident google-tag-apt37-0day-2022-10?,True,2
+43,multi_hop,How many distinct CVEs are supported by any Google-published source?,True,1
+44,multi_hop,Which incident types appear among incidents supported by a source?,True,"ransomware, malware, intrusion"
+45,multi_hop,What is the earliest occurred_on date among all campaigns?,True,2019-01-01
+46,unanswerable,What CVSS score is assigned to CVE-2022-32894?,False,
+47,unanswerable,What file hash identifies the AveMaria executable hosted on Discord?,False,
+48,unanswerable,Which specific EXIM CVE is exploited by FROZENBARENTS?,False,
+49,unanswerable,What ransom amount was demanded in the Silverstone Circuit incident?,False,
+50,unanswerable,Which macOS build number corresponds to Monterey 12.5.1 in the mitigation?,False,

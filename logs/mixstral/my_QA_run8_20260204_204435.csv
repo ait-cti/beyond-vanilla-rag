@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What sponsor is listed for Pensive Ursa?,True,FSB
+2,simple,What motivation is recorded for FARGO ransomware operators?,True,financial
+3,simple,What tactic is set for technique T1485?,True,Impact
+4,simple,What incident type is set for ua-defense-kazuar-2023-07?,True,intrusion
+5,simple,What country name corresponds to iso2 KR?,True,South Korea
+6,simple,What exfiltration flag is set on unit42_2023_israel_destructive_edu_tech_jan_oct?,True,true
+7,simple,What technique tactic is recorded for T1059.001?,True,Execution
+8,simple,What family is assigned to SnappyTCP malware?,True,reverse TCP shell
+9,simple,What service is listed for the C2 infrastructure used by Jupyter?,True,Command and Control (C2)
+10,simple,What type is stored for the incident magniber-2022-10-phishing-cve-2022-44698?,True,ransomware
+11,simple,What sector value is stored on victim Microsoft SQL Server owners?,True,Technology
+12,simple,What publisher is set for source unit42-kazuar-evolution?,True,Unit 42
+13,simple,What date is assigned to incident sea-turtle-2017-dns-hijacking-credential-harvest?,True,2017-01-01
+14,simple,What malware family is recorded for Jupyter?,True,Information Stealer
+15,simple,What framework is set for mitigation Strong Password Policy?,True,General
+16,single_hop,Which sectors are targeted by incident star-blizzard-email-credential-theft-2017?,True,"Government, Other"
+17,single_hop,Which technique is used by incident CVE-2023-7028-gitlab-internet-exposed-risk?,True,T1190
+18,single_hop,Which CVE is exploited in incident magniber-2018-asia-expansion-cve-2018-8174?,True,CVE-2018-8174
+19,single_hop,Which malware is involved in incident incident-jupyter-new-variant-observed-late-october?,True,Jupyter
+20,single_hop,Which victims are attacked by the Jupyter malware?,True,"Chrome users, Edge users, Firefox users, Ethereum Wallet users, MyMonero Wallet users, Atomic Wallet users"
+21,single_hop,Which tool is involved in incident magniber-2017-south-korea-targeting?,True,Magnitude exploit kit
+22,single_hop,Which regions are linked via occurred_in for sea-turtle-2017-dns-hijacking-credential-harvest?,True,"Middle East, North Africa"
+23,single_hop,Which country is linked via occurred_in for ua-defense-kazuar-2023-07?,True,Ukraine
+24,single_hop,Which threat actor is the incident ua-defense-kazuar-2023-07 attributed to?,True,Pensive Ursa
+25,single_hop,Which malware does Pensive Ursa use?,True,Kazuar
+26,single_hop,Which malware does Sea Turtle use according to the graph?,True,SnappyTCP
+27,single_hop,Which technique is used by incident sea-turtle-2021-2023-snappytcp-attacks for persistence phase?,True,T1053.003
+28,single_hop,Which technique is used by incident magniber-2022-10-phishing-cve-2022-44698?,True,T1566
+29,single_hop,Which incident does mitigation Patch Management mitigate?,True,CVE-2023-7028-gitlab-internet-exposed-risk
+30,single_hop,Which incident is mitigated by Security Patching?,True,fargo-sql-latest
+31,multi_hop,How many distinct techniques are used by incident fargo-sql-latest?,True,6
+32,multi_hop,How many incidents are attributed to FARGO ransomware operators?,True,3
+33,multi_hop,How many unique victims are linked to the incident star-blizzard-email-credential-theft-2017?,True,2
+34,multi_hop,How many unique techniques appear across all Magniber incidents?,True,2
+35,multi_hop,How many distinct tools does Jupyter use according to uses relationships?,True,3
+36,multi_hop,Which CVEs are exploited by malware involved in Magniber incidents?,True,"CVE-2022-44698, CVE-2018-8174"
+37,multi_hop,Which victims are attacked by the threat actor behind fargo-sql-latest?,True,Microsoft SQL Server owners
+38,multi_hop,What is the confidence for attributing ua-defense-kazuar-2023-07 to its actor?,True,medium
+39,multi_hop,List countries where incidents attributed to Pensive Ursa occurred.,True,Ukraine
+40,multi_hop,"Which techniques, with tactics, are used in star-blizzard-email-credential-theft-2017?",True,"T1566 Initial Access, T1056 Credential Access"
+41,multi_hop,What is the earliest incident date among Magniber incidents?,True,2017-01-01
+42,multi_hop,Which sectors are targeted in incidents that occurred in Israel?,True,"Education, Technology"
+43,multi_hop,Which techniques are used by incidents attributed to Sea Turtle?,True,"T1565.001, T1059, T1053.003"
+44,multi_hop,How many aliases are recorded for Sea Turtle?,True,4
+45,multi_hop,Which tool is used by an actor and also involved in an incident for that actor?,True,Cobalt Strike
+46,unanswerable,What CVSS score is recorded for CVE-2022-44698 in the graph?,False,
+47,unanswerable,What SHA256 hash identifies the Jupyter digitally signed payload?,False,
+48,unanswerable,Which specific domains were hijacked in the Sea Turtle DNS hijacking incident?,False,
+49,unanswerable,What Bitcoin wallet address is provided in the FARGO ransom note?,False,
+50,unanswerable,Which exact GitLab versions were vulnerable to CVE-2023-7028?,False,

@@ -1,0 +1,51 @@
+id,category,question,answerable,answer
+1,simple,What type is incident CVE-2023-45866-keystroke-injection?,True,intrusion
+2,simple,What technique tactic is associated with T1056?,True,Collection
+3,simple,What technique tactic is associated with T1203?,True,Execution
+4,simple,What publisher is listed for source TAG-EXOTIC-LILY-2021-09?,True,Threat Analysis Group
+5,simple,On what date was source TAG-EXOTIC-LILY-2021-09 published?,True,2021-09-01
+6,simple,What confidence value is stored on incident TAG-EXOTIC-LILY-2021-09 attribution?,True,medium
+7,simple,What is the sponsor listed for threat actor FIN12?,True,Russian cybercrime
+8,simple,What malware family is assigned to Conti?,True,Ransomware
+9,simple,What published date is stored for CVE-2022-2856?,True,2022-07-19
+10,simple,What sponsor is stored for threat actor APT35?,True,Iran
+11,simple,What date is stored for incident inc-apt35-2020-medical-research-targeting?,True,2020-12-01
+12,simple,What sector value is stored for victim Medical research organizations (Israel)?,True,Healthcare
+13,simple,What country name is stored for iso2 FR?,True,France
+14,simple,What malware family is assigned to Win/TrojanDownloader.Rugmi?,True,Loader
+15,simple,What capability name is leveraged by incident stealer-maas-subscription-model?,True,Automation
+16,single_hop,Which tool is involved in incident CVE-2023-45866-keystroke-injection?,True,Python
+17,single_hop,Which CVE is exploited in incident CVE-2023-45866-keystroke-injection?,True,CVE-2023-45866
+18,single_hop,Which technique IDs are used by incident CVE-2023-45866-keystroke-injection?,True,"T1203, T1056"
+19,single_hop,Which threat actor is attributed to incident TAG-EXOTIC-LILY-2021-09?,True,EXOTIC LILY
+20,single_hop,Which CVE is exploited in incident TAG-EXOTIC-LILY-2021-09?,True,CVE-2021-40444
+21,single_hop,Which malware is involved in incident TAG-EXOTIC-LILY-2021-09?,True,"Conti, Diavol"
+22,single_hop,Which motivation type is EXOTIC LILY motivated by?,True,financial
+23,single_hop,Which motivation type is APT35 motivated by?,True,espionage
+24,single_hop,Which technique is used for Initial Access in incident TAG-EXOTIC-LILY-2021-09?,True,T1190
+25,single_hop,Which threat actor is included in campaign APT35 Social Media Spying Campaign?,True,APT35
+26,single_hop,Which victims are targeted by incident inc-apt35-2019-academic-targeting?,True,"Academic institutions (U.S.), Academic institutions (France), Academic institutions (Middle East)"
+27,single_hop,Which sectors are targeted by incident inc_ta558_travel_hospitality_fake_reservations?,True,"Transportation, Retail"
+28,single_hop,Which malware is used by threat actor TA558?,True,Unknown malware variants
+29,single_hop,Which information stealers are used by Win/TrojanDownloader.Rugmi?,True,"Lumma Stealer, Vidar, RecordBreaker, Rescoms"
+30,single_hop,Which capability is leveraged by incident stealer-maas-subscription-model?,True,Automation
+31,multi_hop,Which publisher supports CVE-2022-2856 via supported_by?,True,Google
+32,multi_hop,What is the published_on date of the source supporting CVE-2022-2856?,True,2022-07-19
+33,multi_hop,Which countries are targeted across APT35’s 2019 and 2020 incidents?,True,"United States, France, Israel"
+34,multi_hop,How many distinct victims are targeted by APT35-attributed incidents?,True,5
+35,multi_hop,How many sectors are targeted across APT35-attributed incidents?,True,2
+36,multi_hop,Which sectors are targeted by APT35-attributed incidents?,True,"Education, Healthcare"
+37,multi_hop,How many unique techniques are used across TA558’s incident?,True,3
+38,multi_hop,Which technique tactics are represented in TA558’s incident techniques?,True,"Initial Access, Execution, Collection"
+39,multi_hop,How many incidents are attributed to APT35 in the graph?,True,4
+40,multi_hop,What is the earliest occurred_on date among APT35-attributed incidents?,True,2019-01-01
+41,multi_hop,What is the latest occurred_on date among APT35-attributed incidents?,True,2022-01-01
+42,multi_hop,How many distinct months are linked via occurred_on to Rugmi detections spike incident?,True,2
+43,multi_hop,Which months are linked via occurred_on to Rugmi detections spike incident?,True,"2023-10-01, 2023-11-01"
+44,multi_hop,How many malware nodes are involved across incidents tagged type malware?,True,2
+45,multi_hop,Which malware are involved across incidents tagged type malware?,True,"Win/TrojanDownloader.Rugmi, Lumma Stealer"
+46,unanswerable,What CVSS score is recorded for CVE-2022-2856?,False,
+47,unanswerable,Which specific CVE IDs are included in the ProxyShell bundle?,False,
+48,unanswerable,What file hash identifies the Python script used for CVE-2023-45866 exploitation?,False,
+49,unanswerable,What email sender domain was used in TA558 fake reservation emails?,False,
+50,unanswerable,Which victims experienced data exfiltration in the TA558 incident?,False,
